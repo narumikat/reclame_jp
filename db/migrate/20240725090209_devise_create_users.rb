@@ -7,6 +7,30 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
+      t.boolean :admin, default: false
+      t.boolean :enterprise, default: false
+      t.string :first_name
+      t.string :last_name
+      t.string :phone_number
+      t.string :address
+      t.string :city
+      t.string :state
+      t.string :zip_code
+      t.string :country
+      t.string :company_name
+      t.string :company_register_number
+      t.string :company_address
+      t.string :company_city
+      t.string :company_state
+      t.string :company_zip_code
+      t.string :company_country
+      t.string :company_phone_number
+      t.string :company_website
+      t.string :company_social_media, array: true, default: []
+      t.string :company_description
+      t.string :company_contact_name
+      t.string :company_contact_email
+
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
@@ -15,17 +39,17 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       t.datetime :remember_created_at
 
       ## Trackable
-      # t.integer  :sign_in_count, default: 0, null: false
-      # t.datetime :current_sign_in_at
-      # t.datetime :last_sign_in_at
-      # t.string   :current_sign_in_ip
-      # t.string   :last_sign_in_ip
+      t.integer  :sign_in_count, default: 0, null: false
+      t.datetime :current_sign_in_at
+      t.datetime :last_sign_in_at
+      t.string   :current_sign_in_ip
+      t.string   :last_sign_in_ip
 
       ## Confirmable
-      # t.string   :confirmation_token
-      # t.datetime :confirmed_at
-      # t.datetime :confirmation_sent_at
-      # t.string   :unconfirmed_email # Only if using reconfirmable
+      t.string   :confirmation_token
+      t.datetime :confirmed_at
+      t.datetime :confirmation_sent_at
+      t.string   :unconfirmed_email # Only if using reconfirmable
 
       ## Lockable
       # t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts
