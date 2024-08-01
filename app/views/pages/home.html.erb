@@ -1,2 +1,16 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+  <% if user_signed_in? %>
+    <% if current_user.enterprise? %>
+      <h2>Hello Company</h2>
+      <% if current_user.enterprises.any? %>
+        <%= link_to 'Go to your enterprise profile', enterprise_path(current_user.enterprises.first) %>
+      <% else %>
+        <%= link_to 'Create your enterprise profile', new_enterprise_path %>
+      <% end %>
+    <% else %>
+      <%= link_to 'Go to your profile', user_path(current_user) %>
+    <% end %>
+  <% else %>
+    <%= link_to 'Register', registration_type_path %>
+  <% end %>
+</div>
