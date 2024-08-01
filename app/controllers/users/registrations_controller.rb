@@ -2,6 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
+  before_action :registration_type, only: [:new]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
@@ -10,9 +11,26 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
+  # def create
+  #   super
+  # end
+  
   def create
-    super
+    super do |resource|
+      if resource.persisted?
+        resource.update(enterprise: session[:registration_type])
+        session.delete(:registration_type)
+      end
+    end
   end
+  
+  def registration_type
+    if request.post?
+      session[:registration_type] = params[:registration_type][:enterprise] == "true"
+      redirect_to new_user_registration_path
+    end
+  end
+  
 
   # GET /resource/edit
   # def edit
@@ -38,11 +56,29 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
+  # def configure_sign_up_params
+  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:enterprise])
+  # end
+  
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:enterprise])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :enterprise])
+  end
+
+  def after_sign_up_path_for(resource)
+    if resource.enterprise?
+      new_enterprise_path
+    else
+      new_user_path
+    end
+  end
+
+  def check_registration_type
+    if session[:registration_type].nil?
+      redirect_to choose_registration_type_path
+    end
   end
 
   # If you have extra params to permit, append them to the sanitizer.
