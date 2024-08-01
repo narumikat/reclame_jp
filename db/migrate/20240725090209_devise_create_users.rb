@@ -17,19 +17,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       t.string :state
       t.string :zip_code
       t.string :country
-      t.string :company_name
-      t.string :company_register_number
-      t.string :company_address
-      t.string :company_city
-      t.string :company_state
-      t.string :company_zip_code
-      t.string :company_country
-      t.string :company_phone_number
-      t.string :company_website
-      t.string :company_social_media, array: true, default: []
-      t.string :company_description
-      t.string :company_contact_name
-      t.string :company_contact_email
 
       ## Recoverable
       t.string   :reset_password_token

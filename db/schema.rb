@@ -10,9 +10,65 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_25_090209) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_01_105153) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "complaints", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "enterprise_id", null: false
+    t.jsonb "company_social_media", default: []
+    t.text "review"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["enterprise_id"], name: "index_complaints_on_enterprise_id"
+    t.index ["user_id"], name: "index_complaints_on_user_id"
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "role"
+    t.bigint "user_id", null: false
+    t.bigint "enterprise_id", null: false
+    t.string "business_email"
+    t.string "phone_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["enterprise_id"], name: "index_employees_on_enterprise_id"
+    t.index ["user_id"], name: "index_employees_on_user_id"
+  end
+
+  create_table "enterprises", force: :cascade do |t|
+    t.string "company_name"
+    t.string "company_register_number"
+    t.string "company_address"
+    t.string "company_city"
+    t.string "company_state"
+    t.string "company_zip_code"
+    t.string "company_country"
+    t.string "company_phone_number"
+    t.string "company_website"
+    t.jsonb "company_social_media", default: []
+    t.text "company_description"
+    t.string "company_contact_name"
+    t.string "company_contact_email"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_enterprises_on_user_id"
+  end
+
+  create_table "responses", force: :cascade do |t|
+    t.text "content", null: false
+    t.bigint "employee_id", null: false
+    t.bigint "enterprise_id", null: false
+    t.bigint "complaint_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["complaint_id"], name: "index_responses_on_complaint_id"
+    t.index ["employee_id"], name: "index_responses_on_employee_id"
+    t.index ["enterprise_id"], name: "index_responses_on_enterprise_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,19 +83,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_25_090209) do
     t.string "state"
     t.string "zip_code"
     t.string "country"
-    t.string "company_name"
-    t.string "company_register_number"
-    t.string "company_address"
-    t.string "company_city"
-    t.string "company_state"
-    t.string "company_zip_code"
-    t.string "company_country"
-    t.string "company_phone_number"
-    t.string "company_website"
-    t.string "company_social_media", default: [], array: true
-    t.string "company_description"
-    t.string "company_contact_name"
-    t.string "company_contact_email"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -58,4 +101,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_25_090209) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "complaints", "enterprises"
+  add_foreign_key "complaints", "users"
+  add_foreign_key "employees", "enterprises"
+  add_foreign_key "employees", "users"
+  add_foreign_key "enterprises", "users"
+  add_foreign_key "responses", "complaints"
+  add_foreign_key "responses", "employees"
+  add_foreign_key "responses", "enterprises"
 end
