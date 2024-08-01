@@ -5,16 +5,16 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :trackable
         #  :confirmable usar depois para ocnfirmar o email do user
-has_many :enterprises
-after_create :allow_enterprise_creation, if: :enterprise?
+has_many :companies
+after_create :allow_company_creation, if: :company?
 
-def enterprise?
-  self.enterprise
+def company?
+  self.company
 end
 
 private
 
-  def allow_enterprise_creation
+  def allow_company_creation
     # Lógica para permitir a criação de uma empresa
     # Por exemplo, criar um perfil de empresa associado a este usuário
     Company.create(user_id: self.id) # Exemplo de ação

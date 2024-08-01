@@ -41,7 +41,7 @@ class UsersController < ApplicationController
       :password,
       :password_confirmation,
       :admin,
-      :enterprise,
+      :company,
       :first_name,
       :last_name,
       :phone_number,

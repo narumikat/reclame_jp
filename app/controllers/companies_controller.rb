@@ -1,18 +1,18 @@
-class EnterprisesController < ApplicationController
-  before_action :set_enterprise, only: [:show, :edit, :update]
+class CompaniesController < ApplicationController
+  before_action :set_company, only: [:show, :edit, :update]
   
   def new
-    @enterprise = Enterprise.new
+    @company = Company.new
   end
 
   # def new
-  #   @enterprise = @user.enterprises.build
+  #   @company = @user.companies.build
   # end
   
   def create
-    @enterprise = Enterprise.new(enterprise_params)
-    if @enterprise.save
-      redirect_to enterprise_path(@enterprise)
+    @company = Company.new(company_params)
+    if @company.save
+      redirect_to company_path(@company)
     else
       render :new
     end
@@ -32,16 +32,16 @@ class EnterprisesController < ApplicationController
 
   private
 
-  def set_enterprise
-    @enterprise = Enterprise.find(params[:id])
+  def set_company
+    @company = Company.find(params[:id])
   end
   
   # def set_user
   #   @user = User.find(params[:user_id])
   # end
 
-  def enterprise_params
-    params.require(:enterprise).permit(
+  def company_params
+    params.require(:company).permit(
       :company_name, :company_register_number, :company_address, :company_city,
       :company_state, :company_zip_code, :company_country, :company_phone_number,
       :company_website, :company_social_media, :company_description,

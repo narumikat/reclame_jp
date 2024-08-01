@@ -10,16 +10,26 @@ Rails.application.routes.draw do
   end
 
   resources :users 
-  resources :enterprises, only: [:new, :create, :show, :edit, :update]
+  resources :companies, only: [:new, :create, :show, :edit, :update]
   
   # resources :users do 
-  #   resources :enterprises, only: [:new, :create, :show, :edit, :update]
+  #   resources :companies, only: [:new, :create, :show, :edit, :update]
   # end
   
+  # resources :companies, only: [:new, :create, :show, :edit, :update]
+
   resources :users do
     resources :complaints, only: [:new, :create, :index]
-    resources :enterprises, only: [:index] do
+    resources :companies, only: [:index] do
       resources :employees, only: [:index]
     end
+  end
+
+  resources :companies do
+    resources :complaints, only: [:new, :create, :index]
+  end
+  
+  resources :complaints, only: [:show] do
+    resources :responses, only: [:create, :edit, :update]
   end
 end
