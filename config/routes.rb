@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users, :controllers => { registrations: 'users/registrations' }
   root to: "pages#home"
+  devise_for :users, :controllers => { registrations: 'users/registrations' }
+
+  devise_scope :user do
+    get 'registration_type', to: 'users/registrations#registration_type'
+    post 'registration_type', to: 'users/registrations#registration_type'
+  end
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   
