@@ -1,4 +1,4 @@
-class Enterprise < ApplicationRecord
+class Company < ApplicationRecord
   belongs_to :user
 
   # Validações

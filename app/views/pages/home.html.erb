@@ -1,11 +1,11 @@
 <div class="container">
   <% if user_signed_in? %>
-    <% if current_user.enterprise? %>
+    <% if current_user.company? %>
       <h2>Hello Company</h2>
-      <% if current_user.enterprises.any? %>
-        <%= link_to 'Go to your enterprise profile', enterprise_path(current_user.enterprises.first) %>
+      <% if current_user.companies.any? %>
+        <%= link_to 'Go to your company profile', company_path(current_user.companies.first) %>
       <% else %>
-        <%= link_to 'Create your enterprise profile', new_enterprise_path %>
+        <%= link_to 'Create your company profile', new_company_path %>
       <% end %>
     <% else %>
       <%= link_to 'Go to your profile', user_path(current_user) %>

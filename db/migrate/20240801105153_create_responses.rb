@@ -3,7 +3,7 @@ class CreateResponses < ActiveRecord::Migration[7.1]
     create_table :responses do |t|
       t.text :content, null: false
       t.references :employee, null: false, foreign_key: true
-      t.references :enterprise, null: false, foreign_key: true
+      t.references :company, null: false, foreign_key: true
       t.references :complaint, null: false, foreign_key: true
 
       t.timestamps
