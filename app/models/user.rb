@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :trackable
         #  :confirmable usar depois para ocnfirmar o email do user
-has_one :company
+has_and_belongs_to_many :companies
 after_create :allow_company_creation, if: :company?
 
 def company?

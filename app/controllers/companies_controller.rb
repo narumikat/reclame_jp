@@ -1,4 +1,5 @@
 class CompaniesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_company, only: [:show, :edit, :update]
   
   def new
@@ -7,15 +8,22 @@ class CompaniesController < ApplicationController
   
   def create
     @company = Company.new(company_params)
-    if @company.save
-      redirect_to company_path(@company)
-    else
+    @company.users << current_user
+
+    if company_params[:company_social_media].values.all?(&:blank?)
+      flash[:alert] = "Please fill out at least one social media field."
       render :new
+    else
+      if @company.save
+        redirect_to company_path(@company), notice: 'Company was successfully created.'
+      else
+        render :new
+      end
     end
   end
 
   def show
-    
+    @company = Company.find(params[:id])
   end
 
   def edit

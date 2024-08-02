@@ -1,0 +1,22 @@
+<div class="container">
+  <% company_fields = {
+  "Register Number" => @company.company_register_number,
+  "Address" => @company.company_address,
+  "City" => @company.company_city,
+  "State" => @company.company_state,
+  "ZIP Code" => @company.company_zip_code,
+  "Country" => @company.company_country,
+  "Phone Number" => @company.company_phone_number,
+  "Website" => @company.company_website
+} %>
+  <h1><%= @company.company_name %></h1>
+  <% company_fields.each do |label, value| %>
+    <% if value.present? %>
+      <% if label == "Website" %>
+        <p><strong><%= label %>:</strong> <%= link_to value, value, target: "_blank" %></p>
+      <% else %>
+        <p><strong><%= label %>:</strong> <%= value %></p>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
