@@ -4,10 +4,6 @@ class CompaniesController < ApplicationController
   def new
     @company = Company.new
   end
-
-  # def new
-  #   @company = @user.companies.build
-  # end
   
   def create
     @company = Company.new(company_params)
@@ -35,17 +31,13 @@ class CompaniesController < ApplicationController
   def set_company
     @company = Company.find(params[:id])
   end
-  
-  # def set_user
-  #   @user = User.find(params[:user_id])
-  # end
 
   def company_params
     params.require(:company).permit(
       :company_name, :company_register_number, :company_address, :company_city,
       :company_state, :company_zip_code, :company_country, :company_phone_number,
-      :company_website, :company_social_media, :company_description,
-      :company_contact_name, :company_contact_email
+      :company_website, :company_description,
+      :company_contact_name, :company_contact_email, company_social_media: [:facebook, :twitter, :linkedin, :instagram, :youtube, :tiktok]
     )
   end
 end

@@ -18,7 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super do |resource|
       if resource.persisted?
-        resource.update(company: session[:registration_type])
+        resource.update(is_company: session[:registration_type])
         session.delete(:registration_type)
       end
     end
@@ -26,7 +26,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   
   def registration_type
     if request.post?
-      session[:registration_type] = params[:registration_type][:company] == "true"
+      session[:registration_type] = params[:registration_type][:is_company] == 'true'
       redirect_to new_user_registration_path
     end
   end
@@ -64,11 +64,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
   
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :company])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :is_company])
   end
 
   def after_sign_up_path_for(resource)
-    if resource.company?
+    if resource.is_company?
       new_company_path
     else
       new_user_path

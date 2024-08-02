@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" data-controller="social-media">
   <%= simple_form_for @company do |f| %>
     <%= f.error_notification %>
     <div class="form-inputs">
@@ -11,7 +11,27 @@
       <%= f.input :company_country, label: "Country" %>
       <%= f.input :company_phone_number, label: "Phone Number" %>
       <%= f.input :company_website, label: "Website" %>
-      <%= f.input :company_social_media, label: "Social Media Links", as: :text %>
+
+      <div id="social-media-links">
+        <h3>Social Media Links</h3>
+        <%= f.fields_for :company_social_media, OpenStruct.new do |social| %>
+          <div class="social-media-group">
+            <%= social.input :facebook, label: "Facebook" %>
+
+            <%= social.input :twitter, label: "Twitter" %>
+
+            <%= social.input :linkedin, label: "LinkedIn" %>
+
+            <%= social.input :instagram, label: "Instagram" %>
+
+            <%= social.input :youtube, label: "YouTube" %>
+
+            <%= social.input :tiktok, label: "TikTok" %>
+
+          </div>
+        <% end %>
+      </div>
+
       <%= f.input :company_description, label: "Description", as: :text %>
       <%= f.input :company_contact_name, label: "Contact Name" %>
       <%= f.input :company_contact_email, label: "Contact Email", as: :email %>
