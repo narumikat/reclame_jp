@@ -3,14 +3,17 @@
     <% if current_user.is_company? %>
       <h2>Hello Company</h2>
       <% if !current_user.companies.blank? %>
-        <% current_user.companies.each do |company| %>
-          <%= link_to 'Go to your company profile', company_path(company) %>
-        <% end %>
+        <ul>
+          <% current_user.companies.each do |company| %>
+            <li><%= link_to 'Go to your company profile', company_path(company) %></li>
+          <% end %>
+        </ul>
       <% else %>
         <%= link_to 'Create your company profile', new_company_path %>
       <% end %>
     <% else %>
       <%= link_to 'Go to your profile', user_path(current_user) %>
+      <%= link_to 'Create a new Complaint', new_complaint_complaints_path %>
     <% end %>
   <% else %>
     <%= link_to 'Register', registration_type_path %>

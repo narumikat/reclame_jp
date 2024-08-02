@@ -19,4 +19,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :complaints do
+    get 'new_complaint', on: :collection, to: 'complaints#new_complaint'
+  end
+  
 end
