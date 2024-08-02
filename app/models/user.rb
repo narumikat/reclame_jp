@@ -6,17 +6,8 @@ class User < ApplicationRecord
          :trackable
         #  :confirmable usar depois para ocnfirmar o email do user
 has_and_belongs_to_many :companies
-after_create :allow_company_creation, if: :company?
 
-def company?
-  self.is_company
-end
-
-private
-
-  def allow_company_creation
-    # Lógica para permitir a criação de uma empresa
-    # Por exemplo, criar um perfil de empresa associado a este usuário
-    Company.create(user_id: self.id) # Exemplo de ação
+  def company?
+    self.is_company
   end
 end

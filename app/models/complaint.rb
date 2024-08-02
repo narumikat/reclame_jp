@@ -4,13 +4,13 @@ class Complaint < ApplicationRecord
   has_many :responses, dependent: :destroy
 
   validates :title, presence: true
-  validates :description, presence: true
+  validates :comment, presence: true
   validates :user_id, presence: true
   validates :company_id, presence: true
 
   def self.search(search)
     if search
-      where('title LIKE ? OR description LIKE ?', "%#{search}%", "%#{search}%")
+      where('title LIKE ? OR comment LIKE ?', "%#{search}%", "%#{search}%")
     else
       all
     end
