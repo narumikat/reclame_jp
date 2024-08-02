@@ -17,15 +17,6 @@ class ComplaintsController < ApplicationController
   def new
     @complaint = Complaint.new
   end
-
-  # def create
-  #   @complaint = @company ? @company.complaints.new(complaint_params) : Complaint.new(complaint_params)
-  #   if @complaint.save
-  #     redirect_to @company ? [@company, @complaint] : @complaint, notice: 'Complaint was successfully created.'
-  #   else
-  #     render 'new'
-  #   end
-  # end
   
   def create
     @complaint = Complaint.new(complaint_params)

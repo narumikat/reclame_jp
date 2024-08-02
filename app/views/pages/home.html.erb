@@ -12,8 +12,11 @@
         <%= link_to 'Create your company profile', new_company_path %>
       <% end %>
     <% else %>
-      <%= link_to 'Go to your profile', user_path(current_user) %>
-      <%= link_to 'Create a new Complaint', new_complaint_complaints_path %>
+      <ul>
+        <li><%= link_to 'Go to your profile', user_path(current_user) %></li>
+        <li><%= link_to 'Create a new Complaint', new_complaint_complaints_path %></li>
+        <li><%= link_to 'See all companies', companies_path %></li>
+      </ul>
     <% end %>
   <% else %>
     <%= link_to 'Register', registration_type_path %>

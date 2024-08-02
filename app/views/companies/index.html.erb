@@ -1,0 +1,14 @@
+<div class="container">
+  <% if user_signed_in? %>
+    <% @companies.each do |company| %>
+      <div class="mt-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= company.company_name %></h5>
+            <p class="card-text"><%= company.company_description %></p>
+            <%= link_to 'Go to company profile', company_path(company), class: 'btn btn-primary' %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
