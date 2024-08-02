@@ -33,6 +33,7 @@ class CompaniesController < ApplicationController
 
   def show
     @company = Company.find(params[:id])
+    # @complaint = @company.complaints
   end
 
   def edit

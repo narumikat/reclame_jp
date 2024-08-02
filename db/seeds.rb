@@ -141,30 +141,35 @@ complaints = [
   Complaint.create!(
     title: 'Produto Defeituoso',
     comment: 'Comprei um eletrônico dessa empresa e, após apenas duas semanas de uso, o dispositivo começou a apresentar problemas constantes de funcionamento. Entrei em contato com o suporte, mas a assistência foi insatisfatória e o problema não foi resolvido.',
+    review: rand(1..5),
     company: companies.sample,
     user: normal_users.sample,
   ),
   Complaint.create!(
     title: 'Produto não entregue',
     comment: 'A empresa prometeu entregar meu pedido em 7 dias úteis, mas o produto só chegou após 3 semanas. Não houve comunicação clara sobre o atraso e, quando tentei buscar informações, a resposta foi demorada e pouco útil.',
+    review: rand(1..5),
     company: companies.sample,
     user: normal_users.sample,
   ),
   Complaint.create!(
     title: 'Serviço ao Cliente Insatisfatório',
     comment: 'Experiência extremamente negativa com o atendimento ao cliente. Ao tentar resolver um problema com minha conta, fui tratado com desdém e a solução oferecida foi inadequada. A empresa não demonstrou preocupação com a minha situação.',
+    review: rand(1..5),
     company: companies.sample,
     user: normal_users.sample,
   ),
   Complaint.create!(
     title: 'Cobrança Indevida',
     comment: 'Fui cobrado por um serviço que não contratei. Após revisar meu extrato, percebi que houve uma cobrança adicional que não foi autorizada. O processo de contestação foi burocrático e demorado, e o problema ainda não foi resolvido.',
+    review: rand(1..5),
     company: companies.sample,
     user: normal_users.sample,
   ),
   Complaint.create!(
     title: 'Qualidade do Produto Abaixo do Esperado',
     comment: 'O produto recebido não corresponde às especificações apresentadas no site. A qualidade é inferior ao que foi descrito e a empresa não oferece um retorno eficiente para resolver o problema. Senti-me enganado com a discrepância entre a descrição e o item recebido.',
+    review: rand(1..5),
     company: companies.sample,
     user: normal_users.sample,
   )
@@ -174,7 +179,7 @@ puts 'Complaints created!'
 
 puts 'Creating responses...'
 
-3.times do
+8.times do
   Response.create!(
     content: 'This is a response to a complaint.',
     complaint: complaints.sample,
