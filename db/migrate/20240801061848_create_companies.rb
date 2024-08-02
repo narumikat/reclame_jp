@@ -14,7 +14,6 @@ class CreateCompanies < ActiveRecord::Migration[7.1]
       t.text :company_description
       t.string :company_contact_name
       t.string :company_contact_email
-      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end

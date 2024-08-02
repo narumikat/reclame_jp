@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_01_105153) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_02_020915) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,17 +28,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_01_105153) do
     t.text "company_description"
     t.string "company_contact_name"
     t.string "company_contact_email"
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_companies_on_user_id"
+  end
+
+  create_table "companies_users", id: false, force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["company_id"], name: "index_companies_users_on_company_id"
+    t.index ["user_id"], name: "index_companies_users_on_user_id"
   end
 
   create_table "complaints", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "company_id", null: false
     t.jsonb "company_social_media", default: []
-    t.text "review"
+    t.string "title"
+    t.integer "review"
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -90,7 +96,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_01_105153) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "companies", "users"
   add_foreign_key "complaints", "companies"
   add_foreign_key "complaints", "users"
   add_foreign_key "responses", "companies"
