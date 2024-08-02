@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.company = Company.find(session[:registration_type])
+    @user.is_company = Company.find(session[:registration_type])
     @user.save
     redirect_to user_path(@user)
   end
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
       :password,
       :password_confirmation,
       :admin,
-      :company,
+      :is_company,
       :first_name,
       :last_name,
       :phone_number,

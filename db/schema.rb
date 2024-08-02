@@ -62,7 +62,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_01_105153) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.boolean "admin", default: false
-    t.boolean "company", default: false
+    t.boolean "is_company", default: false
     t.string "company_role"
     t.string "first_name"
     t.string "last_name"

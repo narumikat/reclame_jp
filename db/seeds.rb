@@ -10,6 +10,5 @@
 
 Complain.destroy_all
 Response.destroy_all
-Employee.destroy_all
 Company.destroy_all
 User.destroy_all

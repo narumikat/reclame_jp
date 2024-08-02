@@ -9,7 +9,7 @@ has_one :company
 after_create :allow_company_creation, if: :company?
 
 def company?
-  self.company
+  self.is_company
 end
 
 private

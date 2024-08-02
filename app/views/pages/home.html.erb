@@ -1,6 +1,6 @@
 <div class="container">
   <% if user_signed_in? %>
-    <% if current_user.company? %>
+    <% if current_user.is_company? %>
       <h2>Hello Company</h2>
       <% if !current_user.company.blank? %>
         <%= link_to 'Go to your company profile', company_path(current_user.company) %>

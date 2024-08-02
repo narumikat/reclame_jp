@@ -2,7 +2,7 @@
   <h2>Escolha o tipo de registro</h2>
   <%= simple_form_for :registration_type, url: registration_type_path, method: :post do |f| %>
     <div class="form-group">
-      <%= f.input :company, as: :radio_buttons, collection: [["No", false], ["Yes", true]], label: "Register as company", required: true %>
+      <%= f.input :is_company, as: :radio_buttons, collection: [["No", false], ["Yes", true]], label: "Register as company", required: true %>
     </div>
     <div class="form-group">
       <%= f.button :submit, 'Próximo', class: 'btn btn-primary' %>
