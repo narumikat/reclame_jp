@@ -1,0 +1,11 @@
+<div class="container">
+  <h3><%= @complaint.company.company_name %></h3>
+  <h2><%= @complaint.title %></h2>
+  <p><strong>Comment:</strong> <%= @complaint.comment %></p>
+  <% if @complaint.responses.any? %>
+    <h3>Responses:</h3>
+    <% @complaint.responses.each do |response| %>
+      <p><strong>Comment:</strong> <%= response.content %></p>
+    <% end %>
+  <% end %>
+</div>
