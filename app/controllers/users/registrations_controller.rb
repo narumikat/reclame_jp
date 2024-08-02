@@ -26,7 +26,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   
   def registration_type
     if request.post?
-      session[:registration_type] = params[:registration_type][:company] == "true"
+      session[:registration_type] = params[:registration_type][:company] == true
       redirect_to new_user_registration_path
     end
   end

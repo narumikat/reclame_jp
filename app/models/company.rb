@@ -1,5 +1,6 @@
 class Company < ApplicationRecord
-  belongs_to :user
+  has_and_belongs_to_many :users
+
 
   # Validações
   validates :company_name, presence: true
