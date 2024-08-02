@@ -6,6 +6,8 @@ class User < ApplicationRecord
          :trackable
         #  :confirmable usar depois para ocnfirmar o email do user
 has_and_belongs_to_many :companies
+has_many :responses
+has_many :complaints
 
   def company?
     self.is_company
