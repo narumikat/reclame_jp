@@ -41,8 +41,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_02_020915) do
 
   create_table "complaints", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "company_id", null: false
+    t.bigint "company_id"
     t.jsonb "company_social_media", default: []
+    t.string "new_company_name"
     t.string "title"
     t.integer "review"
     t.text "comment"

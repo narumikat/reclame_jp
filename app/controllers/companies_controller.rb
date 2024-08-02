@@ -5,6 +5,7 @@ class CompaniesController < ApplicationController
   
   def index
     @companies = Company.all
+    @new_companies = Complaint.where(company_id: nil).where.not(new_company_name: [nil, ''])
   end
   def new
     @company = Company.new
