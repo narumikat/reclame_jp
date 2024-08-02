@@ -7,6 +7,7 @@ class ComplaintsController < ApplicationController
 
   def show
     @complaint = Complaint.includes(:responses).find(params[:id])
+    @response = Response.new
   end
 
   def new
@@ -17,7 +18,7 @@ class ComplaintsController < ApplicationController
     @complaint = Complaint.new(complaint_params)
 
     if @complaint.save
-      redirect_to @complaint
+      redirect_to [@company, @complaint], flash[:notice] = 'Complaint was successfully created.'
     else
       render 'new'
     end
