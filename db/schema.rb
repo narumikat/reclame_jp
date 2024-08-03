@@ -35,6 +35,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_02_020915) do
   create_table "companies_users", id: false, force: :cascade do |t|
     t.bigint "company_id", null: false
     t.bigint "user_id", null: false
+    t.string "role"
     t.index ["company_id"], name: "index_companies_users_on_company_id"
     t.index ["user_id"], name: "index_companies_users_on_user_id"
   end
@@ -70,7 +71,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_02_020915) do
     t.string "encrypted_password", default: "", null: false
     t.boolean "admin", default: false
     t.boolean "is_company", default: false
-    t.string "company_role"
     t.string "first_name"
     t.string "last_name"
     t.string "phone_number"

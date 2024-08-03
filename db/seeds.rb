@@ -1,5 +1,6 @@
 Complaint.destroy_all
 Response.destroy_all
+CompaniesUsers.destroy_all
 Company.destroy_all
 User.destroy_all
 
@@ -129,9 +130,9 @@ company2 = Company.create!(
 companies = [company1, company2]
 
 # Create company associations
-company1.users << user_company
-company2.users << user_company
-company2.users << user_company2
+company1.users << user_company unless company1.users.include?(user_company)
+company2.users << user_company unless company2.users.include?(user_company)
+company2.users << user_company2 unless company2.users.include?(user_company2)
 
 puts 'Companies created!'
 

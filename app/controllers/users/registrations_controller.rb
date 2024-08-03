@@ -2,74 +2,53 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
-  before_action :registration_type, only: [:new]
-  # before_action :configure_account_update_params, only: [:update]
+  before_action :check_registration_type, only: [:new, :create]
 
-  # GET /resource/sign_up
-  # def new
-  #   supeß
-  # end
 
-  # POST /resource
-  # def create
-  #   super
-  # end
-  
   def create
     super do |resource|
       if resource.persisted?
         resource.update(is_company: session[:registration_type])
+        if session[:registration_type] && session[:company_id].present?
+          company = Company.find_by(id: session[:company_id])
+          if company
+            CompaniesUser.create!(user: resource, company: company, role: 'Default Role')
+            puts "User associated with company: #{company.company_name}"
+          else
+            puts "User already associated with company: #{company.company_name}"
+          end
+        else
+          flash[:alert] = "Company not found"
+        end
         session.delete(:registration_type)
+        session.delete(:company_id)
       end
     end
   end
-  
+
   def registration_type
     if request.post?
+      # registra e salva a o tipo da sessasão
       session[:registration_type] = params[:registration_type][:is_company] == 'true'
+      # registra e salva o id da empresa, e envia para o create
+      session[:company_id] = params[:registration_type][:company_id] if params[:registration_type][:is_company] == 'true'
       redirect_to new_user_registration_path
     end
   end
-  
-
-  # GET /resource/edit
-  # def edit
-  #   super
-  # end
-
-  # PUT /resource
-  # def update
-  #   super
-  # end
-
-  # DELETE /resource
-  # def destroy
-  #   super
-  # end
-
-  # GET /resource/cancel
-  # Forces the session data which is usually expired after sign
-  # in to be expired now. This is useful if the user wants to
-  # cancel oauth signing in/up in the middle of the process,
-  # removing all OAuth session data.
-  # def cancel
-  #   super
-  # end
 
   protected
 
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:company])
-  # end
-  
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :is_company])
   end
 
   def after_sign_up_path_for(resource)
     if resource.is_company?
-      new_company_path
+      if resource.companies.empty?
+        new_company_path
+      else
+        companies_path
+      end
     else
       new_user_path
     end
@@ -80,19 +59,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
       redirect_to choose_registration_type_path
     end
   end
-
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
-
-  # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
-
-  # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
 end

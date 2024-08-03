@@ -9,7 +9,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
 
       t.boolean :admin, default: false
       t.boolean :is_company, default: false
-      t.string :company_role
       t.string :first_name
       t.string :last_name
       t.string :phone_number
