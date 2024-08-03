@@ -31,7 +31,11 @@ class ComplaintsController < ApplicationController
     end
 
     if @complaint.save
-      redirect_to @complaint, notice: 'Complaint was successfully created.'
+      if params[:company_id].present?
+        redirect_to @complaint, notice: 'Complaint was successfully created.'
+      else
+        redirect_to companies_path, notice: 'Complaint was successfully created'
+      end
     else
       flash[:alert] = 'Failed to save the complaint: ' + @complaint.errors.full_messages.to_sentence
       render :new
