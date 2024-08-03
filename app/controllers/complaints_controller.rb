@@ -2,12 +2,13 @@ class ComplaintsController < ApplicationController
   before_action :set_company, only: [:create, :show], if: -> { params[:company_id].present? }
   before_action :set_complaint, only: [:show]
   def index
-    @complaints = current_user.complaints
+    @complaints = current_user.complaints.order(created_at: :desc)
   end
 
   def show
     @complaint = Complaint.includes(:responses).find(params[:id])
     @response = Response.new
+    @responses = @complaint.responses.order(created_at: :desc)
   end
 
   def new_complaint
@@ -21,25 +22,42 @@ class ComplaintsController < ApplicationController
   def create
     @complaint = Complaint.new(complaint_params)
     @complaint.user = current_user
-
-    # Verificar se uma nova empresa está sendo criada
-    if @complaint.company_id.blank? && complaint_params[:new_company_name].present?
-      # Salvar os detalhes da nova empresa
-      @complaint.company_id = nil
-      @complaint.new_company_name = complaint_params[:new_company_name]
-      @complaint.company_social_media = complaint_params[:company_social_media]
-    end
-
+  
     if @complaint.save
-      if params[:company_id].present?
+      if complaint_params[:company_id].present?
         redirect_to @complaint, notice: 'Complaint was successfully created.'
       else
-        redirect_to companies_path, notice: 'Complaint was successfully created'
+        existing_company = find_company_by_social_media(complaint_params[:company_social_media])
+        
+        if existing_company
+          @complaint.update(company_id: existing_company.id)
+          redirect_to company_path(existing_company), notice: 'Complaint was successfully created and linked to an existing company.'
+        else
+          @company = Company.create(
+            company_name: complaint_params[:new_company_name],
+            company_social_media: complaint_params[:company_social_media],
+            company_city: 'default',
+            company_state: 'default'
+          )
+          @complaint.update(company_id: @company.id)
+          redirect_to companies_path, notice: 'Complaint and new company were successfully created.'
+        end
       end
     else
       flash[:alert] = 'Failed to save the complaint: ' + @complaint.errors.full_messages.to_sentence
       render :new
     end
+  end
+  
+  private
+  
+  def find_company_by_social_media(social_media)
+    social_media.each do |platform, url|
+      next if url.blank?
+      company = Company.where("company_social_media @> ?", { platform => url }.to_json).first
+      return company if company
+    end
+    nil
   end
   
 
