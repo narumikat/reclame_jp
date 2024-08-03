@@ -1,5 +1,5 @@
 class Company < ApplicationRecord
-  has_and_belongs_to_many :users
+  has_and_belongs_to_many :users, through: :companies_users
   has_many :complaints
 
   validates :company_name, :company_city, :company_state, presence: true
