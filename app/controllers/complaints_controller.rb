@@ -2,7 +2,7 @@ class ComplaintsController < ApplicationController
   before_action :set_company, only: [:create, :show], if: -> { params[:company_id].present? }
   before_action :set_complaint, only: [:show]
   def index
-    @complaints = Complaint.all
+    @complaints = current_user.complaints
   end
 
   def show

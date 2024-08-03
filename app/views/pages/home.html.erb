@@ -19,8 +19,16 @@
       <ul>
         <li><%= link_to 'Create a new Complaint', new_complaint_complaints_path %></li>
       </ul>
+      <% if current_user.complaints.any? %>
+        <ul>
+          <li><%= link_to 'See all your complaints', complaints_path(current_user) %></li>
+        </ul>
+      <% end %>
     <% end %>
   <% else %>
-    <%= link_to 'Register', registration_type_path %>
+    <ul>
+      <li><%= link_to 'Register', registration_type_path %></li>
+      <li><%= link_to "Login", new_user_session_path %></li>
+    </ul>
   <% end %>
 </div>

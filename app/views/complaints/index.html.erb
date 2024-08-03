@@ -1,0 +1,13 @@
+<div class="container">
+  <ul>
+    <% @complaints.each do |complaint| %>
+      <li><%= complaint.title %>
+        <% if complaint.company.present? %>
+          <%= link_to 'Go to company', company_complaint_path(complaint.company, complaint) %>
+        <% else %>
+          <span>Company not available</span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
