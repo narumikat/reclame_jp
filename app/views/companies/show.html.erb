@@ -30,7 +30,7 @@
   <h2>Complaints</h2>
   <% if @company.complaints.present? %>
     <ul>
-      <% @company.complaints.each do |complaint| %>
+      <% @complaints.each do |complaint| %>
         <li><%= link_to complaint.title, company_complaint_path(@company, complaint) %></li>
       <% end %>
     <% end %>

@@ -10,23 +10,5 @@
           </div>
         </div>
       <% end %>
-      <h2 class="my-4">Companies not registred:</h2>
-      <% @new_companies.each do |new_company| %>
-        <div class="mt-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"><%= new_company.new_company_name %></h5>
-              <div class="card-text">
-                <ul>
-                  <% new_company.company_social_media.each do |platform, link| %>
-                    <% if link.present? %>
-                      <li><%= platform.capitalize %>: <%= link %></li>
-                    <% end %>
-                  <% end %>
-                </ul>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
+    <% end %>
+  </div>

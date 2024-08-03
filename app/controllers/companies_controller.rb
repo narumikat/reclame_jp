@@ -34,7 +34,7 @@ class CompaniesController < ApplicationController
 
   def show
     @company = Company.find(params[:id])
-    # @complaint = @company.complaints
+    @complaints = @company.complaints.order(created_at: :desc)
   end
 
   def edit
