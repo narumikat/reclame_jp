@@ -1,6 +1,5 @@
 Complaint.destroy_all
 Response.destroy_all
-CompaniesUsers.destroy_all
 Company.destroy_all
 User.destroy_all
 
@@ -127,9 +126,25 @@ company2 = Company.create!(
   company_contact_email: 'company2@mail.com'
 )
 
+Company.create!(
+  company_name: 'Company Validation',
+  company_address: '123 Main St',
+  company_city: 'New York',
+  company_state: 'NY',
+  company_zip_code: '10001',
+  company_country: 'USA',
+  company_phone_number: '1234567890',
+  company_website: 'www.companyvalidation.com',
+  company_social_media: { facebook: 'www.facebook.com/companyvalidation', twitter: 'www.twitter.com/companyvalidation' },
+  company_description: 'Company validation is a company that does things.',
+  company_contact_name: 'John Doe',
+  company_contact_email: 'company2@company.com'
+)
+
 companies = [company1, company2]
 
-# Create company associations
+puts 'Create company associations'
+
 company1.users << user_company unless company1.users.include?(user_company)
 company2.users << user_company unless company2.users.include?(user_company)
 company2.users << user_company2 unless company2.users.include?(user_company2)
