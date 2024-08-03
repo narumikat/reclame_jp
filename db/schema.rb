@@ -33,6 +33,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_02_020915) do
   end
 
   create_table "companies_users", force: :cascade do |t|
+    t.string "role"
     t.bigint "company_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
