@@ -2,7 +2,13 @@
   <h3><%= @complaint.company.company_name %></h3>
   <h2><%= @complaint.title %></h2>
   <p><strong>Comment:</strong> <%= @complaint.comment %></p>
-  <% if current_user.companies.include?(@complaint.company) %>
+  <% if @complaint.responses.any? %>
+    <h3>Responses:</h3>
+    <% @complaint.responses.each do |response| %>
+      <p><strong>Comment:</strong> <%= response.content %></p>
+    <% end %>
+  <% end %>
+  <% if current_user.companies.include?(@complaint.company) || !@complaint.company.blank?%>
     <div>
       <h3>Write a response:</h3>
       <%= simple_form_for([@complaint.company, @complaint, @response]) do |f| %>
@@ -10,11 +16,5 @@
         <%= f.button :submit, "Submit Response" %>
       <% end %>
     </div>
-  <% end %>
-  <% if @complaint.responses.any? %>
-    <h3>Responses:</h3>
-    <% @complaint.responses.each do |response| %>
-      <p><strong>Comment:</strong> <%= response.content %></p>
-    <% end %>
   <% end %>
 </div>

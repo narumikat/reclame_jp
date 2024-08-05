@@ -32,10 +32,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_02_020915) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "companies_users", id: false, force: :cascade do |t|
+  create_table "companies_users", force: :cascade do |t|
+    t.string "role"
     t.bigint "company_id", null: false
     t.bigint "user_id", null: false
-    t.string "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_companies_users_on_company_id"
     t.index ["user_id"], name: "index_companies_users_on_user_id"
   end
@@ -97,6 +99,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_02_020915) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "companies_users", "companies"
+  add_foreign_key "companies_users", "users"
   add_foreign_key "complaints", "companies"
   add_foreign_key "complaints", "users"
   add_foreign_key "responses", "companies"

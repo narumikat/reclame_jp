@@ -31,6 +31,7 @@ class ComplaintsController < ApplicationController
 
   def handle_complaint_create
     if complaint_params[:company_id].present?
+      SendgridMailer.send_email.deliver_now
       redirect_to @complaint, notice: 'Complaint was successfully created.'
     else
       existing_company = find_company_by_social_media(complaint_params[:company_social_media])
