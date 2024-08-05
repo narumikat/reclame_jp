@@ -36,7 +36,6 @@
         </li>
       <% end %>
     </ul>
-    >>>>>>> 3fc53250061b0c64c0f4f14862c099f834ba32a3
   <% end %>
   <% if @company.complaints.present? %>
     <div>
@@ -48,7 +47,7 @@
       </ul>
     </div>
   <% end %>
-  <% if !current_user.is_company? %>
+  <% unless current_user.is_company? %>
     <div>
       <h3>Create a new complaint</h3>
       <%= simple_form_for [@company, @complaint] do |f| %>
