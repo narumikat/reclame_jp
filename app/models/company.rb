@@ -7,6 +7,26 @@ class Company < ApplicationRecord
   validate :must_have_at_least_one_social_media
   validate :unique_social_media_urls
 
+  def unique_complaint_companies_count
+    complaints.select(:company_id).distinct.count
+  end
+
+  def complaints_asnwered_count
+    complaints.joins(:responses).count    
+  end
+
+  def complaints_unasnwered_count
+    complaints.where.not(id: Response.select(:complaint_id)).count
+  end
+
+  def complaints_asnwered_percentage
+    unique_complaint_companies_count.to_f / complaints.count.to_f * 100
+  end
+
+  def complaints_unasnwered_percentage
+    complaints_unasnwered_count.to_f / complaints.count.to_f * 100
+  end
+
   private
 
   def must_have_at_least_one_social_media

@@ -1,12 +1,15 @@
 <div class="container">
-  <h3><%= @complaint.company.company_name %></h3>
+  <h3>Reclamacao da empresa <strong><%= @complaint.company.company_name %></strong></h3>
   <h2><%= @complaint.title %></h2>
-  <p>Escrito por <%= link_to @complaint.user.first_name, user_path(@complaint.user) %></p>
-  <p><strong>Comment:</strong> <%= @complaint.comment %></p>
+  <p>Escrito por <%= link_to @complaint.user.username_protected, user_path(@complaint.user) %></p>
+  <p><strong>Comentario:</strong> <%= @complaint.comment %></p>
   <% if @complaint.responses.any? %>
     <h3>Responses:</h3>
     <% @complaint.responses.each do |response| %>
-      <p><strong>Comment:</strong> <%= response.content %></p>
+      <div class="mb-4">
+        <p class="mb-2"><strong>Resposta:</strong> <%= response.content %></p>
+        <small>Respondida por: <%= link_to response.user.username_protected, user_path(response.user) %></small>
+      </div>
     <% end %>
   <% end %>
   <% unless !user_signed_in? %>

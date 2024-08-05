@@ -26,7 +26,7 @@
         <% @company.users.each do |employee| %>
           <li>
             <% companies_user = @company.companies_users.find_by(user_id: employee.id) %>
-            <%= link_to "#{companies_user.role} - #{employee.email}", user_path(employee) %>
+            <%= link_to "#{companies_user.role} - @#{employee.username_protected}", user_path(employee) %>
           </li>
         <% end %>
       </ul>
@@ -41,6 +41,9 @@
         <% end %>
       </ul>
     </div>
+    <h4>A empresa <%= @company.company_name %> tem um total de <%= @company.complaints.size %> reclamações</h4>
+    <h3>A empresa respondeu <%= @company.unique_complaint_companies_count %> reclamações</h3>
+    <h4>A porcentagem de reclamacoes respondidas são <strong><%= @company.complaints_asnwered_percentage %>%</strong></h4>
   <% end %>
   <% if user_signed_in? %>
     <% unless current_user.is_company? %>

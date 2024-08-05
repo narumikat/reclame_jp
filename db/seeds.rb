@@ -8,6 +8,7 @@ puts 'Creating users...'
 
 # USER ADMIN
 User.create!(
+  username: 'user_admin',
   email: 'admin@mail.com',
   password: '123456',
   password_confirmation: '123456',
@@ -25,6 +26,7 @@ puts 'Admin user created!'
 puts 'Creating normal users...'
 
 user_normal = User.create!(
+  username: 'user_normal',
   email: 'user1@mail.com',
   password: '123456',
   password_confirmation: '123456',
@@ -40,6 +42,7 @@ user_normal = User.create!(
 )
 
 user_normal2 = User.create!(
+  username: 'user_normal2',
   email: 'user2@mail.com',
   password: '123456',
   password_confirmation: '123456',
@@ -62,6 +65,7 @@ puts 'Creating company users...'
 # COMPANY USERS 
 
 user_company = User.create!(
+  username: 'user_company1',
   email: 'user_company1@mail.com',
   password: '123456',
   password_confirmation: '123456',
@@ -77,6 +81,7 @@ user_company = User.create!(
 )
 
 user_company2 = User.create!(
+  username: 'user_company2',
   email: 'user_company2@mail.com',
   password: '123456',
   password_confirmation: '123456',
