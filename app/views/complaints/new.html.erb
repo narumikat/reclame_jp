@@ -15,7 +15,7 @@
     </div>
     <div data-controller="new-complaint">
       <button class="btn btn-info" data-action="click->new-complaint#showFormComplaint">Clique aqui se não encontrou a empresa</button>
-      <div class="mt-4" data-new-complaint-target="complaintCompanySelect">
+      <div class="mt-4 d-none" data-new-complaint-target="complaintCompanySelect">
         <h3>Especifique a companhia abaixo:</h3>
         <div class="form-group">
           <%= f.input :new_company_name, class: 'form-control' %>
