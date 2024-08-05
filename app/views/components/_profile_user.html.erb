@@ -1,4 +1,15 @@
 <div class="my-4">
-  <h4><%= @user.first_name %> criou <strong><%= @user.complaints.size %> reclamações</strong> em <strong><%= @user.unique_complaint_companies_count %> empresas</strong></h4>
-  <h4 class="my-4">Teve <strong><%= @user.complaints_asnwered_count %> respostas</strong> em <strong><%= @user.unique_complaints_asnwered_count %> reclamações</strong></h4>
+  <h4>@<%= @user.username_protected %> criou <strong><%= @user.complaints.size %> reclamações</strong> em <strong><%= @user.unique_complaint_companies_count %> empresas</strong></h4>
+  <h4 class="my-4">Teve <strong><%= @user.complaints_asnwered_count %> respostas</strong> em <strong><%= @user.complaints.size %> reclamações</strong></h4>
+  <% if @user.complaints.present? %>
+    <div class="my-4">
+      <h3>Reclamações</h3>
+      <ul>
+        <% @user.complaints.each do |complaint| %>
+          <li><%= link_to complaint.title, complaint_path(complaint) %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <h4>A porcentagem de reclamacoes respondidas são <strong><%= @user.complaints_asnwered_percentage %>%</strong></h4>
 </div>

@@ -2,9 +2,9 @@
   <h2>Escolha o tipo de registro</h2>
   <%= simple_form_for :registration_type, url: registration_type_path, method: :post do |f| %>
     <div class="form-group">
-      <%= f.input :is_company, as: :radio_buttons, collection: [["No", false], ["Yes", true]], label: "Register as company", required: true, input_html: { data: { action: "change->company#toggleCompanySelect" } } %>
+      <%= f.input :is_company, as: :radio_buttons, collection: [["No", false], ["Yes", true]], label: "Register as company", required: true, input_html: { data: { action: "change->select-company#toggleCompanySelect" } } %>
     </div>
-    <div data-company-target="companySelect" style="display: none;">
+    <div data-select-company-target="companySelect" style="display: none;">
       <h4 class="mt-4">Se sua empresa ja estiver registrada, selecione abaixo:</h4>
       <div class="form-group">
         <%= f.collection_select :company_id, Company.all, :id, :company_name, { include_blank: "Select a company" }, { class: 'form-control' } %>
