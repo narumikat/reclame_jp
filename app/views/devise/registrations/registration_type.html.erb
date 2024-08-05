@@ -4,9 +4,12 @@
     <div class="form-group">
       <%= f.input :is_company, as: :radio_buttons, collection: [["No", false], ["Yes", true]], label: "Register as company", required: true, input_html: { data: { action: "change->company#toggleCompanySelect" } } %>
     </div>
-    <div class="form-group" data-company-target="companySelect" style="display: none;">
-      <%= f.label :company_id, "Select your company" %>
-      <%= f.collection_select :company_id, Company.all, :id, :company_name, { include_blank: "Select a company" }, { class: 'form-control' } %>
+    <div data-company-target="companySelect" style="display: none;">
+      <h4 class="mt-4">Se sua empresa ja estiver registrada, selecione abaixo:</h4>
+      <div class="form-group">
+        <%= f.collection_select :company_id, Company.all, :id, :company_name, { include_blank: "Select a company" }, { class: 'form-control' } %>
+      </div>
+      <h5 class="my-4">Se a empresa nao estiver registrada, voce pode registrar apos se cadastrar</h5>
     </div>
     <div class="form-group">
       <%= f.button :submit, 'Próximo', class: 'btn btn-primary' %>

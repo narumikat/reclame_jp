@@ -3,6 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :check_registration_type, only: [:new, :create]
+  before_action :set_resource, only: [:new]
 
 
   def create
@@ -11,8 +12,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
         resource.update(is_company: session[:registration_type])
         if session[:registration_type] && session[:company_id].present?
           company = Company.find_by(id: session[:company_id])
-          if company
-            CompaniesUser.create!(user: resource, company: company, role: 'Default Role')
+          role = params[:registration_type][:role]
+          if company && role.present?
+            CompaniesUser.create!(user: resource, company: company, role: role)
             puts "User associated with company: #{company.company_name}"
           else
             puts "User already associated with company: #{company.company_name}"
@@ -58,5 +60,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if session[:registration_type].nil?
       redirect_to choose_registration_type_path
     end
+  end
+
+  # Verifica se o usuário escolheu se registrar como empresa ou pessoa física
+  def set_resource
+    @is_company = session[:registration_type] == true
+    build_resource({})
+    resource.is_company = @is_company
   end
 end
