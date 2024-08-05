@@ -19,8 +19,17 @@
       <% end %>
     <% end %>
   <% end %>
-  <h2>Employees</h2>
   <% if @company.users.present? %>
+<<<<<<< HEAD
+    <div>
+      <h2>Employees</h2>
+      <ul>
+        <% @company.users.each do |employee| %>
+          <li><%= link_to employee.first_name, user_path(employee) %></li>
+        <% end %>
+      </ul>
+    </div>
+=======
     <ul>
       <% @company.users.each do |employee| %>
         <li>
@@ -29,13 +38,30 @@
         </li>
       <% end %>
     </ul>
+>>>>>>> 3fc53250061b0c64c0f4f14862c099f834ba32a3
   <% end %>
-  <h2>Complaints</h2>
   <% if @company.complaints.present? %>
-    <ul>
-      <% @complaints.each do |complaint| %>
-        <li><%= link_to complaint.title, company_complaint_path(@company, complaint) %></li>
+    <div>
+      <h2>Complaints</h2>
+      <ul>
+        <% @complaints.each do |complaint| %>
+          <li><%= link_to complaint.title, company_complaint_path(@company, complaint) %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% if !current_user.is_company? %>
+    <div>
+      <h3>Create a new complaint</h3>
+      <%= simple_form_for [@company, @complaint] do |f|  %>
+        <%= f.input :title %>
+        <%= f.input :review %>
+        <%= f.input :comment %>
+        <div class="form-group">
+          <%= f.hidden_field :company_id, value: @company.id %>
+          <%= f.submit "Submit Complaint", class: 'btn btn-primary' %>
+        </div>
       <% end %>
-    <% end %>
-  </ul>
+    </div>
+  <% end %>
 </div>

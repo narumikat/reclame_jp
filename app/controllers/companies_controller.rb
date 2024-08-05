@@ -13,7 +13,6 @@ class CompaniesController < ApplicationController
   
   def create
     @company = Company.new(company_params)
-    # @company.users << current_user
 
     if company_params[:company_social_media].values.all?(&:blank?)
       flash[:alert] = "Please fill out at least one social media field."
@@ -35,6 +34,7 @@ class CompaniesController < ApplicationController
   def show
     @company = Company.find(params[:id])
     @complaints = @company.complaints.order(created_at: :desc)
+    @complaint = Complaint.new
   end
 
   def edit

@@ -1,0 +1,43 @@
+<div class="container">
+  <%= simple_form_for @complaint, html: { class: 'form-horizontal' } do |f| %>
+    <div class="form-group">
+      <%= f.label :company_id, 'Select a Company:', class: 'control-label' %>
+      <%= f.collection_select :company_id, Company.all, :id, :company_name, { include_blank: "Select a company" }, { class: 'form-control' } %>
+    </div>
+    <div class="form-group">
+      <%= f.input :title, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.input :review, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.input :comment, as: :text, label: 'Comentário:', input_html: { class: 'form-control' } %>
+    </div>
+    <div data-controller="new-complaint">
+      <button class="btn btn-info" data-action="click->new-complaint#showFormComplaint">Clique aqui se não encontrou a empresa</button>
+      <div class="mt-4 d-none" data-new-complaint-target="complaintCompanySelect">
+        <h3>Especifique a companhia abaixo:</h3>
+        <div class="form-group">
+          <%= f.input :new_company_name, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <h4>Social Media Links</h4>
+          <%= f.fields_for :company_social_media do |social| %>
+            <div class="social-media-group">
+              <%= social.input :facebook, label: "Facebook" %>
+              <%= social.input :twitter, label: "Twitter" %>
+              <%= social.input :linkedin, label: "LinkedIn" %>
+              <%= social.input :instagram, label: "Instagram" %>
+              <%= social.input :youtube, label: "YouTube" %>
+              <%= social.input :tiktok, label: "TikTok" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group mt-4">
+      <%= f.submit "Submit Complaint", class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
+</div>

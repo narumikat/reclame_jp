@@ -11,10 +11,6 @@ class ComplaintsController < ApplicationController
     @responses = @complaint.responses.order(created_at: :desc)
   end
 
-  def new_complaint
-    @complaint = Complaint.new
-  end
-
   def new
     @complaint = Complaint.new
   end
@@ -24,26 +20,7 @@ class ComplaintsController < ApplicationController
     @complaint.user = current_user
   
     if @complaint.save
-      if complaint_params[:company_id].present?
-        SendgridMailer.send_email.deliver_now
-        redirect_to @complaint, notice: 'Complaint was successfully created.'
-      else
-        existing_company = find_company_by_social_media(complaint_params[:company_social_media])
-        
-        if existing_company
-          @complaint.update(company_id: existing_company.id)
-          redirect_to company_path(existing_company), notice: 'Complaint was successfully created and linked to an existing company.'
-        else
-          @company = Company.create(
-            company_name: complaint_params[:new_company_name],
-            company_social_media: complaint_params[:company_social_media],
-            company_city: 'default',
-            company_state: 'default'
-          )
-          @complaint.update(company_id: @company.id)
-          redirect_to companies_path, notice: 'Complaint and new company were successfully created.'
-        end
-      end
+      handle_complaint_create
     else
       flash[:alert] = 'Failed to save the complaint: ' + @complaint.errors.full_messages.to_sentence
       render :new
@@ -51,6 +28,29 @@ class ComplaintsController < ApplicationController
   end
   
   private
+
+  def handle_complaint_create
+    if complaint_params[:company_id].present?
+      SendgridMailer.send_email.deliver_now
+      redirect_to @complaint, notice: 'Complaint was successfully created.'
+    else
+      existing_company = find_company_by_social_media(complaint_params[:company_social_media])
+      
+      if existing_company
+        @complaint.update(company_id: existing_company.id)
+        redirect_to company_path(existing_company), notice: 'Complaint was successfully created and linked to an existing company.'
+      else
+        @company = Company.create(
+          company_name: complaint_params[:new_company_name],
+          company_social_media: complaint_params[:company_social_media],
+          company_city: 'default',
+          company_state: 'default'
+        )
+        @complaint.update(company_id: @company.id)
+        redirect_to companies_path, notice: 'Complaint and new company were successfully created.'
+      end
+    end
+  end
   
   def find_company_by_social_media(social_media)
     social_media.each do |platform, url|
@@ -60,9 +60,6 @@ class ComplaintsController < ApplicationController
     end
     nil
   end
-  
-
-  private
 
   def complaint_params
     params.require(:complaint).permit(
