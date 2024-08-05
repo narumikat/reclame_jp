@@ -1,0 +1,17 @@
+<% if @user.companies.present? %>
+  <% @user.companies.each do |company| %>
+    <div class="my-4">
+      <% role = @user.companies_users.find_by(company_id: company.id).role %>
+      <h4><%= @user.first_name %> é <strong><%= role %></strong> da empresa <strong><%= link_to company.company_name, company_path(company.id) %></strong></h4>
+    </div>
+  <% end %>
+  <% if @user.responses.any? %>
+    <h4> <%= @user.first_name %> respondeu <strong><%= @user.responses.size %> perguntas</strong></h4>
+    <div class="my-4">
+      <% @user.responses.each do |response| %>
+        <h5><%= response.complaint.title %></h5>
+        <p><%= response.content %></p>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

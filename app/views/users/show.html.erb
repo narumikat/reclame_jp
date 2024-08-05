@@ -1,0 +1,8 @@
+<div class="container">
+  <h2><%= @user.first_name %></h2>
+  <% if @user.is_company? %>
+    <%=  render 'components/profile_employes' %>
+  <% else %>
+    <%= render 'components/profile_user' %>
+  <% end %>
+</div>

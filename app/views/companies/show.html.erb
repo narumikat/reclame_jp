@@ -21,21 +21,16 @@
   <% end %>
   <% if @company.users.present? %>
     <div>
-      <h2>Employees</h2>
+      <h3>Employees</h3>
       <ul>
         <% @company.users.each do |employee| %>
-          <li><%= link_to employee.first_name, user_path(employee) %></li>
+          <li>
+            <% companies_user = @company.companies_users.find_by(user_id: employee.id) %>
+            <%= link_to "#{companies_user.role} - #{employee.email}", user_path(employee) %>
+          </li>
         <% end %>
       </ul>
     </div>
-    <ul>
-      <% @company.users.each do |employee| %>
-        <li>
-          <% companies_user = @company.companies_users.find_by(user_id: employee.id) %>
-          <%= link_to "#{companies_user.role} - #{employee.email}", user_path(employee) %>
-        </li>
-      <% end %>
-    </ul>
   <% end %>
   <% if @company.complaints.present? %>
     <div>
