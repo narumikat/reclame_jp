@@ -1,5 +1,6 @@
 Complaint.destroy_all
 Response.destroy_all
+CompaniesUser.destroy_all
 Company.destroy_all
 User.destroy_all
 
