@@ -22,5 +22,9 @@ Rails.application.routes.draw do
   resources :complaints do
     get 'new_complaint', on: :collection, to: 'complaints#new_complaint'
   end
-  
+
+  # TWILIO
+  post "sms", to: "pages#sms"
+  post "whatsapp", to: "pages#whatsapp"
+
 end
