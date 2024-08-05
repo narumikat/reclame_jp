@@ -1,19 +1,20 @@
 class SendgridMailer < ActionMailer::Base
-  def send_email
-    @user = User.last
+  def send_email(user)
+    @user = user
 
     mail = SendGrid::Mail.new
     mail.from = SendGrid::Email.new(email: ENV['SENDGRID_EMAIL'])
     dynamic_data = SendGrid::Personalization.new
     emails = [
-      ENV['TEST_EMAIL']
+      ENV['TEST_EMAIL'],
+      @user.email
     ]
     emails.each do |email|
       dynamic_data.add_to(SendGrid::Email.new(email: email))
     end
     dynamic_data.add_bcc(SendGrid::Email.new(email: ENV['BCC_EMAIL']))
 
-    # Pass dynamic data with the correct placeholders
+    # Pass dynamic data with the correct placeholders to the SendGrid template
     dynamic_data.add_dynamic_template_data({
                                              "user_name" => @user.email,
                                            })

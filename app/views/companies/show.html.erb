@@ -1,14 +1,14 @@
 <div class="container">
   <% company_fields = {
-  "Register Number" => @company.company_register_number,
-  "Address" => @company.company_address,
-  "City" => @company.company_city,
-  "State" => @company.company_state,
-  "ZIP Code" => @company.company_zip_code,
-  "Country" => @company.company_country,
-  "Phone Number" => @company.company_phone_number,
-  "Website" => @company.company_website
-} %>
+    "Register Number" => @company.company_register_number,
+    "Address" => @company.company_address,
+    "City" => @company.company_city,
+    "State" => @company.company_state,
+    "ZIP Code" => @company.company_zip_code,
+    "Country" => @company.company_country,
+    "Phone Number" => @company.company_phone_number,
+    "Website" => @company.company_website
+  } %>
   <h1><%= @company.company_name %></h1>
   <% company_fields.each do |label, value| %>
     <% if value.present? %>
@@ -42,10 +42,10 @@
       </ul>
     </div>
   <% end %>
-  <% if !current_user.is_company? %>
+  <% unless current_user.is_company? %>
     <div>
       <h3>Create a new complaint</h3>
-      <%= simple_form_for [@company, @complaint] do |f|  %>
+      <%= simple_form_for [@company, @complaint] do |f| %>
         <%= f.input :title %>
         <%= f.input :review %>
         <%= f.input :comment %>
