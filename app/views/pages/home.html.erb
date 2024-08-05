@@ -28,6 +28,7 @@
     <% end %>
   <% else %>
     <ul>
+      <li><%= link_to 'See all companies', companies_path %></li>
       <li><%= link_to 'Register', registration_type_path %></li>
       <li><%= link_to "Login", new_user_session_path %></li>
     </ul>

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :user_params, only: [:create]
+  skip_before_action :authenticate_user!, only: [:show]
 
   def home
   end

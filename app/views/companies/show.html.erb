@@ -42,18 +42,20 @@
       </ul>
     </div>
   <% end %>
-  <% unless current_user.is_company? %>
-    <div>
-      <h3>Create a new complaint</h3>
-      <%= simple_form_for [@company, @complaint] do |f| %>
-        <%= f.input :title %>
-        <%= f.input :review %>
-        <%= f.input :comment %>
-        <div class="form-group">
-          <%= f.hidden_field :company_id, value: @company.id %>
-          <%= f.submit "Submit Complaint", class: 'btn btn-primary' %>
-        </div>
-      <% end %>
-    </div>
+  <% if user_signed_in? %>
+    <% unless current_user.is_company? %>
+      <div>
+        <h3>Create a new complaint</h3>
+        <%= simple_form_for [@company, @complaint] do |f| %>
+          <%= f.input :title %>
+          <%= f.input :review %>
+          <%= f.input :comment %>
+          <div class="form-group">
+            <%= f.hidden_field :company_id, value: @company.id %>
+            <%= f.submit "Submit Complaint", class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 </div>
