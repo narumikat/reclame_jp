@@ -1,6 +1,7 @@
 class ComplaintsController < ApplicationController
   before_action :set_company, only: [:create, :show], if: -> { params[:company_id].present? }
   before_action :set_complaint, only: [:show]
+  skip_before_action :authenticate_user!, only: [:index, :show]
   def index
     @complaints = current_user.complaints.order(created_at: :desc)
   end

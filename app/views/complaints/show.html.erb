@@ -1,6 +1,7 @@
 <div class="container">
   <h3><%= @complaint.company.company_name %></h3>
   <h2><%= @complaint.title %></h2>
+  <p>Escrito por <%= link_to @complaint.user.first_name, user_path(@complaint.user) %></p>
   <p><strong>Comment:</strong> <%= @complaint.comment %></p>
   <% if @complaint.responses.any? %>
     <h3>Responses:</h3>
@@ -8,13 +9,15 @@
       <p><strong>Comment:</strong> <%= response.content %></p>
     <% end %>
   <% end %>
-  <% if current_user.companies.include?(@complaint.company) || !@complaint.company.blank?%>
-    <div>
-      <h3>Write a response:</h3>
-      <%= simple_form_for([@complaint.company, @complaint, @response]) do |f| %>
-        <%= f.input :content, label: false, placeholder: "Write a response..." %>
-        <%= f.button :submit, "Submit Response" %>
-      <% end %>
-    </div>
+  <% unless !user_signed_in? %>
+    <% if current_user.companies.include?(@complaint.company) || !@complaint.company.blank?%>
+      <div>
+        <h3>Write a response:</h3>
+        <%= simple_form_for([@complaint.company, @complaint, @response]) do |f| %>
+          <%= f.input :content, label: false, placeholder: "Write a response..." %>
+          <%= f.button :submit, "Submit Response" %>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 </div>
