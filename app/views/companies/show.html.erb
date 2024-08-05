@@ -23,7 +23,10 @@
   <% if @company.users.present? %>
     <ul>
       <% @company.users.each do |employee| %>
-        <li><%= link_to employee.first_name, user_path(employee) %></li>
+        <li>
+          <% companies_user = @company.companies_users.find_by(user_id: employee.id) %>
+          <%= link_to "#{companies_user.role} - #{employee.email}", user_path(employee) %>
+        </li>
       <% end %>
     </ul>
   <% end %>
