@@ -128,29 +128,39 @@ company2 = Company.create!(
 )
 
 Company.create!(
-  company_name: 'Company Validation',
+  company_name: 'Company No Admin',
   company_address: '123 Main St',
   company_city: 'New York',
   company_state: 'NY',
   company_zip_code: '10001',
   company_country: 'USA',
   company_phone_number: '1234567890',
-  company_website: 'www.companyvalidation.com',
-  company_social_media: { facebook: 'www.facebook.com/companyvalidation', twitter: 'www.twitter.com/companyvalidation' },
-  company_description: 'Company validation is a company that does things.',
+  company_website: 'www.companynoadmin.com',
+  company_social_media: { facebook: 'www.facebook.com/companynoadmin', twitter: 'www.twitter.com/companynoadmin' },
+  company_description: 'Company No Admin is a company that does things.',
   company_contact_name: 'John Doe',
-  company_contact_email: 'company2@company.com'
+  company_contact_email: 'company3@company.com'
 )
 
 companies = [company1, company2]
 
 puts 'Create company associations'
 
-company1.users << user_company unless company1.users.include?(user_company)
-company2.users << user_company unless company2.users.include?(user_company)
-company2.users << user_company2 unless company2.users.include?(user_company2)
+def associate_user_with_company(user, company, role)
+  association = CompaniesUser.find_or_initialize_by(user: user, company: company)
+  if association.new_record?
+    association.role = role
+    association.save!
+  else
+    association.update(role: role)
+  end
+end
 
-puts 'Companies created!'
+associate_user_with_company(user_company, company1, "Manager")
+associate_user_with_company(user_company, company2, "Executive")
+associate_user_with_company(user_company2, company2, "Director")
+
+puts 'Users linked to companies with roles assigned!'
 
 puts 'Creating complaints...'
 
