@@ -10,9 +10,15 @@
     <%= f.input :company_country, label: "Country" %>
     <%= f.input :company_phone_number, label: "Phone Number" %>
     <%= f.input :company_website, label: "Website" %>
+    <% if session[:role].blank? %>
+      <%= label_tag 'role', 'Seu cargo na empresa' %>
+      <%= text_field_tag 'role', '', placeholder: "Insira o seu cargo na empresa", class: 'form-control', required: true %>
+    <% else %>
+      <%= hidden_field_tag 'role', session[:role] %>
+    <% end %>
     <div class="form-group my-4">
       <%= f.label :company_category %><br>
-      <%= f.collection_select :company_category, Company::COMPANY_CATEGORY.each_with_index.map { |category, index| [category, category] }, :last, :first, { include_blank: "Selecione uma Categoria" }, { required: true, class: 'form-control' } %>
+      <%= f.collection_select :company_category, Company::COMPANY_CATEGORY, :to_s, :to_s, { include_blank: "Selecione uma Categoria" }, { required: true, class: 'form-control', multiple: false, name: 'company[company_category][]' } %>
     </div>
     <div id="social-media-links">
       <h3>Social Media Links</h3>
