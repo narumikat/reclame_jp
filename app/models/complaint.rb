@@ -7,6 +7,8 @@ class Complaint < ApplicationRecord
   validates :comment, presence: true
   validates :user_id, presence: true
 
+  accepts_nested_attributes_for :company
+
   def self.search(search)
     if search
       where('title LIKE ? OR comment LIKE ?', "%#{search}%", "%#{search}%")

@@ -3,6 +3,8 @@ class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update]
   before_action :check_company_user, only: [:new, :create, :join] 
   skip_before_action :authenticate_user!, only: [:index, :show]
+
+  COMPANY_CATEGORY = Company::COMPANY_CATEGORY
   
   def index
     @companies = Company.all
@@ -57,7 +59,9 @@ class CompaniesController < ApplicationController
       :company_name, :company_register_number, :company_address, :company_city,
       :company_state, :company_zip_code, :company_country, :company_phone_number,
       :company_website, :company_description,
-      :company_contact_name, :company_contact_email, company_social_media: [:facebook, :twitter, :linkedin, :instagram, :youtube, :tiktok]
+      :company_category,
+      :company_contact_name, :company_contact_email, company_social_media: [:facebook, :twitter, :linkedin, :instagram, :youtube, :tiktok],
+      company_category: []
     )
   end
 

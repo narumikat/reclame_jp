@@ -13,14 +13,16 @@
     <% end %>
   <% end %>
   <% unless !user_signed_in? %>
-    <% if current_user.companies.include?(@complaint.company) || !@complaint.company.blank?%>
-      <div>
-        <h3>Write a response:</h3>
-        <%= simple_form_for([@complaint.company, @complaint, @response]) do |f| %>
-          <%= f.input :content, label: false, placeholder: "Write a response..." %>
-          <%= f.button :submit, "Submit Response" %>
-        <% end %>
-      </div>
+    <% if current_user.is_company? %>
+      <% if current_user.companies.include?(@complaint.company) || !@complaint.company.blank?%>
+        <div>
+          <h3>Write a response:</h3>
+          <%= simple_form_for([@complaint.company, @complaint, @response]) do |f| %>
+            <%= f.input :content, label: false, placeholder: "Write a response..." %>
+            <%= f.button :submit, "Submit Response" %>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 </div>
