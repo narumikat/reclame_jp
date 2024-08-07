@@ -8,6 +8,7 @@ class CreateComplaints < ActiveRecord::Migration[7.1]
       t.integer :review
       t.text :comment
       t.integer :status, default: 0
+      t.string :complaint_category
 
       t.timestamps
     end
