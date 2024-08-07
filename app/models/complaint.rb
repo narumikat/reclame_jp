@@ -6,6 +6,7 @@ class Complaint < ApplicationRecord
   validates :title, presence: true
   validates :comment, presence: true
   validates :user_id, presence: true
+  enum status: { pending: 0, answered: 1 }
 
   accepts_nested_attributes_for :company
 
@@ -14,6 +15,14 @@ class Complaint < ApplicationRecord
       where('title LIKE ? OR comment LIKE ?', "%#{search}%", "%#{search}%")
     else
       all
+    end
+  end
+
+  def update_status
+    if responses.any?
+      answered!
+    else
+      pending!
     end
   end
 end

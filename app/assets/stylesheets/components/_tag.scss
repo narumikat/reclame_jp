@@ -1,0 +1,36 @@
+.red-tag {
+  a {
+    text-decoration: none;
+  }
+
+  background: rgba(253, 16, 21, 0.8);
+  padding: 0.3rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #fff;
+  font-weight: 500;
+  transition: background 0.3s;
+  margin-bottom: 1rem;
+
+    &:hover {
+      background: rgba(253, 16, 21, 1);
+    }
+}
+
+.green-tag {
+  a {
+    text-decoration: none;
+  }
+  background: rgba(30, 221, 136, 0.8);
+  padding: 0.3rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #fff;
+  font-weight: 500;
+  transition: background 0.3s;
+  margin-bottom: 1rem;
+
+    &:hover {
+      background: rgba(30, 221, 136, 0.1);
+    }
+}
