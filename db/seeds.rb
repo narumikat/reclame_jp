@@ -179,7 +179,7 @@ complaints = [
     review: rand(1..5),
     company: companies.sample,
     user: normal_users.sample,
-    complaint_category: [Complaint::COMPLAINT_CATEGORY.sample]
+    complaint_category: Complaint::COMPLAINT_CATEGORY.sample
   ),
   Complaint.create!(
     title: 'Produto não entregue',
@@ -187,7 +187,7 @@ complaints = [
     review: rand(1..5),
     company: companies.sample,
     user: normal_users.sample,
-    complaint_category: [Complaint::COMPLAINT_CATEGORY.sample]
+    complaint_category: Complaint::COMPLAINT_CATEGORY.sample
   ),
   Complaint.create!(
     title: 'Serviço ao Cliente Insatisfatório',
@@ -195,7 +195,7 @@ complaints = [
     review: rand(1..5),
     company: companies.sample,
     user: normal_users.sample,
-    complaint_category: [Complaint::COMPLAINT_CATEGORY.sample]
+    complaint_category: Complaint::COMPLAINT_CATEGORY.sample
   ),
   Complaint.create!(
     title: 'Cobrança Indevida',
@@ -203,7 +203,7 @@ complaints = [
     review: rand(1..5),
     company: companies.sample,
     user: normal_users.sample,
-    complaint_category: [Complaint::COMPLAINT_CATEGORY.sample]
+    complaint_category: Complaint::COMPLAINT_CATEGORY.sample
   ),
   Complaint.create!(
     title: 'Qualidade do Produto Abaixo do Esperado',
@@ -211,7 +211,7 @@ complaints = [
     review: rand(1..5),
     company: companies.sample,
     user: normal_users.sample,
-    complaint_category: [Complaint::COMPLAINT_CATEGORY.sample]
+    complaint_category: Complaint::COMPLAINT_CATEGORY.sample
   )
 ]
 

@@ -51,7 +51,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_02_020915) do
     t.integer "review"
     t.text "comment"
     t.integer "status", default: 0
-    t.string "complaint_category", array: true
+    t.string "complaint_category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_complaints_on_company_id"

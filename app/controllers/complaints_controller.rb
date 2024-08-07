@@ -25,6 +25,7 @@ class ComplaintsController < ApplicationController
     if @complaint.save
       handle_complaint_create
     else
+      Rails.logger.debug "Complaint Category Received: #{@complaint.complaint_category}"
       flash[:alert] = 'Failed to save the complaint: ' + @complaint.errors.full_messages.to_sentence
       render :new
     end
@@ -69,7 +70,7 @@ class ComplaintsController < ApplicationController
 
   def complaint_params
     params.require(:complaint).permit(
-      :company_id, :title, :review, :comment,
+      :company_id, :title, :review, :comment, :complaint_category,
       company_attributes: [
         :company_name, { company_category: [] }, :company_city, :company_state,
         company_social_media: [:facebook, :twitter, :linkedin, :instagram, :youtube, :tiktok]

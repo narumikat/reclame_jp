@@ -33,7 +33,7 @@ class Complaint < ApplicationRecord
   validates :comment, presence: true
   validates :user_id, presence: true
   enum status: { pending: 0, answered: 1 }
-  validates :complaint_category, presence: true, inclusion: { in: COMPLAINT_CATEGORY }
+  validates :complaint_category, inclusion: { in: COMPLAINT_CATEGORY }, presence: true
 
   accepts_nested_attributes_for :company
 
