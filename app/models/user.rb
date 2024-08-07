@@ -4,13 +4,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :trackable
-        #  :confirmable usar depois para ocnfirmar o email do user
-has_many :companies_users
-has_many :companies, through: :companies_users
-has_many :responses
-has_many :complaints
+  #  :confirmable usar depois para ocnfirmar o email do user
+  has_many :companies_users
+  has_many :companies, through: :companies_users
+  has_many :responses
+  has_many :complaints
 
-validates :username, presence: true, uniqueness: true, length: { minimum: 4, maximum: 20 }
+  validates :username, presence: true, uniqueness: true, length: { minimum: 4, maximum: 20 }
 
   def company?
     self.is_company
@@ -20,27 +20,31 @@ validates :username, presence: true, uniqueness: true, length: { minimum: 4, max
     complaints.select(:company_id).distinct.count
   end
 
-  def complaints_asnwered_count
-    complaints.joins(:responses).count    
+  def complaints_answered_count
+    complaints.joins(:responses).count
   end
 
-  def complaints_unasnwered_count
+  def complaints_unanswered_count
     complaints.where.not(id: Response.select(:complaint_id)).count
   end
 
-  def unique_complaints_asnwered_count
+  def unique_complaints_answered_count
     complaints.joins(:responses).select(:company_id).distinct.count
   end
 
-  def unique_complaints_unasnwered_count
+  def unique_complaints_unanswered_count
     complaints.where.not(id: Response.select(:complaint_id)).select(:company_id).distinct.count
   end
 
-  def complaints_asnwered_percentage
+  def complaints_answered_percentage
     unique_complaint_companies_count.to_f / complaints.count.to_f * 100
   end
 
   def username_protected
-    self.username = "#{username[0..1]}#{'*' * 4}"
+    if self.username.blank?
+      self.username = "Anonymous ou **********"
+    else
+      self.username = "#{username[0..1]}#{'*' * 4}"
+    end
   end
 end

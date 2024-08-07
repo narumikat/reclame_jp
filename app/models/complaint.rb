@@ -8,6 +8,8 @@ class Complaint < ApplicationRecord
   validates :user_id, presence: true
   enum status: { pending: 0, answered: 1 }
 
+  accepts_nested_attributes_for :company
+
   def self.search(search)
     if search
       where('title LIKE ? OR comment LIKE ?', "%#{search}%", "%#{search}%")
