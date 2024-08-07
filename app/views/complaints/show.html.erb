@@ -1,7 +1,7 @@
 <div class="container">
   <h3>Reclamacao da empresa <strong><%= @complaint.company.company_name %></strong></h3>
   <h2><%= @complaint.title %></h2>
-  <p>Escrito por <%= link_to @complaint.user.username_protected, user_path(@complaint.user) %></p>
+  <p>Escrito por <%= link_to "@#{@complaint.user.username_protected}", user_path(@complaint.user) %></p>
   <p><strong>Comentario:</strong> <%= @complaint.comment %></p>
   <% if @complaint.responses.any? %>
     <h3>Responses:</h3>
