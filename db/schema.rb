@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_140327) do
     t.string "company_website"
     t.jsonb "company_social_media", default: []
     t.text "company_description"
-    t.string "company_category", default: [], array: true
+    t.string "company_category"
     t.string "company_contact_name"
     t.string "company_contact_email"
     t.datetime "created_at", null: false
