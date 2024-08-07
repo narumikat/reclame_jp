@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_140327) do
     t.string "company_website"
     t.jsonb "company_social_media", default: []
     t.text "company_description"
-    t.string "company_category", default: [], array: true
+    t.string "company_category", array: true
     t.string "company_contact_name"
     t.string "company_contact_email"
     t.datetime "created_at", null: false
@@ -50,6 +50,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_140327) do
     t.string "title"
     t.integer "review"
     t.text "comment"
+    t.string "complaint_category", array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_complaints_on_company_id"
