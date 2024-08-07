@@ -114,7 +114,8 @@ company1 = Company.create!(
   company_social_media: { facebook: 'www.facebook.com/companyone', twitter: 'www.twitter.com/companyone' },
   company_description: 'Company One is a company that does things.',
   company_contact_name: 'John Doe',
-  company_contact_email: 'company@mail.com'
+  company_contact_email: 'company@mail.com',
+  company_category: [Company::COMPANY_CATEGORY.sample] 
 )
 
 company2 = Company.create!(
@@ -129,7 +130,8 @@ company2 = Company.create!(
   company_social_media: { facebook: 'www.facebook.com/companytwo', twitter: 'www.twitter.com/companytwo' },
   company_description: 'Company Two is a company that does things.',
   company_contact_name: 'John Doe',
-  company_contact_email: 'company2@mail.com'
+  company_contact_email: 'company2@mail.com',
+  company_category: [Company::COMPANY_CATEGORY.sample]
 )
 
 Company.create!(
@@ -144,7 +146,8 @@ Company.create!(
   company_social_media: { facebook: 'www.facebook.com/companynoadmin', twitter: 'www.twitter.com/companynoadmin' },
   company_description: 'Company No Admin is a company that does things.',
   company_contact_name: 'John Doe',
-  company_contact_email: 'company3@company.com'
+  company_contact_email: 'company3@company.com',
+  company_category: [Company::COMPANY_CATEGORY.sample] 
 )
 
 companies = [company1, company2]

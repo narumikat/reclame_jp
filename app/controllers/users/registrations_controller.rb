@@ -5,22 +5,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :check_registration_type, only: [:new, :create]
   before_action :set_resource, only: [:new]
 
-
   def create
     super do |resource|
       if resource.persisted?
         resource.update(is_company: session[:registration_type])
+        role = params[:registration_type][:role] || session[:role]
         if session[:registration_type] && session[:company_id].present?
           company = Company.find_by(id: session[:company_id])
-          role = params[:registration_type][:role]
           if company && role.present?
             CompaniesUser.create!(user: resource, company: company, role: role)
-            puts "User associated with company: #{company.company_name}"
-          else
-            puts "User already associated with company: #{company.company_name}"
           end
         else
-          flash[:alert] = "Company not found"
+          session[:role] = role if role.present? # Armazena o role na sessão
         end
         session.delete(:registration_type)
         session.delete(:company_id)
@@ -34,6 +30,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       session[:registration_type] = params[:registration_type][:is_company] == 'true'
       # registra e salva o id da empresa, e envia para o create
       session[:company_id] = params[:registration_type][:company_id] if params[:registration_type][:is_company] == 'true'
+      session[:role] = params[:registration_type][:role] if params[:registration_type][:is_company] == 'true'
       redirect_to new_user_registration_path
     end
   end

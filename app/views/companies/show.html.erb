@@ -10,6 +10,15 @@
     "Website" => @company.company_website
   } %>
   <h1><%= @company.company_name %></h1>
+  <div class="d-flex mb-4">
+    <% if @company.company_category.is_a?(Array) %>
+      <% @company.company_category.each do |tag| %>
+        <div class="badge bg-primary me-2"><%= tag %></div>
+      <% end %>
+    <% else %>
+      <div class="badge bg-primary me-2"><%= @company.company_category %></div>
+    <% end %>
+  </div>
   <% company_fields.each do |label, value| %>
     <% if value.present? %>
       <% if label == "Website" %>
@@ -43,7 +52,7 @@
     </div>
     <h4>A empresa <%= @company.company_name %> tem um total de <%= @company.complaints.size %> reclamações</h4>
     <h3>A empresa respondeu <%= @company.unique_complaint_companies_count %> reclamações</h3>
-    <h4>A porcentagem de reclamacoes respondidas são <strong><%= @company.complaints_asnwered_percentage %>%</strong></h4>
+    <h4>A porcentagem de reclamacoes respondidas são <strong><%= @company.complaints_asnwered_percentage.round %>%</strong></h4>
   <% end %>
   <% if user_signed_in? %>
     <% unless current_user.is_company? %>
