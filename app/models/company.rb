@@ -3,9 +3,31 @@ class Company < ApplicationRecord
   has_many :users, through: :companies_users
   has_many :complaints
 
-  validates :company_name, :company_city, :company_state, presence: true
+  validates :company_name, :company_city, :company_state, :company_category, presence: true
   validate :must_have_at_least_one_social_media
   validate :unique_social_media_urls
+
+  COMPANY_CATEGORY = [
+  "Empreiteiras",
+  "Construção, Demolição e Reforma",
+  "Educação",
+  "Entretenimento",
+  "Moda e Beleza",
+  "Saúde",
+  "Serviços",
+  "Tecnologia",
+  "Veículos e Acessórios",
+  "Viagens e Turismo",
+  "Móveis e Decoração",
+  "Seguradoras",
+  "Agencias de Emprego",
+  "Bancos e Financeiras",
+  "Telefonia, Tv e Internet",
+  "Alimentos e Bebidas",
+  "Supermercados",
+  "Transporte",
+  "Varejo",
+  "Outros"]
 
   def unique_complaint_companies_count
     complaints.select(:company_id).distinct.count
