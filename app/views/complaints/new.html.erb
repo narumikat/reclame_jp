@@ -27,7 +27,11 @@
           </div>
           <div class="form-group my-4">
             <%= company_fields.label "Categoria da empresa", required: true %>
-            <%= company_fields.select :company_category, options_for_select([["Selecione uma categoria", ""]] + Company::COMPANY_CATEGORY.map { |category| [category, category] }, selected: @complaint.company&.company_category&.first), {}, { class: 'form-control', name: 'complaint[company_attributes][company_category][]' } %>
+            <%= company_fields.collection_select :company_category, 
+                                          Company::COMPANY_CATEGORY, 
+                                          :to_s, :to_s, 
+                                          { include_blank: 'Selecione uma categoria' },
+                                          { class: 'form-control' } %>
           </div>
           <div class="form-group">
             <%= company_fields.input :company_city, label: "Cidade da empresa", class: "form-control" %>

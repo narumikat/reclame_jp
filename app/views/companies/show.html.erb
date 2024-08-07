@@ -11,7 +11,7 @@
   } %>
   <h1><%= @company.company_name %></h1>
   <div class="d-flex mb-4">
-      <div class="badge bg-primary me-2"><%= @company.company_category? ? @company.company_category : "" %></div>
+    <div class="badge bg-primary me-2"><%= @company.company_category? ? @company.company_category : "" %></div>
   </div>
   <% company_fields.each do |label, value| %>
     <% if value.present? %>

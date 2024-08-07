@@ -29,6 +29,8 @@ class Company < ApplicationRecord
   "Varejo",
   "Outros"]
 
+  validates :company_category, presence: true, inclusion: { in: COMPANY_CATEGORY }
+
   def unique_complaint_companies_count
     complaints.select(:company_id).distinct.count
   end

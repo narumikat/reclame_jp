@@ -72,7 +72,7 @@ class ComplaintsController < ApplicationController
     params.require(:complaint).permit(
       :company_id, :title, :review, :comment, :complaint_category,
       company_attributes: [
-        :company_name, { company_category: [] }, :company_city, :company_state,
+        :company_name, :company_category, :company_city, :company_state,
         company_social_media: [:facebook, :twitter, :linkedin, :instagram, :youtube, :tiktok]
       ]
     )
