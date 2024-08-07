@@ -1,6 +1,11 @@
 <div class="container">
   <h3>Reclamacao da empresa <strong><%= @complaint.company.company_name %></strong></h3>
-  <h2><%= @complaint.title %></h2>
+  <div>
+    <h2><%= @complaint.title %></h2>
+    <span class="<%= @complaint.status == 'pending' ? 'red-tag' : 'green-tag' %>">
+      <%= @complaint.status == 'answered' ? 'answered' : 'pending' %>
+    </span>
+  </div>
   <p>Escrito por <%= link_to @complaint.user.username_protected, user_path(@complaint.user) %></p>
   <p><strong>Comentario:</strong> <%= @complaint.comment %></p>
   <% if @complaint.responses.any? %>
@@ -12,8 +17,8 @@
       </div>
     <% end %>
   <% end %>
-  <% unless !user_signed_in? %>
-    <% if current_user.companies.include?(@complaint.company) || !@complaint.company.blank?%>
+  <% if user_signed_in? %>
+    <% if current_user.companies.include?(@complaint.company)%>
       <div>
         <h3>Write a response:</h3>
         <%= simple_form_for([@complaint.company, @complaint, @response]) do |f| %>
