@@ -12,7 +12,7 @@ class CreateCompanies < ActiveRecord::Migration[7.1]
       t.string :company_website
       t.jsonb :company_social_media, default: []
       t.text :company_description
-      t.string :company_category, array: true, default: []
+      t.string :company_category, array: true
       t.string :company_contact_name
       t.string :company_contact_email
 

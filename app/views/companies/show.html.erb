@@ -10,6 +10,15 @@
     "Website" => @company.company_website
   } %>
   <h1><%= @company.company_name %></h1>
+  <div class="d-flex mb-4">
+    <% if @company.company_category.is_a?(Array) %>
+      <% @company.company_category.each do |tag| %>
+        <div class="badge bg-primary me-2"><%= tag %></div>
+      <% end %>
+    <% else %>
+      <div class="badge bg-primary me-2"><%= @company.company_category %></div>
+    <% end %>
+  </div>
   <% company_fields.each do |label, value| %>
     <% if value.present? %>
       <% if label == "Website" %>
