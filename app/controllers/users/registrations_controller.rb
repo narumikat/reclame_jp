@@ -9,9 +9,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super do |resource|
       if resource.persisted?
         resource.update(is_company: session[:registration_type])
-        role = params[:registration_type][:role] || session[:role]
         if session[:registration_type] && session[:company_id].present?
           company = Company.find_by(id: session[:company_id])
+          role = params[:registration_type][:role] || session[:role]
           if company && role.present?
             CompaniesUser.create!(user: resource, company: company, role: role)
           end
@@ -49,7 +49,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         companies_path
       end
     else
-      new_user_path
+      user_path(resource)
     end
   end
 
