@@ -31,6 +31,12 @@ class Company < ApplicationRecord
 
   validates :company_category, presence: true, inclusion: { in: COMPANY_CATEGORY }
 
+  # before_validation :initialize_social_media
+
+  # def initialize_social_media
+  #   self.company_social_media ||= {}
+  # end
+
   def unique_complaint_companies_count
     complaints.select(:company_id).distinct.count
   end

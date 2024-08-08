@@ -18,7 +18,11 @@
     <% end %>
     <div class="form-group my-4">
       <%= f.label :company_category %><br>
-      <%= f.collection_select :company_category, Company::COMPANY_CATEGORY, :to_s, :to_s, { include_blank: "Selecione uma Categoria" }, { required: true, class: 'form-control', multiple: false, name: 'company[company_category][]' } %>
+      <%= f.collection_select :company_category, 
+                                          Company::COMPANY_CATEGORY, 
+                                          :to_s, :to_s, 
+                                          { include_blank: 'Selecione uma categoria' },
+                                          { class: 'form-control' } %>
     </div>
     <div id="social-media-links">
       <h3>Social Media Links</h3>
