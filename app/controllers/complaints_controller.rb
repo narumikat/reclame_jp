@@ -3,7 +3,7 @@ class ComplaintsController < ApplicationController
   before_action :set_complaint, only: [:show]
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
-    @complaints = current_user.complaints.order(created_at: :desc)
+    @complaints = Complaint.where(user_id: current_user.id).order(created_at: :desc)
   end
 
   def show
