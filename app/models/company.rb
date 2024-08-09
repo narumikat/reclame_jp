@@ -36,26 +36,22 @@ class Company < ApplicationRecord
   # def initialize_social_media
   #   self.company_social_media ||= {}
   # end
-
-  def unique_complaint_companies_count
-    complaints.select(:company_id).distinct.count
+  def total_complaints_count
+    complaints.count
   end
 
-  def complaints_asnwered_count
-    complaints.joins(:responses).count    
+  def complaints_answered_count
+    complaints.joins(:responses).distinct.count
   end
 
-  def complaints_unasnwered_count
+  def complaints_unanswered_count
     complaints.where.not(id: Response.select(:complaint_id)).count
   end
 
-  def complaints_asnwered_percentage
-    unique_complaint_companies_count.to_f / complaints.count.to_f * 100
-  end
-
-  def complaints_unasnwered_percentage
-    complaints_unasnwered_count.to_f / complaints.count.to_f * 100
-  end
+  def complaints_answered_percentage
+    return 0 if total_complaints_count.zero?
+    complaints_answered_count.to_f / total_complaints_count.to_f * 100
+  end  
 
   private
 
