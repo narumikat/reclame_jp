@@ -16,7 +16,13 @@ class User < ApplicationRecord
     self.is_company
   end
 
+  def total_complaints_count
+    return 0 if complaints.blank?
+    complaints.count
+  end
+
   def unique_complaint_companies_count
+    return 0 if complaints.blank?
     complaints.select(:company_id).distinct.count
   end
 
@@ -28,21 +34,13 @@ class User < ApplicationRecord
     complaints.where.not(id: Response.select(:complaint_id)).count
   end
 
-  def unique_complaints_answered_count
-    complaints.joins(:responses).select(:company_id).distinct.count
-  end
-
-  def unique_complaints_unanswered_count
-    complaints.where.not(id: Response.select(:complaint_id)).select(:company_id).distinct.count
-  end
-
   def complaints_answered_percentage
     unique_complaint_companies_count.to_f / complaints.count.to_f * 100
   end
 
   def username_protected
     if self.username.blank?
-      self.username = "Anonymous ou **********"
+      self.username = "Anonimo"
     else
       self.username = "#{username[0..1]}#{'*' * 4}"
     end

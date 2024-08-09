@@ -25,6 +25,25 @@ User.create!(
 puts 'Admin user created!'
 puts 'Creating normal users...'
 
+# USER SEM RECLAMACOES 
+User.create!(
+  username: 'user_no_complaints',
+  email: 'usermail@mail.com',
+  password: '123456',
+  password_confirmation: '123456',
+  first_name: 'User',
+  last_name: 'No Complaints',
+  phone_number: '1234567890',
+  address: '123 Main St',
+  city: 'New York',
+  state: 'NY',
+  zip_code: '10001',
+  admin: false,
+  is_company: false
+)
+
+# USER COMR ECLAMACOES 
+
 user_normal = User.create!(
   username: 'user_normal',
   email: 'user1@mail.com',
