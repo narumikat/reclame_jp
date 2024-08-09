@@ -23,7 +23,7 @@
     <% end %>
   <% end %>
   <% if user_signed_in? %>
-    <% if current_user.companies.include?(@complaint.company)%>
+    <% if current_user.companies.include?(@complaint.company) || current_user.complaints.include?(@complaint)%>
       <div>
         <h3>Write a response:</h3>
         <%= simple_form_for([@complaint.company, @complaint, @response]) do |f| %>
