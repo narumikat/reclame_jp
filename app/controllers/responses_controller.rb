@@ -27,7 +27,7 @@ class ResponsesController < ApplicationController
   end
 
   def check_user_permission
-    unless current_user.companies.include?(@complaint.company)
+    unless current_user.companies.include?(@complaint.company) || current_user.complaints.include?(@complaint)
       redirect_to root_path, alert: 'You are not authorized to perform this action.'
     end
   end

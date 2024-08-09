@@ -36,6 +36,7 @@ class Company < ApplicationRecord
   # def initialize_social_media
   #   self.company_social_media ||= {}
   # end
+  
   def total_complaints_count
     complaints.count
   end
