@@ -49,7 +49,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         companies_path
       end
     else
-      root_path
+      user_path(resource)
     end
   end
 

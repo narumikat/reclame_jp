@@ -1,7 +1,7 @@
 <div class="my-4">
-  <h4>@<%= @user.username_protected %> criou <strong><%= @user.complaints.size %> reclamações</strong> em <strong><%= @user.unique_complaint_companies_count %> empresas</strong></h4>
-  <h4 class="my-4">Teve <strong><%= @user.complaints_asnwered_count %> respostas</strong> em <strong><%= @user.complaints.size %> reclamações</strong></h4>
+  <h4>@<%= @user.username_protected %> criou <strong><%= @user.complaints.present? ? @user.complaints.size : '0' %> reclamações</strong> em <strong><%= @user.complaints.present? ? @user.unique_complaint_companies_count : '0' %> empresas</strong></h4>
   <% if @user.complaints.present? %>
+    <h4 class="my-4">Teve <strong><%= @user.complaints_answered_count %> respostas</strong> em <strong><%= @user.complaints.size %> reclamações</strong></h4>
     <div class="my-4">
       <h3>Reclamações</h3>
       <ul>
@@ -10,6 +10,6 @@
         <% end %>
       </ul>
     </div>
+    <h4>A porcentagem de reclamações respondidas é <strong><%= @user.complaints_answered_percentage.round %>%</strong></h4>
   <% end %>
-  <h4>A porcentagem de reclamacoes respondidas são <strong><%= @user.complaints_asnwered_percentage %>%</strong></h4>
 </div>
