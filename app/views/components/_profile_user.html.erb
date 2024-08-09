@@ -10,6 +10,6 @@
         <% end %>
       </ul>
     </div>
-    <h4>A porcentagem de reclamacoes respondidas são <strong><%= @user.complaints_answered_percentage %>%</strong></h4>
+    <h4>A porcentagem de reclamacoes respondidas são <strong><%= @user.complaints_answered_percentage.round %>%</strong></h4>
   <% end %>
 </div>
