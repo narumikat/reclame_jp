@@ -37,7 +37,6 @@ class CompaniesController < ApplicationController
       end
     end
   end
-
   
   def join
     # join to a existing company

@@ -24,14 +24,37 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  # def registration_type
+  #   if request.post?
+  #     # registra e salva a o tipo da sessasão
+  #     session[:registration_type] = params[:registration_type][:is_company] == 'true'
+  #     # registra e salva o id da empresa, e envia para o create
+  #     session[:company_id] = params[:registration_type][:company_id] if params[:registration_type][:is_company] == 'true'
+  #     session[:role] = params[:registration_type][:role] if params[:registration_type][:is_company] == 'true'
+  #     redirect_to new_user_registration_path
+  #   end
+  # end
   def registration_type
-    if request.post?
-      # registra e salva a o tipo da sessasão
+    if request.xhr? && params[:query].present?
+      query = params[:query]
+      companies = Company.where("company_name ILIKE ?", "%#{query}%").limit(10)
+      render json: companies.map { |company| { id: company.id, name: company.company_name } }
+    elsif request.post?
+      # Verifica se o company_id está fora do hash registration_type e o move para dentro
+      if params[:company_id].present?
+        params[:registration_type][:company_id] = params[:company_id]
+      end
+  
+      # Salva o tipo da sessão e o ID da empresa
       session[:registration_type] = params[:registration_type][:is_company] == 'true'
-      # registra e salva o id da empresa, e envia para o create
-      session[:company_id] = params[:registration_type][:company_id] if params[:registration_type][:is_company] == 'true'
+      if params[:registration_type][:is_company] == 'true'
+        session[:company_id] = params[:registration_type][:company_id] 
+      end
+      
       session[:role] = params[:registration_type][:role] if params[:registration_type][:is_company] == 'true'
       redirect_to new_user_registration_path
+    else
+      render :registration_type
     end
   end
 

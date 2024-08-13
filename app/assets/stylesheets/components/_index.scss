@@ -5,3 +5,13 @@
 @import "navbar";
 @import "tag";
 @import "search_bar";
+@import "toggle_form";
+@import "buttons";
+
+h1, h2, h3, h4, h5, h6, p, label, small {
+  color: $black;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $headers-font;
+}

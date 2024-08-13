@@ -4,3 +4,21 @@
   right: 16px;
   z-index: 1000;
 }
+
+.info-box {
+  background: #cfe2ff;
+  border: 1px solid #9ec5fe;
+  color: #052c65;
+  text-align: center;
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+}
+
+.alert-box {
+  background: #f8d7da;
+  color: #58151c;
+  border: 1px solid #f1aeb5;
+  text-align: center;
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+}
