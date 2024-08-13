@@ -56,9 +56,23 @@
     transition: box-shadow 0.3s;
     background: #fff;
     border-radius: 8px;
+    border: 2px solid #dee2e6;
+    transition: all 0.3s;
+  }
 
+  .registration-card-company {
     &:hover {
       box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+      background: lighten($blue, 60%);
+      border: 2px solid $blue;
+    }
+  }
+
+  .registration-card-user {
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+      background: lighten($green, 70%);
+      border: 2px solid $green;
     }
   }
 }
