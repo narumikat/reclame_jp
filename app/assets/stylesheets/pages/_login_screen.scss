@@ -1,0 +1,18 @@
+.login-screen {
+  border-radius: 8px;
+  background: #fff;
+
+  img {
+    width: 300px;
+    height: auto;
+  }
+
+  h2 {
+    font-weight: 600;
+
+    span {
+      color: $main-red;
+      font-weight: 800;
+    }
+  }
+}

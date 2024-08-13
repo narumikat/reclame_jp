@@ -1,0 +1,96 @@
+.registration_type {
+  h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-weight: 700;
+    color: $black;
+  }
+
+  .registration-card-user {
+    h2 {
+      color: $green;
+    }
+  }
+
+  .registration-card-company {
+    h2 {
+      color: $blue;
+    }
+  }
+
+  .fa-user-circle {
+    color: $green;
+  }
+
+  .fa-building {
+    color: $blue;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2em;
+    }
+  }
+
+  .toggle-form {
+    h4 {
+      font-weight: 600;
+    }
+
+    .custom-placeholder {
+      color: $gray-hover;
+    }
+  }
+
+  .company-name {
+    strong {
+      color: $main-red;
+    }
+  }
+
+  .registration-card-user, .registration-card-company {
+    transition: box-shadow 0.3s;
+    background: #fff;
+    border-radius: 8px;
+    border: 2px solid #dee2e6;
+    transition: all 0.3s;
+  }
+
+  .registration-card-company {
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+      background: lighten($blue, 60%);
+      border: 2px solid $blue;
+    }
+  }
+
+  .registration-card-user {
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+      background: lighten($green, 70%);
+      border: 2px solid $green;
+    }
+  }
+}
+
+#results {
+  max-height: 150px;
+  overflow-y: auto;
+  background-color: #fff;
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
+}
+
+.list-group-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.list-group-item:hover {
+  background-color: #f8f9fa;
+}

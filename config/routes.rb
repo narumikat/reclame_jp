@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   end
 
   get 'search', to: 'search#index', as: 'search'
+  match 'registration_type', to: 'registrations#registration_type', via: [:get, :post]
 
   # TWILIO
   post "sms", to: "pages#sms"

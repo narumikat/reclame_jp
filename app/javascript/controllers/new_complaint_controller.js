@@ -7,8 +7,6 @@ export default class extends Controller {
     document.addEventListener('DOMContentLoaded', () => {
       this.showFormComplaint();
     });
-    console.log("Complaint controller connected");
-    console.log(this.initialComplaintFormTarget);
   }
 
   showFormComplaint() {

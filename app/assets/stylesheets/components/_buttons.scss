@@ -1,0 +1,51 @@
+.btn-green {
+  background: $green;
+  border: none;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  border-radius: 6px;
+  transition: background 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    background: darken($green, 10%);
+  }
+}
+
+.btn-blue {
+  background: $blue;
+  border: none;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  border-radius: 6px;
+  transition: background 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    background: darken($blue, 10%);
+  }
+}
+
+.btn-red {
+  background: $main-red;
+  border: none;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  border-radius: 6px;
+  transition: background 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    background: darken($main-red, 10%);
+    color: #fff;
+  }
+}
+
+.back-btn {
+  font-size: 2rem;
+  color: $gray-icon;
+
+  i {
+    color: $gray-icon;
+  }
+}

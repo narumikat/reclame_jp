@@ -1,0 +1,23 @@
+.new-registration-page {
+  .new-company {
+    h2 {
+      strong {
+        color: $blue;
+        font-weight: 800;
+      }
+    }
+
+    i {
+      color: $blue;
+
+    }
+  }
+
+  .alert-box {
+    font-size: 0.8rem;
+  }
+
+  label {
+    font-weight: 600;
+  }
+}

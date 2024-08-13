@@ -1,24 +1,21 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["companySelect"]
+  static targets = ["companySelect", "companySelectBtn", "companyRadio"]
 
   connect() {
-    this.toggleCompanySelect()
-    console.log("Company controller connected")
   }
-
-  toggleCompanySelect() {
-    const selectedRadio = this.element.querySelector('input[name="registration_type[is_company]"]:checked')
-    if (selectedRadio) {
-      const selectedValue = selectedRadio.value
-      if (selectedValue === "true") {
-        this.companySelectTarget.style.display = "block"
-      } else {
-        this.companySelectTarget.style.display = "none"
-      }
+  
+  toggleCompanySelect(event) {
+    event.preventDefault()
+    
+    this.companySelectTarget.classList.toggle("visible")
+    if(this.companySelectTarget.classList.contains("visible")) {
+      this.companySelectBtnTarget.innerHTML = "Fechar"
     } else {
-      this.companySelectTarget.style.display = "none"
+      this.companySelectBtnTarget.innerHTML = "Acessar área da empresa"
     }
+    this.companyRadioTarget.checked = true; // Marca o botão de rádio como true
+    this.element.closest('form').submit();
   }
 }
