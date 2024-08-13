@@ -3,21 +3,25 @@ class ComplaintsController < ApplicationController
   before_action :set_complaint, only: [:show]
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
+    authorize Complaint
     @complaints = Complaint.where(user_id: current_user.id).order(created_at: :desc)
   end
 
   def show
+    authorize @complaint
     @complaint = Complaint.includes(:responses).find(params[:id])
     @response = Response.new
     @responses = @complaint.responses.order(created_at: :desc)
   end
 
   def new
+    authorize Complaint
     @complaint = Complaint.new
     @complaint.build_company
   end
 
   def create
+    authorize Complaint
     Rails.logger.debug "Received params: #{params.inspect}"
     @complaint = Complaint.new(complaint_params.merge(user: current_user))
   

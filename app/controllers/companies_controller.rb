@@ -7,14 +7,17 @@ class CompaniesController < ApplicationController
   COMPANY_CATEGORY = Company::COMPANY_CATEGORY
   
   def index
+    authorize Company
     @companies = Company.all
     @new_companies = Complaint.where(company_id: nil).where.not(new_company_name: [nil, ''])
   end
   def new
+    authorize Company
     @company = Company.new
   end
   
   def create
+    authorize Company
     @company = Company.new(company_params)
     if company_params[:company_social_media].values.all?(&:blank?)
       flash[:alert] = "Please fill out at least one social media field."
@@ -25,7 +28,7 @@ class CompaniesController < ApplicationController
         if role.present?
           CompaniesUser.create!(user: current_user, company: @company, role: role)
           session.delete(:role)
-          redirect_to company_path(@company), notice: 'Company was successfully created.'
+          redirect_to company_path(@company), notice: 'Empresa criada com sucesso.'
         else
           @company.destroy
           flash[:alert] = "Role can't be blank"
@@ -43,6 +46,7 @@ class CompaniesController < ApplicationController
   end
 
   def show
+    authorize @company
     @company = Company.find(params[:id])
     @complaints = @company.complaints.order(created_at: :desc)
     @complaint = Complaint.new

@@ -1,4 +1,5 @@
 class Complaint < ApplicationRecord
+  include Pundit::Authorization
   belongs_to :user
   belongs_to :company, optional: true 
   has_many :responses, dependent: :destroy
