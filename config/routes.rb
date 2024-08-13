@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     get 'new_complaint', on: :collection, to: 'complaints#new_complaint'
   end
 
+  get 'search', to: 'search#index', as: 'search'
+
   # TWILIO
   post "sms", to: "pages#sms"
   post "whatsapp", to: "pages#whatsapp"
