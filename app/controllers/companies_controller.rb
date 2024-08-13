@@ -28,7 +28,7 @@ class CompaniesController < ApplicationController
         if role.present?
           CompaniesUser.create!(user: current_user, company: @company, role: role)
           session.delete(:role)
-          redirect_to company_path(@company), notice: 'Company was successfully created.'
+          redirect_to company_path(@company), notice: 'Empresa criada com sucesso.'
         else
           @company.destroy
           flash[:alert] = "Role can't be blank"
