@@ -7,14 +7,17 @@ class CompaniesController < ApplicationController
   COMPANY_CATEGORY = Company::COMPANY_CATEGORY
   
   def index
+    authorize @company
     @companies = Company.all
     @new_companies = Complaint.where(company_id: nil).where.not(new_company_name: [nil, ''])
   end
   def new
+    authorize @company
     @company = Company.new
   end
   
   def create
+    authorize @company
     @company = Company.new(company_params)
     if company_params[:company_social_media].values.all?(&:blank?)
       flash[:alert] = "Please fill out at least one social media field."
@@ -44,6 +47,7 @@ class CompaniesController < ApplicationController
   end
 
   def show
+    authorize @company
     @company = Company.find(params[:id])
     @complaints = @company.complaints.order(created_at: :desc)
     @complaint = Complaint.new
