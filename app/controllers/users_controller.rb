@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   # end
 
   def create
+    authorize @user
     @user = User.new(user_params)
     @user.is_company = Company.find(session[:registration_type])
     @user.save
@@ -21,15 +22,18 @@ class UsersController < ApplicationController
   end
   
   def edit
+    authorize @user
   end
 
   def update
+    authorize @user
     @user = current_user
     @user.update(user_params)
     redirect_to user_path(@user)
   end
 
   def destroy
+    authorize @user
     @user = current_user
     @user.destroy
     redirect_to root_path
