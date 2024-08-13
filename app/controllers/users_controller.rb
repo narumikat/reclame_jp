@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   # end
 
   def create
-    authorize @user
+    authorize User
     @user = User.new(user_params)
     @user.is_company = Company.find(session[:registration_type])
     @user.save

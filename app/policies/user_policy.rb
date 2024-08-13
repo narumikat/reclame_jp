@@ -20,6 +20,10 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
+  def create?
+    true
+  end
+
   def edit?
     user_is_owner?
   end
