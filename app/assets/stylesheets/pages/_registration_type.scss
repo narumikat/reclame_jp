@@ -51,6 +51,16 @@
       color: $main-red;
     }
   }
+
+  .registration-card-user, .registration-card-company {
+    transition: box-shadow 0.3s;
+    background: #fff;
+    border-radius: 8px;
+
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+    }
+  }
 }
 
 #results {

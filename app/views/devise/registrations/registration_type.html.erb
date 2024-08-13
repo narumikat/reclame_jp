@@ -7,7 +7,7 @@
     <div class="row">
       <!-- Consumidor -->
       <div class="col-md-6 my-2">
-        <div class="card text-center registration-card-user">
+        <div class="card p-4 text-center registration-card-user">
           <%= f.radio_button :is_company, false, id: 'consumer_radio', class: 'd-none' %>
           <label for="consumer_radio" class="card-body">
             <div class="icon">
@@ -21,7 +21,7 @@
       </div>
       <!-- Empresa -->
       <div class="col-md-6 my-2">
-        <div class="card text-center registration-card-company">
+        <div class="card text-center p-4 registration-card-company">
           <%= f.radio_button :is_company, true, id: 'company_radio', class: 'd-none', data: { select_company_target: "companyRadio" } %>
           <label for="company_radio" class="card-body">
             <div class="icon">
