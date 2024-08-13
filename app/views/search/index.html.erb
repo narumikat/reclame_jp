@@ -1,0 +1,43 @@
+<div class="container">
+  <h1 class="my-4">Resultado da busca por <strong>'<%= @query %>'</strong></h1>
+  <% if @companies.any? || @complaints.any? %>
+    <% if @companies.any? %>
+      <h2 class="my-4">Companies</h2>
+      <div class="row">
+        <% @companies.each do |company| %>
+          <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+              <div class="card-body">
+                <h4 class="card-title">
+                  <%= link_to company.company_name, company_path(company) %>
+                </h4>
+                <p class="card-text"><%= company.company_city %>, <%= company.company_state %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p>Nenhuma empresa encontrada</p>
+    <% end %>
+    <% if @complaints.any? %>
+      <h2 class="my-4">Reclamacoes</h2>
+      <div class="row">
+        <% @complaints.each do |complaint| %>
+          <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+              <div class="card-body">
+                <h4 class="card-title">
+                  <%= link_to complaint.title, complaint_path(complaint) %>
+                </h4>
+                <p class="card-text"><%= complaint.company.company_name %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <p>Nenhum resulatdo encontrado.</p>
+  <% end %>
+</div>
