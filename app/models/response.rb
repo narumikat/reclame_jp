@@ -1,4 +1,5 @@
 class Response < ApplicationRecord
+  include Pundit::Authorization
   after_save :update_complaint_status
   
   belongs_to :complaint

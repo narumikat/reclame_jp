@@ -3,6 +3,7 @@ class ResponsesController < ApplicationController
   before_action :check_user_permission, only: [:create]
   
   def create
+    authorize Response
     @response = @complaint.responses.new(response_params)
     @response.user = current_user
     @response.company = @complaint.company
