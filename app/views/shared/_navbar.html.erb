@@ -1,7 +1,7 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon fixed-top">
+<div class="navbar navbar-expand-lg fixed-top">
   <div class="container-fluid">
-    <%= link_to root_path, class: "navbar-brand" do %>
-      <%= image_tag 'reclame-logo.png' %>
+    <%= link_to root_path do %>
+      <%= image_tag 'reclame-logo.png', class: "logo-sm" %>
     <% end %>
     <div class="col-8 col-md-6">
       <%= render 'components/search_bar' %>
@@ -12,8 +12,8 @@
       </button>
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header">
-          <%= link_to root_path, class: "navbar-brand" do %>
-            <%= image_tag 'reclame-logo.png' %>
+          <%= link_to root_path do %>
+            <%= image_tag 'reclame-logo.png', class: "logo-sm" %>
           <% end %>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>

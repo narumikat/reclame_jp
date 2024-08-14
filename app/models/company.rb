@@ -8,9 +8,13 @@ class Company < ApplicationRecord
   validate :must_have_at_least_one_social_media
   validate :unique_social_media_urls
 
+  has_one_attached :company_logo
+  has_one_attached :company_cover
+
   COMPANY_CATEGORY = [
   "Empreiteiras",
-  "Construção, Demolição e Reforma",
+  "Construção",
+  "Demolição e Reforma",
   "Educação",
   "Entretenimento",
   "Moda e Beleza",
@@ -31,12 +35,6 @@ class Company < ApplicationRecord
   "Outros"]
 
   validates :company_category, presence: true, inclusion: { in: COMPANY_CATEGORY }
-
-  # before_validation :initialize_social_media
-
-  # def initialize_social_media
-  #   self.company_social_media ||= {}
-  # end
   
   def total_complaints_count
     complaints.count
@@ -53,6 +51,16 @@ class Company < ApplicationRecord
   def complaints_answered_percentage
     return 0 if total_complaints_count.zero?
     complaints_answered_count.to_f / total_complaints_count.to_f * 100
+  end
+
+  def company_score
+    return 0 if total_complaints_count.zero?
+    
+    score = complaints_answered_percentage
+
+    scaled_score = (score / 10.0).round(2)
+    
+    scaled_score
   end  
 
   private
