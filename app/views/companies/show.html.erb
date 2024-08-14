@@ -1,74 +1,123 @@
-<div class="container">
-  <% company_fields = {
-    "Register Number" => @company.company_register_number,
-    "Address" => @company.company_address,
-    "City" => @company.company_city,
-    "State" => @company.company_state,
-    "ZIP Code" => @company.company_zip_code,
-    "Country" => @company.company_country,
-    "Phone Number" => @company.company_phone_number,
-    "Website" => @company.company_website
-  } %>
-  <h1><%= @company.company_name %></h1>
-  <div class="d-flex mb-4">
-    <div class="badge bg-primary me-2"><%= @company.company_category? ? @company.company_category : "" %></div>
-  </div>
-  <% company_fields.each do |label, value| %>
-    <% if value.present? %>
-      <% if label == "Website" %>
-        <p><strong><%= label %>:</strong> <%= link_to value, value, target: "_blank" %></p>
-      <% else %>
-        <p><strong><%= label %>:</strong> <%= value %></p>
-      <% end %>
-    <% end %>
-  <% end %>
-  <% if @company.users.present? %>
-    <div>
-      <h3>Employees</h3>
-      <ul>
-        <% @company.users.each do |employee| %>
-          <li>
-            <% companies_user = @company.companies_users.find_by(user_id: employee.id) %>
-            <%= link_to "#{companies_user.role} - @#{employee.username_protected}", user_path(employee) %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <% if @company.complaints.present? %>
-    <div>
-      <h2>Complaints</h2>
-      <ul>
-        <% @complaints.each do |complaint| %>
-          <li><%= link_to complaint.title, company_complaint_path(@company, complaint) %></li>
-        <% end %>
-      </ul>
-    </div>
-    <h4>A empresa <%= @company.company_name %> tem um total de <%= @company.complaints.size %> reclamações</h4>
-    <% if @company.complaints_answered_count > 0 %>
-      <h3>A empresa respondeu <%= @company.complaints_answered_count %> reclamações</h3>
+<div class="company_show">
+  <div class="company-banner">
+    <% if @company.company_cover.present? %>
+      <%= image_tag @company.company_cover, class: "company-card-banner" %>
     <% else %>
-      <h3>A empresa não respondeu nenhuma reclamação</h3>
+      <%= image_tag 'card-img.png', class: "company-card-banner" %>
     <% end %>
-    <h4>A porcentagem de reclamacoes respondidas são <strong><%= @company.complaints_answered_percentage.round %>%</strong></h4>
-  <% end %>
-  <% if user_signed_in? %>
+    <% if @company.company_logo.present? %>
+      <%= image_tag @company.company_logo, class: "banner-avatar" %>
+    <% else %>
+      <%= image_tag 'company-avatar.png', class: "banner-avatar" %>
+    <% end %>
+  </div>
+  <div class="container mt-4">
+    <div>
+      <h1 class="text-center"><%= @company.capitalize_name %></h1>
+      <div class="d-flex justify-content-center">
+        <span class="tag-grey-sm"><%= @company.company_category %></span>
+      </div>
+    </div>
+    <!-- FORM -->
     <% unless current_user.is_company? %>
-      <div>
-        <h3>Create a new complaint</h3>
-        <%= simple_form_for [@company, @complaint] do |f| %>
-          <%= f.input :title %>
-          <%= f.input :review %>
-          <%= f.input :comment %>
-          <div class="form-group mb-4">
-            <%= f.collection_select :complaint_category, Complaint::COMPLAINT_CATEGORY, :to_s, :to_s, { include_blank: "Selecione uma Categoria" }, { required: true, class: 'form-control', multiple: false } %>
+      <div data-controller="complaint-form">
+        <div class="d-flex justify-content-center my-4">
+          <button class="btn-red-lg" data-complaint-form-target="newComplaintBtn" data-action="click->complaint-form#toggleForm">
+            <i class="fa-solid fa-bullhorn me-2"></i>
+            Reclamar
+          </button>
+        </div>
+        <div data-complaint-form-target="formComplaint" class="toggle-form row d-flex justify-content-center">
+          <h3 class="text-center mb-4">Crie uma reclamação da empresa <br>
+            <strong><%= @company.capitalize_name %></strong></h3>
+          <div class="col-md-8 py-4">
+            <%= simple_form_for [@company, @complaint] do |f| %>
+              <%= f.input :title, label: 'Titulo da reclamação' %>
+              <%= f.input :review, placeholder: 'numero de 1 a 5' %>
+              <%= f.input :comment, label: 'Reclamação' %>
+              <div class="form-group mb-4">
+                <%= f.label 'Categoria da reclamação', required: true, class: "mb-2" %>
+                <%= f.collection_select :complaint_category, Complaint::COMPLAINT_CATEGORY, :to_s, :to_s, { include_blank: "Selecione uma Categoria" }, { required: true, class: 'form-control', multiple: false } %>
+                <%= f.hidden_field :company_id, value: @company.id %>
+              </div>
+              <div class="d-flex justify-content-end">
+                <%= f.submit "Enviar Reclamação", class: 'btn btn-primary' %>
+              </div>
+            <% end %>
           </div>
-          <div class="form-group">
-            <%= f.hidden_field :company_id, value: @company.id %>
-            <%= f.submit "Submit Complaint", class: 'btn btn-primary' %>
-          </div>
-        <% end %>
+        </div>
       </div>
     <% end %>
-  <% end %>
+    <!-- END FORM -->
+    <div>
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Inicio</button>
+          <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Sobre</button>
+          <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contato</button>
+          <button class="nav-link" id="nav-employees-tab" data-bs-toggle="tab" data-bs-target="#nav-employees" type="button" role="tab" aria-controls="nav-employees" aria-selected="false">Empregados</button>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+          <% company_fields = {
+              "Register Number" => @company.company_register_number,
+              "Address" => @company.company_address,
+              "City" => @company.company_city,
+              "State" => @company.company_state,
+              "ZIP Code" => @company.company_zip_code,
+              "Country" => @company.company_country,
+              "Phone Number" => @company.company_phone_number,
+              "Website" => @company.company_website
+            } %>
+          <% company_fields.each do |label, value| %>
+            <% if value.present? %>
+              <% if label == "Website" %>
+                <p><strong><%= label %>:</strong> <%= link_to value, value, target: "_blank" %></p>
+              <% else %>
+                <p><strong><%= label %>:</strong> <%= value %></p>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">Contato</div>
+        <div class="tab-pane fade" id="nav-employees" role="tabpanel" aria-labelledby="nav-employees-tab" tabindex="0">
+          <% if @company.users.present? %>
+            <div>
+              <h3>Employees</h3>
+              <ul>
+                <% @company.users.each do |employee| %>
+                  <li>
+                    <% companies_user = @company.companies_users.find_by(user_id: employee.id) %>
+                    <%= link_to "#{companies_user.role} - @#{employee.username_protected}", user_path(employee) %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <% if @company.complaints.present? %>
+      <div>
+        <h2>Complaints</h2>
+        <ul>
+          <% @complaints.each do |complaint| %>
+            <li><%= link_to complaint.title, company_complaint_path(@company, complaint) %></li>
+          <% end %>
+        </ul>
+      </div>
+      <h4>A empresa <%= @company.company_name %> tem um total de <%= @company.complaints.size %> reclamações</h4>
+      <% if @company.complaints_answered_count > 0 %>
+        <h3>A empresa respondeu <%= @company.complaints_answered_count %> reclamações</h3>
+      <% else %>
+        <h3>A empresa não respondeu nenhuma reclamação</h3>
+      <% end %>
+      <h4>A porcentagem de reclamacoes respondidas são <strong><%= @company.complaints_answered_percentage.round %>%</strong></h4>
+    <% end %>
+    <% if user_signed_in? %>
+    <% end %>
+  </div>
 </div>

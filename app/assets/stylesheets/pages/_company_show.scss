@@ -1,0 +1,51 @@
+.company_show {
+  .company-banner {
+    position: relative;
+
+    .company-card-banner {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .banner-avatar {
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid $light-gray;
+      box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+
+      @media (max-width: 768px) {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  }
+
+  h1 {
+    font-weight: 700;
+  }
+
+  .toggle-form {
+    strong {
+      color: $main-red;
+      font-weight: 700;
+    }
+    @media (max-width: 768px) {
+      h3 {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  nav {
+    button {
+      color: $main-red;
+    }
+  }
+}

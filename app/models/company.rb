@@ -35,6 +35,10 @@ class Company < ApplicationRecord
   "Outros"]
 
   validates :company_category, presence: true, inclusion: { in: COMPANY_CATEGORY }
+
+  def capitalize_name
+    company_name.titleize
+  end
   
   def total_complaints_count
     complaints.count
