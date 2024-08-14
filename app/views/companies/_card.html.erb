@@ -14,7 +14,11 @@
         <i class="fa-solid fa-medal me-2"></i>
         <h5><%= company.company_score %><small>/10</small></h5>
       </div>
-      <%= image_tag 'company-avatar.png', class: "card-avatar" %>
+      <% if company.company_logo.present? %>
+        <%= image_tag company.company_logo, class: "card-avatar" %>
+      <% else %>
+        <%= image_tag 'company-avatar.png', class: "card-avatar" %>
+      <% end %>
     </div>
   <% end %>
 </div>

@@ -1,11 +1,11 @@
 .company-card {
   overflow: hidden;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
   background: #fff;
   transition: box-shadow 0.3s;
 
   &:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   }
 
   a {

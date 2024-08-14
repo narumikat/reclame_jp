@@ -1,9 +1,9 @@
 .complaint-card {
 
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s;
   &:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   }
 
   a {
@@ -14,6 +14,7 @@
     position: relative;
     overflow: hidden;
     border-radius: 8px 8px 0 0;
+    height: 180px;
 
     &::before {
       content: "";
@@ -26,9 +27,22 @@
       z-index: 1;
       
     }
+
+    .card-avatar {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      height: 60px;
+      width: 60px;
+      object-fit: cover;
+      z-index: 1;
+    }
+
     .img-card {
       width: 100%;
-      height: 150px;
+      height: 180px;
       object-fit: cover;
       position: relative;
       z-index: 0;
@@ -37,7 +51,7 @@
     h3 {
       position: absolute;
       bottom: 10%;
-      left: 10%;
+      left: 5%;
       z-index: 2;
       color: white;
       font-weight: 600;

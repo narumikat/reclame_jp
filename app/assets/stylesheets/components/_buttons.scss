@@ -44,9 +44,14 @@
 .back-btn {
   font-size: 2rem;
   color: $gray-icon;
+  transition: color 0.3s;
 
   i {
     color: $gray-icon;
+  }
+
+  &:hover {
+    color: $gray-hover;
   }
 }
 

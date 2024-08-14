@@ -1,13 +1,9 @@
 <div class="container">
-  <ul>
+  <div class="row d-flex justify-content-center">
     <% @complaints.each do |complaint| %>
-      <li><%= complaint.title %>
-        <% if complaint.company.present? %>
-          <%= link_to 'Go to company', company_path(complaint.company, complaint) %>
-        <% else %>
-          <span>Company not available</span>
-        <% end %>
-      </li>
+      <div class="col-10 col-md-4 my-2">
+        <%= render 'complaints/card', complaint: complaint %>
+      </div>
     <% end %>
-  </ul>
+  </div>
 </div>

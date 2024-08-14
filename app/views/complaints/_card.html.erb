@@ -9,6 +9,11 @@
       <span class="<%= complaint.status == 'pending' ? 'red-tag' : 'green-tag' %>">
         <%= complaint.status == 'answered' ? 'answered' : 'pending' %>
       </span>
+      <% if complaint.company.company_logo.present? %>
+        <%= image_tag complaint.company.company_logo, class: "card-avatar" %>
+      <% else %>
+        <%= image_tag 'company-avatar.png', class: "card-avatar" %>
+      <% end %>
       <h3><%= complaint.title %></h3>
     </div>
     <div class="p-2">
