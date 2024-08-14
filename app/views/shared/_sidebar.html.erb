@@ -1,0 +1,55 @@
+<div class="sidebar">
+  <div class="row d-flex justify-content-center pb-4 bg-white">
+    <div class="d-flex justify-content-center my-4 pt-4">
+      <%= image_tag 'user-photo.png', class: "avatar-large" %>
+    </div>
+    <h3 class="text-center pb-2">Ola <strong><%= current_user.username %></strong></h3>
+    <div class="d-flex justify-content-center mb-4">
+      <%= link_to new_complaint_path do %>
+        <button class="btn-red-lg">
+          <i class="fa-solid fa-bullhorn me-2"></i>
+          Nova reclamação
+        </button>
+      <% end %>
+    </div>
+  </div>
+  <div class="row my-4 profile-links">
+    <div class="d-flex m-2 pb-2">
+      <%= link_to root_path do %>
+        <i class="fa-solid fa-house me-2"></i>
+        <span>Inicio</span>
+      <% end %>
+    </div>
+    <div class="my-2 pb-2">
+      <div class="container-fluid ps-2">
+        <div class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="true" aria-label="Toggle navigation">
+          <i class="fa-solid fa-bullhorn me-2"></i>
+          <span>Minhas reclamações</span>
+        </div>
+      </div>
+      <div class="collapse show" id="navbarToggleExternalContent">
+        <div class="row ms-4 px-4 pt-4">
+          <% if current_user.complaints.any? %>
+            <%= link_to 'Todas', complaints_path, class: "mb-4" %>
+            <%= link_to 'Respondidas', complaints_path(respondidas: true), class: "mb-4" %>
+            <%= link_to 'Não respondidas', complaints_path(respondidas: false), class: "mb-2" %>
+          <% else %>
+            <p>Sem reclamações</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex m-2 pb-2">
+      <%= link_to user_path(current_user) do %>
+        <i class="fa-solid fa-user me-2"></i>
+        <span>Meu perfil</span>
+      <% end %>
+    </div>
+    <div class="d-flex m-2">
+      <%= link_to destroy_user_session_path do %>
+        <i class="fa-solid fa-right-from-bracket me-2"></i>
+        <span>Sair</span>
+      <% end %>
+    </div>
+  </div>
+</div>

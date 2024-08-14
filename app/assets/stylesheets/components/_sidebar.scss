@@ -1,0 +1,34 @@
+.sidebar {
+
+  .bg-white {
+    background: #fff;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .fa-bullhorn {
+    color: #fff;
+  }
+
+  a {
+    text-decoration: none;
+    color: $black;
+    &:hover {
+      color: $gray-hover;
+    }
+  }
+  
+  .profile-links {
+    i {
+      color: $blue;
+      font-size: 1.2rem;
+    }
+  }
+  
+  .navbar-toggler {
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1rem;
+    color: $black;
+  }
+}

@@ -1,0 +1,46 @@
+.user-dashboard {
+  .welcome-dashboard {
+    background-image: image-url('bg-transparent.png');
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: auto 100px;
+  }
+
+  h3 {
+      
+    span {
+      color: $main-red;
+      font-weight: 700;
+    }
+  }
+
+  @media (max-width: 768px) {
+    h3 {
+      font-size: 1.2rem;
+    }
+  }
+
+  .companies, .complaints {
+    .fa-circle-arrow-right {
+      color: $gray-icon;
+      font-size: 2rem;
+      transition: color 0.3s;
+
+      &:hover {
+        color: $gray-hover;
+      }
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: $black;
+    }
+
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
