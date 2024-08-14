@@ -49,3 +49,18 @@
     color: $gray-icon;
   }
 }
+
+.btn-red-lg {
+  background: $main-red;
+  border: none;
+  padding: 1rem 1.5rem;
+  color: #fff;
+  border-radius: 8px;
+  transition: background 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    background: darken($main-red, 10%);
+    color: #fff;
+  }
+}

@@ -5,6 +5,14 @@ class ComplaintsController < ApplicationController
   def index
     authorize Complaint
     @complaints = Complaint.where(user_id: current_user.id).order(created_at: :desc)
+
+    if params[:respondidas].present?
+      if params[:respondidas] == "true"
+        @complaints = @complaints.joins(:responses).distinct
+      elsif params[:respondidas] == "false"
+        @complaints = @complaints.left_joins(:responses).where(responses: { id: nil })
+      end
+    end
   end
 
   def show
