@@ -1,11 +1,23 @@
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title"><%= complaint.title %></h5>
-    <h6 class="card-subtitle mb-2 text-body-secondary"><%= complaint.company.company_name %></h6>
-    <div class="d-flex justify-content-end">
-      <%= link_to company_path(complaint.company, complaint) do %>
-        <i class="fa-solid fa-chevron-right"></i>
+<div class="complaint-card border">
+  <%= link_to company_complaint_path(complaint.company, complaint) do %>
+    <div class="banner-card">
+      <% if complaint.company.company_cover.present? %>
+        <%= image_tag complaint.company.company_cover, class: "img-card" %>
+      <% else %>
+        <%= image_tag 'card-img.png', class: "img-card" %>
       <% end %>
+      <span class="<%= complaint.status == 'pending' ? 'red-tag' : 'green-tag' %>">
+        <%= complaint.status == 'answered' ? 'answered' : 'pending' %>
+      </span>
+      <h3><%= complaint.title %></h3>
     </div>
-  </div>
+    <div class="p-2">
+      <div class="d-flex justify-content-between align-items-center my-2">
+        <span class="tag-grey-sm"><%= complaint.complaint_category %></span>
+        <%= link_to company_complaint_path(complaint.company, complaint) do %>
+          <i class="fa-solid fa-chevron-right me-2"></i>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>

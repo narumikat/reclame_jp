@@ -1,12 +1,20 @@
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title"><%= company.company_name %></h5>
-    <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <div class="d-flex justify-content-end">
-      <%= link_to company_path(company) do %>
-        <i class="fa-solid fa-chevron-right"></i>
-      <% end %>
+<div class="company-card border">
+  <%= link_to company_path(company) do %>
+    <% if company.company_cover.present? %>
+      <%= image_tag company.company_cover, class: "card-cover" %>
+    <% else %>
+      <%= image_tag 'card-img.png', class: "card-cover" %>
+    <% end %>
+    <div class="company-card-info mb-2">
+      <div>
+        <h3><%= company.company_name %></h3>
+        <span class="tag-grey-sm"><%= company.company_category %></span>
+      </div>
+      <div class="company-score">
+        <i class="fa-solid fa-medal me-2"></i>
+        <h5><%= company.company_score %><small>/10</small></h5>
+      </div>
+      <%= image_tag 'company-avatar.png', class: "card-avatar" %>
     </div>
-  </div>
+  <% end %>
 </div>
