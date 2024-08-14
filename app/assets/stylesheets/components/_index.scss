@@ -10,6 +10,7 @@
 @import "sidebar";
 @import "company_card";
 @import "complaint_card";
+@import "complaint_tab";
 
 h1, h2, h3, h4, h5, h6, p, label, small {
   color: $black;
@@ -29,4 +30,8 @@ body {
   @media (max-width: 768px) {
     padding-top: 50px;
   }
+}
+
+a {
+  text-decoration: none;
 }

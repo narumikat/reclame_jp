@@ -31,7 +31,7 @@
           <h3 class="text-center mb-4">Crie uma reclamação da empresa <br>
             <strong><%= @company.capitalize_name %></strong></h3>
           <div class="col-md-8 py-4">
-            <%= simple_form_for [@company, @complaint] do |f| %>
+            <%= simple_form_for [@company, @new_complaint] do |f| %>
               <%= f.input :title, label: 'Titulo da reclamação' %>
               <%= f.input :review, placeholder: 'numero de 1 a 5' %>
               <%= f.input :comment, label: 'Reclamação' %>
@@ -60,6 +60,37 @@
       </nav>
       <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+          <div class="row mt-4">
+            <div class="col-md-3">
+              <div class="ranking-box">
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                  <i class="fa-solid fa-medal mb-2"></i>
+                  <h5 class="mb-0"><%= @company.company_score %><small>/10</small></h5>
+                </div>
+                <p class="text-center">Nota media da empresa.</p>
+              </div>
+              <div class="desempenho border p-2 mt-3 mb-4 bg-white">
+                <h5 class="text-center mt-3">Desempenho</h5>
+                <div class="d-flex align-items-center my-4">
+                  <i class="fa-solid fa-bullhorn ms-2 me-3"></i>
+                  <p>A empresa <span><%= @company.capitalize_name %></span> recebeu <strong><%= @company.complaints.size %></strong> reclamações</p>
+                </div>
+                <div class="d-flex align-items-center my-4">
+                  <i class="fa-solid fa-comment-dots ms-2 me-3"></i>
+                  <p>A empresa <span><%= @company.capitalize_name %></span> respondeu <strong><%= @company.complaints_answered_count %></strong> reclamações</p>
+                </div>
+                <div class="d-flex align-items-center my-4">
+                  <i class="fa-solid fa-circle-check ms-2 me-3"></i>
+                  <p>A porcentagem de reclamacoes respondidas é de <strong><%= @company.complaints_answered_percentage.round %>%</strong></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-7">
+              <%= render 'complaints_show' %>
+            </div>
+            <div class="col-md">
+            </div>
+          </div>
         </div>
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
           <% company_fields = {

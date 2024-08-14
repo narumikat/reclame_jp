@@ -50,7 +50,9 @@ class CompaniesController < ApplicationController
     authorize @company
     @company = Company.find(params[:id])
     @complaints = @company.complaints.order(created_at: :desc)
-    @complaint = Complaint.new
+    @answered_complaints = @company.complaints.joins(:responses).distinct
+    @unanswered_complaints = @company.complaints.left_joins(:responses).where(responses: { id: nil })
+    @new_complaint = Complaint.new
   end
 
   def edit
