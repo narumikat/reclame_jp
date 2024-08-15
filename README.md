@@ -13,3 +13,8 @@ WHERE datname = 'reclame_jp_development' AND pid <> pg_backend_pid();
 
 \q
 ```
+
+### SUBIR SERVE NGROK
+```
+ngrok http 3000
+```

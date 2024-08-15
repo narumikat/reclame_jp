@@ -1,74 +1,271 @@
-<div class="container">
-  <% company_fields = {
-    "Register Number" => @company.company_register_number,
-    "Address" => @company.company_address,
-    "City" => @company.company_city,
-    "State" => @company.company_state,
-    "ZIP Code" => @company.company_zip_code,
-    "Country" => @company.company_country,
-    "Phone Number" => @company.company_phone_number,
-    "Website" => @company.company_website
-  } %>
-  <h1><%= @company.company_name %></h1>
-  <div class="d-flex mb-4">
-    <div class="badge bg-primary me-2"><%= @company.company_category? ? @company.company_category : "" %></div>
-  </div>
-  <% company_fields.each do |label, value| %>
-    <% if value.present? %>
-      <% if label == "Website" %>
-        <p><strong><%= label %>:</strong> <%= link_to value, value, target: "_blank" %></p>
-      <% else %>
-        <p><strong><%= label %>:</strong> <%= value %></p>
-      <% end %>
-    <% end %>
-  <% end %>
-  <% if @company.users.present? %>
-    <div>
-      <h3>Employees</h3>
-      <ul>
-        <% @company.users.each do |employee| %>
-          <li>
-            <% companies_user = @company.companies_users.find_by(user_id: employee.id) %>
-            <%= link_to "#{companies_user.role} - @#{employee.username_protected}", user_path(employee) %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <% if @company.complaints.present? %>
-    <div>
-      <h2>Complaints</h2>
-      <ul>
-        <% @complaints.each do |complaint| %>
-          <li><%= link_to complaint.title, company_complaint_path(@company, complaint) %></li>
-        <% end %>
-      </ul>
-    </div>
-    <h4>A empresa <%= @company.company_name %> tem um total de <%= @company.complaints.size %> reclamações</h4>
-    <% if @company.complaints_answered_count > 0 %>
-      <h3>A empresa respondeu <%= @company.complaints_answered_count %> reclamações</h3>
+<div class="company_show">
+  <div class="company-banner">
+    <% if @company.company_cover.present? %>
+      <%= image_tag @company.company_cover, class: "company-card-banner" %>
     <% else %>
-      <h3>A empresa não respondeu nenhuma reclamação</h3>
+      <%= image_tag 'card-img.png', class: "company-card-banner" %>
     <% end %>
-    <h4>A porcentagem de reclamacoes respondidas são <strong><%= @company.complaints_answered_percentage.round %>%</strong></h4>
-  <% end %>
-  <% if user_signed_in? %>
+    <% if @company.company_logo.present? %>
+      <%= image_tag @company.company_logo, class: "banner-avatar" %>
+    <% else %>
+      <%= image_tag 'company-avatar.png', class: "banner-avatar" %>
+    <% end %>
+  </div>
+  <div class="container mt-4">
+    <div>
+      <h1 class="text-center"><%= @company.capitalize_name %></h1>
+      <div class="d-flex justify-content-center">
+        <span class="tag-grey-sm"><%= @company.company_category %></span>
+      </div>
+    </div>
+    <!-- FORM -->
     <% unless current_user.is_company? %>
-      <div>
-        <h3>Create a new complaint</h3>
-        <%= simple_form_for [@company, @complaint] do |f| %>
-          <%= f.input :title %>
-          <%= f.input :review %>
-          <%= f.input :comment %>
-          <div class="form-group mb-4">
-            <%= f.collection_select :complaint_category, Complaint::COMPLAINT_CATEGORY, :to_s, :to_s, { include_blank: "Selecione uma Categoria" }, { required: true, class: 'form-control', multiple: false } %>
+      <div data-controller="complaint-form">
+        <div class="d-flex justify-content-center my-4">
+          <button class="btn-red-lg" data-complaint-form-target="newComplaintBtn" data-action="click->complaint-form#toggleForm">
+            <i class="fa-solid fa-bullhorn me-2"></i>
+            Reclamar
+          </button>
+        </div>
+        <div data-complaint-form-target="formComplaint" class="toggle-form row d-flex justify-content-center">
+          <h3 class="text-center mb-4">Crie uma reclamação da empresa <br>
+            <strong><%= @company.capitalize_name %></strong></h3>
+          <div class="col-md-8 py-4">
+            <%= simple_form_for [@company, @new_complaint] do |f| %>
+              <%= f.input :title, label: 'Titulo da reclamação' %>
+              <%= f.input :review, placeholder: 'numero de 1 a 5' %>
+              <%= f.input :comment, label: 'Reclamação' %>
+              <div class="form-group mb-4">
+                <%= f.label 'Categoria da reclamação', required: true, class: "mb-2" %>
+                <%= f.collection_select :complaint_category, Complaint::COMPLAINT_CATEGORY, :to_s, :to_s, { include_blank: "Selecione uma Categoria" }, { required: true, class: 'form-control', multiple: false } %>
+                <%= f.hidden_field :company_id, value: @company.id %>
+              </div>
+              <div class="d-flex justify-content-end">
+                <%= f.submit "Enviar Reclamação", class: 'btn btn-primary' %>
+              </div>
+            <% end %>
           </div>
-          <div class="form-group">
-            <%= f.hidden_field :company_id, value: @company.id %>
-            <%= f.submit "Submit Complaint", class: 'btn btn-primary' %>
-          </div>
-        <% end %>
+        </div>
       </div>
     <% end %>
-  <% end %>
+    <!-- END FORM -->
+    <div>
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Inicio</button>
+          <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Sobre</button>
+          <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contato</button>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <!-- Inicio -->
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+          <div class="row mt-4 d-flex align-items-stretch">
+            <!-- primeira coluna -->
+            <div class="col-md-3 d-flex flex-column">
+              <div class="ranking-box">
+                <div class="d-flex justify-content-center align-items-center">
+                  <%= image_tag 'medal-icon.png' %>
+                  <h5 class="ms-3 mb-0"><%= @company.company_score %><small>/10</small></h5>
+                </div>
+                <p class="text-center">Nota média da empresa.</p>
+              </div>
+              <div class="desempenho border p-2 mt-2 mb-4 bg-white flex-grow-1">
+                <h5 class="text-center mt-3">Desempenho</h5>
+                <div class="d-flex align-items-center my-4">
+                  <i class="fa-solid fa-bullhorn ms-2 me-3"></i>
+                  <p>A empresa <span><%= @company.capitalize_name %></span> recebeu <strong><%= @company.complaints.size %></strong> reclamações</p>
+                </div>
+                <div class="d-flex align-items-center my-4">
+                  <i class="fa-solid fa-comment-dots ms-2 me-3"></i>
+                  <p>A empresa <span><%= @company.capitalize_name %></span> respondeu <strong><%= @company.complaints_answered_count %></strong> reclamações</p>
+                </div>
+                <div class="d-flex align-items-center my-4">
+                  <i class="fa-solid fa-circle-check ms-2 me-3"></i>
+                  <p>A porcentagem de reclamações respondidas é de <strong><%= @company.complaints_answered_percentage.round %>%</strong></p>
+                </div>
+              </div>
+            </div>
+            <!-- segunda coluna -->
+            <div class="col-md-6 d-flex flex-column">
+              <div class="flex-grow-1">
+                <%= render 'complaints_show' %>
+              </div>
+            </div>
+            <!-- terceira coluna -->
+            <div class="col-md d-flex flex-column company-info">
+              <div class="border bg-white pt-3 px-3 pb-4">
+                <h5 class="text-center mb-3">Informaçõpes da empresa <strong><%= @company.company_name %></strong></h5>
+                <p class="mb-3"><strong>Sobre</strong></p>
+                <p><%= @company.company_description %></p>
+                <p class="my-3"><strong>Categoria:</strong></p>
+                <span class="tag-grey-sm"><%= @company.company_category %></span>
+              </div>
+              <div class="border bg-white mt-2 flex-grow-1 mb-4 p-3">
+                <h5 class="text-center mb-3 mt-2">contato da empresa</h5>
+                <% if @company.company_website.present? %>
+                  <div class="info-box">
+                    <%= link_to @company.company_website, target: "_blank", class: "text-decoration-none" do %>
+                      <i class="fa-solid fa-globe me-2"></i>
+                      <%= @company.company_website %>
+                    <% end %>
+                  </div>
+                <% end %>
+                <div class="contato-company mt-4 ms-4">
+                  <% social_media_fields = @company.company_social_media || {} %>
+                  <% social_media_fields.each do |platform, url| %>
+                    <% if url.present? %>
+                      <div class="mb-2">
+                        <%= link_to url, target: "_blank", class: "d-flex align-items-center" do %>
+                          <% case platform.downcase %>
+                          <% when "facebook" %>
+                            <i class="fa-brands fa-facebook me-2"></i>
+                          <% when "twitter" %>
+                            <i class="fa-brands fa-twitter me-2"></i>
+                          <% when "linkedin" %>
+                            <i class="fa-brands fa-linkedin me-2"></i>
+                          <% when "instagram" %>
+                            <i class="fa-brands fa-instagram me-2"></i>
+                          <% when "youtube" %>
+                            <i class="fa-brands fa-youtube me-2"></i>
+                          <% when "tiktok" %>
+                            <i class="fa-brands fa-tiktok me-2"></i>
+                          <% end %>
+                          <span><%= platform.capitalize %></span>
+                        <% end %>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Sobre -->
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+          <div class="company-about p-3 border bg-white my-3">
+            <div class="row d-flex justify-content-center">
+              <div class="col-12 col-md-8">
+                <div class="d-flex align-items-center mt-4 mb-2">
+                  <i class="fa-solid fa-building me-2"></i>
+                  <h5 class="mb-0 pb-0">Sobre <strong><%= @company.company_name %></strong></h5>
+                </div>
+                <div class="mb-4">
+                  <p><%= @company.company_description %></p>
+                </div>
+                <% company_fields = {
+              "Numero de registro" => @company.company_register_number,
+              "Endereço" => @company.company_address,
+              "Cidade" => @company.company_city,
+              "Provincia" => @company.company_state,
+              "CEP" => @company.company_zip_code,
+              "País" => @company.company_country
+            } %>
+                <% company_fields.each do |label, value| %>
+                  <% if value.present? %>
+                    <% if label == "Website" %>
+                      <p><strong><%= label %>:</strong> <%= link_to value, value, target: "_blank" %></p>
+                    <% else %>
+                      <p><strong><%= label %>:</strong> <%= value %></p>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+            <div class="employees my-4">
+              <% if @company.users.present? %>
+                <h5 class="text-center">Trabalham nessa empresa:</h5>
+                <div class="mt-4 d-flex flex-column align-items-center">
+                  <% @company.users.each do |employee| %>
+                    <div class="col-10 col-md-6 border p-3 mb-2">
+                      <% companies_user = @company.companies_users.find_by(user_id: employee.id) %>
+                      <%= link_to user_path(employee), class: 'text-decoration-none text-dark' do %>
+                        <div class="d-flex align-items-center">
+                          <i class="fa-solid fa-user me-2"></i>
+                          <p class="mb-0 pe-4 border-end"><%= employee.username_protected %></p>
+                          <p class="mb-0 ms-3"><%= companies_user.role.capitalize %> da empresa</p>
+                        </div>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <!-- Contato -->
+        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+          <div class="company-contact border bg-white my-3 p-3">
+            <div class="row d-flex justify-content-center">
+              <div class="col-12 col-md-8">
+                <div class="d-flex align-items-center my-3">
+                  <i class="fa-solid fa-phone-volume me-2"></i>
+                  <h5 class="mb-0 pb-0">Contato</h5>
+                </div>
+                <% company_fields = {
+                "Telefone" => @company.company_phone_number,
+                "Website" => @company.company_website
+              } %>
+                <% company_fields.each do |label, value| %>
+                  <% if value.present? %>
+                    <p>
+                      <strong>
+                        <% if label == "Telefone" %>
+                          <i class="fa-solid fa-phone me-2"></i>
+                        <% elsif label == "Website" %>
+                          <i class="fa-solid fa-globe me-2"></i>
+                        <% end %>
+                        <%= label %>:
+                      </strong>
+                      <% if label == "Website" %>
+                        <%= link_to value, value, target: "_blank" %>
+                      <% else %>
+                        <%= value %>
+                      <% end %>
+                    </p>
+                  <% end %>
+                <% end %>
+                <div class="company-social-media mt-4">
+                  <h5 class="mb-4 text-center">Redes sociais da empresa:</h5>
+                  <div class="d-flex justify-content-center">
+                    <% social_media_fields = @company.company_social_media || {} %>
+                    <% social_media_fields.each do |platform, url| %>
+                      <% if url.present? %>
+                        <% case platform.downcase %>
+                        <% when "facebook" %>
+                          <%= link_to url, target: "_blank" do %>
+                            <i class="fa-brands fa-facebook me-2"></i>
+                          <% end %>
+                        <% when "twitter" %>
+                          <%= link_to url, target: "_blank" do %>
+                            <i class="fa-brands fa-twitter me-2"></i>
+                          <% end %>
+                        <% when "linkedin" %>
+                          <%= link_to url, target: "_blank" do %>
+                            <i class="fa-brands fa-linkedin me-2"></i>
+                          <% end %>
+                        <% when "instagram" %>
+                          <%= link_to url, target: "_blank" do %>
+                            <i class="fa-brands fa-instagram me-2"></i>
+                          <% end %>
+                        <% when "youtube" %>
+                          <%= link_to url, target: "_blank" do %>
+                            <i class="fa-brands fa-youtube me-2"></i>
+                          <% end %>
+                        <% when "tiktok" %>
+                          <%= link_to url, target: "_blank" do %>
+                            <i class="fa-brands fa-tiktok me-2"></i>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
