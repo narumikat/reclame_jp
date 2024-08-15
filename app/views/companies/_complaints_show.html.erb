@@ -1,25 +1,46 @@
-<div class="complaints border p-4 bg-white">
-  <h2 class="text-center mt-2">Reclamações da empresa <strong><%= @company.company_name %></strong></h2>
-  <div class="d-flex justify-content-center mt-4">
-    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="pills-complaints-tab" data-bs-toggle="pill" data-bs-target="#pills-complaints" type="button" role="tab" aria-controls="pills-complaints" aria-selected="true">Todas</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="pills-answered-tab" data-bs-toggle="pill" data-bs-target="#pills-answered" type="button" role="tab" aria-controls="pills-answered" aria-selected="false">Respondidas</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="pills-unanswered-tab" data-bs-toggle="pill" data-bs-target="#pills-unanswered" type="button" role="tab" aria-controls="pills-unanswered" aria-selected="false">Não respondidas</button>
-      </li>
-    </ul>
-  </div>
-  <div class="tab-content" id="pills-tabContent">
-    <div class="tab-pane fade show active" id="pills-complaints" role="tabpanel" aria-labelledby="pills-complaints-tab" tabindex="0">
-      <% @complaints.each do |complaint| %>
-        <%= render 'complaints/complaint_tab', complaint: complaint %>
-      <% end %>
+<div class="complaints border p-4 bg-white mb-4">
+  <h2 class="text-center mt-2">Reclamações da empresa <br>
+    <strong><%= @company.company_name %></strong></h2>
+  <% if @company.complaints.present? %>
+    <div class="d-flex justify-content-center mt-4">
+      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="pills-complaints-tab" data-bs-toggle="pill" data-bs-target="#pills-complaints" type="button" role="tab" aria-controls="pills-complaints" aria-selected="true">Todas</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-answered-tab" data-bs-toggle="pill" data-bs-target="#pills-answered" type="button" role="tab" aria-controls="pills-answered" aria-selected="false">Respondidas</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-unanswered-tab" data-bs-toggle="pill" data-bs-target="#pills-unanswered" type="button" role="tab" aria-controls="pills-unanswered" aria-selected="false">Pendentes</button>
+        </li>
+      </ul>
     </div>
-    <div class="tab-pane fade" id="pills-answered" role="tabpanel" aria-labelledby="pills-answered-tab" tabindex="0">...</div>
-    <div class="tab-pane fade" id="pills-unanswered" role="tabpanel" aria-labelledby="pills-unanswered-tab" tabindex="0">...</div>
-  </div>
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-complaints" role="tabpanel" aria-labelledby="pills-complaints-tab" tabindex="0">
+        <% @complaints.each do |complaint| %>
+          <%= render 'complaints/complaint_tab', complaint: complaint %>
+        <% end %>
+      </div>
+      <div class="tab-pane fade" id="pills-answered" role="tabpanel" aria-labelledby="pills-answered-tab" tabindex="0">
+        <% if @answered_complaints.any? %>
+          <% @answered_complaints.each do |complaint| %>
+            <%= render 'complaints/complaint_tab', complaint: complaint %>
+          <% end %>
+        <% else %>
+          <h4 class="mt-4 text-center">Nenhuma pergunta foi respondida</h4>
+        <% end %>
+      </div>
+      <div class="tab-pane fade" id="pills-unanswered" role="tabpanel" aria-labelledby="pills-unanswered-tab" tabindex="0">
+        <% if @unanswered_complaints.any? %>
+          <% @unanswered_complaints.each do |complaint| %>
+            <%= render 'complaints/complaint_tab', complaint: complaint %>
+          <% end %>
+        <% else %>
+          <h4 class="mt-4 text-center">Todas as perguntas foram respondidas</h4>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <h4 class="mt-4 text-center">A empresa não recebeu nenhuma reclamação</h4>
+  <% end %>
 </div>

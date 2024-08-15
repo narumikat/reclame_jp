@@ -1,0 +1,9 @@
+<span class="<%= complaint.status == 'pending' ? 'red-tag' : 'green-tag' %>">
+  <% if complaint.status == 'answered' %>
+    <i class="fa-regular fa-face-smile me-1"></i>
+    Respondido
+  <% else %>
+    <i class="fa-regular fa-face-meh me-1"></i>
+    Não respondido
+  <% end %>
+</span>

@@ -3,9 +3,7 @@
     <h3><%= complaint.title %></h3>
     <p><%= complaint.comment %></p>
     <div class="d-flex justify-content-between align-items-center">
-      <span class="<%= complaint.status == 'pending' ? 'red-tag' : 'green-tag' %>">
-        <%= complaint.status == 'answered' ? 'answered' : 'pending' %>
-      </span>
+      <%= render 'components/tag_status', complaint: complaint %>
       <small>Criado em <%= complaint.created_at.strftime("%d %b") %></small>
     </div>
   <% end %>

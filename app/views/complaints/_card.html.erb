@@ -6,9 +6,7 @@
       <% else %>
         <%= image_tag 'card-img.png', class: "img-card" %>
       <% end %>
-      <span class="<%= complaint.status == 'pending' ? 'red-tag' : 'green-tag' %>">
-        <%= complaint.status == 'answered' ? 'answered' : 'pending' %>
-      </span>
+      <%= render 'components/tag_status', complaint: complaint %>
       <% if complaint.company.company_logo.present? %>
         <%= image_tag complaint.company.company_logo, class: "card-avatar" %>
       <% else %>

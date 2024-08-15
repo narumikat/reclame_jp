@@ -13,6 +13,10 @@ Rails.application.configure do
     password:             ENV["SENDGRID_API_KEY"],
     authentication:       'plain',
     enable_starttls_auto: true  }
+
+  #NGROCK LOCAL HOST
+  config.hosts << /.*\.ngrok-free\.app/
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time

@@ -27,6 +27,20 @@
   margin-bottom: 1rem;
 }
 
+.yellow-tag {
+  a {
+    text-decoration: none;
+  }
+  background: sandybrown;
+  padding: 0.3rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #fff;
+  font-weight: 500;
+  transition: background 0.3s;
+  margin-bottom: 1rem;
+}
+
 .tag-complaint {
   background: sandybrown;
   padding: 0.3rem 0.8rem;
