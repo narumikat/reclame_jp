@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_14_050815) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_19_022402) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -93,8 +93,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_14_050815) do
     t.bigint "complaint_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "parent_id"
     t.index ["company_id"], name: "index_responses_on_company_id"
     t.index ["complaint_id"], name: "index_responses_on_complaint_id"
+    t.index ["parent_id"], name: "index_responses_on_parent_id"
     t.index ["user_id"], name: "index_responses_on_user_id"
   end
 
@@ -138,5 +140,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_14_050815) do
   add_foreign_key "complaints", "users"
   add_foreign_key "responses", "companies"
   add_foreign_key "responses", "complaints"
+  add_foreign_key "responses", "responses", column: "parent_id"
   add_foreign_key "responses", "users"
 end

@@ -1,0 +1,57 @@
+.complaint-show {
+  padding: 1rem;
+
+  h2 {
+    font-weight: 700;
+  }
+
+  h3 a {
+    color: $main-red;
+    transition: color 0.3s;
+
+    &:hover {
+      color: darken($main-red, 10%);
+    }
+  }
+
+  h4 {
+    font-weight: 700;
+  }
+
+  h5 {
+    font-weight: 700;
+  }
+
+  small {
+    color: $gray-hover;
+  }
+
+  p {
+    font-size: 1.1rem;
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+
+  .complaint-response {
+    padding: 1rem;
+
+    .response-to-response {
+      background: $light-gray;
+      padding: 1rem;
+    }
+
+    .response-to-response-form {
+      p {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+// USER COMPLAINTS 
+
+.user-complaints {
+  padding: 1rem;
+  background: #fff;
+}

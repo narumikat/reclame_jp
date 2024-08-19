@@ -25,7 +25,8 @@
           </div>
           <div>
             <h3>Insira seu cargo na empresa:</h3>
-            <%= text_field_tag 'registration_type[role]', nil, required: true, class: 'form-control', placeholder: 'Ex: gerente, representante ...' %>
+            <% roles = CompaniesUser::ROLE %>
+            <%= select_tag 'registration_type[role]', options_for_select(roles), { prompt: 'Selecione uma categoria', class: 'form-control', required: true } %>
           </div>
           <div class="d-flex justify-content-center my-4">
             <p class="alert-box col-12 col-md-10">Ao registrar-se com um perfil empresarial, você confirma que todas as informações fornecidas são verdadeiras e precisas. Lembre-se de que tanto nós quanto a empresa teremos acesso a esses dados para verificação. Não é permitido fornecer informações falsas ou enganosas. O descumprimento pode levar à suspensão ou exclusão do seu perfil. Agradecemos sua honestidade e cooperação.</p>

@@ -5,6 +5,8 @@ class Response < ApplicationRecord
   belongs_to :complaint
   belongs_to :user
   belongs_to :company
+  belongs_to :parent, class_name: 'Response', optional: true
+  has_many :responses, class_name: 'Response', foreign_key: 'parent_id', dependent: :destroy
 
   validates :content, presence: true
 

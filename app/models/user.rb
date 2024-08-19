@@ -17,6 +17,10 @@ class User < ApplicationRecord
     self.is_company
   end
 
+  def role_in_company(company)
+    companies_users.find_by(company: company)&.role
+  end
+
   def total_complaints_count
     return 0 if complaints.blank?
     complaints.count

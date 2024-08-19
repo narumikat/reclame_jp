@@ -1,5 +1,5 @@
 <div class="sidebar">
-  <div class="row d-flex justify-content-center pb-4 bg-white">
+  <div class="row d-flex justify-content-center pb-4 bg-white-tab">
     <div class="d-flex justify-content-center my-4 pt-4">
       <%= image_tag 'user-photo.png', class: "avatar-large" %>
     </div>
@@ -23,9 +23,9 @@
       <div class="collapse show" id="navbarToggleExternalContent">
         <div class="row ms-4 px-4 pt-4">
           <% if current_user.complaints.any? %>
-            <%= link_to 'Todas', complaints_path, class: "mb-4" %>
-            <%= link_to 'Respondidas', complaints_path(respondidas: true), class: "mb-4" %>
-            <%= link_to 'Não respondidas', complaints_path(respondidas: false), class: "mb-2" %>
+            <%= link_to 'Todas', user_user_complaints_path(current_user), class: "mb-4" %>
+            <%= link_to 'Respondidas', user_user_complaints_path(current_user, respondidas: true), class: "mb-4" %>
+            <%= link_to 'Não respondidas', user_user_complaints_path(current_user, respondidas: false), class: "mb-2" %>
           <% else %>
             <p>Sem reclamações</p>
           <% end %>
