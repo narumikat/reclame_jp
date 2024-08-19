@@ -3,30 +3,11 @@ class ComplaintsController < ApplicationController
   before_action :set_complaint, only: [:show]
   skip_before_action :authenticate_user!, only: [:index, :show]
 
-  # def index
-  #   authorize Complaint
-    
-  #   if @company.present?
-  #     @complaints = @company.complaints.order(created_at: :desc)
-  #   else
-  #     @complaints = Complaint.where(user_id: current_user.id).order(created_at: :desc)
-  #   end
-  
-  #   if params[:respondidas].present?
-  #     if params[:respondidas] == "true"
-  #       @complaints = @complaints.joins(:responses).distinct
-  #     elsif params[:respondidas] == "false"
-  #       @complaints = @complaints.left_joins(:responses).where(responses: { id: nil })
-  #     end
-  #   end
-  # end
-  # 
   def index
     authorize Complaint
-  
-    if params[:user_id]
-      @user = User.find(params[:user_id])
-      @complaints = @user.complaints.order(created_at: :desc)
+    
+    if @company.present?
+      @complaints = @company.complaints.order(created_at: :desc)
     else
       @complaints = Complaint.where(user_id: current_user.id).order(created_at: :desc)
     end
@@ -41,7 +22,7 @@ class ComplaintsController < ApplicationController
   end
 
   def user_complaints
-    @user = User.find(params[:user_id]) # Defina @user antes de chamar authorize
+    @user = User.find(params[:user_id])
     authorize @user
     
     @complaints = @user.complaints.order(created_at: :desc)
