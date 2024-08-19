@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 mt-4 border d-none d-md-flex">
+      <%= render 'shared/sidebar' %>
+    </div>
+    <div class="col-md-9 col-12 mt-4">
+      <div class="user-profile row d-flex justify-content-center">
+        <div class="welcome-dashboard border col-md-10 col-12">
+          <div class="d-flex">
+            <div>
+              <% if current_user.avatar.present? %>
+                <%= image_tag current_user.avatar, class: "avatar-large" %>
+              <% else %>
+                <%= image_tag 'user-photo.png', class: "avatar-large" %>
+              <% end %>
+            </div>
+            <div class="ms-2">
+              <h4><strong><%= @user.username_protected %></strong></h4>
+              <p>Se cadastrou em <%= @user.created_at.strftime("%d %b %Y") %></p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 col-md-10 col-12">
+          <div class="box-info">
+          </div>
+          <div class="box-info">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- -->
+<h4>@<%= @user.username_protected %> criou <strong><%= @user.total_complaints_count %> reclamações</strong> em <strong><%= @user.unique_complaint_companies_count %> empresas</strong></h4>
+<% if @user.complaints.present? %>
+  <h4 class="my-4">Teve <strong><%= @user.complaints_answered_count %> respostas</strong> em <strong><%= @user.total_complaints_count %> reclamações</strong></h4>
+  <div class="my-4">
+    <h3>Reclamações</h3>
+    <ul>
+      <% @user.complaints.each do |complaint| %>
+        <li><%= link_to complaint.title, complaint_path(complaint) %></li>
+      <% end %>
+    </ul>
+  </div>
+  <h4>A porcentagem de reclamações respondidas é <strong><%= @user.complaints_answered_percentage.round %>%</strong></h4>
+<% end %>

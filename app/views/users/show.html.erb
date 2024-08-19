@@ -1,8 +1,7 @@
 <div class="container">
-  <h2>@<%= @user.username_protected %></h2>
   <% if @user.is_company? %>
-    <%=  render 'components/profile_employes' %>
+    <%=  render 'profile_employes' %>
   <% else %>
-    <%= render 'components/profile_user' %>
+    <%= render 'profile_user' %>
   <% end %>
 </div>

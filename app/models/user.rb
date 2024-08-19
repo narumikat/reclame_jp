@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :responses
   has_many :complaints
 
+  has_one_attached :avatar
+
   validates :username, presence: true, uniqueness: true, length: { minimum: 4, maximum: 20 }
 
   def company?
