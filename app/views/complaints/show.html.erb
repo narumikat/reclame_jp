@@ -1,4 +1,5 @@
 <%= render 'companies/company_banner', company: @company %>
+<%= render 'shared/back_btn_absolute' %>
 <div class="container complaint-show">
   <h3 class="text-center my-4">
     Reclamação da empresa <%= link_to company_path(@company) do %><strong><%= @complaint.company.company_name %></strong><% end %>
@@ -8,8 +9,11 @@
     <h2><%= @complaint.title %></h2>
     <div class="d-flex justify-content-between">
       <small>
+        Criado por: <%= link_to @complaint.user.username_protected, user_path(@complaint.user) %>
+        <br>
         <i class="fa-regular fa-calendar me-2"></i>
-        <%= @complaint.created_at.strftime('%d %B %Y') %></small>
+        <%= @complaint.created_at.strftime('%d %B %Y') %>
+      </small>
       <%= render 'components/tag_status', complaint: @complaint %>
     </div>
     <div class="my-4">
@@ -17,8 +21,19 @@
     </div>
     <span class="tag-complaint"><%= @complaint.complaint_category %></span>
   </div>
+  <% if user_signed_in? && current_user.companies.include?(@complaint.company) %>
+    <div class="my-3">
+      <h5>Responda a reclamação:</h5>
+      <%= simple_form_for([@complaint.company, @complaint, @response]) do |f| %>
+        <%= f.input :content, label: false, placeholder: "Escreva uma resposta..." %>
+        <div class="d-flex justify-content-center mt-4">
+          <%= f.button :submit, "Responder", class: "btn-red" %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
   <% if @responses.any? %>
-    <div class="complaint-response border bg-white">
+    <div class="complaint-response border bg-white mb-4">
       <h4 class="mb-3">
         <% if @responses.size > 1 %>
           Respostas da empresa:
@@ -57,18 +72,6 @@
               <% end %>
             <% end %>
           </div>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
-  <% if user_signed_in? && current_user.companies.include?(@complaint.company) %>
-    <div class="border-bottom mx-4"></div>
-    <div class="mt-3">
-      <h5>Responda a reclamação:</h5>
-      <%= simple_form_for([@complaint.company, @complaint, @response]) do |f| %>
-        <%= f.input :content, label: false, placeholder: "Escreva uma resposta..." %>
-        <div class="d-flex justify-content-center mt-4">
-          <%= f.button :submit, "Responder", class: "btn-red" %>
         </div>
       <% end %>
     </div>
