@@ -1,15 +1,24 @@
-<% if user_signed_in? %>
-  <% if current_user.is_company? %>
-    <%= render 'users/dashboard_company' %>
-  <% else %>
-    <%= render 'users/dashboard' %>
-  <% end %>
-  <!--    Descomente o código abaixo para habilitar o envio de SMS e Whatsapp-->
-  <!--    <h1 class="mb-4">Sending Messages</h1>-->
-  <!--    <div class="card mb-4">-->
-  <!--      <div class="card-body">-->
-  <!--        <h5 class="card-title">To: <%#= current_user.email %></h5>-->
-  <%#= form_with url: sms_path, method: :post, local: true, class: 'mb-3' do %>
+<% if user_signed_in? && current_user.is_company? %>
+  <%= render 'users/dashboard_company' %>
+<% else %>
+  <%= render 'users/dashboard' %>
+<% end %>
+<!--    Descomente o código abaixo para habilitar o envio de SMS e Whatsapp-->
+<!--    <h1 class="mb-4">Sending Messages</h1>-->
+<!--    <div class="card mb-4">-->
+<!--      <div class="card-body">-->
+<!--        <h5 class="card-title">To: <%#= current_user.email %></h5>-->
+<%#= form_with url: sms_path, method: :post, local: true, class: 'mb-3' do %>
+  <!--          <div class="form-group">-->
+  <!--            <label for="message">Telefone:</label>-->
+  <%#= text_field_tag :phone, nil, class: 'form-control', required: true %>
+  <!--            <label for="message">Escreva sua Mensagem:</label>-->
+  <%#= text_field_tag :message, nil, class: 'form-control', required: true %>
+  <!--          </div>-->
+  <!--          <br>-->
+  <%#= submit_tag "Enviar SMS", class: 'btn btn-primary' %>
+  <%# end %>
+  <%#= form_with url: whatsapp_path, method: :post, local: true do %>
     <!--          <div class="form-group">-->
     <!--            <label for="message">Telefone:</label>-->
     <%#= text_field_tag :phone, nil, class: 'form-control', required: true %>
@@ -17,24 +26,7 @@
     <%#= text_field_tag :message, nil, class: 'form-control', required: true %>
     <!--          </div>-->
     <!--          <br>-->
-    <%#= submit_tag "Enviar SMS", class: 'btn btn-primary' %>
+    <%#= submit_tag "Enviar Whatsapp", class: 'btn btn-success' %>
     <%# end %>
-    <%#= form_with url: whatsapp_path, method: :post, local: true do %>
-      <!--          <div class="form-group">-->
-      <!--            <label for="message">Telefone:</label>-->
-      <%#= text_field_tag :phone, nil, class: 'form-control', required: true %>
-      <!--            <label for="message">Escreva sua Mensagem:</label>-->
-      <%#= text_field_tag :message, nil, class: 'form-control', required: true %>
-      <!--          </div>-->
-      <!--          <br>-->
-      <%#= submit_tag "Enviar Whatsapp", class: 'btn btn-success' %>
-      <%# end %>
-      <!--      </div>-->
-      <!--    </div>-->
-    <% else %>
-      <ul>
-        <li><%= link_to 'See all companies', companies_path %></li>
-        <li><%= link_to 'Register', registration_type_path %></li>
-        <li><%= link_to "Login", new_user_session_path %></li>
-      </ul>
-    <% end %>
+    <!--      </div>-->
+    <!--    </div>-->
