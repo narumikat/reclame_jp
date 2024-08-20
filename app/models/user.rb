@@ -54,7 +54,7 @@ class User < ApplicationRecord
   end
 
   # VALIDAÇÃO DE EMAIL
-  FORBIDDEN_EMAILS = ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "icloud.com", "hotmail.com.br", "yahoo.com.br"]
+  FORBIDDEN_EMAILS = %w[gmail.com yahoo.com hotmail.com outlook.com icloud.com hotmail.com.br yahoo.com.br outlook.com.br uol.com.br bol.com.br terra.com.br ig.com.br]
   validate :email_domain
 
   private
