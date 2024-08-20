@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="mb-4">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-md-3 mt-4 border d-none d-md-flex">
+        <%= render 'shared/sidebar_company' %>
+      </div>
+      <!-- Main content -->
+      <div class="col-md-9 col-12">
+        <div class="mt-4 mx-2">
+          <div class="border p-4 welcome-dashboard mb-4">
+            <h3 class="text-center">Bem vindo ao <span>Reclame JP</span> <br>
+              <strong><%= current_user.first_name %></strong></h3>
+          </div>
+          <div class="border p-4">
+            <% if current_user.companies.size > 1 %>
+              <h3 class="text-center">Veja as <span>reclamações</span> das suas empresas</h3>
+            <% else %>
+              <h3 class="text-center">Veja as <span>reclamações</span> da sua empresa</h3>
+            <% end %>
+            <%= render 'components/btn_companies' %>
+          </div>
+          <div class="companies mb-4">
+            <div class="d-flex justify-content-between align-items-center my-4">
+              <h2>Ultimas empresas</h2>
+              <%= link_to companies_path do %>
+                <i class="fa-solid fa-circle-arrow-right"></i>
+              <% end %>
+            </div>
+            <div class="d-flex flex-row flex-nowrap overflow-auto">
+              <% @companies.each do |company| %>
+                <div class="col-10 col-md-4 m-2">
+                  <%= render 'companies/card', company: company %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="complaints pt-4">
+            <div class="my-4">
+              <h2>Ultimas reclamações</h2>
+            </div>
+            <div class="d-flex flex-row flex-nowrap overflow-auto">
+              <% @complaints.each do |complaint| %>
+                <div class="m-2 col-9 col-md-4">
+                  <%= render 'complaints/card', complaint: complaint %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

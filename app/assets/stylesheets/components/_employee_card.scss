@@ -1,0 +1,22 @@
+.employee-card {
+  background: $light-gray;
+  border-radius: 6px;
+  padding: 1rem;
+  margin: 0.5rem;
+  text-align: center;
+
+  strong {
+    color: $main-red;
+  }
+
+  a {
+    font-weight: 700;
+    color: $blue;
+  }
+
+  @media (max-width: 768px) {
+    h5 {
+      font-size: 1rem;
+    }
+  }
+}
