@@ -1,0 +1,68 @@
+<div class="container">
+  <%= render 'shared/back_btn' %>
+  <div class="row">
+    <div class="col-md-3 mt-2 border d-none d-md-flex">
+      <% if current_user.is_company? %>
+        <%= render 'shared/sidebar_company' %>
+      <% else %>
+        <%= render 'shared/sidebar' %>
+      <% end %>
+    </div>
+    <div class="col-md-9 col-12 mt-2">
+      <div class="user-profile row d-flex justify-content-center">
+        <div class="welcome-dashboard border col-md-10 col-12">
+          <div class="d-flex align-items-center">
+            <div>
+              <% if current_user.avatar.present? %>
+                <%= image_tag current_user.avatar, class: "avatar-profile" %>
+              <% else %>
+                <%= image_tag 'user-photo.png', class: "avatar-profile" %>
+              <% end %>
+            </div>
+            <div class="ms-4">
+              <h4><strong><%= @user.username_protected %></strong></h4>
+              <p>Se cadastrou em <%= @user.created_at.strftime("%d %b %Y") %></p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 col-md-10 col-12 d-flex">
+          <div class="col-6 box-info">
+            <p><%= @user.username_protected %> trabalha em</p>
+            <h2><%= @user.companies.size %></h2>
+            <% if @user.companies.size > 1 %>
+              <p>empresas</p>
+            <% else %>
+              <p>empresa</p>
+            <% end %>
+          </div>
+          <div class="col box-info">
+            <p><%= @user.username_protected %> respondeu</p>
+            <h2><%= @user.responses.size %> </h2>
+            <p>reclamações</p>
+          </div>
+        </div>
+        <div class="col-md-10 mt-4 user-complaints bg-white border py-4">
+          <div class="row d-flex justify-content-center">
+            <% if @user.companies.present? %>
+              <h3 class="text-center">Empresas do usuario</h3>
+              <div class="row d-flex justify-content-center mt-4 pb-4">
+                <% @user.companies.each do |company| %>
+                  <% role = @user.companies_users.find_by(company_id: company.id).role %>
+                  <div class="col-md-10">
+                    <div class="employee-card">
+                      <h5><%= @user.username_protected %> é <strong><%= role %></strong> da empresa 
+                        <br>
+                        <%= link_to company.company_name, company_path(company.id) %></h5>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <h3 class="text-center"><%= @user.username_protected %> não trabalha em nenhuam empresa</h3>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
