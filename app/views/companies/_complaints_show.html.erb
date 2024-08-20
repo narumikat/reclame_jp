@@ -16,28 +16,40 @@
       </ul>
     </div>
     <div class="tab-content" id="pills-tabContent">
+      <!-- Todas reclamacoes -->
       <div class="tab-pane fade show active" id="pills-complaints" role="tabpanel" aria-labelledby="pills-complaints-tab" tabindex="0">
-        <% @complaints.each do |complaint| %>
+        <% @complaints.last(4).each do |complaint| %>
           <%= render 'complaints/complaint_tab', complaint: complaint %>
         <% end %>
+        <div class="d-flex justify-content-center mt-4">
+          <%= link_to 'Ver tudo', company_complaints_path(@company), class: "btn-red" %>
+        </div>
       </div>
+      <!-- Reclamacoes respondidas -->
       <div class="tab-pane fade" id="pills-answered" role="tabpanel" aria-labelledby="pills-answered-tab" tabindex="0">
         <% if @answered_complaints.any? %>
-          <% @answered_complaints.each do |complaint| %>
+          <% @answered_complaints.last(4).each do |complaint| %>
             <%= render 'complaints/complaint_tab', complaint: complaint %>
           <% end %>
         <% else %>
           <h4 class="mt-4 text-center">Nenhuma pergunta foi respondida</h4>
         <% end %>
+        <div class="d-flex justify-content-center mt-4">
+          <%= link_to 'Ver respondidas', company_complaints_path(@company, respondidas: true), class: "btn-red" %>
+        </div>
       </div>
+      <!-- Reclamacoes nao respondidas -->
       <div class="tab-pane fade" id="pills-unanswered" role="tabpanel" aria-labelledby="pills-unanswered-tab" tabindex="0">
         <% if @unanswered_complaints.any? %>
-          <% @unanswered_complaints.each do |complaint| %>
+          <% @unanswered_complaints.last(4).each do |complaint| %>
             <%= render 'complaints/complaint_tab', complaint: complaint %>
           <% end %>
         <% else %>
           <h4 class="mt-4 text-center">Todas as perguntas foram respondidas</h4>
         <% end %>
+        <div class="d-flex justify-content-center mt-4">
+          <%= link_to 'Ver não respondidas', company_complaints_path(@company, respondidas: false), class: "btn-red" %>
+        </div>
       </div>
     </div>
   <% else %>

@@ -1,21 +1,10 @@
 <div class="company_show">
-  <div class="company-banner">
-    <% if @company.company_cover.present? %>
-      <%= image_tag @company.company_cover, class: "company-card-banner" %>
-    <% else %>
-      <%= image_tag 'card-img.png', class: "company-card-banner" %>
-    <% end %>
-    <% if @company.company_logo.present? %>
-      <%= image_tag @company.company_logo, class: "banner-avatar" %>
-    <% else %>
-      <%= image_tag 'company-avatar.png', class: "banner-avatar" %>
-    <% end %>
-  </div>
-  <div class="container mt-4">
+  <%= render 'companies/company_banner', company: @company %>
+  <div class="container py-4">
     <div>
       <h1 class="text-center"><%= @company.capitalize_name %></h1>
       <div class="d-flex justify-content-center">
-        <span class="tag-grey-sm"><%= @company.company_category %></span>
+        <span class="tag-grey"><%= @company.company_category %></span>
       </div>
     </div>
     <!-- FORM -->
@@ -62,7 +51,7 @@
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
           <div class="row mt-4 d-flex align-items-stretch">
             <!-- primeira coluna -->
-            <div class="col-md-3 d-flex flex-column">
+            <div class="col-md-3 d-flex flex-column pb-2">
               <div class="ranking-box">
                 <div class="d-flex justify-content-center align-items-center">
                   <%= image_tag 'medal-icon.png' %>
@@ -70,7 +59,7 @@
                 </div>
                 <p class="text-center">Nota média da empresa.</p>
               </div>
-              <div class="desempenho border p-2 mt-2 mb-4 bg-white flex-grow-1">
+              <div class="desempenho border p-2 mt-2 bg-white-tab flex-grow-1">
                 <h5 class="text-center mt-3">Desempenho</h5>
                 <div class="d-flex align-items-center my-4">
                   <i class="fa-solid fa-bullhorn ms-2 me-3"></i>
@@ -87,21 +76,21 @@
               </div>
             </div>
             <!-- segunda coluna -->
-            <div class="col-md-6 d-flex flex-column">
+            <div class="col-md-6 d-flex flex-column pb-2">
               <div class="flex-grow-1">
                 <%= render 'complaints_show' %>
               </div>
             </div>
             <!-- terceira coluna -->
-            <div class="col-md d-flex flex-column company-info">
-              <div class="border bg-white pt-3 px-3 pb-4">
+            <div class="col-md d-flex flex-column company-info pb-2">
+              <div class="border bg-white-tab pt-3 px-3 pb-4">
                 <h5 class="text-center mb-3">Informaçõpes da empresa <strong><%= @company.company_name %></strong></h5>
                 <p class="mb-3"><strong>Sobre</strong></p>
                 <p><%= @company.company_description %></p>
                 <p class="my-3"><strong>Categoria:</strong></p>
                 <span class="tag-grey-sm"><%= @company.company_category %></span>
               </div>
-              <div class="border bg-white mt-2 flex-grow-1 mb-4 p-3">
+              <div class="border bg-white-tab mt-2 flex-grow-1 p-3">
                 <h5 class="text-center mb-3 mt-2">contato da empresa</h5>
                 <% if @company.company_website.present? %>
                   <div class="info-box">
@@ -143,7 +132,7 @@
         </div>
         <!-- Sobre -->
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-          <div class="company-about p-3 border bg-white my-3">
+          <div class="company-about p-3 border bg-white-tab my-3">
             <div class="row d-flex justify-content-center">
               <div class="col-12 col-md-8">
                 <div class="d-flex align-items-center mt-4 mb-2">
@@ -195,7 +184,7 @@
         </div>
         <!-- Contato -->
         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
-          <div class="company-contact border bg-white my-3 p-3">
+          <div class="company-contact border bg-white-tab my-3 p-3">
             <div class="row d-flex justify-content-center">
               <div class="col-12 col-md-8">
                 <div class="d-flex align-items-center my-3">

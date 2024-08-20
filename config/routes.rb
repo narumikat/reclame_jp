@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   end
 
   # Usuários podem ser empresas ou usuários comuns
-  resources :users
+  resources :users do
+    get 'complaints', to: 'complaints#user_complaints', as: 'user_complaints'
+  end
 
   # Empresas podem ter reclamações e respostas
   resources :companies do

@@ -20,7 +20,7 @@ class ResponsesController < ApplicationController
   private
 
   def response_params
-    params.require(:response).permit(:content)
+    params.require(:response).permit(:content, :parent_id)
   end
 
   def set_complaint
