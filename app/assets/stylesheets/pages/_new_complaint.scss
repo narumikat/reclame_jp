@@ -1,0 +1,14 @@
+.new-complaint {
+  p.alert-msg{
+    color: $main-red;
+    font-weight: 700;
+  }
+
+  p.p-red {
+    color: $main-red;
+  }
+
+  label {
+    font-weight: 600;
+  }
+}
