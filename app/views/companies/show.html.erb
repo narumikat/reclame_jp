@@ -9,34 +9,38 @@
       </div>
     </div>
     <!-- FORM -->
-    <% unless current_user.is_company? %>
-      <div data-controller="complaint-form">
-        <div class="d-flex justify-content-center my-4">
-          <button class="btn-red-lg" data-complaint-form-target="newComplaintBtn" data-action="click->complaint-form#toggleForm">
-            <i class="fa-solid fa-bullhorn me-2"></i>
-            Reclamar
-          </button>
-        </div>
-        <div data-complaint-form-target="formComplaint" class="toggle-form row d-flex justify-content-center">
-          <h3 class="text-center mb-4">Crie uma reclamação da empresa <br>
-            <strong><%= @company.capitalize_name %></strong></h3>
-          <div class="col-md-8 py-4">
-            <%= simple_form_for [@company, @new_complaint] do |f| %>
-              <%= f.input :title, label: 'Titulo da reclamação' %>
-              <%= f.input :review, placeholder: 'numero de 1 a 5' %>
-              <%= f.input :comment, label: 'Reclamação' %>
-              <div class="form-group mb-4">
-                <%= f.label 'Categoria da reclamação', required: true, class: "mb-2" %>
-                <%= f.collection_select :complaint_category, Complaint::COMPLAINT_CATEGORY, :to_s, :to_s, { include_blank: "Selecione uma Categoria" }, { required: true, class: 'form-control', multiple: false } %>
-                <%= f.hidden_field :company_id, value: @company.id %>
-              </div>
-              <div class="d-flex justify-content-end">
-                <%= f.submit "Enviar Reclamação", class: 'btn btn-primary' %>
-              </div>
-            <% end %>
+    <% if user_signed_in? %>
+      <% unless current_user.is_company? %>
+        <div data-controller="complaint-form">
+          <div class="d-flex justify-content-center my-4">
+            <button class="btn-red-lg" data-complaint-form-target="newComplaintBtn" data-action="click->complaint-form#toggleForm">
+              <i class="fa-solid fa-bullhorn me-2"></i>
+              Reclamar
+            </button>
+          </div>
+          <div data-complaint-form-target="formComplaint" class="toggle-form row d-flex justify-content-center">
+            <h3 class="text-center mb-4">Crie uma reclamação da empresa <br>
+              <strong><%= @company.capitalize_name %></strong></h3>
+            <div class="col-md-8 py-4">
+              <%= simple_form_for [@company, @new_complaint] do |f| %>
+                <%= f.input :title, label: 'Titulo da reclamação' %>
+                <%= f.input :review, placeholder: 'numero de 1 a 5' %>
+                <%= f.input :comment, label: 'Reclamação' %>
+                <div class="form-group mb-4">
+                  <%= f.label 'Categoria da reclamação', required: true, class: "mb-2" %>
+                  <%= f.collection_select :complaint_category, Complaint::COMPLAINT_CATEGORY, :to_s, :to_s, { include_blank: "Selecione uma Categoria" }, { required: true, class: 'form-control', multiple: false } %>
+                  <%= f.hidden_field :company_id, value: @company.id %>
+                </div>
+                <div class="d-flex justify-content-end">
+                  <%= f.submit "Enviar Reclamação", class: 'btn btn-primary' %>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
-      </div>
+      <% end %>
+    <% else %>
+      <%= render 'components/btn_reclamar', text: 'Reclamar', path: registration_type_path %>
     <% end %>
     <!-- END FORM -->
     <div>

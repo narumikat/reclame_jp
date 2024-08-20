@@ -1,11 +1,8 @@
 class SearchController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index]
   def index
-    # Uncomment this line to enable Pundit
-    # authorize :search, :index?
-    # @companies = policy_scope(Company).where("company_name ILIKE ?", "%#{@query}%")
-    # @complaints = policy_scope(Complaint).where("title ILIKE ?", "%#{@query}%")
     @query = params[:query]
-    @companies = Company.where("company_name ILIKE ?", "%#{@query}%")
-    @complaints = Complaint.where("title ILIKE ?", "%#{@query}%")
+    @companies = policy_scope(Company).where("company_name ILIKE ?", "%#{@query}%")
+    @complaints = policy_scope(Complaint).where("title ILIKE ?", "%#{@query}%")
   end
 end

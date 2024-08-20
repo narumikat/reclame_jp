@@ -10,12 +10,22 @@
         <div class="mt-4 mx-2">
           <div class="border p-4 welcome-dashboard mb-4">
             <h3 class="text-center">Bem vindo ao <strong>Reclame JP</strong> <br>
-              <span><%= current_user.username %></span></h3>
+              <% if user_signed_in? %>
+                <span><%= current_user.username %></span>
+              <% else %>
+                <span>Visitante</span>
+              <% end %>
+            </h3>
           </div>
           <div class="border p-4">
             <h3>Esta com algum <span>problema?</span></h3>
-            <p>Crie uma reclamação</p>
-            <%= render 'components/btn_reclamar' %>
+            <% if user_signed_in? %>
+              <p>Crie uma reclamação</p>
+              <%= render 'components/btn_reclamar', path: new_complaint_path %>
+            <% else %>
+              <p>Registre-se e crie uma reclamação</p>
+              <%= render 'components/btn_reclamar', text: 'Nova reclamacão', path: registration_type_path %>
+            <% end %>
           </div>
           <div class="companies mb-4">
             <div class="d-flex justify-content-between align-items-center my-4">

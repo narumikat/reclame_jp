@@ -1,14 +1,19 @@
 <div class="sidebar">
   <div class="row d-flex justify-content-center pb-4 bg-white-tab">
     <div class="d-flex justify-content-center my-4 pt-4">
-      <% if current_user.avatar.present? %>
+      <% if user_signed_in? && current_user.avatar.present? %>
         <%= image_tag current_user.avatar, class: "avatar-large" %>
       <% else %>
         <%= image_tag 'user-photo.png', class: "avatar-large" %>
       <% end %>
     </div>
-    <h3 class="text-center pb-2">Ola <strong><%= current_user.username %></strong></h3>
-    <%= render 'components/btn_reclamar' %>
+    <% if user_signed_in? %>
+      <h3 class="text-center pb-2">Olá <strong><%= current_user.username %></strong></h3>
+      <%= render 'components/btn_reclamar' %>
+    <% else %>
+      <h3 class="text-center pb-2">Olá <strong>visitante</strong></h3>
+      <%= render 'components/btn_reclamar', text: 'Reclamar', path: registration_type_path %>
+    <% end %>
   </div>
   <div class="row my-4 profile-links">
     <div class="d-flex m-2 pb-2">
@@ -17,36 +22,50 @@
         <span>Inicio</span>
       <% end %>
     </div>
-    <div class="my-2 pb-2">
-      <div class="container-fluid ps-2">
-        <div class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="true" aria-label="Toggle navigation">
-          <i class="fa-solid fa-bullhorn me-2"></i>
-          <span>Minhas reclamações</span>
+    <% if user_signed_in? %>
+      <div class="my-2 pb-2">
+        <div class="container-fluid ps-2">
+          <div class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="true" aria-label="Toggle navigation">
+            <i class="fa-solid fa-bullhorn me-2"></i>
+            <span>Minhas reclamações</span>
+          </div>
+        </div>
+        <div class="collapse show" id="navbarToggleExternalContent">
+          <div class="row ms-4 px-4 pt-4">
+            <% if current_user.complaints.any? %>
+              <%= link_to 'Todas', user_user_complaints_path(current_user), class: "mb-4" %>
+              <%= link_to 'Respondidas', user_user_complaints_path(current_user, respondidas: true), class: "mb-4" %>
+              <%= link_to 'Não respondidas', user_user_complaints_path(current_user, respondidas: false), class: "mb-2" %>
+            <% else %>
+              <p>Sem reclamações</p>
+            <% end %>
+          </div>
         </div>
       </div>
-      <div class="collapse show" id="navbarToggleExternalContent">
-        <div class="row ms-4 px-4 pt-4">
-          <% if current_user.complaints.any? %>
-            <%= link_to 'Todas', user_user_complaints_path(current_user), class: "mb-4" %>
-            <%= link_to 'Respondidas', user_user_complaints_path(current_user, respondidas: true), class: "mb-4" %>
-            <%= link_to 'Não respondidas', user_user_complaints_path(current_user, respondidas: false), class: "mb-2" %>
-          <% else %>
-            <p>Sem reclamações</p>
-          <% end %>
-        </div>
+    <% else %>
+      <div class="d-flex ms-2 align-items-center">
+        <i class="fa-solid fa-right-to-bracket me-3 my-3"></i>
+        <%= link_to "Login", new_user_session_path %>
       </div>
-    </div>
-    <div class="d-flex m-2 pb-2">
-      <%= link_to user_path(current_user) do %>
-        <i class="fa-solid fa-user me-2"></i>
-        <span>Meu perfil</span>
-      <% end %>
-    </div>
-    <div class="d-flex m-2">
-      <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
-        <i class="fa-solid fa-right-from-bracket me-2"></i>
-        <span>Sair</span>
-      <% end %>
-    </div>
+      <div class="d-flex ms-2 align-items-center">
+        <i class="fa-solid fa-pen me-3 my-3"></i>
+        <%= link_to "Registre-se", registration_type_path %>
+      </div>
+    <% end %>
+    <% if user_signed_in? %>
+      <div class="d-flex m-2 pb-2">
+        <%= link_to user_path(current_user) do %>
+          <i class="fa-solid fa-user me-2"></i>
+          <span>Meu perfil</span>
+        <% end %>
+      </div>
+      <div class="d-flex m-2">
+        <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
+          <i class="fa-solid fa-right-from-bracket me-2"></i>
+          <span>Sair</span>
+        <% end %>
+      </div>
+    <% else %>
+    <% end %>
   </div>
 </div>
