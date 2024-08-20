@@ -1,11 +1,15 @@
-.toggle-form{
+/* Configurações para esconder e mostrar os formulários com transição */
+.toggle-form,
+.initial-form {
   transition: opacity 1.3s ease, max-height 1.3s ease;
   overflow: hidden;
   max-height: 0;
   opacity: 0;
 }
 
-.toggle-form.visible {
-    opacity: 1;
-    max-height: 700px;
+/* Quando a classe 'visible' é aplicada, o formulário se expande e se torna visível */
+.toggle-form.visible,
+.initial-form.visible {
+  opacity: 1;
+  max-height: 2000px;
 }
