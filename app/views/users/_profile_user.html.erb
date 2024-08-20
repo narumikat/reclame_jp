@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 mt-4 border d-none d-md-flex">
+      <%= render 'shared/sidebar' %>
+    </div>
+    <div class="col-md-9 col-12 mt-4">
+      <div class="user-profile row d-flex justify-content-center">
+        <div class="welcome-dashboard border col-md-10 col-12">
+          <div class="d-flex align-items-center">
+            <div>
+              <% if current_user.avatar.present? %>
+                <%= image_tag current_user.avatar, class: "avatar-profile" %>
+              <% else %>
+                <%= image_tag 'user-photo.png', class: "avatar-profile" %>
+              <% end %>
+            </div>
+            <div class="ms-4">
+              <h4><strong><%= @user.username_protected %></strong></h4>
+              <p>Se cadastrou em <%= @user.created_at.strftime("%d %b %Y") %></p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 col-md-10 col-12 d-flex">
+          <div class="col-6 box-info">
+            <p><%= @user.username_protected %> criou</p>
+            <h2><%= @user.total_complaints_count %> </h2>
+            <p>reclamações <br>
+              em <strong><%= @user.unique_complaint_companies_count %> empresas</strong></p>
+          </div>
+          <div class="col box-info">
+            <p><%= @user.username_protected %> tem</p>
+            <h2><%= @user.complaints_answered_percentage.round %>%</h2>
+            <p>das reclamações<br>
+              respondidas</p>
+          </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-10 mt-4 user-complaints bg-white border py-4">
+            <h3 class="text-center">Reclamações do usuario</h3>
+            <div class="row d-flex justify-content-center mt-4 pb-4">
+              <% @user.complaints.order(created_at: :desc).each do |complaint| %>
+                <div class="col-md-10">
+                  <%= render 'complaints/complaint_tab', complaint: complaint %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

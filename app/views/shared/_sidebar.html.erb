@@ -1,7 +1,11 @@
 <div class="sidebar">
   <div class="row d-flex justify-content-center pb-4 bg-white-tab">
     <div class="d-flex justify-content-center my-4 pt-4">
-      <%= image_tag 'user-photo.png', class: "avatar-large" %>
+      <% if current_user.avatar.present? %>
+        <%= image_tag current_user.avatar, class: "avatar-large" %>
+      <% else %>
+        <%= image_tag 'user-photo.png', class: "avatar-large" %>
+      <% end %>
     </div>
     <h3 class="text-center pb-2">Ola <strong><%= current_user.username %></strong></h3>
     <%= render 'components/btn_reclamar' %>

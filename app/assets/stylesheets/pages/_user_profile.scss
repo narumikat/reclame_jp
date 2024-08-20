@@ -1,0 +1,48 @@
+.user-profile {
+  h3 {
+    font-weight: 700;
+  }
+  .welcome-dashboard {
+    background-image: image-url('bg-transparent.png');
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: auto 100px;
+    padding: 1rem;
+
+    p {
+      margin-bottom: 0;
+      color: $gray-hover;
+    }
+  }
+
+  .box-info {
+    background: rgba(207, 216, 244, 0.4);
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 0.5rem;
+
+    p {
+      color: #1f69c1;
+      text-align: center;
+    }
+
+    h2 {
+      color: $main-red;
+      font-size: 3rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      margin: 0.2rem;
+
+      p {
+        font-size: 0.8rem;
+      }
+
+      h2 {
+        font-size: 2.5rem;
+      }
+    }
+  }
+}
