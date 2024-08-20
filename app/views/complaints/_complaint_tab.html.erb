@@ -1,8 +1,5 @@
 <div class="complaint-tab mb-2">
   <%= link_to company_complaint_path(complaint.company, complaint) do %>
-    <% if current_page?(user_user_complaints_path(current_user)) %>
-      <h4>Empresa: <strong><%= complaint.company.company_name %></strong></h4>
-    <% end %>
     <h3><%= complaint.title %></h3>
     <p><%= complaint.comment %></p>
     <div class="d-flex justify-content-between align-items-center">
