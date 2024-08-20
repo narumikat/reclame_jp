@@ -2,7 +2,11 @@
   <%= render 'shared/back_btn' %>
   <div class="row d-flex">
     <div class="col-md-3 mt-4 border d-none d-md-flex flex-column">
-      <%= render 'shared/sidebar' %>
+      <% if current_user.is_company? %>
+        <%= render 'shared/sidebar_company' %>
+      <% else %>
+        <%= render 'shared/sidebar' %>
+      <% end %>
     </div>
     <div class="col-md-9 col-12 d-flex flex-column">
       <div class="border user-complaints mt-4">

@@ -21,6 +21,9 @@
           <% if user_signed_in? %>
             <div class="d-md-none">
               <% if current_user.is_company? %>
+                <div class="border p-4">
+                  <%= render 'shared/sidebar_company' %>
+                </div>
               <% else %>
                 <div class="border p-4">
                   <%= render 'shared/sidebar' %>
