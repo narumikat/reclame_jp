@@ -1,19 +1,6 @@
 <% if user_signed_in? %>
   <% if current_user.is_company? %>
-    <h2>Hello Company</h2>
-    <ul>
-      <li><%= link_to 'Go to your profile', user_path(current_user) %></li>
-      <li><%= link_to 'See all companies', companies_path %></li>
-    </ul>
-    <% if !current_user.companies.blank? %>
-      <ul>
-        <% current_user.companies.each do |company| %>
-          <li><%= link_to "Go to your company: #{company.company_name}", company_path(company) %></li>
-        <% end %>
-      </ul>
-    <% else %>
-      <%= link_to 'Create your company profile', new_company_path %>
-    <% end %>
+    <%= render 'users/dashboard_company' %>
   <% else %>
     <%= render 'users/dashboard' %>
   <% end %>
