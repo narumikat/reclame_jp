@@ -59,7 +59,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if resource.companies.empty?
         new_company_path
       else
-        root_path
+        companies_path
       end
     else
       user_path(resource)

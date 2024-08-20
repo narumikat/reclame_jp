@@ -7,10 +7,6 @@
     <% end %>
     <div class="company-card-info mb-2">
       <div>
-        <% if user_signed_in? && current_page?(user_user_companies_path(current_user)) %>
-          <% role = current_user.companies_users.find_by(company_id: company.id).role %>
-          <small>Voce é <strong><%= role %></strong> da empresa</small>
-        <% end %>
         <h3><%= company.company_name %></h3>
         <span class="tag-grey-sm"><%= company.company_category %></span>
       </div>

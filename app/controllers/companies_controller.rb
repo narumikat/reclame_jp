@@ -16,10 +16,6 @@ class CompaniesController < ApplicationController
     authorize Company
     @company = Company.new
   end
-
-  def user_companies
-    @companies = current_user.companies.where(id: params[:companies_ids])
-  end  
   
   def create
     authorize Company

@@ -61,12 +61,12 @@ user_normal = User.create!(
 )
 
 user_normal2 = User.create!(
-  username: 'pessoa2',
+  username: 'user_normal2',
   email: 'user2@mail.com',
   password: '123456',
   password_confirmation: '123456',
-  first_name: 'Pessoa',
-  last_name: 'Dois',
+  first_name: 'User',
+  last_name: 'Two',
   phone_number: '1234567890',
   address: '123 Main St',
   city: 'New York',
