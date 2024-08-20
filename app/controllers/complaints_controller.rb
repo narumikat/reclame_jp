@@ -25,7 +25,11 @@ class ComplaintsController < ApplicationController
     @user = User.find(params[:user_id])
     authorize @user
     
-    @complaints = @user.complaints.order(created_at: :desc)
+    if params[:companies_ids].present?
+      @complaints = Complaint.where(company_id: params[:companies_ids]).order(created_at: :desc)
+    else
+      @complaints = @user.complaints.order(created_at: :desc)
+    end
   
     if params[:respondidas].present?
       if params[:respondidas] == "true"

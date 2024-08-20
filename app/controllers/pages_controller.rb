@@ -2,8 +2,8 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :home ]
 
   def home
-    @companies = Company.all
-    @complaints = Complaint.all
+    @companies = Company.all.order(created_at: :desc).last(10)
+    @complaints = Complaint.all.order(created_at: :desc).last(10)
   end
   def sms
     phone_number = format_number(params[:phone])
