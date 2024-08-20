@@ -52,4 +52,17 @@ class User < ApplicationRecord
       self.username = "#{username[0..1]}#{'*' * 4}"
     end
   end
+
+  # VALIDAÇÃO DE EMAIL
+  FORBIDDEN_EMAILS = %w[gmail.com yahoo.com hotmail.com outlook.com icloud.com hotmail.com.br yahoo.com.br outlook.com.br uol.com.br bol.com.br terra.com.br ig.com.br]
+  validate :email_domain
+
+  private
+
+  def email_domain
+    domain = email.split("@").last
+    if FORBIDDEN_EMAILS.include?(domain)
+      errors.add(:email, "Este não é permitido, por favor use um email corporativo")
+    end
+  end
 end
