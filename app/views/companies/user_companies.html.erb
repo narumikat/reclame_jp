@@ -7,7 +7,11 @@
     <div class="col-md-9 col-12 mt-2">
       <div class="bg-white border">
         <div class="row d-flex justify-content-center">
-          <h2 class="text-center my-4">Suas empresas</h2>
+          <% if current_user.companies.size > 1 %>
+            <h2 class="text-center my-4">Suas empresas</h2>
+          <% else %>
+            <h2 class="text-center my-4">Sua empresa</h2>
+          <% end %>
           <% @companies.each do |company| %>
             <div class="col-11 col-md-10 my-2">
               <%= render 'companies/card', company: company %>
