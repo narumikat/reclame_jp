@@ -17,12 +17,17 @@
   border: none;
   padding: 0.5rem 1rem;
   color: #fff;
-  border-radius: 6px;
+  border-radius: 32px;
   transition: background 0.3s;
   cursor: pointer;
 
   &:hover {
     background: darken($blue, 10%);
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -52,6 +57,33 @@
 
   &:hover {
     color: $gray-hover;
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 20px;
+  }
+}
+
+.back-btn-absolute {
+  font-size: 2rem;
+  color: $gray-icon;
+  transition: color 0.3s;
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  z-index: 1000;
+
+  i {
+    color: $gray-icon;
+  }
+
+  &:hover {
+    color: $gray-hover;
+  }
+
+  @media (max-width: 768px) {
+    top: 68px;
+    left: 20px;
   }
 }
 

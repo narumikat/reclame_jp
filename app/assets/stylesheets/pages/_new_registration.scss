@@ -11,6 +11,12 @@
       color: $blue;
 
     }
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: $blue;
+    }
   }
 
   .alert-box {
@@ -19,5 +25,30 @@
 
   label {
     font-weight: 600;
+  }
+}
+
+.new-user {
+
+  h2 {
+    strong {
+      color: $green;
+      font-weight: 800;
+    }
+  }
+
+  i {
+    color: $green;
+    font-size: 2.5rem;
+  }
+
+  label {
+    font-weight: 600;
+  }
+
+  h3 {
+    font-weight: 800;
+    color: $green;
+    font-size: 1.2rem;
   }
 }

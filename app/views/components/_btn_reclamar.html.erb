@@ -1,8 +1,17 @@
 <div class="d-flex justify-content-center my-4">
-  <%= link_to new_complaint_path do %>
-    <button class="btn-red-lg">
-      <i class="fa-solid fa-bullhorn me-2"></i>
-      Nova reclamação
-    </button>
-  <% end %>
-</div>
+  <% if user_signed_in? %>
+    <%= link_to new_complaint_path do %>
+      <button class="btn-red-lg">
+        <i class="fa-solid fa-bullhorn me-2"></i>
+        Nova reclamação
+      </button>
+    <% end %>
+  <% else %>
+    <%= link_to new_user_registration_path do %>
+      <button class="btn-red-lg">
+        <i class="fa-solid fa-user-plus me-2"></i>
+        Cadastre-se
+      </button>
+    <% end %>
+  </div>
+<% end %>
