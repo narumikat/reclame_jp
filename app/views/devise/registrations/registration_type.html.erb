@@ -1,6 +1,6 @@
 <div class="container registration_type" data-controller="select-company">
   <div class="d-md-none">
-    <%= render 'components/back_btn' %>
+    <%= render 'shared/back_btn' %>
   </div>
   <h1 class="text-center mt-4">Escolha o tipo de registro</h1>
   <%= simple_form_for :registration_type, url: registration_type_path, method: :post do |f| %>
@@ -41,8 +41,8 @@
         <%= f.collection_select :company_id, Company.all, :id, :company_name, { include_blank: "Selecione sua empresa" }, { class: 'form-control custom-placeholder' } %>
       </div>
       <div class="form-group company-name" data-controller="suggestions">
-        <p>Ou faça uma busca pelo <strong>nome da sua empresa</strong></p>
-        <%= f.label :company_name, "Digite o nome da empresa" %>
+        <p><strong>Ou faça uma busca pelo nome da sua empresa</strong></p>
+        <%= f.label :company_name, "Digite o nome da empresa", class: "mb-2" %>
         <%= text_field_tag :company_name, nil, id: 'search', class: 'form-control custom-placeholder', placeholder: "Comece a digitar o nome da empresa", autocomplete: "off", data: { action: "input->suggestions#autocomplete", suggestions_target: "companyNameInput" } %>
         <ul id="results" class="list-group mt-2" data-suggestions-target="suggestionsList"></ul>
       </div>
@@ -58,6 +58,6 @@
     </div>
   <% end %>
   <div class="d-none d-md-block">
-    <%= render 'components/back_btn' %>
+    <%= render 'shared/back_btn' %>
   </div>
 </div>
