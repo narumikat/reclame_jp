@@ -1,11 +1,13 @@
-.toggle-form{
+.toggle-form,
+.initial-form {
   transition: opacity 1.3s ease, max-height 1.3s ease;
   overflow: hidden;
   max-height: 0;
   opacity: 0;
 }
 
-.toggle-form.visible {
-    opacity: 1;
-    max-height: 700px;
+.toggle-form.visible,
+.initial-form.visible {
+  opacity: 1;
+  max-height: 2000px;
 }
