@@ -1,4 +1,5 @@
 <%= render 'companies/company_banner', company: @company %>
+<%= render 'shared/back_btn_absolute' %>
 <div class="container complaint-show">
   <h3 class="text-center my-4">
     Reclamação da empresa <%= link_to company_path(@company) do %><strong><%= @complaint.company.company_name %></strong><% end %>

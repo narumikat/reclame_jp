@@ -1,6 +1,6 @@
 <div class="container registration_type" data-controller="select-company">
   <div class="d-md-none">
-    <%= render 'components/back_btn' %>
+    <%= render 'shared/back_btn' %>
   </div>
   <h1 class="text-center mt-4">Escolha o tipo de registro</h1>
   <%= simple_form_for :registration_type, url: registration_type_path, method: :post do |f| %>
@@ -58,6 +58,6 @@
     </div>
   <% end %>
   <div class="d-none d-md-block">
-    <%= render 'components/back_btn' %>
+    <%= render 'shared/back_btn' %>
   </div>
 </div>
