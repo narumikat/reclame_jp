@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row d-flex">
+    <div class="col-md-3 mt-4 border d-none d-md-flex flex-column">
+      <%= render 'shared/sidebar' %>
+    </div>
+    <div class="col-md-9 col-12 d-flex flex-column">
+      <div class="border user-complaints mt-4">
+        <h3>Todas as suas reclamações</h3>
+        <div class="mt-4 row d-flex justify-content-center">
+          <% @complaints.each do |complaint| %>
+            <div class="col-11 col-md-10 my-2">
+              <%= render 'complaints/complaint_tab', complaint: complaint %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

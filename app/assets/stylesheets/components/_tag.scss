@@ -42,9 +42,23 @@
 }
 
 .tag-complaint {
-  background: sandybrown;
+  color: #1f69c1;
+  background: rgba(207, 216, 244, 0.4);
   padding: 0.3rem 0.8rem;
   border-radius: 6px;
+}
+
+.tag-grey {
+  background: $gray-icon;
+  color: #fff;
+  padding: 0.3rem 0.8rem;
+  border-radius: 24px;
+  transition: background 0.3s;
+  
+  &:hover {
+    background: $gray-hover;
+    cursor: pointer;
+  }
 }
 
 .tag-grey-sm {
@@ -52,7 +66,7 @@
   color: #fff;
   padding: 0.3rem 0.8rem;
   border-radius: 24px;
-  // font-size: 0.8rem;
+  font-size: 0.8rem;
   transition: background 0.3s;
   
   &:hover {

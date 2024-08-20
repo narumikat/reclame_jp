@@ -1,7 +1,7 @@
 class CompaniesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_company, only: [:show, :edit, :update]
-  before_action :check_company_user, only: [:new, :create, :join] 
+  before_action :check_company_user, only: [:new, :create] 
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   COMPANY_CATEGORY = Company::COMPANY_CATEGORY
@@ -41,10 +41,6 @@ class CompaniesController < ApplicationController
       end
     end
   end
-  
-  def join
-    # join to a existing company
-  end
 
   def show
     authorize @company
@@ -82,7 +78,6 @@ class CompaniesController < ApplicationController
     )
   end
   
-
   def check_company_user
     unless current_user.company?
       redirect_to root_path, alert: "You are not authorized to perform this action."

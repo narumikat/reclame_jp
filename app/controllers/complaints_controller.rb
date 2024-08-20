@@ -1,11 +1,32 @@
 class ComplaintsController < ApplicationController
-  before_action :set_company, only: [:create, :show], if: -> { params[:company_id].present? }
+  before_action :set_company, only: [:index, :create, :show], if: -> { params[:company_id].present? }
   before_action :set_complaint, only: [:show]
   skip_before_action :authenticate_user!, only: [:index, :show]
+
   def index
     authorize Complaint
-    @complaints = Complaint.where(user_id: current_user.id).order(created_at: :desc)
+    
+    if @company.present?
+      @complaints = @company.complaints.order(created_at: :desc)
+    else
+      @complaints = Complaint.where(user_id: current_user.id).order(created_at: :desc)
+    end
+  
+    if params[:respondidas].present?
+      if params[:respondidas] == "true"
+        @complaints = @complaints.joins(:responses).distinct
+      elsif params[:respondidas] == "false"
+        @complaints = @complaints.left_joins(:responses).where(responses: { id: nil })
+      end
+    end
+  end
 
+  def user_complaints
+    @user = User.find(params[:user_id])
+    authorize @user
+    
+    @complaints = @user.complaints.order(created_at: :desc)
+  
     if params[:respondidas].present?
       if params[:respondidas] == "true"
         @complaints = @complaints.joins(:responses).distinct
@@ -16,12 +37,13 @@ class ComplaintsController < ApplicationController
   end
 
   def show
+    @complaint = Complaint.includes(:company, responses: :responses).find(params[:id])
+    @company = @complaint.company
     authorize @complaint
-    @complaint = Complaint.includes(:responses).find(params[:id])
     @response = Response.new
-    @responses = @complaint.responses.order(created_at: :desc)
+    @responses = @complaint.responses.where(parent_id: nil).order(created_at: :desc)
   end
-
+  
   def new
     authorize Complaint
     @complaint = Complaint.new
@@ -34,6 +56,7 @@ class ComplaintsController < ApplicationController
     @complaint = Complaint.new(complaint_params.merge(user: current_user))
   
     if @complaint.save
+      @company = @complaint.company
       # Descomentar esta linha abaixo para enviar email.
       # SendgridMailer.send_email(current_user).deliver_now
       redirect_to @complaint, notice: 'Complaint was successfully created.'
@@ -102,7 +125,7 @@ class ComplaintsController < ApplicationController
   end
   
   def set_company
-    @company = Company.find(params[:company_id])
+    @company = Company.find(params[:company_id]) if params[:company_id].present?
   end
 
   def set_complaint

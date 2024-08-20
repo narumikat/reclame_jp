@@ -36,6 +36,10 @@ class UserPolicy < ApplicationPolicy
     user_is_owner?
   end
 
+  def user_complaints?
+    @user == @record
+  end
+
   private
 
   def user_is_owner?

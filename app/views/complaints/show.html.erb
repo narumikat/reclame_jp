@@ -1,36 +1,76 @@
-<div class="container">
-  <h3>Reclamacao da empresa <strong><%= @complaint.company.company_name %></strong></h3>
-  <div class="d-flex justify-content-between">
+<%= render 'companies/company_banner', company: @company %>
+<div class="container complaint-show">
+  <h3 class="text-center my-4">
+    Reclamação da empresa <%= link_to company_path(@company) do %><strong><%= @complaint.company.company_name %></strong><% end %>
+  </h3>
+  <div class="border-bottom px-4"></div>
+  <div class="py-4">
     <h2><%= @complaint.title %></h2>
-    <span class="<%= @complaint.status == 'pending' ? 'red-tag' : 'green-tag' %>">
-      <%= @complaint.status == 'answered' ? 'answered' : 'pending' %>
-    </span>
-  </div>
-  <p>Escrito por <%= link_to @complaint.user.username_protected, user_path(@complaint.user) %></p>
-  <% if @complaint.complaint_category.present? %>
+    <div class="d-flex justify-content-between">
+      <small>
+        <i class="fa-regular fa-calendar me-2"></i>
+        <%= @complaint.created_at.strftime('%d %B %Y') %></small>
+      <%= render 'components/tag_status', complaint: @complaint %>
+    </div>
+    <div class="my-4">
+      <p><%= @complaint.comment %></p>
+    </div>
     <span class="tag-complaint"><%= @complaint.complaint_category %></span>
-  <% end %>
-  <div class="my-4">
-    <p><strong>Comentario:</strong> <%= @complaint.comment %></p>
   </div>
-  <% if @complaint.responses.any? %>
-    <h3>Responses:</h3>
-    <% @complaint.responses.each do |response| %>
-      <div class="mb-4">
-        <p class="mb-2"><strong>Resposta:</strong> <%= response.content %></p>
-        <small>Respondida por: <%= link_to response.user.username_protected, user_path(response.user) %></small>
-      </div>
-    <% end %>
-  <% end %>
-  <% if user_signed_in? %>
-    <% if current_user.companies.include?(@complaint.company) || current_user.complaints.include?(@complaint)%>
-      <div>
-        <h3>Write a response:</h3>
-        <%= simple_form_for([@complaint.company, @complaint, @response]) do |f| %>
-          <%= f.input :content, label: false, placeholder: "Write a response..." %>
-          <%= f.button :submit, "Submit Response" %>
+  <% if @responses.any? %>
+    <div class="complaint-response border bg-white">
+      <h4 class="mb-3">
+        <% if @responses.size > 1 %>
+          Respostas da empresa:
+        <% else %>
+          Resposta da empresa:
         <% end %>
-      </div>
-    <% end %>
+      </h4>
+      <% @responses.each do |response| %>
+        <div class="mx-4 border-bottom"></div>
+        <div class="my-4">
+          <small>Respondida por: <%= link_to response.user.username_protected, user_path(response.user) %>, <strong><%= response.user.role_in_company(@complaint.company) %></strong> da empresa</small>
+          <p class="my-2"><%= response.content %></p>
+          <small><%= response.created_at.strftime('%d %B %Y') %></small>
+          <!-- Renderizando as respostas aninhadas -->
+          <% if response.responses.any? %>
+            <div class="m-4">
+              <% response.responses.each do |child_response| %>
+                <div class="my-2 response-to-response">
+                  <small><%= link_to child_response.user.username_protected, user_path(child_response.user) %> respondeu:</small>
+                  <p><%= child_response.content %></p>
+                  <small><%= child_response.created_at.strftime('%d %B %Y') %></small>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+          <!-- Formulário para responder à reclamação -->
+          <div class="ml-5 response-to-response-form">
+            <% if user_signed_in? && current_user.complaints.include?(@complaint) %>
+              <p><strong>Responda ao <%= response.user.role_in_company(@complaint.company) %></strong></p>
+              <%= simple_form_for([response.complaint.company, response.complaint, response.responses.build]) do |f| %>
+                <%= f.hidden_field :parent_id, value: response.id %>
+                <%= f.input :content, label: false, placeholder: "Escreva uma resposta..." %>
+                <div class="d-flex justify-content-end my-4">
+                  <%= f.button :submit, "Responder", class: "btn-red" %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <% if user_signed_in? && current_user.companies.include?(@complaint.company) %>
+    <div class="border-bottom mx-4"></div>
+    <div class="mt-3">
+      <h5>Responda a reclamação:</h5>
+      <%= simple_form_for([@complaint.company, @complaint, @response]) do |f| %>
+        <%= f.input :content, label: false, placeholder: "Escreva uma resposta..." %>
+        <div class="d-flex justify-content-center mt-4">
+          <%= f.button :submit, "Responder", class: "btn-red" %>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 </div>

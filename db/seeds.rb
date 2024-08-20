@@ -173,19 +173,22 @@ companies = [company1, company2]
 
 puts 'Create company associations'
 
+role = CompaniesUser::ROLE
+
 def associate_user_with_company(user, company, role)
-  association = CompaniesUser.find_or_initialize_by(user: user, company: company)
-  if association.new_record?
-    association.role = role
-    association.save!
-  else
-    association.update(role: role)
-  end
+  selected_role = role.sample
+  CompaniesUser.create!(
+    user: user,
+    company: company,
+    role: selected_role
+  )
 end
 
-associate_user_with_company(user_company, company1, "Manager")
-associate_user_with_company(user_company, company2, "Executive")
-associate_user_with_company(user_company2, company2, "Director")
+associate_user_with_company(user_company, company1, role)
+associate_user_with_company(user_company, company2, role)
+associate_user_with_company(user_company2, company2, role)
+
+
 
 puts 'Users linked to companies with roles assigned!'
 
@@ -238,12 +241,12 @@ puts 'Complaints created!'
 
 puts 'Creating responses...'
 
-8.times do
+10.times do
   Response.create!(
     content: 'This is a response to a complaint.',
     complaint: complaints.sample,
     user: company_users.sample,
-    company: companies.sample
+    company: companies.sample,
   )
 end
 

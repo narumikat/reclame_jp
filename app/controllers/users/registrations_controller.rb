@@ -24,16 +24,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  # def registration_type
-  #   if request.post?
-  #     # registra e salva a o tipo da sessasão
-  #     session[:registration_type] = params[:registration_type][:is_company] == 'true'
-  #     # registra e salva o id da empresa, e envia para o create
-  #     session[:company_id] = params[:registration_type][:company_id] if params[:registration_type][:is_company] == 'true'
-  #     session[:role] = params[:registration_type][:role] if params[:registration_type][:is_company] == 'true'
-  #     redirect_to new_user_registration_path
-  #   end
-  # end
   def registration_type
     if request.xhr? && params[:query].present?
       query = params[:query]

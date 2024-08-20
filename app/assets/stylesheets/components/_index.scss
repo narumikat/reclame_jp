@@ -11,6 +11,7 @@
 @import "company_card";
 @import "complaint_card";
 @import "complaint_tab";
+@import "company_banner";
 
 h1, h2, h3, h4, h5, h6, p, label, small {
   color: $black;
@@ -26,10 +27,18 @@ h1, h2, h3, h4, h5, h6 {
 
 body {
   padding-top: 70px;
+  height: 100%;
 
   @media (max-width: 768px) {
     padding-top: 50px;
   }
+}
+
+.bg-white {
+  min-height: 100%;
+  height: auto;
+  padding-bottom: 20px; /* Adicione padding se precisar de espaço na parte inferior */
+  background-color: white; /* Já está definido, mas só para reforçar */
 }
 
 a {
