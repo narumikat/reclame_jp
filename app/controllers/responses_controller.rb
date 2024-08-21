@@ -9,7 +9,7 @@ class ResponsesController < ApplicationController
     @response.company = @complaint.company
   
     if @response.save
-      redirect_to [ @complaint.company, @complaint ], notice: 'Response was successfully created.'
+      redirect_to [ @complaint.company, @complaint ], notice: 'Resposta criada com sucesso.'
     else
       Rails.logger.debug(@response.errors.full_messages.to_sentence)
       flash[:alert] = 'Failed to save the response: ' + @response.errors.full_messages.to_sentence
@@ -29,7 +29,7 @@ class ResponsesController < ApplicationController
 
   def check_user_permission
     unless current_user.companies.include?(@complaint.company) || current_user.complaints.include?(@complaint)
-      redirect_to root_path, alert: 'You are not authorized to perform this action.'
+      redirect_to root_path, alert: 'Você não tem permissão para responder a essa reclamação.'
     end
   end
 end

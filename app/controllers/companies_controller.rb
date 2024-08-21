@@ -25,7 +25,7 @@ class CompaniesController < ApplicationController
     authorize Company
     @company = Company.new(company_params)
     if company_params[:company_social_media].values.all?(&:blank?)
-      flash[:alert] = "Please fill out at least one social media field."
+      flash[:alert] = "Por favor, preencha pelo menos um campo de rede social."
       render :new
     else
       if @company.save
@@ -36,11 +36,11 @@ class CompaniesController < ApplicationController
           redirect_to company_path(@company), notice: 'Empresa criada com sucesso.'
         else
           @company.destroy
-          flash[:alert] = "Role can't be blank"
+          flash[:alert] = "Cargo não selecionado."
           render :new
         end
       else
-        flash[:alert] = 'Failed to save the company: ' + @company.errors.full_messages.to_sentence
+        flash[:alert] = 'Falha ao salvar a Empresa: ' + @company.errors.full_messages.to_sentence
         render :new
       end
     end
@@ -84,7 +84,7 @@ class CompaniesController < ApplicationController
   
   def check_company_user
     unless current_user.company?
-      redirect_to root_path, alert: "You are not authorized to perform this action."
+      redirect_to root_path, alert: "Você não tem permissão para criar uma empresa."
     end
   end
 end

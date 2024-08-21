@@ -63,7 +63,7 @@ class ComplaintsController < ApplicationController
       @company = @complaint.company
       # Descomentar esta linha abaixo para enviar email.
       # SendgridMailer.send_email(current_user).deliver_now
-      redirect_to @complaint, notice: 'Complaint was successfully created.'
+      redirect_to @complaint, notice: 'Reclamação criada com sucesso.'
     else
       handle_existing_or_new_company
     end
@@ -89,7 +89,7 @@ class ComplaintsController < ApplicationController
 
   def link_complaint_to_existing_company(existing_company)
     @complaint.update(company_id: existing_company.id)
-    redirect_to company_path(existing_company), notice: 'Complaint was successfully created and linked to an existing company.'
+    redirect_to company_path(existing_company), notice: 'Reclamaçaõ e Empresa existente foram vinculadas com sucesso.'
   end
   
   def create_company
@@ -102,9 +102,9 @@ class ComplaintsController < ApplicationController
       )
       if @company.save
         @complaint.update(company_id: @company.id)
-        redirect_to companies_path, notice: 'Complaint and new company were successfully created.'
+        redirect_to companies_path, notice: 'Reclamação e Empresa criadas com sucesso.'
       else
-        flash[:alert] = 'Failed to create company: ' + @company.errors.full_messages.to_sentence
+        flash[:alert] = 'Falha ao criar a Empresa: ' + @company.errors.full_messages.to_sentence
         render :new
       end
   end
