@@ -9,14 +9,14 @@ class PagesController < ApplicationController
     phone_number = format_number(params[:phone])
     message = params[:message]
     TwilioClient.new.send_message(to: phone_number, body: message)
-    redirect_to root_path, notice: "SMS sent!"
+    redirect_to root_path, notice: "SMS enviado com sucesso!"
   end
 
   def whatsapp
     phone_number = format_number(params[:phone])
     message = params[:message]
     TwilioClient.new.send_whatsapp(to: phone_number, body: message)
-    redirect_to root_path, notice: "Whatsapp sent!"
+    redirect_to root_path, notice: "Whatsapp enviado com sucesso!"
   end
 
   private
