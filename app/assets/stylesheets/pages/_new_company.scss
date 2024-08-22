@@ -1,0 +1,36 @@
+// TELA D EREGISTRO 
+
+.new-company {
+  h2 {
+    strong {
+      color: $blue;
+      font-weight: 800;
+    }
+  }
+
+  i {
+    color: $blue;
+
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: $blue;
+  }
+}
+
+// COMPANY NEW PAGE 
+
+.register {
+  span {
+    color: $main-red;
+    font-weight: 700;
+  }
+
+  .form-new-company {
+    label {
+      font-weight: 600;
+    }
+  }
+}

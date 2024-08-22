@@ -9,6 +9,19 @@ class UsersController < ApplicationController
   # def new
   #   @user = User.new
   # end
+   
+  def edit
+    authorize @user
+  end
+  
+  def update
+    authorize @user
+    if @user.update(user_params)
+      redirect_to user_path(@user), notice: 'Usuário atualizado com sucesso.'
+    else
+      render :edit, alert: 'Erro ao atualizar o usuário.'
+    end
+  end  
 
   def create
     authorize User

@@ -42,7 +42,7 @@ User.create!(
   is_company: false
 )
 
-# USER COMR ECLAMACOES 
+# USER COM RECLAMACOES 
 
 user_normal = User.create!(
   username: 'user_normal',

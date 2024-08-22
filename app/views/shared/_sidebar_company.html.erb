@@ -11,7 +11,14 @@
     <% if current_user.companies.any? %>
       <%= render 'components/btn_companies' %>
     <% else %>
-      <%= link_to 'Create your company profile', new_company_path, class: "btn-red" %>
+      <div class="d-flex justify-content-center my-4">
+        <%= link_to new_company_path do %>
+          <button class="btn-red-lg">
+            <i class="fa-solid fa-building me-3"></i>
+            <span>Criar Perfil da Empresa</span>
+          </button>
+        <% end %>
+      </div>
     <% end %>
   </div>
   <div class="row my-4 profile-links">

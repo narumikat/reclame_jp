@@ -77,7 +77,7 @@ class CompaniesController < ApplicationController
     params.require(:company).permit(
       :company_name, :company_register_number, :company_address, :company_city,
       :company_state, :company_zip_code, :company_country, :company_phone_number,
-      :company_website, :company_description, :company_category,
+      :company_website, :company_description, :company_category, :company_logo, :company_cover,
       :company_contact_name, :company_contact_email, company_social_media: [:facebook, :twitter, :linkedin, :instagram, :youtube, :tiktok],
     )
   end
