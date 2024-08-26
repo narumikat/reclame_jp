@@ -40,6 +40,8 @@
     <%= f.input :company_description, label: "Description", as: :text %>
     <%= f.input :company_contact_name, label: "Contact Name" %>
     <%= f.input :company_contact_email, label: "Contact Email", as: :email %>
+    <%= f.input :company_logo, as: :file %>
+    <%= f.input :company_cover, as: :file %>
   </div>
   <div class="form-actions">
     <%= f.button :submit %>

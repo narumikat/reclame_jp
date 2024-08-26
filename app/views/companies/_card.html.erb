@@ -1,7 +1,7 @@
 <div class="company-card border">
   <%= link_to company_path(company) do %>
     <% if company.company_cover.present? %>
-      <%= image_tag company.company_cover, class: "card-cover" %>
+      <%= cl_image_tag company.company_cover.key, class: "card-cover" %>
     <% else %>
       <%= image_tag 'card-img.png', class: "card-cover" %>
     <% end %>
@@ -19,7 +19,7 @@
         <h5><%= company.company_score %><small>/10</small></h5>
       </div>
       <% if company.company_logo.present? %>
-        <%= image_tag company.company_logo, class: "card-avatar" %>
+        <%= cl_image_tag company.company_logo.key, class: "card-avatar" %>
       <% else %>
         <%= image_tag 'company-avatar.png', class: "card-avatar" %>
       <% end %>

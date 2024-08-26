@@ -2,13 +2,13 @@
   <%= link_to company_complaint_path(complaint.company, complaint) do %>
     <div class="banner-card">
       <% if complaint.company.company_cover.present? %>
-        <%= image_tag complaint.company.company_cover, class: "img-card" %>
+        <%= cl_image_tag complaint.company.company_cover.key, class: "img-card" %>
       <% else %>
         <%= image_tag 'card-img.png', class: "img-card" %>
       <% end %>
       <%= render 'components/tag_status', complaint: complaint %>
       <% if complaint.company.company_logo.present? %>
-        <%= image_tag complaint.company.company_logo, class: "card-avatar" %>
+        <%= cl_image_tag complaint.company.company_logo.key, class: "card-avatar" %>
       <% else %>
         <%= image_tag 'company-avatar.png', class: "card-avatar" %>
       <% end %>
