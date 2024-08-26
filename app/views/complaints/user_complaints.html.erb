@@ -10,14 +10,18 @@
     </div>
     <div class="col-md-9 col-12 d-flex flex-column">
       <div class="border user-complaints mt-4">
-        <h3 class="text-center">Todas as suas reclamações</h3>
-        <div class="mt-4 row d-flex justify-content-center">
-          <% @complaints.each do |complaint| %>
-            <div class="col-11 col-md-10 my-2">
-              <%= render 'complaints/complaint_tab', complaint: complaint %>
-            </div>
-          <% end %>
-        </div>
+        <% if current_user.complaints.any? || current_user.companies.joins(:complaints).any? %>
+          <h3 class="text-center mt-3">Todas as suas reclamações</h3>
+          <div class="mt-4 row d-flex justify-content-center">
+            <% @complaints.each do |complaint| %>
+              <div class="col-11 col-md-10 my-2">
+                <%= render 'complaints/complaint_tab', complaint: complaint %>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <h3 class="text-center my-3">Nenhuma reclamação</h3>
+        <% end %>
       </div>
     </div>
   </div>
