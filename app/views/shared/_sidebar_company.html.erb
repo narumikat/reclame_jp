@@ -49,7 +49,7 @@
       <% end %>
     </div>
     <div class="d-flex m-2">
-      <%= link_to destroy_user_session_path, method: :delete do %>
+      <%= link_to destroy_user_session_path, data: {turbo_method: :delete} do %>
         <i class="fa-solid fa-right-from-bracket me-2"></i>
         <span>Sair</span>
       <% end %>
