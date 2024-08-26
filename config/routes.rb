@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
 
   # Empresas podem ter reclamações e respostas
-  resources :companies do
+  resources :companies, only: [:index, :show, :new, :create, :edit, :update] do
     resources :complaints do
       resources :responses
     end

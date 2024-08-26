@@ -57,6 +57,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_19_022402) do
     t.string "company_category"
     t.string "company_contact_name"
     t.string "company_contact_email"
+    t.string "company_banner_url"
+    t.string "company_logo_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -114,6 +116,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_19_022402) do
     t.string "state"
     t.string "zip_code"
     t.string "country"
+    t.string "avatar_url"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

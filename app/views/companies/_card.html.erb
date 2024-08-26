@@ -1,7 +1,9 @@
 <div class="company-card border">
   <%= link_to company_path(company) do %>
-    <% if company.company_cover.present? %>
-      <%= cl_image_tag company.company_cover.key, class: "card-cover" %>
+    <% if company.company_banner.attached? %>
+      <%= cl_image_tag company.company_banner.key, class: "card-cover" %>
+    <% elsif company.company_banner_url.present? %>
+      <%= image_tag company.company_banner_url, class: "card-cover" %>
     <% else %>
       <%= image_tag 'card-img.png', class: "card-cover" %>
     <% end %>
@@ -20,9 +22,16 @@
       </div>
       <% if company.company_logo.present? %>
         <%= cl_image_tag company.company_logo.key, class: "card-avatar" %>
+      <% elsif company.company_logo_url.present? %>
+        <%= image_tag company.company_logo_url, class: "card-avatar" %>
       <% else %>
         <%= image_tag 'company-avatar.png', class: "card-avatar" %>
       <% end %>
     </div>
+  <% end %>
+  <% if can_edit_company?(company) %>
+    <%= link_to edit_company_path(company) do %>
+      <i class="fa-solid fa-pen-to-square"></i>
+    <% end %>
   <% end %>
 </div>

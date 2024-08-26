@@ -36,6 +36,10 @@ class ApplicationPolicy
     false
   end
 
+  def user_is_owner_or_admin?
+    record.users.include?(user) || user.admin?
+  end
+
   class Scope
     def initialize(user, scope)
       @user = user
