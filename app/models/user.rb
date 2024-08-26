@@ -42,7 +42,7 @@ class User < ApplicationRecord
   end
 
   def complaints_answered_percentage
-    unique_complaint_companies_count.to_f / complaints.count.to_f * 100
+    complaints_answered_count.to_f / complaints.count.to_f * 100
   end
 
   def username_protected
