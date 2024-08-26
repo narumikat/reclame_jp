@@ -1,13 +1,17 @@
 <div class="company-banner">
-  <% if @company.present? && @company.company_cover.present? %>
-    <%= cl_image_tag @company.company_cover.key, class: "company-card-banner" %>
+  <% if @company.present? && @company.company_banner.attached? %>
+    <%= cl_image_tag @company.company_banner.key, class: "company-card-banner" %>
+  <% elsif @company.company_banner_url.present? %>
+    <%= image_tag @company.company_banner_url, class: "company-card-banner" %>
   <% else %>
     <%= image_tag 'card-img.png', class: "company-card-banner" %>
   <% end %>
   <% if @company.present? %>
     <%= link_to company_path(@company) do %>
-      <% if @company.present? && @company.company_logo.present? %>
+      <% if @company.company_logo.present? %>
         <%= cl_image_tag @company.company_logo.key, class: "banner-avatar" %>
+      <% elsif @company.company_logo_url.present? %>
+        <%= image_tag @company.company_logo_url, class: "banner-avatar" %>
       <% else %>
         <%= image_tag 'company-avatar.png', class: "banner-avatar" %>
       <% end %>

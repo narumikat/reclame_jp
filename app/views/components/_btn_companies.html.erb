@@ -1,12 +1,9 @@
+<% link_path = link_path || user_user_companies_path(current_user, companies_ids: current_user.companies.pluck(:id)) %>
 <div class="d-flex justify-content-center my-4">
-  <%= link_to user_user_companies_path(current_user, companies_ids: current_user.companies.pluck(:id)) do %>
+  <%= link_to link_path do %>
     <button class="btn-red-lg">
       <i class="fa-solid fa-building me-3"></i>
-      <% if current_user.companies.size > 1 %>
-        Ver suas empresas
-      <% else %>
-        Ver sua empresa
-      <% end %>
+      <%= btn_text %>
     </button>
   <% end %>
 </div>

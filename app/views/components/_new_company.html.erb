@@ -1,14 +1,14 @@
 <%= simple_form_for @company do |f| %>
   <%= f.error_notification %>
   <div class="form-inputs">
-    <%= f.input :company_name, label: "Company Name", required: true %>
-    <%= f.input :company_register_number, label: "Company Register Number" %>
-    <%= f.input :company_address, label: "Address" %>
-    <%= f.input :company_city, label: "City" %>
-    <%= f.input :company_state, label: "State" %>
-    <%= f.input :company_zip_code, label: "Zip Code" %>
-    <%= f.input :company_country, label: "Country" %>
-    <%= f.input :company_phone_number, label: "Phone Number" %>
+    <%= f.input :company_name, label: "Nome da empresa", required: true %>
+    <%= f.input :company_register_number, label: "Número de registro da empresa" %>
+    <%= f.input :company_address, label: "Endereço" %>
+    <%= f.input :company_city, label: "Cidade" %>
+    <%= f.input :company_state, label: "Província" %>
+    <%= f.input :company_zip_code, label: "Código Postal" %>
+    <%= f.input :company_country, label: "País da empresa" %>
+    <%= f.input :company_phone_number, label: "Número de telefone da empresa" %>
     <%= f.input :company_website, label: "Website" %>
     <% if session[:role].blank? %>
       <%= label_tag 'role', 'Seu cargo na empresa' %>
@@ -17,7 +17,7 @@
       <%= hidden_field_tag 'role', session[:role] %>
     <% end %>
     <div class="form-group my-4">
-      <%= f.label :company_category %><br>
+      <%= f.label :company_category, class: "mb-2" %>
       <%= f.collection_select :company_category, 
                                           Company::COMPANY_CATEGORY, 
                                           :to_s, :to_s, 
@@ -25,7 +25,8 @@
                                           { class: 'form-control' } %>
     </div>
     <div id="social-media-links">
-      <h3>Social Media Links</h3>
+      <h3 class="text-center pt-4">Redes sociais da empresa</h3>
+      <p class="text-center">Insira pelo menos <strong>uma</strong> URL</p>
       <%= f.fields_for :company_social_media, OpenStruct.new do |social| %>
         <div class="social-media-group">
           <%= social.input :facebook, label: "Facebook" %>
@@ -37,13 +38,20 @@
         </div>
       <% end %>
     </div>
-    <%= f.input :company_description, label: "Description", as: :text %>
-    <%= f.input :company_contact_name, label: "Contact Name" %>
-    <%= f.input :company_contact_email, label: "Contact Email", as: :email %>
-    <%= f.input :company_logo, as: :file %>
-    <%= f.input :company_cover, as: :file %>
+    <div class="border-bottom m-4 pt-2"></div>
+    <%= f.input :company_description, label: "Descrição da empresa", as: :text %>
+    <%= f.input :company_contact_name, label: "Nome de contato" %>
+    <%= f.input :company_contact_email, label: "Email de contato", as: :email %>
+    <h4 class="text-center mt-4">A empresa possui logomarca? </h4>
+    <p>Faça upload do arquivo <strong>ou</strong> cole uma URL</p>
+    <%= f.input :company_logo, as: :file, label: 'Upload do logo da empresa' %>
+    <%= f.input :company_logo_url, label: 'Cole a URL da logomarca da empresa' %>
+    <h4 class="text-center mt-4">A empresa possui banner? </h4>
+    <p>Faça upload do arquivo <strong>ou</strong> cole uma URL</p>
+    <%= f.input :company_banner, as: :file, label: 'Banner da empresa' %>
+    <%= f.input :company_banner_url, label: 'Cole a URL do banner da empresa' %>
   </div>
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="d-flex justify-content-center my-4">
+    <%= f.button :submit, text_btn , class: "btn-red" %>
   </div>
 <% end %>

@@ -9,7 +9,9 @@ class Company < ApplicationRecord
   validate :unique_social_media_urls
 
   has_one_attached :company_logo
-  has_one_attached :company_cover
+  has_one_attached :company_banner
+
+  before_save :capitalize_name
 
   COMPANY_CATEGORY = [
   "Empreiteiras",
@@ -36,9 +38,9 @@ class Company < ApplicationRecord
 
   validates :company_category, presence: true, inclusion: { in: COMPANY_CATEGORY }
 
-  def capitalize_name
-    company_name.titleize
-  end
+  # def capitalize_name
+  #   company_name.titleize
+  # end
   
   def total_complaints_count
     complaints.count
@@ -83,5 +85,9 @@ class Company < ApplicationRecord
         errors.add(:company_social_media, "URL #{url} for #{platform} must be unique")
       end
     end
+  end
+
+  def capitalize_name
+    self.company_name = self.company_name.titleize if self.company_name.present?
   end
 end

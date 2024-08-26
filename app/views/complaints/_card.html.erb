@@ -1,8 +1,10 @@
 <div class="complaint-card border">
   <%= link_to company_complaint_path(complaint.company, complaint) do %>
     <div class="banner-card">
-      <% if complaint.company.company_cover.present? %>
-        <%= cl_image_tag complaint.company.company_cover.key, class: "img-card" %>
+      <% if complaint.company.company_banner.attached? %>
+        <%= cl_image_tag complaint.company.company_banner.key, class: "img-card" %>
+      <% elsif complaint.company.company_banner_url.present? %>
+        <%= image_tag complaint.company.company_banner_url, class: "img-card" %>
       <% else %>
         <%= image_tag 'card-img.png', class: "img-card" %>
       <% end %>
