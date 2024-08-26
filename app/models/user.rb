@@ -42,8 +42,13 @@ class User < ApplicationRecord
   end
 
   def complaints_answered_percentage
-    unique_complaint_companies_count.to_f / complaints.count.to_f * 100
+    total_complaints = complaints.count.to_f
+    return 0 if total_complaints.zero?
+  
+    percentage = (unique_complaint_companies_count.to_f / total_complaints) * 100
+    percentage.nan? ? 0 : percentage
   end
+  
 
   def username_protected
     if self.username.blank?
