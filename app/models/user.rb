@@ -34,7 +34,8 @@ class User < ApplicationRecord
   end
 
   def complaints_answered_count
-    complaints.joins(:responses).count
+    # Leva em consideração apenas as reclamações que possuem pelo menos uma resposta
+    complaints.joins(:responses).distinct.count(:id)
   end
 
   def complaints_unanswered_count
