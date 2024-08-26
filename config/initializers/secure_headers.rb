@@ -6,7 +6,7 @@ SecureHeaders::Configuration.default do |config|
       lax: true # mark all cookies as SameSite=lax
     }
   }
-  config.hsts = "max-age=#{1.week.to_i}"
+  config.hsts = "max-age=#{1.month.to_i}"
   config.x_frame_options = "DENY"
   config.x_content_type_options = "nosniff"
   config.x_xss_protection = "1; mode=block"
