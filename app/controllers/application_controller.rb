@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include Pundit::Authorization
-  before_action :authenticate_user!, :load_users, :set_permissions_policy
+  before_action :authenticate_user!, :load_users
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     @users = User.all.order(:user_name)
   end
 
-  def set_permissions_policy
-    response.headers['Permissions-Policy'] = 'geolocation=(self "https://www.reclamejp.com"), microphone=(), camera=()'
-  end
+  # def set_permissions_policy
+  #   response.headers['Permissions-Policy'] = 'geolocation=(self "https://www.reclamejp.com"), microphone=(), camera=()'
+  # end
 end

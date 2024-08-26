@@ -54,7 +54,8 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem "pundit"
 gem "cloudinary"
-gem 'secure_headers', '~> 6.7'
+# gem 'secure_headers', '~> 6.7'
+
 # Sendgrid
 gem "sendgrid-ruby"
 
