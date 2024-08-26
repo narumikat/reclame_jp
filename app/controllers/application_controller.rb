@@ -16,7 +16,4 @@ class ApplicationController < ActionController::Base
     @users = User.all.order(:user_name)
   end
 
-  # def set_permissions_policy
-  #   response.headers['Permissions-Policy'] = 'geolocation=(self "https://www.reclamejp.com"), microphone=(), camera=()'
-  # end
 end
