@@ -35,7 +35,7 @@
           <div class="col box-info">
             <p><%= @user.username_protected %> tem</p>
             <h2>
-              <%= @user.complaints_answered_percentage && @user.complaints_answered_percentage.finite? ? 0 : @user.complaints_answered_percentage.round %>%
+              <%= @user.complaints_answered_percentage && @user.complaints_answered_percentage.finite? ? @user.complaints_answered_percentage.round : 0 %>%
             </h2>
             <p>das reclamações<br>
               respondidas</p>
