@@ -33,4 +33,11 @@ Rails.application.routes.draw do
   post "sms", to: "pages#sms"
   post "whatsapp", to: "pages#whatsapp"
 
+  # Static pages
+  get 'about', to: 'pages#about'
+  get 'contact', to: 'pages#contact'
+  get 'privacy', to: 'pages#privacy'
+  get 'terms', to: 'pages#terms'
+  get 'faq', to: 'pages#faq'
+
 end
