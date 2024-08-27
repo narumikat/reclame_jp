@@ -42,7 +42,7 @@ User.create!(
   is_company: false
 )
 
-# USER COMR ECLAMACOES 
+# USER COM RECLAMACOES 
 
 user_normal = User.create!(
   username: 'user_normal',
@@ -119,7 +119,7 @@ company_users = [user_company, user_company2]
 
 puts 'Users created!'
 
-puts 'Creating companies...'
+puts 'Creating TEST companies...'
 
 company1 = Company.create!(
   company_name: 'Company One',
@@ -170,6 +170,24 @@ Company.create!(
 )
 
 companies = [company1, company2]
+
+puts "Creating company EMPREITEIRAS..."
+
+Company.create!(
+  company_name: 'Kowa Corporation ',
+  company_address: '123 Main St',
+  company_city: 'New York',
+  company_prefecture: Company::COMPANY_PREFECTURE.sample,
+  company_zip_code: '10001',
+  company_country: 'USA',
+  company_phone_number: '1234567890',
+  company_website: 'www.companynoadmin.com',
+  company_social_media: { facebook: 'www.facebook.com/companynoadmin', twitter: 'www.twitter.com/companynoadmin' },
+  company_description: 'Company No Admin is a company that does things.',
+  company_contact_name: 'John Doe',
+  company_contact_email: 'company3@company.com',
+  company_category: Company::COMPANY_CATEGORY.sample
+)
 
 puts 'Create company associations'
 
