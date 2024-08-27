@@ -3,7 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :check_registration_type, only: [:new, :create]
-  before_action :set_resource, only: [:new]
+  before_action :set_resource, only: [:new, :create]
 
   def create
     super do |resource|
@@ -72,9 +72,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  # Verifica se o usuário escolheu se registrar como empresa ou pessoa física
   def set_resource
-    @is_company = session[:registration_type] == true
+    @is_company = params.dig(:user, :is_company) == 'true' || session[:registration_type] == true
     build_resource({})
     resource.is_company = @is_company
   end
