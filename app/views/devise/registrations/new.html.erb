@@ -13,14 +13,13 @@
         <h3 class="mb-4">Insira suas informações:</h3>
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <%= f.error_notification %>
+          <%= f.hidden_field :is_company, value: true %>
           <div class="form-inputs">
-
             <%= f.input :username, 
-        required: true, 
-        autofocus: true, 
-        input_html: { placeholder: "Escolha um username" },
-        hint: ("Minimo #{@minimum_password_length} caracteres, SEM ESPAÇOS" if @minimum_password_length)%>
-
+              required: true, 
+              autofocus: true, 
+              input_html: { placeholder: "Escolha um username" },
+              hint: @minimum_password_length ? "Minimo #{@minimum_password_length} caracteres, SEM ESPAÇOS" : "" %>
             <%= f.input :email, label: 'Email Empresarial', required: true, autofocus: true, input_html: { placeholder: "seu-email@empresarial.com" } %>
             <%= f.input :password, label: "Senha", required: true, hint: ("Minimo #{@minimum_password_length} caracteres" if @minimum_password_length), input_html: { placeholder: "insira uma senha" } %>
             <%= f.input :password_confirmation, label: "Confirme sua senha", required: true, input_html: { placeholder: "confirme sua senha" } %>
@@ -40,8 +39,9 @@
           <div class="form-actions d-flex justify-content-center mb-4">
             <%= f.button :submit, "Registre-se", class: "btn-red" %>
           </div>
-          </div>
         <% end %>
+      </div>
+    </div>
   <% else %>
     <div class="new-user mt-4">
       <div class="d-flex align-items-center mb-4">
@@ -52,12 +52,13 @@
       <h3 class="mb-4">Insira suas informações:</h3>
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= f.error_notification %>
+        <%= f.hidden_field :is_company, value: false %>
         <div class="form-inputs">
           <%= f.input :username,
-                      required: true,
-                      autofocus: true,
-                      input_html: { placeholder: "Escolha um username" },
-                      hint: ("Minimo #{@minimum_password_length} caracteres" if @minimum_password_length) %>
+            required: true,
+            autofocus: true,
+            input_html: { placeholder: "Escolha um username" },
+            hint: @minimum_password_length ? "Minimo #{@minimum_password_length} caracteres, SEM ESPAÇOS" : "" %>
           <%= f.input :email, required: true, autofocus: true, input_html: { placeholder: "seu@email.com" } %>
           <%= f.input :password, label: "Senha", required: true, hint: ("Minimo #{@minimum_password_length} caracteres" if @minimum_password_length), input_html: { placeholder: "insira uma senha" } %>
           <%= f.input :password_confirmation, label: "Confirmação da senha", required: true, input_html: { placeholder: "confirme sua senha" } %>
@@ -68,30 +69,10 @@
         <div class="form-actions d-flex justify-content-center mb-4">
           <%= link_to "Já tenho conta", new_session_path(resource_name), class: "btn-blue" %>
         </div>
-
-        <div class="border-bottom px-4 mb-4"></div>
-        <h3 class="mb-4">Insira suas informações:</h3>
-        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <%= f.error_notification %>
-          <div class="form-inputs">
-            <%= f.input :username, 
-        required: true, 
-        autofocus: true, 
-        input_html: { placeholder: "Escolha um username" },
-        hint: ("Minimo #{@minimum_password_length} caracteres, SEM ESPAÇOS" if @minimum_password_length)  %>
-            <%= f.input :email, required: true, autofocus: true, input_html: { placeholder: "seu@email.com" } %>
-            <%= f.input :password, label: "Senha", required: true, hint: ("Minimo #{@minimum_password_length} caracteres" if @minimum_password_length), input_html: { placeholder: "insira uma senha" } %>
-            <%= f.input :password_confirmation, label: "Confirmação da senha", required: true, input_html: { placeholder: "confirme sua senha" } %>
-          </div>
-          <div class="form-actions d-flex justify-content-center mb-4">
-            <%= f.button :submit, "Registre-se", class: "btn-red" %>
-          </div>
-
-        </div>
       <% end %>
+    </div>
   <% end %>
   <div class="d-none d-md-block">
     <%= render 'shared/back_btn' %>
-  </div>
   </div>
 </div>
