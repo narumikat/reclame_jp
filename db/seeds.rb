@@ -10,11 +10,11 @@ puts 'Creating users...'
 User.create!(
   username: 'user_admin',
   email: 'admin@mail.com',
-  password: '123456',
-  password_confirmation: '123456',
+  password: 'admin123',
+  password_confirmation: 'admin123',
   first_name: 'Admin',
   last_name: 'One',
-  phone_number: '1234567890',
+  phone_number: '000-000-0000',
   address: '123 Main St',
   city: 'New York',
   state: 'NY',
@@ -121,15 +121,15 @@ puts 'Users created!'
 puts 'Creating TEST companies...'
 
 company1 = Company.create!(
-  company_name: 'Company One',
+  company_name: 'Company Test',
   company_address: '123 Main St',
   company_city: 'New York',
   company_prefecture: Company::COMPANY_PREFECTURE.sample,
   company_zip_code: '10001',
   company_country: 'USA',
   company_phone_number: '0270-21-8155',
-  company_website: 'www.companyone.com',
-  company_social_media: { facebook: 'www.facebook.com/companyone', twitter: 'www.twitter.com/companyone' },
+  company_website: 'www.companytest.com',
+  company_social_media: { facebook: 'www.facebook.com/companitest', twitter: 'www.twitter.com/companitest' },
   company_description: 'Company One is a company that does things.',
   company_contact_name: 'John Doe',
   company_contact_email: 'company@mail.com',
