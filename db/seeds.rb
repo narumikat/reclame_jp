@@ -10,8 +10,8 @@ puts 'Creating users...'
 User.create!(
   username: 'user_admin',
   email: 'admin@mail.com',
-  password: '123456',
-  password_confirmation: '123456',
+  password: 'password',
+  password_confirmation: 'password',
   first_name: 'Admin',
   last_name: 'One',
   phone_number: '1234567890',
@@ -42,7 +42,7 @@ User.create!(
   is_company: false
 )
 
-# USER COMR ECLAMACOES 
+# USER COM RECLAMACOES 
 
 user_normal = User.create!(
   username: 'user_normal',
@@ -153,11 +153,15 @@ company2 = Company.create!(
   company_category: Company::COMPANY_CATEGORY.sample
 )
 
+companies = [company1, company2]
+
+puts 'Creating EMPREITEIRAS...'
+
 Company.create!(
-  company_name: 'Company No Admin',
-  company_address: '123 Main St',
-  company_city: 'New York',
-  company_state: 'NY',
+  company_name: 'Kowa Corporation ',
+  company_address: 'Gunma-ken Isesaki-shi Yanagihara 15',
+  company_city: 'Isesaki-shi',
+  company_state: 'Gunma-ken',
   company_zip_code: '10001',
   company_country: 'USA',
   company_phone_number: '1234567890',
@@ -169,7 +173,6 @@ Company.create!(
   company_category: Company::COMPANY_CATEGORY.sample
 )
 
-companies = [company1, company2]
 
 puts 'Create company associations'
 
