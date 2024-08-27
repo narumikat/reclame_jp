@@ -54,6 +54,7 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem "pundit"
 gem "cloudinary"
+gem 'countries'
 
 # Sendgrid
 gem "sendgrid-ruby"

@@ -11,7 +11,7 @@
         <%= f.collection_select :company_id, Company.all, :id, :company_name, { include_blank: "Selecione uma empresa" }, { class: 'form-control' } %>
       </div>
       <%= render 'components/new_complaint', f: f %>
-      <div class="form-group my-4">
+      <div class="my-4 d-flex justify-content-center">
         <%= f.submit "Enviar reclamação", class: 'btn-red' %>
       </div>
     <% end %>
@@ -43,10 +43,15 @@
             <%= company_fields.input :company_city, label: "Cidade da empresa", class: "form-control" %>
           </div>
           <div class="form-group">
-            <%= company_fields.input :company_state, label: "Estado da empresa", class: "form-control" %>
+            <%= company_fields.label "Província", required: true, class: "mb-2" %>
+            <%= company_fields.collection_select :company_prefecture,
+                                                  Company::COMPANY_PREFECTURE,
+                                                  :to_s, :to_s,
+                                                  { include_blank: 'Selecione uma província' },
+                                                  { class: 'form-control' } %>
           </div>
-          <div class="form-group">
-            <h4 class="mb-3">Redes sociais da empresa</h4>
+          <div class="form-group mt-4">
+            <h4 class="mb-3 text-center"><strong>Redes sociais da empresa</strong></h4>
             <p class="p-red">Insira pelo menos <strong>um link ou username</strong></p>
             <%= company_fields.fields_for :company_social_media do |social| %>
               <div class="social-media-group">
@@ -64,7 +69,7 @@
             <%= render 'components/new_complaint', f: f %>
           </div>
         <% end %>
-        <div class="form-group mt-4">
+        <div class="mt-4 d-flex justify-content-center">
           <%= f.submit "Enviar reclamação", class: 'btn-red' %>
         </div>
       <% end %>

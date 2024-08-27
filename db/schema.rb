@@ -47,7 +47,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_19_022402) do
     t.string "company_register_number"
     t.string "company_address"
     t.string "company_city"
-    t.string "company_state"
+    t.string "company_prefecture"
     t.string "company_zip_code"
     t.string "company_country"
     t.string "company_phone_number"
