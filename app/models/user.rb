@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
-  validates :username, presence: true, uniqueness: true, length: { minimum: 4, maximum: 20 }
+  validates :username, presence: true, uniqueness: true, length: { minimum: 4, maximum: 20 }, format: { without: /\s/, message: "não pode conter espaços" }
 
   def company?
     self.is_company

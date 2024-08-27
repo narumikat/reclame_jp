@@ -18,18 +18,20 @@
             </h3>
           </div>
           <div class="border p-4">
-            <h3>Esta com algum <span>problema?</span></h3>
-            <% if user_signed_in? %>
-              <p>Crie uma reclamação</p>
-              <%= render 'components/btn_reclamar', path: new_complaint_path %>
-            <% else %>
-              <p>Registre-se e crie uma reclamação</p>
-              <%= render 'components/btn_reclamar', text: 'Nova reclamacão', path: registration_type_path %>
-            <% end %>
+            <div class="ms-4">
+              <h3>Está com algum <span>problema?</span></h3>
+              <% if user_signed_in? %>
+                <p><strong>Crie uma reclamação</strong></p>
+                <%= render 'components/btn_reclamar', path: new_complaint_path %>
+              <% else %>
+                <p><strong>Registre-se e crie uma reclamação</strong></p>
+                <%= render 'components/btn_reclamar', text: 'Nova reclamacão', path: registration_type_path %>
+              <% end %>
+            </div>
           </div>
           <div class="companies mb-4">
             <div class="d-flex justify-content-between align-items-center my-4">
-              <h2>Ultimas empresas</h2>
+              <h2>Últimas empresas</h2>
               <%= link_to companies_path do %>
                 <i class="fa-solid fa-circle-arrow-right"></i>
               <% end %>
@@ -44,7 +46,7 @@
           </div>
           <div class="complaints pt-4">
             <div class="my-4">
-              <h2>Ultimas reclamações</h2>
+              <h2>Últimas reclamações</h2>
             </div>
             <div class="d-flex flex-row flex-nowrap overflow-auto">
               <% @complaints.sort_by { |i| -i.created_at.to_i }.last(5).each do |complaint| %>

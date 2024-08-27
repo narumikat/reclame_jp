@@ -5,9 +5,14 @@
     <%= f.input :company_register_number, label: "Número de registro da empresa" %>
     <%= f.input :company_address, label: "Endereço" %>
     <%= f.input :company_city, label: "Cidade" %>
-    <%= f.input :company_state, label: "Província" %>
+    <%= f.label "Província", required: true, class: "mb-2" %>
+    <%= f.collection_select :company_prefecture,
+                                                  Company::COMPANY_PREFECTURE,
+                                                  :to_s, :to_s,
+                                                  { include_blank: 'Selecione uma província' },
+                                                  { class: 'form-control mb-3' } %>
     <%= f.input :company_zip_code, label: "Código Postal" %>
-    <%= f.input :company_country, label: "País da empresa" %>
+    <%= f.input :company_country, label: "País da empresa", collection: ISO3166::Country.all.map { |country| [country.translations['en'], country.alpha2] }, prompt: "Selecione um país" %>
     <%= f.input :company_phone_number, label: "Número de telefone da empresa" %>
     <%= f.input :company_website, label: "Website" %>
     <% if session[:role].blank? %>
@@ -17,8 +22,8 @@
       <%= hidden_field_tag 'role', session[:role] %>
     <% end %>
     <div class="form-group my-4">
-      <%= f.label :company_category, class: "mb-2" %>
-      <%= f.collection_select :company_category, 
+      <%= f.label "Categoria da empresa *", class: "mb-2" %>
+      <%= f.collection_select :company_category,
                                           Company::COMPANY_CATEGORY, 
                                           :to_s, :to_s, 
                                           { include_blank: 'Selecione uma categoria' },

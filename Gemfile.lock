@@ -357,6 +357,7 @@ DEPENDENCIES
   bootstrap (~> 5.2)
   capybara
   cloudinary
+  countries
   country_select
   debug
   devise

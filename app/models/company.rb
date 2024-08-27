@@ -4,7 +4,7 @@ class Company < ApplicationRecord
   has_many :users, through: :companies_users
   has_many :complaints
 
-  validates :company_name, :company_city, :company_state, :company_category, presence: true
+  validates :company_name, :company_city, :company_prefecture, :company_category, presence: true
   validate :must_have_at_least_one_social_media
   validate :unique_social_media_urls
 
@@ -36,11 +36,16 @@ class Company < ApplicationRecord
   "Varejo",
   "Outros"]
 
-  validates :company_category, presence: true, inclusion: { in: COMPANY_CATEGORY }
+  COMPANY_PREFECTURE = [
+    'Hokkaido', 'Aomori', 'Akita', 'Iwate', 'Yamagata', 'Miyagi', 'Niigata', 'Fukushima', 'Tochigi',
+    'Gunma', 'Ibaraki', 'Chiba', 'Kanagawa', 'Tokyo', 'Saitama', 'Yamanashi', 'Nagano', 'Toyama', 'Ishikawa', 'Fukui',
+    'Gifu', 'Aichi', 'Shizuoka', 'Shiga', 'Mie', 'Kyoto', 'Nara', 'Wakayama', 'Osaka', 'Hyogo', 'Tottori',
+    'Okayama', 'Hiroshima', 'Shimane', 'Yamaguchi', 'Tokushima', 'Kagawa', 'Ehime', 'Kochi', 'Fukuoka',
+    'Oita', 'Saga', 'Miyazaki', 'Kumamoto', 'Nagasaki', 'Kagoshima', 'Okinawa'
+  ]
 
-  # def capitalize_name
-  #   company_name.titleize
-  # end
+  validates :company_prefecture, presence: true, inclusion: { in: COMPANY_PREFECTURE }
+  validates :company_category, presence: true, inclusion: { in: COMPANY_CATEGORY }
   
   def total_complaints_count
     complaints.count

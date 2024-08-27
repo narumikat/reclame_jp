@@ -86,7 +86,7 @@ class CompaniesController < ApplicationController
       :company_register_number, 
       :company_address, 
       :company_city,
-      :company_state, 
+      :company_prefecture, 
       :company_zip_code, 
       :company_country, 
       :company_phone_number,

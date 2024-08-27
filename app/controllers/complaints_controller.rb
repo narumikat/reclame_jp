@@ -97,7 +97,7 @@ class ComplaintsController < ApplicationController
       company_name: complaint_params[:new_company_name],
       company_social_media: complaint_params[:company_social_media],
       company_city: complaint_params.dig(:company_attributes, :company_city),
-      company_state: complaint_params.dig(:company_attributes, :company_state),
+      company_prefecture: complaint_params.dig(:company_attributes, :company_prefecture),
       company_category: [complaint_params.dig(:company_attributes, :company_category)]
       )
       if @company.save
@@ -122,7 +122,7 @@ class ComplaintsController < ApplicationController
     params.require(:complaint).permit(
       :company_id, :title, :review, :comment, :complaint_category,
       company_attributes: [
-        :company_name, :company_category, :company_city, :company_state,
+        :company_name, :company_category, :company_city, :company_prefecture,
         company_social_media: [:facebook, :twitter, :linkedin, :instagram, :youtube, :tiktok]
       ]
     )
