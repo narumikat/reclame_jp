@@ -4,14 +4,16 @@ class Company < ApplicationRecord
   has_many :users, through: :companies_users
   has_many :complaints
 
+  before_validation :normalize_phone_number
+  before_save :capitalize_name
+
   validates :company_name, :company_city, :company_prefecture, :company_category, presence: true
   validate :must_have_at_least_one_social_media
   validate :unique_social_media_urls
+  validate :phone_number_format
 
   has_one_attached :company_logo
   has_one_attached :company_banner
-
-  before_save :capitalize_name
 
   COMPANY_CATEGORY = [
   "Empreiteiras",
@@ -95,4 +97,34 @@ class Company < ApplicationRecord
   def capitalize_name
     self.company_name = self.company_name.titleize if self.company_name.present?
   end
+
+  def normalize_phone_number
+    return if company_phone_number.blank?
+  
+    digits = company_phone_number.gsub(/\D/, '')
+  
+    if digits.start_with?('0')
+      if digits.length == 10 # Telefone fixo
+        self.company_phone_number = digits.gsub(/(\d{4})(\d{2})(\d{4})/, '\1 \2 \3')
+      elsif digits.length == 11 # Celular
+        self.company_phone_number = digits.gsub(/(\d{3})(\d{4})(\d{4})/, '\1 \2 \3')
+      else
+        self.company_phone_number = digits
+      end
+    else
+      self.company_phone_number = digits
+    end
+  end
+  
+
+  def phone_number_format
+    return if company_phone_number.blank?
+  
+    fixed_line_regex = /\A\d{4} \d{2} \d{4}\z/
+    mobile_regex = /\A\d{3} \d{4} \d{4}\z/
+  
+    unless company_phone_number.match?(fixed_line_regex) || company_phone_number.match?(mobile_regex)
+      errors.add(:company_phone_number, 'deve ser um número de telefone japonês válido')
+    end
+  end  
 end
