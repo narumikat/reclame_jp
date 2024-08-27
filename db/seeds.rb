@@ -390,6 +390,23 @@ Company.create!(
   company_logo_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/271653184_4279371895501424_7959931784793890947_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=Aoq5y2e815QQ7kNvgG26OEC&_nc_ht=scontent-nrt1-2.xx&oh=00_AYCjFa-A8Z3Bb7MHsrejfwO-RzNmQoxUMi1wgwq1HkAueg&oe=66D311AF',
 )
 
+Company.create!(
+  company_name: 'NIKKO empregos ',
+  company_address: 'Aichi-ken Nagoya-shi Nakagawa-ku Nishihioki-cho 9-111',
+  company_city: 'Nagoya-shi',
+  company_prefecture: 'Aichi',
+  company_zip_code: '454-0005',
+  company_country: 'Japan',
+  company_phone_number: '090-4915-3646',
+  company_website: 'https://empregos-jp.com/',
+  company_social_media: { facebook: 'www.facebook.com/nikko.empregos', instagram: 'www.instagram.com/nikko_empregos' },
+  company_description: 'A Nikko é uma empresa com matriz em Nagoya, Aichi, fundada há mais de 30 anos com o intuito de promover o desenvolvimento econômico do Japão por meio do fornecimento de mão de obra qualificada às empresas de manufatura do Japão, e criação de oportunidades de trabalho.',
+  company_contact_email: 'global@co-nikko.co.jp',
+  company_category: 'Empreiteiras',
+  company_banner_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/426570674_122155540928020884_7319176549077818955_n.png?_nc_cat=106&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=5XDjkmFBdxAQ7kNvgGo23wB&_nc_ht=scontent-nrt1-2.xx&oh=00_AYCUs0U2iFqK7g3XhqqE3H8B2WOvAqndz2BsVk40T3cmPg&oe=66D3331E',
+  company_logo_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/395080327_122131457516020884_7073746306474335940_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TtKt5-ZRmF0Q7kNvgFW5L0P&_nc_ht=scontent-nrt1-2.xx&oh=00_AYAyZpyucRxPDcmlGnMXFso6SsFUiPudVm0Z9uczXIikQw&oe=66D3337E',
+)
+
 # Company.create!(
 #   company_name: '',
 #   company_address: '',
