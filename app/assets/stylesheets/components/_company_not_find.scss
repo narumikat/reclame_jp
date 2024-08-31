@@ -1,0 +1,20 @@
+.company-not-find {
+  padding: 1rem;
+  h3{
+    font-weight: 600;
+    margin-bottom: 2rem;
+  }
+
+  span {
+    color: $main-red;
+    font-weight: 600;
+  }
+
+  p{
+    text-align: center;
+  }
+
+  small {
+    font-weight: 300;
+  }
+}
