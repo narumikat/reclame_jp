@@ -19,12 +19,12 @@
           </div>
           <div class="border p-4">
             <div class="ms-4">
-              <h3>Está com algum <span>problema?</span></h3>
+              <h3 class="mb-4">Está com algum <span>problema?</span></h3>
               <% if user_signed_in? %>
                 <p><strong>Crie uma reclamação</strong></p>
                 <%= render 'components/btn_reclamar', path: new_complaint_path %>
               <% else %>
-                <p><strong>Registre-se e crie uma reclamação</strong></p>
+                <p><strong>Registre-se e crie uma reclamação</strong>, reclamações podem ser feitas de forma <strong>anônima</strong></p>
                 <%= render 'components/btn_reclamar', text: 'Nova reclamacão', path: registration_type_path %>
               <% end %>
             </div>
@@ -44,6 +44,7 @@
               <% end %>
             </div>
           </div>
+          <%= render 'components/company_not_find' %>
           <div class="complaints pt-4">
             <div class="my-4">
               <h2>Últimas reclamações</h2>

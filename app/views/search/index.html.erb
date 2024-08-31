@@ -13,6 +13,11 @@
   <% else %>
     <p>Nenhuma empresa encontrada</p>
   <% end %>
+  <div class="d-flex justify-content-center">
+    <div class="my-4 col-11 col-md-8">
+      <%= render 'components/company_not_find' %>
+    </div>
+  </div>
   <h3 class="my-4">Reclamações</h3>
   <% if @complaints.any? %>
     <div class="row d-flex justify-content-center">

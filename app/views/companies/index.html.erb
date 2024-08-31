@@ -23,10 +23,19 @@
     </div>
   </div>
   <div class="row d-flex justify-content-center">
+    <% post_counter = 0 %>
     <% @companies.each do |company| %>
+      <% post_counter += 1 %>
       <div class="col-10 col-md-4 my-2">
         <%= render 'companies/card', company: company %>
       </div>
+      <% if post_counter == 9 || (post_counter > 9 && (post_counter - 9) % 10 == 0) %>
+        <div class="d-flex justify-content-center">
+          <div class="my-4 col-11 col-md-8">
+            <%= render 'components/company_not_find' %>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>
