@@ -1,10 +1,33 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :home ]
+  skip_before_action :authenticate_user!, only: [ :home, :about, :contact, :privacy, :terms, :faq ]
 
   def home
     @companies = Company.all.order(created_at: :desc).last(10)
     @complaints = Complaint.all.order(created_at: :desc).last(10)
   end
+
+  # Static pages
+  def about
+
+  end
+
+  def contact
+
+  end
+
+  def privacy
+
+  end
+
+  def terms
+
+  end
+
+  def faq
+
+  end
+
+  # SMS and Whatsapp
   def sms
     phone_number = format_number(params[:phone])
     message = params[:message]
