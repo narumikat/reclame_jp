@@ -1,0 +1,56 @@
+.about, .privacy, .terms, .contact, .FAQ {
+  min-height: 100vh;
+  .img-top {
+    display: flex;
+    justify-content: flex-end;
+    img {
+      margin-top: 1rem;
+      margin-right: 1rem;
+      width: 200px;
+      height: auto;
+      right: 0;
+      @media (max-width: 768px) {
+        width: 150px;
+      }
+    }
+  }
+  p {
+    font-weight: 300;
+  }
+
+  h1 {
+    color: $main-red;
+    font-weight: 700;
+  }
+
+  h3 {
+    color: $main-salmon;
+    font-weight: 700;
+  }
+
+  h5 {
+    color: $main-salmon;
+    font-weight: 600;
+  }
+
+  span {
+    color:$main-red;
+  }
+
+  strong {
+    font-weight: 700;
+  }
+
+  .page-link {
+    font-weight: 600;
+    white-space: nowrap;
+    strong {
+      color: $blue;
+      transition: color 0.3s;
+      
+      &:hover {
+        color: $main-red;
+      }
+  }
+  }
+}
