@@ -17,6 +17,7 @@ class CreateCompanies < ActiveRecord::Migration[7.1]
       t.string :company_contact_email
       t.string :company_banner_url
       t.string :company_logo_url
+      t.string :company_employee_range
 
       t.timestamps
     end

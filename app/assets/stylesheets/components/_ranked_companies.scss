@@ -1,0 +1,23 @@
+.ranked-companies-card {
+  padding: 1rem;
+  border-radius: 8px;
+
+  .medal {
+    width: 40px;
+    height: 100%;
+  }
+
+  h4 {
+    margin-top: 0.5rem;
+    font-weight: 600;
+  }
+
+  h5 {
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: $main-red;
+    @media (max-width: 768px) {
+      font-size: 1.2rem;
+    }
+  }
+}
