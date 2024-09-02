@@ -140,10 +140,23 @@ company1 = Company.create!(
 
 
 ############################################################################################################
+puts "deleting photos from companies..."
+
+Company.find_each do |company|
+  if company.company_logo.attached?
+    company.company_logo.purge
+    puts "Deleted logo for #{company.company_name}"
+  end
+  
+  if company.company_banner.attached?
+    company.company_banner.purge
+    puts "Deleted banner for #{company.company_name}"
+  end
+end
 
 puts "Creating company EMPREITEIRAS..."
 
-Company.create!(
+kowa = Company.create!(
   company_name: 'Kowa Corporation ',
   company_address: 'Gunma-ken Isesaki-shi Yanagihara 15',
   company_city: 'Isesaki-shi ',
@@ -157,12 +170,25 @@ Company.create!(
                         serviços e assistência, além de transporte e moradia. Recrutamos pessoas para diversos tipos de serviços em várias regiões do Japão. 
                         Se você tem preferência por alguma região ou por gosto pessoal , ajudamos a encontrar o serviço mais próximo ao seu perfil',
   company_contact_email: 'cadastro@kowa-corp.com',
-  company_category: 'Empreiteiras',
-  company_banner_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/283074422_2104233369754770_3491773026005714977_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=0qBlT_o3bqMQ7kNvgFd5ptV&_nc_ht=scontent-nrt1-2.xx&_nc_gid=AwqfjIhG7qJIi7n8ePnjvTz&oh=00_AYCyMLwxjVMTuTpyj5z2hTmkj0M6pBjsCRqfuxe_2XSY0Q&oe=66D2F939',
-  company_logo_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/355885530_302298135481611_2941827571822001198_n.png?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=wKtc9lNKBagQ7kNvgEW3ofv&_nc_ht=scontent-nrt1-2.xx&oh=00_AYCjdyNu84dLuTl72b3Zq0NjdhTWfl3z5k7jvq48N2YC0Q&oe=66D2EA51',
+  company_category: 'Empreiteiras'
 )
 
-Company.create!(
+kowa.company_logo.purge if kowa.company_logo.attached?
+kowa.company_banner.purge if kowa.company_banner.attached?
+
+logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725252341/reclame-jp/exlf1g56sv6oidvsvuyh.png')
+kowa.company_logo.attach(
+  io: logo, 
+  filename: 'kowa.jpg', 
+  content_type: 'image/jpg')
+
+banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725252341/reclame-jp/uefum56zahy8cecdiy5k.jpg')
+kowa.company_banner.attach(
+  io: banner, 
+  filename: 'kowa.jpg', 
+  content_type: 'image/jpg')
+
+fujiarte = Company.create!(
   company_name: 'Fujiarte',
   company_address: 'Taiyujicho, 5-15 Umeda East Bld. 3F, Osaka, Japan',
   company_city: 'Taiyujicho ',
@@ -174,12 +200,21 @@ Company.create!(
   company_social_media: { facebook: 'https://www.facebook.com/fujiarte', instagram: 'www.instagram.com/fujiarte.brasil', tiktok: 'https://www.tiktok.com/@fujiarte.brasil', youtube: 'https://www.youtube.com/@fujiarte.brasil' },
   company_description: 'A Fujiarte Co. Ltd., é empresa fundada em 1962 pioneira no ramo de outsourcing industrial. É uma das maiores na área de recrutamento de estrangeiros no Japão.',
   company_contact_email: 'empregos-mail@fujiarte.co.jp',
-  company_category: 'Empreiteiras',
-  company_banner_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/447674430_840666251425619_5721174446051250998_n.png?_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=gBC9wceTyhsQ7kNvgELit8Z&_nc_ht=scontent-nrt1-2.xx&oh=00_AYC__NfUI4gt2oLWMRpzSU68rwphLgc0ZDLTYkNyc8sk4g&oe=66D30A21',
-  company_logo_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/281847748_5288348814541834_4110152173776724300_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=40ACrOMRYFcQ7kNvgETtggZ&_nc_ht=scontent-nrt1-2.xx&oh=00_AYCUNMkNoutZs8-zCL-E7DSNLmdOupiD87n7B2cK2916Jw&oe=66D31DEC',
+  company_category: 'Empreiteiras'
 )
+logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251117/reclame-jp/sl4beyekvhwmojj84gjf.jpg')
+fujiarte.company_logo.attach(
+  io: logo, 
+  filename: 'fujiarte.jpg', 
+  content_type: 'image/jpg')
 
-Company.create!(
+banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251118/reclame-jp/vrmyteoh1vvd214crenc.png')
+fujiarte.company_banner.attach(
+  io: banner, 
+  filename: 'fujiarte.jpg', 
+  content_type: 'image/jpg')
+
+suri_emu = Company.create!(
   company_name: 'UT Suri-emu ',
   company_address: 'Aichi-ken Okazaki-shi Harisaki-cho Furo16-1',
   company_city: 'Okazaki-shi',
@@ -191,12 +226,23 @@ Company.create!(
   company_social_media: { facebook: 'https://www.facebook.com/UTSuriemu', instagram: 'https://www.instagram.com/ut_suriemu/' },
   company_description: 'Há mais de 30 anos aproximando pessoas e oportunidades de sucesso em todo o Japão. ',
   company_category: 'Empreiteiras',
-  company_contact_email: 'yamashita@suri-emu.co.jp',
-  company_banner_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/315846892_5662055657193095_2597838303728041700_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=86c6b0&_nc_ohc=Xh3gKRdEV0EQ7kNvgF-4jst&_nc_ht=scontent-nrt1-2.xx&oh=00_AYDwxpzMaM0sqPWFvIVPvsARRngFEhu8uvBYdb_HkX411Q&oe=66D3102C',
-  company_logo_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/271487238_4748499388548731_4826216284450439333_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=8JYHLuqaweUQ7kNvgESTaDE&_nc_ht=scontent-nrt1-2.xx&oh=00_AYB2eXxs_KF43kpyVQzcxEX5xl7xH3RbO1_FVw-jYgH6eg&oe=66D313F0',
+  company_contact_email: 'yamashita@suri-emu.co.jp'
 )
 
-Company.create!(
+logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251126/reclame-jp/gpqa5gpcjgwhxhhsatxy.jpg')
+suri_emu.company_logo.attach(
+  io: logo,
+  filename: 'suri_emu.jpg',
+  content_type: 'image/jpg'
+)
+banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251126/reclame-jp/maecvpdznjazncfkbqlp.png')
+suri_emu.company_banner.attach(
+  io: banner,
+  filename: 'suri_emu.jpg',
+  content_type: 'image/jpg'
+)
+
+earnest = Company.create!(
   company_name: 'Earnest Corp.',
   company_address: 'Shizuoka-ken Hamamatsu-shi Naka-ku Nishiiiba-cho 20-8',
   company_city: 'Hamamatsu-shi',
@@ -208,12 +254,23 @@ Company.create!(
   company_social_media: { facebook: 'https://www.facebook.com/profile.php?id=100083099392692' },
   company_description: 'Um local de trabalho onde todos podem demonstrar seus pontos fortes através do trabalho.',
   company_contact_email: 'm.osumi@earnest-s.co.jp',
-  company_category: 'Empreiteiras',
-  company_banner_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/289953193_106517875448887_6430435018767223456_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=QG0EhtxaBfsQ7kNvgH-VnQW&_nc_ht=scontent-nrt1-2.xx&oh=00_AYDT5LLM06NYDe8QZQ0cJQR402Ws7qLEXA0ZED5gFMsdAg&oe=66D320CD',
-  company_logo_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/294990714_119152430852098_5859083643534488008_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=1-uUNnSR65oQ7kNvgG6OQVy&_nc_ht=scontent-nrt1-2.xx&oh=00_AYDcz2G9-h0LOwA_F27MlSMo_Fs_yMN_kz-uA0v_r4pxKw&oe=66D2F8C0',
+  company_category: 'Empreiteiras'
 )
 
-Company.create!(
+logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251119/reclame-jp/pg6bqvoreneepu5ufxfw.jpg')
+earnest.company_logo.attach(
+  io: logo,
+  filename: 'earnest.jpg',
+  content_type: 'image/jpg'
+)
+banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251119/reclame-jp/pg6bqvoreneepu5ufxfw.jpg')
+earnest.company_banner.attach(
+  io: banner,
+  filename: 'earnest.jpg',
+  content_type: 'image/jpg'
+)
+
+ikai = Company.create!(
   company_name: 'Ikai Industry',
   company_address: 'Shizuoka-ken Hamamatsu-shi Naka-ku Sumiyoshi 3-18-6',
   company_city: 'amamatsu-shi',
@@ -225,12 +282,23 @@ Company.create!(
   company_social_media: { facebook: 'https://www.facebook.com/ikaioutsourcing', instagram: 'www.instagram.com/ikaioutsourcing' },
   company_description: 'Na Ikai Industry, estamos trabalhando para criar um ambiente onde os funcionários possam trabalhar com tranquilidade, fortalecendo o apoio antes mesmo de se candidatarem, como consultas de emprego e visitas às fábricas. Por favor, desfrute de uma vida estável em nossa empresa cujo lema é “Cuidar das pessoas”.',
   company_contact_email: 'tanaka_kenji@ikaigp.co.jp',
-  company_category: 'Empreiteiras',
-  company_banner_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/251323911_4810141392363775_3541057071720167543_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=mrVxpYoN01YQ7kNvgGHuk4H&_nc_ht=scontent-nrt1-2.xx&oh=00_AYDZZ-JCA1KZu6nUUur4eUkO8DSWUkZxi9lHLNMJWiFN7w&oe=66D30608',
-  company_logo_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/326927363_904914170641997_6343719978753973999_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=Nmjt-QuhlwMQ7kNvgHfP1qg&_nc_ht=scontent-nrt1-2.xx&oh=00_AYCjbQxOEZZ_aAsd21NyPZvCeD_4uje74yNZSNuYSUq1_w&oe=66D32829',
+  company_category: 'Empreiteiras'
 )
 
-Company.create!(
+logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251120/reclame-jp/q8ihuuegvu1bkjbufteu.jpg')
+ikai.company_logo.attach(
+  io: logo,
+  filename: 'ikai.jpg',
+  content_type: 'image/jpg'
+)
+banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251120/reclame-jp/xvid9twpgiayzxlbcs4k.jpg')
+ikai.company_banner.attach(
+  io: banner,
+  filename: 'ikai.jpg',
+  content_type: 'image/jpg'
+)
+
+jto = Company.create!(
   company_name: 'JTO Corp.',
   company_address: 'Aichi-ken Anjo-shi Midori cho 1-16-6 T1 Midori cho 1F',
   company_city: 'Anjo-shi',
@@ -241,12 +309,23 @@ Company.create!(
   company_website: 'https://www.jto-c.jp/',
   company_social_media: { facebook: 'https://www.facebook.com/empreiteirajto', instagram: 'https://www.instagram.com/empreiteira_jto/' },
   company_description: 'Empresa foi fundada em 2013 com o desejo de ser uma empresa prestativa que impressiona nossos clientes, combinando sabedoria e conhecimento, sendo criativa e engenhosa para ajudar a sociedade.',
-  company_category: 'Empreiteiras',
-  company_banner_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/415054789_311174278581658_5896365693617125659_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=nP3EqkWsjgQQ7kNvgGwuJVO&_nc_ht=scontent-nrt1-2.xx&oh=00_AYDv84vDR1HG_hfPcEcXqgb4Jw59dr42pTBjFFbVYI6Dng&oe=66D30C44',
-  company_logo_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/331673296_1857127327971862_3761113296173349280_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=eR5IQfz3Za4Q7kNvgEQ41l2&_nc_ht=scontent-nrt1-2.xx&oh=00_AYC0_xm73-H8spUFdwSyLqnOQuju7D6PVuHyqpQgBZFT6g&oe=66D3130A',
+  company_category: 'Empreiteiras'
 )
 
-Company.create!(
+logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251121/reclame-jp/ezcobsfdgrqqol7uf31q.jpg')
+jto.company_logo.attach(
+  io: logo,
+  filename: 'jto.jpg',
+  content_type: 'image/jpg'
+)
+banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251119/reclame-jp/xkp4xlitjejizz3dmorj.jpg')
+jto.company_banner.attach(
+  io: banner,
+  filename: 'jto.jpg',
+  content_type: 'image/jpg'
+)
+
+nichirin = Company.create!(
   company_name: 'Nichirin Group',
   company_address: 'Aichi-ken Handa-shi Yanabenaka-machi 2-98-1',
   company_city: 'Handa-shi',
@@ -257,12 +336,23 @@ Company.create!(
   company_website: 'https://www.nichirinn.com/',
   company_social_media: { facebook: 'https://www.facebook.com/Nichirin.Honsha' },
   company_description: 'Contribuiremos para a sociedade através do poder do emprego através de serviços de maior valor acrescentado, como serviços de segurança e serviços de suporte à vida, a fim de responder amplamente ao envelhecimento da sociedade e à expansão do emprego estrangeiro.',
-  company_category: 'Empreiteiras',
-  company_banner_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/302132305_480368020765828_3907449284438604058_n.png?_nc_cat=100&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=xufB_-5oOZIQ7kNvgGF5Nq0&_nc_ht=scontent-nrt1-2.xx&oh=00_AYBsj3NbQrCr28rn_lNItsWQRVGHkS-56bvbFGZ4idrkDw&oe=66D302C3',
-  company_logo_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/300450397_480368017432495_6149622439946288248_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=kFmYjYjfOI4Q7kNvgFIoINz&_nc_ht=scontent-nrt1-2.xx&oh=00_AYD-gpPCqLA2AlbH9vtLx6mUeqBkIV5f4VsK6n4otPHanw&oe=66D313A6',
+  company_category: 'Empreiteiras'
 )
 
-Company.create!(
+logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251122/reclame-jp/mktmyishppm6yj27byzn.jpg')
+nichirin.company_logo.attach(
+  io: logo,
+  filename: 'nichirin.jpg',
+  content_type: 'image/jpg'
+)
+banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251122/reclame-jp/h1ceiq0ymumlgwao8uv3.png')
+nichirin.company_banner.attach(
+  io: banner,
+  filename: 'nichirin.jpg',
+  content_type: 'image/jpg'
+)
+
+konishi = Company.create!(
   company_name: 'Konishi Sangyo Co., Ltd.',
   company_address: 'Shiga-ken Koka-shi Minakuchi-cho Shimoyama 666-85',
   company_city: 'Koka-shi',
@@ -275,8 +365,13 @@ Company.create!(
   company_description: 'Na Konishi Sangyo Co., Ltd., não poupamos esforços para garantir um ambiente de trabalho agradável e seguro para todos. Nós nos esforçamos para criar um ambiente onde os funcionários possam trabalhar com tranquilidade.',
   company_contact_email: 'hiro@konishisangyo.com',
   company_category: 'Empreiteiras',
-  company_banner_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/452941274_922378589933238_6650148896585100807_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=AaSFJGjlm2sQ7kNvgG4pMwn&_nc_ht=scontent-nrt1-2.xx&oh=00_AYAWihfNQurzL3gvq_NYcaU-vvYYCxcS3jIoAvtmqSKucg&oe=66D32EC1',
   company_logo_url: 'https://i0.wp.com/jobsonline.jp/wp-content/uploads/2021/11/konishi1.jpg?fit=750%2C394&ssl=1',
+)
+banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251121/reclame-jp/krof2rgrlibafaxll5qg.jpg')
+konishi.company_banner.attach(
+  io: banner,
+  filename: 'konishi.jpg',
+  content_type: 'image/jpg'
 )
 
 Company.create!(
@@ -294,7 +389,7 @@ Company.create!(
   company_logo_url: 'https://www.aoc-net.co.jp/wp-content/themes/aocwp/assets/common/svg/footerlogo.svg',
 )
 
-Company.create!(
+human = Company.create!(
   company_name: 'Human Corp.',
   company_address: 'Mie-ken Suzuka-shi Sanjo 3 chome 16-30',
   company_city: 'Suzuka-shi',
@@ -307,10 +402,15 @@ Company.create!(
   company_description: 'A Human oferece um serviço que combina pessoas que procuram trabalho com empresas e organizações que procuram recursos humanos. ',
   company_category: 'Empreiteiras',
   company_banner_url: 'https://www.human-g.co.jp/files/libs/268/202302151552489542.png?1676516268',
-  company_logo_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/277570623_104444868897516_2321695864494571218_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=i-CBdDc8vGYQ7kNvgFWJlrz&_nc_ht=scontent-nrt1-2.xx&oh=00_AYA65pYkjm8OzJZTLGXlKz2mqjdToT11R289wOIHc0pn8w&oe=66D33412',
+)
+logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251118/reclame-jp/ap0srewktk4h0dinyfg2.jpg')
+human.company_logo.attach(
+  io: logo,
+  filename: 'human.jpg',
+  content_type: 'image/jpg'
 )
 
-Company.create!(
+marusan = Company.create!(
   company_name: 'Marusan Group',
   company_address: ' Aichi-ken Kariya-shi Hitotsugi-cho 1-1-17',
   company_city: 'Kariya-shi',
@@ -323,11 +423,16 @@ Company.create!(
   company_description: 'Marusan is a pioneering company in the eastern region of Mikawa in working with foreigners of Japanese descent and their spouses.',
   company_contact_email: 'marusanquality@gmail.com',
   company_category: 'Empreiteiras',
-  company_banner_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/299115255_464550519016903_1825612492205577218_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=Cp81_13zYv8Q7kNvgF3O1NY&_nc_ht=scontent-nrt1-2.xx&oh=00_AYAJypY5fz4coXn9btAn2pI2DoRMqyG0Zuj_rBkXGrsawQ&oe=66D2FF31',
   company_logo_url: 'https://i0.wp.com/jobsonline.jp/wp-content/uploads/2021/11/marusan-kariya1.jpg?fit=750%2C394&ssl=1',
 )
+banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251121/reclame-jp/po1wiwihbiwgvj5cwscn.jpg')
+marusan.company_banner.attach(
+  io: banner,
+  filename: 'marusan.jpg',
+  content_type: 'image/jpg'
+)
 
-Company.create!(
+sankyo = Company.create!(
   company_name: 'Sankyo Techno',
   company_address: 'Aichi-ken Toyohashi-shi Nishimiyuki-cho Miyuki 22-2 Sankyo Bldg.',
   company_city: ' Toyohashi-shi',
@@ -340,11 +445,21 @@ Company.create!(
   company_description: 'Contribuímos para a concretização de uma sociedade próspera e saudável, tanto física, mental quanto espiritualmente, através da gestão baseada na área de terceirização e de recursos humanos que atendam às necessidades de nossos clientes.',
   company_contact_email: 'cadastro@sankyo-gr.com',
   company_category: 'Empreiteiras',
-  company_banner_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t1.6435-9/33834434_1709332889119924_7021427872829014016_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=2a1932&_nc_ohc=lTo1ps8LangQ7kNvgGorYqG&_nc_ht=scontent-nrt1-2.xx&oh=00_AYDjFE1sQxJeBkU6nxmwR1ivCZXbV1qNSdIrVv3EAIsARw&oe=66F4CE01',
-  company_logo_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/348436917_3432234230363835_404246973378801796_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=NOE4H4sxL9IQ7kNvgExpMTz&_nc_ht=scontent-nrt1-2.xx&oh=00_AYDE7gnBYZapxp9fl-2iQNmUd0_YohMLsZ3ByROe8MYrNQ&oe=66D31CEF',
+)
+logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251124/reclame-jp/sa1gw5fa3uwuk5yjufsd.jpg')
+sankyo.company_logo.attach(
+  io: logo,
+  filename: 'sankyo.jpg',
+  content_type: 'image/jpg'
+)
+banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251124/reclame-jp/kvscjerrymtohdjcsvh1.png')
+sankyo.company_banner.attach(
+  io: banner,
+  filename: 'sankyo.jpg',
+  content_type: 'image/jpg'
 )
 
-Company.create!(
+fuji = Company.create!(
   company_name: 'Fuji Kogyosho',
   company_address: 'Gunma-ken Maebashi-shi Sojamachi 3-9-9',
   company_city: 'Maebashi-shi',
@@ -355,9 +470,19 @@ Company.create!(
   company_website: 'https://fuji-ko.com/',
   company_social_media: { facebook: 'https://www.facebook.com/fujikogyoshou' },
   company_contact_email: 'shishido_sss@fuji-ko.com',
-  company_category: 'Empreiteiras',
-  company_banner_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/262637073_115341660975647_2518947275984599450_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=spwKUZMMSoAQ7kNvgFuy0p_&_nc_ht=scontent-nrt1-2.xx&oh=00_AYDkrOsQeQsOyFItiEKI0U15taA2rCQIbmth5lTRV0FVaQ&oe=66D31258',
-  company_logo_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/262149504_114900064353140_1744445676912348532_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=_MzrZNem3W8Q7kNvgEfXcJ0&_nc_ht=scontent-nrt1-2.xx&oh=00_AYBrRkYKFb4vBYD7q9PpCvgnVZ2UKSAAMHUzzr5BWj7z9A&oe=66D3041B',
+  company_category: 'Empreiteiras'
+)
+logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251117/reclame-jp/lkzd6szdaya48ilwbo9m.jpg')
+fuji.company_logo.attach(
+  io: logo,
+  filename: 'fuji.jpg',
+  content_type: 'image/jpg'
+)
+banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251118/reclame-jp/rfqsxl3pxevffb98vjwb.jpg')
+fuji.company_banner.attach(
+  io: banner,
+  filename: 'fuji.jpg',
+  content_type: 'image/jpg'
 )
 
 Company.create!(
@@ -376,7 +501,7 @@ Company.create!(
   company_logo_url: 'https://i0.wp.com/jobsonline.jp/wp-content/uploads/2024/03/shigoto-no-tobira.jpg?fit=750%2C394&ssl=1',
 )
 
-Company.create!(
+sun_family = Company.create!(
   company_name: 'Sun Family',
   company_address: '滋賀県長浜市三田町1355-1',
   company_city: 'Nagahama shi',
@@ -388,11 +513,21 @@ Company.create!(
   company_social_media: { facebook: 'https://www.facebook.com/SunfamilyEmpreiteira' },
   company_contact_email: 'ito@sunfamily.info',
   company_category: 'Empreiteiras',
-  company_banner_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/301177490_507380851387830_8864027811105492643_n.png?_nc_cat=106&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=xO8rAu1Dr_cQ7kNvgHKsZ7m&_nc_ht=scontent-nrt1-2.xx&_nc_gid=ACN7LwMq4itCzpABs5HzIt8&oh=00_AYCGk2XlwFe5Y1RrsgP2OV7HIXXH6QOXll9Tl-V2DwL5fA&oe=66D32482',
-  company_logo_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/271653184_4279371895501424_7959931784793890947_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=Aoq5y2e815QQ7kNvgG26OEC&_nc_ht=scontent-nrt1-2.xx&oh=00_AYCjFa-A8Z3Bb7MHsrejfwO-RzNmQoxUMi1wgwq1HkAueg&oe=66D311AF',
+)
+logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251125/reclame-jp/nwiyyalitanf3ndvpugb.jpg')
+sun_family.company_logo.attach(
+  io: logo,
+  filename: 'sun_family.jpg',
+  content_type: 'image/jpg'
+)
+banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251124/reclame-jp/fs5uj7pytpwyl4bdcqoz.png')
+sun_family.company_banner.attach(
+  io: banner,
+  filename: 'sun_family.jpg',
+  content_type: 'image/jpg'
 )
 
-Company.create!(
+nikko = Company.create!(
   company_name: 'NIKKO empregos ',
   company_address: 'Aichi-ken Nagoya-shi Nakagawa-ku Nishihioki-cho 9-111',
   company_city: 'Nagoya-shi',
@@ -404,9 +539,19 @@ Company.create!(
   company_social_media: { facebook: 'www.facebook.com/nikko.empregos', instagram: 'www.instagram.com/nikko_empregos' },
   company_description: 'A Nikko é uma empresa com matriz em Nagoya, Aichi, fundada há mais de 30 anos com o intuito de promover o desenvolvimento econômico do Japão por meio do fornecimento de mão de obra qualificada às empresas de manufatura do Japão, e criação de oportunidades de trabalho.',
   company_contact_email: 'global@co-nikko.co.jp',
-  company_category: 'Empreiteiras',
-  company_banner_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/426570674_122155540928020884_7319176549077818955_n.png?_nc_cat=106&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=5XDjkmFBdxAQ7kNvgGo23wB&_nc_ht=scontent-nrt1-2.xx&oh=00_AYCUs0U2iFqK7g3XhqqE3H8B2WOvAqndz2BsVk40T3cmPg&oe=66D3331E',
-  company_logo_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/395080327_122131457516020884_7073746306474335940_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TtKt5-ZRmF0Q7kNvgFW5L0P&_nc_ht=scontent-nrt1-2.xx&oh=00_AYAyZpyucRxPDcmlGnMXFso6SsFUiPudVm0Z9uczXIikQw&oe=66D3337E',
+  company_category: 'Empreiteiras'
+)
+logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251123/reclame-jp/gyjiq98zkw1gqyp3ygg4.jpg')
+nikko.company_logo.attach(
+  io: logo,
+  filename: 'nikko.jpg',
+  content_type: 'image/jpg'
+)
+banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251123/reclame-jp/vmyutarjdzxlkpt64lbf.png')
+nikko.company_banner.attach(
+  io: banner,
+  filename: 'nikko.jpg',
+  content_type: 'image/jpg'
 )
 
 Company.create!(
@@ -418,8 +563,18 @@ Company.create!(
   company_country: 'Japan',
   company_social_media: { facebook: 'https://www.facebook.com/profile.php?id=100069316765489' },
   company_category: 'Empreiteiras',
-  company_banner_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/301432120_376941377959751_496286775423448064_n.png?_nc_cat=111&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=8H7BCO2se0cQ7kNvgEs59Cy&_nc_ht=scontent-nrt1-2.xx&oh=00_AYDNVuVmaiDbWG78E0L9c1AbG3MKygle0x7Gf8NaVXCeow&oe=66DB07E5',
-  company_logo_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/299934621_376941381293084_6143853427791099642_n.png?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=vPBFW9gsN0EQ7kNvgHxUTOl&_nc_ht=scontent-nrt1-2.xx&oh=00_AYAAuIfDUHmgDJEpC5pG2XXk_oAMRGPwnBAjYyyzYxSobA&oe=66DAD580',
+)
+logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251119/reclame-jp/necujnxgtvxjemwawgpo.png')
+nikko.company_logo.attach(
+  io: logo,
+  filename: 'nikko.jpg',
+  content_type: 'image/jpg'
+)
+banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251118/reclame-jp/rupgmrxtisjbg5mnlihi.png')
+nikko.company_banner.attach(
+  io: banner,
+  filename: 'nikko.jpg',
+  content_type: 'image/jpg'
 )
 
 # Company.create!(
