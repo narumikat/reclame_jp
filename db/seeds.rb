@@ -123,16 +123,16 @@ puts 'Users created!'
 puts 'Creating TEST companies...'
 
 company1 = Company.create!(
-  company_name: 'Company Test',
+  company_name: 'Empresa Exemplo',
   company_address: '123 Main St',
   company_city: 'New York',
   company_prefecture: Company::COMPANY_PREFECTURE.sample,
   company_zip_code: '10001',
   company_country: 'USA',
   company_phone_number: '0270-21-8155',
-  company_website: 'www.companytest.com',
-  company_social_media: { facebook: 'www.facebook.com/companitest', twitter: 'www.twitter.com/companitest' },
-  company_description: 'Company One is a company that does things.',
+  company_website: 'www.empresaexemplo.com',
+  company_social_media: { facebook: 'www.facebook.com/empresaexemplo', twitter: 'www.twitter.com/empresaexemplo' },
+  company_description: 'Este perfil é um exemplo de empresa.',
   company_contact_name: 'John Doe',
   company_contact_email: 'company@mail.com',
   company_category: Company::COMPANY_CATEGORY.sample
@@ -515,9 +515,9 @@ puts 'Complaints created!'
 
 puts 'Creating responses...'
 
-10.times do
+3.times do
   Response.create!(
-    content: 'This is a response to a complaint.',
+    content: 'Essa é a resposta da empresa ao seu comentário. Lamentamos o ocorrido e estamos trabalhando para resolver o problema. Entre em contato conosco para que possamos ajudá-lo da melhor forma possível.',
     complaint: complaints.sample,
     user: company_users.sample,
     company: company1,

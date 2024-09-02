@@ -59,6 +59,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_19_022402) do
     t.string "company_contact_email"
     t.string "company_banner_url"
     t.string "company_logo_url"
+    t.string "company_employee_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

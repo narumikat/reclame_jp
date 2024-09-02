@@ -99,7 +99,7 @@
                 <h5 class="text-center mb-3 mt-2">contato da empresa</h5>
                 <% if @company.company_website.present? %>
                   <div class="info-box">
-                    <%= link_to @company.company_website, target: "_blank", class: "text-decoration-none" do %>
+                    <%= link_to ( @company.company_website.start_with?("http://", "https://") ? @company.company_website : "http://#{@company.company_website}" ), target: "_blank", class: "text-decoration-none" do %>
                       <i class="fa-solid fa-globe me-2"></i>
                       <%= @company.company_website %>
                     <% end %>
