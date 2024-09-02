@@ -172,7 +172,6 @@ kowa = Company.create!(
   company_contact_email: 'cadastro@kowa-corp.com',
   company_category: 'Empreiteiras'
 )
-
 kowa.company_logo.purge if kowa.company_logo.attached?
 kowa.company_banner.purge if kowa.company_banner.attached?
 
@@ -202,6 +201,9 @@ fujiarte = Company.create!(
   company_contact_email: 'empregos-mail@fujiarte.co.jp',
   company_category: 'Empreiteiras'
 )
+fujiarte.company_logo.purge if fujiarte.company_logo.attached?
+fujiarte.company_banner.purge if fujiarte.company_banner.attached?
+
 logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251117/reclame-jp/sl4beyekvhwmojj84gjf.jpg')
 fujiarte.company_logo.attach(
   io: logo, 
@@ -228,6 +230,8 @@ suri_emu = Company.create!(
   company_category: 'Empreiteiras',
   company_contact_email: 'yamashita@suri-emu.co.jp'
 )
+suri_emu.company_logo.purge if suri_emu.company_logo.attached?
+suri_emu.company_banner.purge if suri_emu.company_banner.attached?
 
 logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251126/reclame-jp/gpqa5gpcjgwhxhhsatxy.jpg')
 suri_emu.company_logo.attach(
@@ -256,6 +260,8 @@ earnest = Company.create!(
   company_contact_email: 'm.osumi@earnest-s.co.jp',
   company_category: 'Empreiteiras'
 )
+earnest.company_logo.purge if earnest.company_logo.attached?
+earnest.company_banner.purge if earnest.company_banner.attached?
 
 logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251119/reclame-jp/pg6bqvoreneepu5ufxfw.jpg')
 earnest.company_logo.attach(
@@ -284,6 +290,8 @@ ikai = Company.create!(
   company_contact_email: 'tanaka_kenji@ikaigp.co.jp',
   company_category: 'Empreiteiras'
 )
+ikai.company_logo.purge if ikai.company_logo.attached?
+ikai.company_banner.purge if ikai.company_banner.attached?
 
 logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251120/reclame-jp/q8ihuuegvu1bkjbufteu.jpg')
 ikai.company_logo.attach(
@@ -311,6 +319,8 @@ jto = Company.create!(
   company_description: 'Empresa foi fundada em 2013 com o desejo de ser uma empresa prestativa que impressiona nossos clientes, combinando sabedoria e conhecimento, sendo criativa e engenhosa para ajudar a sociedade.',
   company_category: 'Empreiteiras'
 )
+jto.company_logo.purge if jto.company_logo.attached?
+jto.company_banner.purge if jto.company_banner.attached?
 
 logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251121/reclame-jp/ezcobsfdgrqqol7uf31q.jpg')
 jto.company_logo.attach(
@@ -338,6 +348,8 @@ nichirin = Company.create!(
   company_description: 'Contribuiremos para a sociedade através do poder do emprego através de serviços de maior valor acrescentado, como serviços de segurança e serviços de suporte à vida, a fim de responder amplamente ao envelhecimento da sociedade e à expansão do emprego estrangeiro.',
   company_category: 'Empreiteiras'
 )
+nichirin.company_logo.purge if nichirin.company_logo.attached?
+nichirin.company_banner.purge if nichirin.company_banner.attached?
 
 logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251122/reclame-jp/mktmyishppm6yj27byzn.jpg')
 nichirin.company_logo.attach(
@@ -367,6 +379,9 @@ konishi = Company.create!(
   company_category: 'Empreiteiras',
   company_logo_url: 'https://i0.wp.com/jobsonline.jp/wp-content/uploads/2021/11/konishi1.jpg?fit=750%2C394&ssl=1',
 )
+konishi.company_logo.purge if konishi.company_logo.attached?
+konishi.company_banner.purge if konishi.company_banner.attached?
+
 banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251121/reclame-jp/krof2rgrlibafaxll5qg.jpg')
 konishi.company_banner.attach(
   io: banner,
@@ -403,6 +418,9 @@ human = Company.create!(
   company_category: 'Empreiteiras',
   company_banner_url: 'https://www.human-g.co.jp/files/libs/268/202302151552489542.png?1676516268',
 )
+human.company_logo.purge if human.company_logo.attached?
+human.company_banner.purge if human.company_banner.attached?
+
 logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251118/reclame-jp/ap0srewktk4h0dinyfg2.jpg')
 human.company_logo.attach(
   io: logo,
@@ -425,6 +443,9 @@ marusan = Company.create!(
   company_category: 'Empreiteiras',
   company_logo_url: 'https://i0.wp.com/jobsonline.jp/wp-content/uploads/2021/11/marusan-kariya1.jpg?fit=750%2C394&ssl=1',
 )
+marusan.company_logo.purge if marusan.company_logo.attached?
+marusan.company_banner.purge if marusan.company_banner.attached?
+
 banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251121/reclame-jp/po1wiwihbiwgvj5cwscn.jpg')
 marusan.company_banner.attach(
   io: banner,
@@ -446,6 +467,9 @@ sankyo = Company.create!(
   company_contact_email: 'cadastro@sankyo-gr.com',
   company_category: 'Empreiteiras',
 )
+sankyo.company_logo.purge if sankyo.company_logo.attached?
+sankyo.company_banner.purge if sankyo.company_banner.attached?
+
 logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251124/reclame-jp/sa1gw5fa3uwuk5yjufsd.jpg')
 sankyo.company_logo.attach(
   io: logo,
@@ -472,6 +496,9 @@ fuji = Company.create!(
   company_contact_email: 'shishido_sss@fuji-ko.com',
   company_category: 'Empreiteiras'
 )
+fuji.company_logo.purge if fuji.company_logo.attached?
+fuji.company_banner.purge if fuji.company_banner.attached?
+
 logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251117/reclame-jp/lkzd6szdaya48ilwbo9m.jpg')
 fuji.company_logo.attach(
   io: logo,
@@ -514,6 +541,9 @@ sun_family = Company.create!(
   company_contact_email: 'ito@sunfamily.info',
   company_category: 'Empreiteiras',
 )
+sun_family.company_logo.purge if sun_family.company_logo.attached?
+sun_family.company_banner.purge if sun_family.company_banner.attached?
+
 logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251125/reclame-jp/nwiyyalitanf3ndvpugb.jpg')
 sun_family.company_logo.attach(
   io: logo,
@@ -541,6 +571,9 @@ nikko = Company.create!(
   company_contact_email: 'global@co-nikko.co.jp',
   company_category: 'Empreiteiras'
 )
+nikko.company_logo.purge if nikko.company_logo.attached?
+nikko.company_banner.purge if nikko.company_banner.attached?
+
 logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251123/reclame-jp/gyjiq98zkw1gqyp3ygg4.jpg')
 nikko.company_logo.attach(
   io: logo,
@@ -554,7 +587,7 @@ nikko.company_banner.attach(
   content_type: 'image/jpg'
 )
 
-Company.create!(
+lp_staff = Company.create!(
   company_name: 'LP STAFF',
   company_address: 'Shizuoka ken kakegawa shi ekimae 11-1, Kakegawa-shi, Shizuoka, Japan',
   company_city: 'kakegawa shi',
@@ -564,16 +597,19 @@ Company.create!(
   company_social_media: { facebook: 'https://www.facebook.com/profile.php?id=100069316765489' },
   company_category: 'Empreiteiras',
 )
+lp_staff.company_logo.purge if lp_staff.company_logo.attached?
+lp_staff.company_banner.purge if lp_staff.company_banner.attached?
+
 logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251119/reclame-jp/necujnxgtvxjemwawgpo.png')
-nikko.company_logo.attach(
+lp_staff.company_logo.attach(
   io: logo,
-  filename: 'nikko.jpg',
+  filename: 'lp_staff.jpg',
   content_type: 'image/jpg'
 )
 banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251118/reclame-jp/rupgmrxtisjbg5mnlihi.png')
-nikko.company_banner.attach(
+lp_staff.company_banner.attach(
   io: banner,
-  filename: 'nikko.jpg',
+  filename: 'lp_staff.jpg',
   content_type: 'image/jpg'
 )
 
