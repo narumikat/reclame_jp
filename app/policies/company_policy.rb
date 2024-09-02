@@ -35,4 +35,8 @@ class CompanyPolicy < ApplicationPolicy
   def update?
     user_is_owner_or_admin?
   end
+
+  def top_scored_companies
+    true
+  end
 end

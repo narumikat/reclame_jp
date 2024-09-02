@@ -1,3 +1,5 @@
+puts 'Cleaning database...'
+
 Complaint.destroy_all
 Response.destroy_all
 CompaniesUser.destroy_all

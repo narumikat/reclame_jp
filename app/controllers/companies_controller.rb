@@ -2,14 +2,13 @@ class CompaniesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_company, only: [:show, :edit, :update]
   before_action :check_company_user, only: [:new, :create, :edit, :update] 
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:index, :show, :top_scored_companies]
 
   COMPANY_CATEGORY = Company::COMPANY_CATEGORY
   
   def index
     authorize Company
     @companies = Company.all
-    # @new_companies = Complaint.where(company_id: nil).where.not(new_company_name: [nil, ''])
     @categories = Company::COMPANY_CATEGORY
   end
   def new
@@ -71,7 +70,10 @@ class CompaniesController < ApplicationController
   end  
 
   def destroy
+  end
 
+  def top_scored_companies
+    @ranked_companies = Company.company_ranking
   end
 
   private

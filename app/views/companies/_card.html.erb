@@ -7,7 +7,7 @@
     <% else %>
       <%= image_tag 'card-img.png', class: "card-cover" %>
     <% end %>
-    <div class="company-card-info mb-2">
+    <div class="company-card-info mb-2 d-flex justify-content-between">
       <div>
         <% if user_signed_in? && current_page?(user_user_companies_path(current_user)) %>
           <% role = current_user.companies_users.find_by(company_id: company.id).role %>

@@ -67,14 +67,24 @@ class Company < ApplicationRecord
   end
 
   def company_score
-    return 0 if total_complaints_count.zero?
+    return 10 if total_complaints_count.zero?
     
     score = complaints_answered_percentage
-
     scaled_score = (score / 10.0).round(2)
     
     scaled_score
   end  
+  
+  def self.company_ranking
+    companies = Company.all
+    
+    companies_with_complaints = companies.select { |company| company.total_complaints_count > 0 }
+    
+    ranked_companies = companies_with_complaints.sort_by { |company| -company.company_score }
+    
+    ranked_companies
+  end
+  
 
   private
 
