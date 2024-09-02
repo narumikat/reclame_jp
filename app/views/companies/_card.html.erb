@@ -14,7 +14,9 @@
           <small>Voce é <strong><%= role %></strong> da empresa</small>
         <% end %>
         <h3><%= company.company_name %></h3>
-        <span class="tag-grey-sm"><%= company.company_category %></span>
+        <%= link_to search_path(company_category: company.company_category) do %>
+          <span class="tag-grey-sm"><%= company.company_category %></span>
+        <% end %>
       </div>
       <div class="company-score">
         <i class="fa-solid fa-medal me-2"></i>

@@ -407,6 +407,19 @@ Company.create!(
   company_logo_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/395080327_122131457516020884_7073746306474335940_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TtKt5-ZRmF0Q7kNvgFW5L0P&_nc_ht=scontent-nrt1-2.xx&oh=00_AYAyZpyucRxPDcmlGnMXFso6SsFUiPudVm0Z9uczXIikQw&oe=66D3337E',
 )
 
+Company.create!(
+  company_name: 'LP STAFF',
+  company_address: 'Shizuoka ken kakegawa shi ekimae 11-1, Kakegawa-shi, Shizuoka, Japan',
+  company_city: 'kakegawa shi',
+  company_prefecture: 'Shizuoka',
+  company_zip_code: '436-0077',
+  company_country: 'Japan',
+  company_social_media: { facebook: 'https://www.facebook.com/profile.php?id=100069316765489' },
+  company_category: 'Empreiteiras',
+  company_banner_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/301432120_376941377959751_496286775423448064_n.png?_nc_cat=111&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=8H7BCO2se0cQ7kNvgEs59Cy&_nc_ht=scontent-nrt1-2.xx&oh=00_AYDNVuVmaiDbWG78E0L9c1AbG3MKygle0x7Gf8NaVXCeow&oe=66DB07E5',
+  company_logo_url: 'https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/299934621_376941381293084_6143853427791099642_n.png?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=vPBFW9gsN0EQ7kNvgHxUTOl&_nc_ht=scontent-nrt1-2.xx&oh=00_AYAAuIfDUHmgDJEpC5pG2XXk_oAMRGPwnBAjYyyzYxSobA&oe=66DAD580',
+)
+
 # Company.create!(
 #   company_name: '',
 #   company_address: '',

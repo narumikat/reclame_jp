@@ -1,6 +1,10 @@
 <div class="container">
   <%= render 'shared/back_btn' %>
-  <h1 class="my-4">Resultado da busca por <strong>'<%= @query %>'</strong></h1>
+  <% if @query.present? %>
+    <h1 class="my-4">Resultado da busca por <strong>'<%= @query %>'</strong></h1>
+  <% else %>
+    <h1 class="my-4">Resultado da busca por <strong>'<%= @category %>'</strong></h1>
+  <% end %>
   <h3 class="my-4">Empresas</h3>
   <% if @companies.any? %>
     <div class="row d-flex justify-content-center">
