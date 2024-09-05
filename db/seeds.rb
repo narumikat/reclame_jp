@@ -17,10 +17,10 @@ User.create!(
   first_name: 'Cassiano',
   last_name: 'Admin',
   phone_number: '000-000-0000',
-  address: '123 Main St',
+  address: Faker::Address.full_address,
   city: 'New York',
   state: 'NY',
-  zip_code: '10001',
+  zip_code: '0000-000',
   admin: true,
 )
 
@@ -32,10 +32,10 @@ User.create!(
   first_name: 'Narumi',
   last_name: 'Admin',
   phone_number: '000-000-0000',
-  address: '123 Main St',
+  address: Faker::Address.full_address,
   city: 'New York',
   state: 'NY',
-  zip_code: '10001',
+  zip_code: '0000-000',
   admin: true,
 )
 
@@ -135,7 +135,6 @@ company1 = Company.create!(
   company_contact_email: 'company@mail.com',
   company_category: Company::COMPANY_CATEGORY.sample
 )
-
 
 ############################################################################################################
 puts "deleting photos from companies..."
