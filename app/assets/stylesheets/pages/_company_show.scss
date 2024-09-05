@@ -9,6 +9,11 @@
     font-weight: 600;
   }
 
+  .fa-pen-to-square {
+    color: $gray-icon;
+    font-size: 1.3rem;
+  }
+
   .flex-column {
     padding: 0 0.3rem;
     @media (max-width: 768px) {

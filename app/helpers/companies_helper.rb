@@ -3,7 +3,7 @@ module CompaniesHelper
     user_signed_in? && 
     current_page?(user_user_companies_path(current_user)) && 
     current_user.company? && 
-    (company.users.include?(current_user) || current_user.admin?)
+    (company.users.include?(current_user) || current_user.admin?) || current_user.admin?
   end
 
   def company_button_for(current_user)

@@ -6,12 +6,19 @@
 }
 
 .info-box {
+  max-width: 100%;
   background: #cfe2ff;
   border: 1px solid #9ec5fe;
   color: #052c65;
   text-align: center;
   padding: 1rem 1.5rem;
   border-radius: 6px;
+
+  .website-text {
+    white-space: normal;
+    word-break: break-all;
+    display: inline-block;
+  }
 }
 
 .alert-box {
