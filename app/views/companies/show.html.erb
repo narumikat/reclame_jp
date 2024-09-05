@@ -168,9 +168,11 @@
                 <% company_fields.each do |label, value| %>
                   <% if value.present? %>
                     <% if label == "Website" %>
-                      <p><strong><%= label %>:</strong> <%= link_to value, value, target: "_blank" %></p>
+                      <p class="mb-2"><strong><%= label %>:</strong> <%= link_to value, value, target: "_blank" %></p>
+                    <% elsif label == "CEP" %>
+                      <p class="mb-2"><strong><%= label %>:</strong> 〒<%= value %></p>
                     <% else %>
-                      <p><strong><%= label %>:</strong> <%= value %></p>
+                      <p class="mb-2"><strong><%= label %>:</strong> <%= value %></p>
                     <% end %>
                   <% end %>
                 <% end %>
