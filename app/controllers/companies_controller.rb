@@ -23,13 +23,17 @@ class CompaniesController < ApplicationController
   def create
     authorize Company
     @company = Company.new(company_params)
+    
     if company_params[:company_social_media].values.all?(&:blank?)
       flash[:alert] = "Por favor, preencha pelo menos um campo de rede social."
       render :new
     else
       if @company.save
         role = session[:role] || params[:role] 
-        if role.present?
+        
+        if current_user.admin? || current_user.superadmin?
+          redirect_to company_path(@company), notice: 'Empresa criada com sucesso.'
+        elsif role.present?
           CompaniesUser.create!(user: current_user, company: @company, role: role)
           session.delete(:role)
           redirect_to company_path(@company), notice: 'Empresa criada com sucesso.'
@@ -107,7 +111,7 @@ class CompaniesController < ApplicationController
   
   
   def check_company_user
-    unless current_user.company?
+    unless current_user.company? || current_user.admin?
       redirect_to root_path, alert: "Você não tem permissão para criar uma empresa."
     end
   end

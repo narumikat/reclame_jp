@@ -42,6 +42,14 @@
           </div>
         </div>
       </div>
+      <% if current_user.admin? %>
+        <%= link_to new_company_path do %>
+          <div class="d-flex ms-2 align-items-center my-2">
+            <i class="fa-solid fa-building me-2"></i>
+            <span>Adicionar empresa</span>
+          </div>
+        <% end %>
+      <% end %>
     <% else %>
       <div class="d-flex ms-2 align-items-center">
         <i class="fa-solid fa-right-to-bracket me-3 my-3"></i>

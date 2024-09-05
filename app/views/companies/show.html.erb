@@ -2,8 +2,15 @@
   <%= render 'companies/company_banner', company: @company %>
   <%= render 'shared/back_btn_absolute' %>
   <div class="container py-4">
-    <div>
-      <h1 class="text-center"><%= @company.company_name %></h1>
+    <div class="row">
+      <div class="d-flex justify-content-center align-items-center mb-2">
+        <h1 class="mb-0"><%= @company.company_name %></h1>
+        <% if can_edit_company?(@company) %>
+          <%= link_to edit_company_path(@company) do %>
+            <i class="ms-2 fa-solid fa-pen-to-square"></i>
+          <% end %>
+        <% end %>
+      </div>
       <div class="d-flex justify-content-center">
         <%= link_to search_path(company_category: @company.company_category) do %>
           <span class="tag-grey"><%= @company.company_category %></span>
@@ -100,10 +107,10 @@
               <div class="border bg-white-tab mt-2 flex-grow-1 p-3">
                 <h5 class="text-center mb-3 mt-2">contato da empresa</h5>
                 <% if @company.company_website.present? %>
-                  <div class="info-box">
-                    <%= link_to ( @company.company_website.start_with?("http://", "https://") ? @company.company_website : "http://#{@company.company_website}" ), target: "_blank", class: "text-decoration-none" do %>
+                  <div class="info-box d-flex align-items-center">
+                    <%= link_to ( @company.company_website.start_with?("http://", "https://") ? @company.company_website : "http://#{@company.company_website}" ), target: "_blank", class: "text-decoration-none d-flex align-items-center flex-wrap" do %>
                       <i class="fa-solid fa-globe me-2"></i>
-                      <%= @company.company_website %>
+                      <span class="website-text"><%= display_website(@company.company_website) %></span>
                     <% end %>
                   </div>
                 <% end %>
