@@ -55,7 +55,6 @@ gem "sassc-rails"
 gem "pundit"
 gem "cloudinary"
 gem 'countries'
-gem "faker"
 
 # Sendgrid
 gem "sendgrid-ruby"

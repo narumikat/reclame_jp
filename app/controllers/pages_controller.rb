@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :home, :about, :contact, :privacy, :terms, :faq ]
 
   def home
-    @companies = Company.all.order(created_at: :desc).last(10)
+    @companies = Company.all.order(created_at: :desc).limit(5)
     @complaints = Complaint.all.order(created_at: :desc).last(10)
     @ranked_companies = Company.company_ranking.first(3)
   end

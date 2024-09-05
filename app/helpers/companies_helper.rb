@@ -7,7 +7,6 @@ module CompaniesHelper
     (company.users.include?(current_user) || current_user.admin?) || current_user.admin?
   end
   
-
   def company_button_for(current_user)
     if current_user.companies.any? && current_user.companies.size == 1
       btn_text = 'Ver empresa'

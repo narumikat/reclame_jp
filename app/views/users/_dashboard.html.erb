@@ -37,7 +37,7 @@
               <% end %>
             </div>
             <div class="d-flex flex-row flex-nowrap overflow-auto">
-              <% @companies.sort_by { |i| -i.created_at.to_i }.last(5).each do |company| %>
+              <% @companies.each do |company| %>
                 <div class="col-10 col-md-4 m-2">
                   <%= render 'companies/card', company: company %>
                 </div>
