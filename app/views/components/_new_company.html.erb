@@ -2,32 +2,57 @@
   <%= f.error_notification %>
   <div class="form-inputs">
     <%= f.input :company_name, label: "Nome da empresa", required: true %>
-    <%= f.input :company_register_number, label: "Número de registro da empresa" %>
     <%= f.input :company_address, label: "Endereço" %>
-    <%= f.input :company_city, label: "Cidade" %>
-    <%= f.label "Província", required: true, class: "mb-2" %>
-    <%= f.collection_select :company_prefecture,
+    <div class="d-flex">
+      <div class="col-6 me-2">
+        <%= f.input :company_city, label: "Cidade" %>
+      </div>
+      <div class="col">
+        <%= f.label "Província", required: true, class: "mb-2" %>
+        <%= f.collection_select :company_prefecture,
                                                   Company::COMPANY_PREFECTURE,
                                                   :to_s, :to_s,
                                                   { include_blank: 'Selecione uma província' },
                                                   { class: 'form-control mb-3' } %>
-    <%= f.input :company_zip_code, label: "Código Postal" %>
-    <%= f.input :company_country, label: "País da empresa", collection: ISO3166::Country.all.map { |country| [country.translations['en'], country.alpha2] }, prompt: "Selecione um país" %>
-    <%= f.input :company_phone_number, label: "Número de telefone da empresa" %>
-    <%= f.input :company_website, label: "Website" %>
-    <% if session[:role].blank? %>
-      <%= label_tag 'role', 'Seu cargo na empresa' %>
-      <%= text_field_tag 'role', '', placeholder: "Insira o seu cargo na empresa", class: 'form-control', required: true %>
-    <% else %>
-      <%= hidden_field_tag 'role', session[:role] %>
-    <% end %>
-    <div class="form-group my-4">
-      <%= f.label "Categoria da empresa *", class: "mb-2" %>
-      <%= f.collection_select :company_category,
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-6 me-2">
+        <%= f.label "Código Postal", class: "mb-2" %>
+        <div class="d-flex align-items-center w-100">
+          <p class="me-2 mb-0">〒</p>
+          <%= f.input :company_zip_code, label: false, wrapper: false, input_html: { class: "form-control flex-grow-1" } %>
+        </div>
+      </div>
+      <div class="col">
+        <%= f.input :company_country, label: "País da empresa", collection: ISO3166::Country.all.map { |country| [country.translations['en'], country.alpha2] }, prompt: "Selecione um país" %>
+      </div>
+    </div>
+    <div class="d-flex row">
+      <div class="col-12 col-md-6">
+        <%= f.input :company_phone_number, label: "Telefone da empresa" %>
+      </div>
+      <div class="col-12 col-md">
+        <%= f.input :company_website, label: "Website" %>
+      </div>
+    </div>
+    <div class="d-flex row align-items-center">
+      <div class="col-12 col-md-6">
+        <% if session[:role].blank? %>
+          <%= label_tag 'role', 'Seu cargo na empresa' %>
+          <%= text_field_tag 'role', '', placeholder: "Insira o seu cargo na empresa", class: 'form-control', required: true %>
+        <% else %>
+          <%= hidden_field_tag 'role', session[:role] %>
+        <% end %>
+      </div>
+      <div class="form-group my-4 col-12 col-md">
+        <%= f.label "Categoria da empresa *", class: "mb-2" %>
+        <%= f.collection_select :company_category,
                                           Company::COMPANY_CATEGORY, 
                                           :to_s, :to_s, 
                                           { include_blank: 'Selecione uma categoria' },
                                           { class: 'form-control' } %>
+      </div>
     </div>
     <div id="social-media-links">
       <h3 class="text-center pt-4">Redes sociais da empresa</h3>
@@ -45,7 +70,6 @@
     </div>
     <div class="border-bottom m-4 pt-2"></div>
     <%= f.input :company_description, label: "Descrição da empresa", as: :text %>
-    <%= f.input :company_contact_name, label: "Nome de contato" %>
     <%= f.input :company_contact_email, label: "Email de contato", as: :email %>
     <h4 class="text-center mt-4">A empresa possui <strong>logomarca?</strong> </h4>
     <p>Faça upload do arquivo <strong>ou</strong> cole uma URL</p>

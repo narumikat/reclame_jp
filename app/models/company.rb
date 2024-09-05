@@ -114,18 +114,19 @@ class Company < ApplicationRecord
   
     if digits.start_with?('0')
       if digits.length == 10 # Telefone fixo
-        self.company_phone_number = digits.gsub(/(\d{4})(\d{2})(\d{4})/, '\1 \2 \3')
+        self.company_phone_number = digits.gsub(/(\d{2})(\d{4})(\d{4})/, '\1 \2 \3')
       elsif digits.length == 11 # Celular
         self.company_phone_number = digits.gsub(/(\d{3})(\d{4})(\d{4})/, '\1 \2 \3')
       else
         self.company_phone_number = digits
       end
+    elsif digits.length == 9 || digits.length == 10 # Telefone fixo sem o '0'
+      self.company_phone_number = digits.gsub(/(\d{1,2})(\d{4})(\d{4})/, '\1 \2 \3')
     else
       self.company_phone_number = digits
     end
   end
   
-
   def phone_number_format
     return if company_phone_number.blank?
   
