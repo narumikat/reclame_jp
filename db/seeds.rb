@@ -276,7 +276,7 @@ earnest.company_banner.attach(
 ikai = Company.create!(
   company_name: 'Ikai Industry',
   company_address: 'Shizuoka-ken Hamamatsu-shi Naka-ku Sumiyoshi 3-18-6',
-  company_city: 'amamatsu-shi',
+  company_city: 'Hamamatsu-shi',
   company_prefecture: 'Shizuoka',
   company_zip_code: '430-0906',
   company_country: 'Japan',

@@ -31,7 +31,7 @@
       <div class="col-10 col-md-4 my-2">
         <%= render 'companies/card', company: company %>
       </div>
-      <% if post_counter == 9 || (post_counter > 9 && (post_counter - 9) % 10 == 0) %>
+      <% if post_counter == 9 || (post_counter > 9 && (post_counter - 8) % 10 == 0) %>
         <div class="d-flex justify-content-center">
           <div class="my-4 col-11 col-md-8">
             <%= render 'components/company_not_find' %>

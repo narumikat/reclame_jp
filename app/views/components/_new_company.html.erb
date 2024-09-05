@@ -47,14 +47,14 @@
     <%= f.input :company_description, label: "Descrição da empresa", as: :text %>
     <%= f.input :company_contact_name, label: "Nome de contato" %>
     <%= f.input :company_contact_email, label: "Email de contato", as: :email %>
-    <h4 class="text-center mt-4">A empresa possui logomarca? </h4>
+    <h4 class="text-center mt-4">A empresa possui <strong>logomarca?</strong> </h4>
     <p>Faça upload do arquivo <strong>ou</strong> cole uma URL</p>
     <%= f.input :company_logo, as: :file, label: 'Upload do logo da empresa' %>
-    <%= f.input :company_logo_url, label: 'Cole a URL da logomarca da empresa' %>
-    <h4 class="text-center mt-4">A empresa possui banner? </h4>
+    <%= f.input :company_logo_url, label: 'Ou cole a URL da logomarca da empresa' %>
+    <h4 class="text-center mt-4">A empresa possui <strong>banner?</strong> </h4>
     <p>Faça upload do arquivo <strong>ou</strong> cole uma URL</p>
     <%= f.input :company_banner, as: :file, label: 'Banner da empresa' %>
-    <%= f.input :company_banner_url, label: 'Cole a URL do banner da empresa' %>
+    <%= f.input :company_banner_url, label: 'Ou cole a URL do banner da empresa' %>
   </div>
   <div class="d-flex justify-content-center my-4">
     <%= f.button :submit, text_btn , class: "btn-red" %>
