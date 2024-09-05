@@ -11,11 +11,11 @@ puts 'Creating users...'
 # USER ADMIN
 User.create!(
   username: 'user_admin',
-  email: 'admin@mail.com',
+  email: 'cassiano@u-innova.com',
   password: 'admin123',
   password_confirmation: 'admin123',
-  first_name: 'Admin',
-  last_name: 'One',
+  first_name: 'Cassiano',
+  last_name: 'Admin',
   phone_number: '000-000-0000',
   address: '123 Main St',
   city: 'New York',
@@ -24,21 +24,19 @@ User.create!(
   admin: true,
 )
 
-# USER SEM RECLAMACOES 
 User.create!(
-  username: 'user_no_complaints',
-  email: 'usermail@mail.com',
-  password: '123456',
-  password_confirmation: '123456',
-  first_name: 'User',
-  last_name: 'No Complaints',
-  phone_number: '1234567890',
+  username: 'user_admin',
+  email: 'narumi@u-innova.com',
+  password: 'admin123',
+  password_confirmation: 'admin123',
+  first_name: 'Narumi',
+  last_name: 'Admin',
+  phone_number: '000-000-0000',
   address: '123 Main St',
   city: 'New York',
   state: 'NY',
   zip_code: '10001',
-  admin: false,
-  is_company: false
+  admin: true,
 )
 
 # USER COM RECLAMACOES 
