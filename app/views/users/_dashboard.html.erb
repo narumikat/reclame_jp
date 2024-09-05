@@ -58,17 +58,25 @@
               </div>
             <% end %>
           </div>
-          <div class="complaints pt-4">
+          <div class="complaints pt-4 pb-2">
             <div class="my-4">
               <h2>Últimas reclamações</h2>
             </div>
-            <div class="d-flex flex-row flex-nowrap overflow-auto">
+            <div class="d-flex flex-row flex-nowrap overflow-auto mb-4">
               <% @complaints.sort_by { |i| -i.created_at.to_i }.last(5).each do |complaint| %>
                 <div class="m-2 col-9 col-md-4">
                   <%= render 'complaints/card', complaint: complaint %>
                 </div>
               <% end %>
             </div>
+          </div>
+          <div class="border p-4 mt-4">
+            <h3 class="mb-4 text-center">Crie uma reclamação <span>anônima</span> agora mesmo</h3>
+            <% if user_signed_in? %>
+              <%= render 'components/btn_reclamar', text: 'Reclamar', path: new_complaint_path %>
+            <% else %>
+              <%= render 'components/btn_reclamar', text: 'Reclamar', path: registration_type_path %>
+            <% end %>
           </div>
         </div>
       </div>
