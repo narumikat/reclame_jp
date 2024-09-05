@@ -98,9 +98,10 @@
             <!-- terceira coluna -->
             <div class="col-md d-flex flex-column company-info pb-2">
               <div class="border bg-white-tab pt-3 px-3 pb-4">
-                <h5 class="text-center mb-3">Informaçõpes da empresa <strong><%= @company.company_name %></strong></h5>
+                <h5 class="text-center mb-3">Informaçõpes da empresa <br>
+                  <strong><%= @company.company_name %></strong></h5>
                 <p class="mb-3"><strong>Sobre</strong></p>
-                <p><%= @company.company_description %></p>
+                <p class="about"><%= @company.company_description %></p>
                 <p class="my-3"><strong>Categoria:</strong></p>
                 <span class="tag-grey-sm"><%= @company.company_category %></span>
               </div>

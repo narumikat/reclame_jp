@@ -9,7 +9,8 @@ class CompaniesController < ApplicationController
   def index
     authorize Company
     @companies = Company.all
-    @categories = Company::COMPANY_CATEGORY
+    # @categories = Company::COMPANY_CATEGORY
+    @categories = Company.select(:company_category).distinct.pluck(:company_category)
   end
   def new
     authorize Company
