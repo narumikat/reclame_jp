@@ -90,7 +90,7 @@ class Company < ApplicationRecord
   def must_have_at_least_one_social_media
     social_media = company_social_media
     if social_media.blank? || !social_media.values.any?(&:present?)
-      errors.add(:company_social_media, "must have at least one social media account")
+      errors.add(:company_social_media, "deve ter pelo menos uma rede social")
     end
   end
 
@@ -98,7 +98,7 @@ class Company < ApplicationRecord
     company_social_media.each do |platform, url|
       next if url.blank?
       if Company.where("company_social_media @> ?", { platform => url }.to_json).where.not(id: self.id).exists?
-        errors.add(:company_social_media, "URL #{url} for #{platform} must be unique")
+        errors.add(:company_social_media, "URL #{url} de #{platform} deve ser única")
       end
     end
   end
@@ -109,32 +109,33 @@ class Company < ApplicationRecord
 
   def normalize_phone_number
     return if company_phone_number.blank?
-  
+
     digits = company_phone_number.gsub(/\D/, '')
-  
+    # Se for um número de telefone fixo que falta o "0", adiciona o "0"
+    if digits.length == 9 && digits[0] != '0'
+      digits = '0' + digits
+    end
+
     if digits.start_with?('0')
-      if digits.length == 10 # Telefone fixo
+      if digits.length == 10 # Telefone fixo (ex: 03-1234-5678)
         self.company_phone_number = digits.gsub(/(\d{2})(\d{4})(\d{4})/, '\1 \2 \3')
-      elsif digits.length == 11 # Celular
+      elsif digits.length == 11 # Celular (ex: 090-1234-5678)
         self.company_phone_number = digits.gsub(/(\d{3})(\d{4})(\d{4})/, '\1 \2 \3')
       else
-        self.company_phone_number = digits
+        errors.add(:company_phone_number, 'número inválido')
       end
-    elsif digits.length == 9 || digits.length == 10 # Telefone fixo sem o '0'
-      self.company_phone_number = digits.gsub(/(\d{1,2})(\d{4})(\d{4})/, '\1 \2 \3')
     else
-      self.company_phone_number = digits
+      errors.add(:company_phone_number, 'número inválido')
     end
   end
   
   def phone_number_format
     return if company_phone_number.blank?
-  
-    fixed_line_regex = /\A\d{4} \d{2} \d{4}\z/
-    mobile_regex = /\A\d{3} \d{4} \d{4}\z/
+    fixed_line_regex = /\A0\d{1,4} \d{1,4} \d{4}\z/
+    mobile_regex = /\A0[789]0 \d{4} \d{4}\z/
   
     unless company_phone_number.match?(fixed_line_regex) || company_phone_number.match?(mobile_regex)
       errors.add(:company_phone_number, 'deve ser um número de telefone japonês válido')
     end
-  end  
+  end
 end
