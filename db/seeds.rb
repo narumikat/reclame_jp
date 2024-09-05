@@ -10,7 +10,7 @@ puts 'Creating users...'
 
 # USER ADMIN
 User.create!(
-  username: 'user_admin',
+  username: 'cassiano.admin',
   email: 'cassiano@u-innova.com',
   password: 'admin123',
   password_confirmation: 'admin123',
@@ -25,7 +25,7 @@ User.create!(
 )
 
 User.create!(
-  username: 'user_admin',
+  username: 'narumi.admin',
   email: 'narumi@u-innova.com',
   password: 'admin123',
   password_confirmation: 'admin123',
