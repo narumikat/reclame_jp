@@ -77,7 +77,7 @@ class Company < ApplicationRecord
   def self.company_ranking
     companies = Company.all
     
-    companies_with_complaints = companies.select { |company| company.total_complaints_count > 0 }
+    companies_with_complaints = companies.select { |company| company.total_complaints_count > 0 && company.complaints_answered_count > 0 }
     
     ranked_companies = companies_with_complaints.sort_by { |company| -company.company_score }
     
