@@ -4,7 +4,8 @@ class PagesController < ApplicationController
   def home
     @companies = Company.all.order(created_at: :desc).limit(5)
     @complaints = Complaint.all.order(created_at: :desc).limit(5)
-    @ranked_companies = Company.company_ranking.first(3)
+    @top_ranked_companies = Company.top_company_ranking.first(3)
+    @low_ranked_companies = Company.low_company_ranking.first(3)
   end
 
   # Static pages

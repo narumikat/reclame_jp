@@ -45,14 +45,27 @@
             </div>
           </div>
           <%= render 'components/company_not_find' %>
-          <div class="my-4 pt-4 ranking">
+          <div class="my-4 pt-4 ranked_companies">
             <div class="d-flex justify-content-between align-items-center my-4">
-              <h2 class="mb-4">Maior pontuação</h2>
-              <%= link_to top_companies_path do %>
+              <h2 class="mb-4"><span>Maior</span> pontuação</h2>
+              <%= link_to top_scored_companies_path do %>
                 <i class="fa-solid fa-circle-arrow-right"></i>
               <% end %>
             </div>
-            <% @ranked_companies.each do |company| %>
+            <% @top_ranked_companies.each do |company| %>
+              <div class="mb-2">
+                <%= render 'companies/ranked_companies', company: company %>
+              </div>
+            <% end %>
+          </div>
+          <div class="my-4 pt-4 ranked_companies">
+            <div class="d-flex justify-content-between align-items-center my-4">
+              <h2 class="mb-4"><span>Pior</span> pontuação</h2>
+              <%= link_to low_scored_companies_path do %>
+                <i class="fa-solid fa-circle-arrow-right"></i>
+              <% end %>
+            </div>
+            <% @low_ranked_companies.each do |company| %>
               <div class="mb-2">
                 <%= render 'companies/ranked_companies', company: company %>
               </div>

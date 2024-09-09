@@ -22,7 +22,8 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'top_companies', to: 'companies#top_scored_companies', as: 'top_companies'
+  get 'top_scored_companies', to: 'companies#top_scored_companies', as: 'top_scored_companies'
+  get 'low_scored_companies', to: 'companies#low_scored_companies', as: 'low_scored_companies'
 
   resources :complaints do
     get 'new_complaint', on: :collection, to: 'complaints#new_complaint'

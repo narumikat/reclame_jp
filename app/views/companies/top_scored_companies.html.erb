@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container ranked_companies">
   <%= render 'shared/back_btn' %>
-  <h2 class="my-4 text-bold">Empresas com maior pontuação</h2>
-  <% @ranked_companies.each do |company| %>
+  <h2 class="my-4 text-bold">Empresas com <span>maior</span> pontuação</h2>
+  <% @top_ranked_companies.each do |company| %>
     <div class="mb-2">
       <%= render 'companies/ranked_companies', company: company %>
     </div>
