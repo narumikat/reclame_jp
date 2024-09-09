@@ -74,16 +74,19 @@ class Company < ApplicationRecord
     scaled_score
   end  
   
-  def self.company_ranking
+  def self.top_company_ranking
     companies = Company.all
-    
     companies_with_complaints = companies.select { |company| company.total_complaints_count > 0 && company.complaints_answered_count > 0 }
-    
-    ranked_companies = companies_with_complaints.sort_by { |company| -company.company_score }
-    
-    ranked_companies
+    top_ranked_companies = companies_with_complaints.sort_by { |company| -company.company_score }
+    top_ranked_companies
   end
   
+  def self.low_company_ranking
+    companies = Company.all
+    companies_with_complaints = companies.select { |company| company.total_complaints_count > 0 && company.complaints_unanswered_count > 0 }
+    low_ranked_companies = companies_with_complaints.sort_by { |company| company.company_score }
+    low_ranked_companies
+  end  
 
   private
 

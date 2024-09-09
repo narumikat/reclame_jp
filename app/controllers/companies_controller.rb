@@ -78,7 +78,11 @@ class CompaniesController < ApplicationController
   end
 
   def top_scored_companies
-    @ranked_companies = Company.company_ranking
+    @top_ranked_companies = Company.top_company_ranking
+  end
+
+  def low_scored_companies
+    @low_ranked_companies = Company.low_company_ranking
   end
 
   private
