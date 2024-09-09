@@ -19,28 +19,32 @@
       font-size: 1.2rem;
     }
   }
+}
 
-  .companies, .complaints, .ranking {
-    .fa-circle-arrow-right {
-      color: $gray-icon;
-      font-size: 2rem;
-      transition: color 0.3s;
+.companies, .complaints, .ranked_companies {
+  .fa-circle-arrow-right {
+    color: $gray-icon;
+    font-size: 2rem;
+    transition: color 0.3s;
 
-      &:hover {
-        color: $gray-hover;
-      }
+    &:hover {
+      color: $gray-hover;
     }
+  }
 
-    h2 {
-      font-size: 2rem;
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $black;
+    span {
+      color: $main-red;
       font-weight: 700;
-      color: $black;
     }
+  }
 
-    @media (max-width: 768px) {
-      h2 {
-        font-size: 1.5rem;
-      }
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 1.5rem;
     }
   }
 }
