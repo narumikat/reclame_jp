@@ -6,13 +6,15 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.smtp_settings = {
-    address:              'smtp.sendgrid.net',
+    address:              'mail.privateemail.com',
     port:                 587,
-    domain:               'u-innova.com',
-    user_name:            'apikey',
-    password:             ENV["SENDGRID_API_KEY"],
+    domain:               'www.reclamejp.com',
+    user_name:            ENV["USER_EMAIL"],
+    password:             ENV["USER_EMAIL_PASSWORD"],
     authentication:       'plain',
-    enable_starttls_auto: true  }
+    enable_starttls_auto: true,
+    openssl_verify_mode: 'none'
+  }
 
   #NGROCK LOCAL HOST
   config.hosts << /.*\.ngrok-free\.app/

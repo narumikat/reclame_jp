@@ -61,6 +61,7 @@ class ComplaintsController < ApplicationController
   
     if @complaint.save
       @company = @complaint.company
+      UserMailer.email_to_user(current_user.email, @complaint).deliver_now
       # Descomentar esta linha abaixo para enviar email.
       # SendgridMailer.send_email(current_user).deliver_now
       redirect_to @complaint, notice: 'Reclamação criada com sucesso.'
