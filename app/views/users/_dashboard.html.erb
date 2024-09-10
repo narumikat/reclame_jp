@@ -17,6 +17,25 @@
               <% end %>
             </h3>
           </div>
+          <div id="carouselExampleSlidesOnly" class="carousel slide mb-4" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <% @companies.each_with_index do |company, index| %>
+                <%= link_to company_path(company) do %>
+                  <div class="carousel-item <%= 'active' if index == 0 %>">
+                    <% if company.company_banner.attached? %>
+                      <%= cl_image_tag company.company_banner.key, class: 'img-carousel' %>
+                    <% else %>
+                      <%= image_tag 'card-img.png', class: 'img-carousel' %>
+                    <% end %>
+                    <h5><%= company.company_name %></h5>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="d-flex justify-content-center mt-2">
+              <%= link_to "Todas as empresas", companies_path, class: "btn-blue" %>
+            </div>
+          </div>
           <div class="border p-4">
             <div class="ms-4">
               <h3 class="mb-4">Está com algum <span>problema?</span></h3>
