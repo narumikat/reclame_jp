@@ -56,9 +56,6 @@ gem "pundit"
 gem "cloudinary"
 gem 'countries'
 
-# Sendgrid
-# gem "sendgrid-ruby"
-
 # Twilio
 gem "twilio-ruby"
 
