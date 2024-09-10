@@ -30,11 +30,9 @@ class CompaniesController < ApplicationController
       render :new
     else
       if @company.save
-        role = session[:role] || params[:role] 
-        
-        if current_user.admin? || current_user.superadmin?
-          redirect_to company_path(@company), notice: 'Empresa criada com sucesso.'
-        elsif role.present?
+        role = session[:role] || params[:role]
+
+        if role.present?
           CompaniesUser.create!(user: current_user, company: @company, role: role)
           session.delete(:role)
           redirect_to company_path(@company), notice: 'Empresa criada com sucesso.'
@@ -42,6 +40,10 @@ class CompaniesController < ApplicationController
           @company.destroy
           flash[:alert] = "Cargo não selecionado."
           render :new
+        end
+        
+        if current_user.admin?
+          redirect_to company_path(@company), notice: 'Empresa criada com sucesso.'
         end
       else
         flash[:alert] = 'Falha ao salvar a Empresa: ' + @company.errors.full_messages.to_sentence
