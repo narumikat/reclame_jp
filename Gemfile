@@ -57,7 +57,7 @@ gem "cloudinary"
 gem 'countries'
 
 # Sendgrid
-gem "sendgrid-ruby"
+# gem "sendgrid-ruby"
 
 # Twilio
 gem "twilio-ruby"
