@@ -51,7 +51,7 @@
                   <% role = @user.companies_users.find_by(company_id: company.id).role %>
                   <div class="col-md-10">
                     <div class="employee-card">
-                      <h5>@<%= @user.username %> é <strong><%= role %></strong> da empresa 
+                      <h5>@<%= @user.username %> trabalha como <strong><%= role %></strong> da empresa 
                         <br>
                         <%= link_to company.company_name, company_path(company.id) %></h5>
                     </div>

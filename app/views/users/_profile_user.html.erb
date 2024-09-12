@@ -45,7 +45,7 @@
         <div class="row d-flex justify-content-center mb-4">
           <div class="col-md-10 mt-4 user-complaints bg-white border py-4">
             <% if @user.complaints.any? %>
-              <h3 class="text-center">Reclamações do usuario</h3>
+              <h3 class="text-center">Reclamações do usuário</h3>
               <div class="row d-flex justify-content-center mt-4 pb-4">
                 <% @user.complaints.order(created_at: :desc).each do |complaint| %>
                   <div class="col-md-10">
