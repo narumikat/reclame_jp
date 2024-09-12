@@ -1,15 +1,14 @@
 class UserMailer < ApplicationMailer
-
-  def email_to_company(user_email, complaint)
+  def email_to_company(company_email, complaint)
+    @complaint = complaint
     mail(
-      to: user_email,
+      to: company_email,
       from: ENV["USER_EMAIL"],
-      subject: "Reclamação de Usuário, #{complaint.title} por favor, responda esse email.",
-      body: "Reclamação:\n
-#{complaint.title}\n
-#{complaint.comment}"
+      subject: "Sua empresa recebeu uma reclamação: #{complaint.title}, veja os detalhes",
+      template_name: 'email_to_company',
+      template_path: 'user_mailer'
     )
-  end
+  end  
 
   def email_company_to_user(user_email, response)
     mail(
@@ -17,10 +16,7 @@ class UserMailer < ApplicationMailer
       from: ENV["USER_EMAIL"],
       subject: "Resposta da Empresa",
       body: "Resposta:\n
-#{response.content}"
+      #{response.content}"
     )
-
   end
-
-
 end

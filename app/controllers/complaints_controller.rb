@@ -75,19 +75,17 @@ class ComplaintsController < ApplicationController
   def update
     
   end
-  # app/controllers/complaints_controller.rb
-def destroy
-  @complaint = Complaint.find(params[:id])
-  authorize @complaint
-  if @complaint.destroy
-    flash[:success] = "Reclamação excluída com sucesso."
-  else
-    flash[:error] = "Erro ao excluir a reclamação."
+  
+  def destroy
+    @complaint = Complaint.find(params[:id])
+    authorize @complaint
+    if @complaint.destroy
+      flash[:success] = "Reclamação excluída com sucesso."
+    else
+      flash[:error] = "Erro ao excluir a reclamação."
+    end
+    redirect_to company_complaints_path(@complaint.company)
   end
-  redirect_to company_complaints_path(@complaint.company)
-end
-
-
   
   private
 
