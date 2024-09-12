@@ -24,33 +24,34 @@ class CompaniesController < ApplicationController
   def create
     authorize Company
     @company = Company.new(company_params)
-    
+  
     if company_params[:company_social_media].values.all?(&:blank?)
       flash[:alert] = "Por favor, preencha pelo menos um campo de rede social."
-      render :new
-    else
-      if @company.save
-        role = session[:role] || params[:role]
-
+      render :new and return
+    end
+  
+    if @company.save
+      role = session[:role] || params[:role]
+  
+      if current_user.admin?
+        redirect_to company_path(@company), notice: 'Empresa criada com sucesso pelo administrador.' and return
+      else
         if role.present?
           CompaniesUser.create!(user: current_user, company: @company, role: role)
           session.delete(:role)
-          redirect_to company_path(@company), notice: 'Empresa criada com sucesso.'
+          redirect_to company_path(@company), notice: 'Empresa criada com sucesso.' and return
         else
           @company.destroy
           flash[:alert] = "Cargo não selecionado."
-          render :new
+          render :new and return
         end
-        
-        if current_user.admin?
-          redirect_to company_path(@company), notice: 'Empresa criada com sucesso.'
-        end
-      else
-        flash[:alert] = 'Falha ao salvar a Empresa: ' + @company.errors.full_messages.to_sentence
-        render :new
       end
+    else
+      flash[:alert] = 'Falha ao salvar a Empresa: ' + @company.errors.full_messages.to_sentence
+      render :new and return
     end
   end
+  
 
   def show
     authorize @company
