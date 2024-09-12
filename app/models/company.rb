@@ -95,7 +95,7 @@ class Company < ApplicationRecord
              SUM(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) AS unanswered_complaints,
              AVG(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) AS unanswered_complaints_ratio')
       .having('COUNT(complaints.id) > 0 AND SUM(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) > 0')
-      .order('unanswered_complaints_ratio ASC')
+      .order('unanswered_complaints_ratio DESC')
   end
 
 
