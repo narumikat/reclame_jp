@@ -1,6 +1,6 @@
 class ComplaintsController < ApplicationController
-  before_action :set_company, only: [:index, :create, :show], if: -> { params[:company_id].present? }
-  before_action :set_complaint, only: [:show]
+  before_action :set_company, only: [:index, :create, :show, :destroy], if: -> { params[:company_id].present? }
+  before_action :set_complaint, only: [:show, :destroy]
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
@@ -68,6 +68,26 @@ class ComplaintsController < ApplicationController
     end
   end
   
+  def edit
+    
+  end
+
+  def update
+    
+  end
+  # app/controllers/complaints_controller.rb
+def destroy
+  @complaint = Complaint.find(params[:id])
+  authorize @complaint
+  if @complaint.destroy
+    flash[:success] = "Reclamação excluída com sucesso."
+  else
+    flash[:error] = "Erro ao excluir a reclamação."
+  end
+  redirect_to company_complaints_path(@complaint.company)
+end
+
+
   
   private
 

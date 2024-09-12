@@ -127,10 +127,9 @@ company1 = Company.create!(
   company_prefecture: Company::COMPANY_PREFECTURE.sample,
   company_zip_code: '10001',
   company_country: 'USA',
-  company_phone_number: '0270-21-8155',
-  company_website: 'www.empresaexemplo.com',
+  company_website: 'www.reclamejp.com',
   company_contact_email: 'suporte@reclamejp.com',
-  company_social_media: { facebook: 'www.facebook.com/empresaexemplo', twitter: 'www.twitter.com/empresaexemplo' },
+  company_social_media: { facebook: 'https://www.facebook.com/profile.php?id=61565440495945', instagram: 'https://www.instagram.com/servicos_no_japao' },
   company_description: 'Este perfil é um exemplo de empresa.',
   company_contact_name: 'John Doe',
   company_category: Company::COMPANY_CATEGORY.sample

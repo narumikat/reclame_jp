@@ -47,6 +47,16 @@
       }
     }
   }
+
+  .fa-trash-alt {
+    color: $gray-icon;
+    transition: color 0.3s;
+    font-size: 1.2rem;
+
+    &:hover {
+      color: $gray-hover;
+    }
+  }
 }
 
 // USER COMPLAINTS 
