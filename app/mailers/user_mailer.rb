@@ -8,4 +8,16 @@ class UserMailer < ApplicationMailer
     )
   end
 
+  def email_company_to_user(user_email, response)
+    mail(
+      to: user_email,
+      from: ENV["USER_EMAIL"],
+      subject: "Resposta da Empresa",
+      body: "Resposta:\n
+#{response.content}"
+    )
+
+  end
+
+
 end
