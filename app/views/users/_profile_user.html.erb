@@ -20,20 +20,21 @@
               <% end %>
             </div>
             <div class="ms-4">
-              <h4><strong><%= @user.username_protected %></strong></h4>
+              <small>Perfil empresarial</small>
+              <h4 class="mt-2">@<strong><%= @user.username_protected %></strong></h4>
               <p>Se cadastrou em <%= @user.created_at.strftime("%d %b %Y") %></p>
             </div>
           </div>
         </div>
         <div class="mt-4 col-md-10 col-12 d-flex">
           <div class="col-6 box-info">
-            <p><%= @user.username_protected %> criou</p>
+            <p>@<%= @user.username_protected %> criou</p>
             <h2><%= @user.total_complaints_count %> </h2>
             <p>reclamações <br>
               em <strong><%= @user.unique_complaint_companies_count %> empresas</strong></p>
           </div>
           <div class="col box-info">
-            <p><%= @user.username_protected %> tem</p>
+            <p>@<%= @user.username_protected %> tem</p>
             <h2>
               <%= (@user.complaints_answered_percentage || 0).round %>%
             </h2>
@@ -41,7 +42,7 @@
               respondidas</p>
           </div>
         </div>
-        <div class="row d-flex justify-content-center">
+        <div class="row d-flex justify-content-center mb-4">
           <div class="col-md-10 mt-4 user-complaints bg-white border py-4">
             <% if @user.complaints.any? %>
               <h3 class="text-center">Reclamações do usuario</h3>

@@ -20,14 +20,15 @@
               <% end %>
             </div>
             <div class="ms-4">
-              <h4><strong><%= @user.username_protected %></strong></h4>
+              <small>Perfil empresarial</small>
+              <h4 class="mt-2">@<strong><%= @user.username %></strong></h4>
               <p>Se cadastrou em <%= @user.created_at.strftime("%d %b %Y") %></p>
             </div>
           </div>
         </div>
         <div class="mt-4 col-md-10 col-12 d-flex">
           <div class="col-6 box-info">
-            <p><%= @user.username_protected %> trabalha em</p>
+            <p>@<%= @user.username %> trabalha em</p>
             <h2><%= @user.companies.size %></h2>
             <% if @user.companies.size > 1 %>
               <p>empresas</p>
@@ -36,7 +37,7 @@
             <% end %>
           </div>
           <div class="col box-info">
-            <p><%= @user.username_protected %> respondeu</p>
+            <p>@<%= @user.username %> respondeu</p>
             <h2><%= @user.responses.size %> </h2>
             <p>reclamações</p>
           </div>
@@ -50,7 +51,7 @@
                   <% role = @user.companies_users.find_by(company_id: company.id).role %>
                   <div class="col-md-10">
                     <div class="employee-card">
-                      <h5><%= @user.username_protected %> é <strong><%= role %></strong> da empresa 
+                      <h5>@<%= @user.username %> é <strong><%= role %></strong> da empresa 
                         <br>
                         <%= link_to company.company_name, company_path(company.id) %></h5>
                     </div>
@@ -58,7 +59,7 @@
                 <% end %>
               </div>
             <% else %>
-              <h3 class="text-center"><%= @user.username_protected %> não trabalha em nenhuma empresa</h3>
+              <h3 class="text-center">@<%= @user.username %> não trabalha em nenhuma empresa</h3>
             <% end %>
           </div>
         </div>

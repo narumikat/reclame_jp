@@ -7,7 +7,7 @@
   <div class="border-bottom px-4"></div>
   <div class="py-4">
     <div class="d-flex align-items-center">
-      <h2><%= @complaint.title %> - <small><%= @complaint.user.username_protected %></small></h2>
+      <h2><%= @complaint.title %></h2>
       <% if user_signed_in? && current_user.admin? %>
         <%= link_to company_complaint_path(@company, @complaint), data: { turbo_method: :delete, turbo_confirm: "Tem certeza que deseja excluir essa reclamação?" }, class: 'delete-link' do %>
           <i class="fa-solid fa-trash-alt mx-4"></i>
@@ -15,9 +15,12 @@
       <% end %>
     </div>
     <div class="d-flex justify-content-between">
-      <small>
-        <i class="fa-regular fa-calendar me-2"></i>
-        <%= @complaint.created_at.strftime('%d %B %Y') %></small>
+      <div>
+        <small>
+          <i class="fa-regular fa-calendar me-2"></i>
+          <%= @complaint.created_at.strftime('%d %B %Y') %><br>
+          Criado por <strong><%= link_to user_path(@complaint.user) do %><%= @complaint.user.username_protected %><% end %></strong></small>
+      </div>
       <%= render 'components/tag_status', complaint: @complaint %>
     </div>
     <div class="my-4">
