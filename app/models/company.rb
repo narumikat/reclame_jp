@@ -69,7 +69,7 @@ class Company < ApplicationRecord
     return 10 if total_complaints_count.zero?
 
     score = complaints_answered_percentage
-    scaled_score = (score / 10.0).round(2)
+    scaled_score = (score / 10.0).round(1)
 
     scaled_score
   end
