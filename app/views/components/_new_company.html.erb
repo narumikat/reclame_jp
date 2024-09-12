@@ -37,14 +37,6 @@
       </div>
     </div>
     <div class="d-flex row align-items-center">
-      <div class="col-12 col-md-6">
-        <% if session[:role].blank? %>
-          <%= label_tag 'role', 'Seu cargo na empresa' %>
-          <%= text_field_tag 'role', '', placeholder: "Insira o seu cargo na empresa", class: 'form-control', required: true %>
-        <% else %>
-          <%= hidden_field_tag 'role', session[:role] %>
-        <% end %>
-      </div>
       <div class="form-group my-4 col-12 col-md">
         <%= f.label "Categoria da empresa *", class: "mb-2" %>
         <%= f.collection_select :company_category,
@@ -53,6 +45,14 @@
                                           { include_blank: 'Selecione uma categoria' },
                                           { class: 'form-control' } %>
       </div>
+      <% if session[:role].blank? && !current_user.admin %>
+        <div class="col-12 col-md-6">
+          <%= label_tag 'role', 'Seu cargo na empresa *', class: "mb-1" %>
+          <%= select_tag 'role', options_for_select(CompaniesUser::ROLE), { prompt: 'Selecione seu cargo', class: 'form-control', required: true } %>
+        <% else %>
+          <%= hidden_field_tag 'role', session[:role] %>
+        </div>
+      <% end %>
     </div>
     <div id="social-media-links">
       <h3 class="text-center pt-4">Redes sociais da empresa</h3>
