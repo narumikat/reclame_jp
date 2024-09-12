@@ -1,0 +1,17 @@
+<div id="carouselExampleSlidesOnly" class="carousel slide mb-4" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <% companies.each_with_index do |company, index| %>
+      <%= link_to company_path(company) do %>
+        <div class="carousel-item <%= 'active' if index == 0 %>">
+          <% if company.company_banner.attached? %>
+            <%= cl_image_tag company.company_banner.key, class: 'img-carousel' %>
+          <% else %>
+            <%= image_tag 'card-img.png', class: 'img-carousel' %>
+          <% end %>
+          <h5><%= company.company_name %></h5>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+                                                                                              
