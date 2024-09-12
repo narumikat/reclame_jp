@@ -25,7 +25,7 @@
               <%= link_to "Todas as empresas", companies_path, class: "btn-blue" %>
             </div>
           </div>
-          <div class="border p-4">
+          <div class="border white-bg p-4">
             <div class="ms-4">
               <h3 class="mb-4">Está com algum <span>problema?</span></h3>
               <% if user_signed_in? %>
@@ -56,7 +56,7 @@
           <div class="my-4 pt-4 ranked_companies">
             <div class="d-flex justify-content-between align-items-center my-4">
               <h2 class="mb-4"><span>Maior</span> pontuação</h2>
-              <%= link_to top_scored_companies_path do %>
+              <%= link_to top_scored_companies_companies_path do %>
                 <i class="fa-solid fa-circle-arrow-right"></i>
               <% end %>
             </div>
@@ -69,7 +69,7 @@
           <div class="my-4 pt-4 ranked_companies">
             <div class="d-flex justify-content-between align-items-center my-4">
               <h2 class="mb-4"><span>Pior</span> pontuação</h2>
-              <%= link_to low_scored_companies_path do %>
+              <%= link_to low_scored_companies_companies_path do %>
                 <i class="fa-solid fa-circle-arrow-right"></i>
               <% end %>
             </div>
@@ -91,7 +91,7 @@
               <% end %>
             </div>
           </div>
-          <div class="border p-4 mt-4">
+          <div class="border p-4 mt-4 white-bg">
             <h3 class="mb-4 text-center">Crie uma reclamação <span>anônima</span> agora mesmo</h3>
             <% if user_signed_in? %>
               <%= render 'components/btn_reclamar', text: 'Reclamar', path: new_complaint_path %>

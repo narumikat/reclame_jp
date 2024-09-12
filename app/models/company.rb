@@ -83,7 +83,6 @@ class Company < ApplicationRecord
              SUM(CASE WHEN responses.id IS NOT NULL THEN 1 ELSE 0 END) AS answered_complaints_count')
       .having('COUNT(complaints.id) > 0 AND SUM(CASE WHEN responses.id IS NOT NULL THEN 1 ELSE 0 END) > 0')
       .order(Arel.sql('SUM(CASE WHEN responses.id IS NOT NULL THEN 1 ELSE 0 END) / COUNT(complaints.id) DESC'))
-      .limit(3)
   end
 
   def self.low_company_ranking
@@ -97,7 +96,6 @@ class Company < ApplicationRecord
              AVG(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) AS unanswered_complaints_ratio')
       .having('COUNT(complaints.id) > 0 AND SUM(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) > 0')
       .order('unanswered_complaints_ratio ASC')
-      .limit(3)
   end
 
 
