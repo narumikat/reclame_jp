@@ -27,4 +27,8 @@ class ComplaintPolicy < ApplicationPolicy
   def create?
     true
   end
+
+  def destroy?
+    current_user.admin?
+  end
 end

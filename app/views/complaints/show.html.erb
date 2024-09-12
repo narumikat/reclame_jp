@@ -7,6 +7,9 @@
   <div class="border-bottom px-4"></div>
   <div class="py-4">
     <h2><%= @complaint.title %> - <small><%= @complaint.user.username_protected %></small></h2>
+    <%= link_to company_complaint_path(@company, @complaint), method: :delete, data: { confirm: 'Tem certeza de que deseja excluir esta reclamação?' }, class: 'delete-link' do %>
+      <i class="fa-solid fa-trash-alt"></i>
+    <% end %>
     <div class="d-flex justify-content-between">
       <small>
         <i class="fa-regular fa-calendar me-2"></i>
