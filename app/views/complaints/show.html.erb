@@ -37,7 +37,7 @@
       <% @responses.each do |response| %>
         <div class="mx-4 border-bottom"></div>
         <div class="my-4">
-          <small>Respondida por: <%= link_to response.user.username_protected, user_path(response.user) %>, <strong><%= response.user.role_in_company(@complaint.company) %></strong> da empresa</small>
+          <small>Respondida por: <%= link_to response.user.username, user_path(response.user) %> - <strong><%= response.user.role_in_company(@complaint.company) %></strong> da empresa</small>
           <p class="my-2"><%= response.content %></p>
           <small><%= response.created_at.strftime('%d %B %Y') %></small>
           <!-- Renderizando as respostas aninhadas -->
@@ -55,7 +55,7 @@
           <!-- Formulário para responder à reclamação -->
           <div class="ml-5 response-to-response-form">
             <% if user_signed_in? && current_user.complaints.include?(@complaint) %>
-              <p><strong>Responda ao <%= response.user.role_in_company(@complaint.company) %></strong></p>
+              <p>Responda ao <%= response.user.username %>, <strong><%= response.user.role_in_company(@complaint.company) %></strong>:</p>
               <%= simple_form_for([response.complaint.company, response.complaint, response.responses.build]) do |f| %>
                 <%= f.hidden_field :parent_id, value: response.id %>
                 <%= f.input :content, label: false, placeholder: "Escreva uma resposta..." %>
@@ -79,6 +79,16 @@
           <%= f.button :submit, "Responder", class: "btn-red" %>
         </div>
       <% end %>
+    </div>
+  <% end %>
+  <!-- btn cadastre-se para responder-->
+  <% if !user_signed_in? %>
+    <div class="d-flex row justify-content-center mt-4">
+      <div class="border p-4 complaint-company col-11 col-md-10">
+        <h5 class="text-center mb-4">Essa reclamação pertence à sua empresa? <br>
+          Cadastre-se como <strong>empresa</strong> e responda</h5>
+        <%= render 'components/btn_companies', btn_text: 'Cadastre-se e responda', link_path: registration_type_path %>
+      </div>
     </div>
   <% end %>
 </div>
