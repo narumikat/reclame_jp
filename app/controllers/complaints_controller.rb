@@ -61,7 +61,7 @@ class ComplaintsController < ApplicationController
   
     if @complaint.save
       @company = @complaint.company
-      UserMailer.email_to_user(@company.company_contact_email, @complaint).deliver_now
+      UserMailer.email_to_company(@company.company_contact_email, @complaint).deliver_now
       redirect_to @complaint, notice: 'Reclamação criada com sucesso. Um email de confirmação foi enviado para a empresa.'
     else
       handle_existing_or_new_company

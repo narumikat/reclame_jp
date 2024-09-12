@@ -1,6 +1,6 @@
 class UserMailer < ApplicationMailer
 
-  def email_to_user(user_email, complaint)
+  def email_to_company(user_email, complaint)
     mail(
       to: user_email,
       from: ENV["USER_EMAIL"],
