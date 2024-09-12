@@ -20,7 +20,7 @@
   <div class="p-2">
     <div class="d-flex justify-content-between align-items-center my-2">
       <span class="tag-grey-sm"><%= complaint.complaint_category %></span>
-      <% if current_user.admin? %>
+      <% if user_signed_in? && current_user.admin? %>
         <%= link_to company_complaint_path(complaint.company, complaint), data: { turbo_method: :delete, turbo_confirm: "Tem certeza que deseja excluir essa reclamação?" }, class: 'delete-link' do %>
           <i class="fa-solid fa-trash-alt me-2"></i>
         <% end %>
