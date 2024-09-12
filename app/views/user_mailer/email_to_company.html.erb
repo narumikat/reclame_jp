@@ -1,28 +1,26 @@
-<div class="container">
-  <body>
-    <div class="mail">
-      <div class="mail-top">
-        <h1>Olá, <strong><%= @complaint.company.company_name %></strong>, <br>
-          sua empresa recebeu uma nova reclamação!</h1>
-      </div>
-      <div class="mail-body">
-        <small>Reclamação criada em: <strong><%= @complaint.created_at.strftime("%d %B %Y") %></strong>.<br>
-          Confira os detalhes abaixo:</small>
-        <h3>"<%= @complaint.title %>"</h3>
-        <p><%= @complaint.comment %></p>
-        <h5>* Para responder a essa reclamação, acesse o painel administrativo da sua empresa em nosso site e envie uma
-          resposta para o usuário.</h5>
-        <div class="button">
-          <%= link_to complaint_url(@complaint, @complaint.company), class: 'btn-red' do %>
-            Ver Reclamação
-          <% end %>
-        </div>
-        <small>Atenciosamente, <br>
-          Equipe <strong>ReclameJP</strong></small>
-      </div>
+<body>
+  <div class="mail">
+    <div class="mail-top">
+      <h1>Olá, <strong><%= @complaint.company.company_name %></strong>, <br>
+        sua empresa recebeu uma nova reclamação!</h1>
     </div>
-  </body>
-</div>
+    <div class="mail-body">
+      <small>Reclamação criada em: <strong><%= @complaint.created_at.strftime("%d %B %Y") %></strong>.<br>
+        Confira os detalhes abaixo:</small>
+      <h3>"<%= @complaint.title %>"</h3>
+      <p><%= @complaint.comment %></p>
+      <h5>* Para responder a essa reclamação, acesse o painel administrativo da sua empresa em nosso site e envie uma
+        resposta para o usuário.</h5>
+      <div class="button">
+        <%= link_to complaint_url(@complaint, @complaint.company), class: 'btn-red' do %>
+          Ver Reclamação
+        <% end %>
+      </div>
+      <small>Atenciosamente, <br>
+        Equipe <strong>ReclameJP</strong></small>
+    </div>
+  </div>
+</body>
 <style>
   .mail {
     background: #f9f9f9;
