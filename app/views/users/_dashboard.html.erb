@@ -25,7 +25,7 @@
               <%= link_to "Todas as empresas", companies_path, class: "btn-blue" %>
             </div>
           </div>
-          <div class="border white-bg p-4">
+          <div class="border bg-white p-4">
             <div class="ms-4">
               <h3 class="mb-4">Está com algum <span>problema?</span></h3>
               <% if user_signed_in? %>
@@ -91,7 +91,7 @@
               <% end %>
             </div>
           </div>
-          <div class="border p-4 mt-4 white-bg">
+          <div class="border p-4 mt-4 bg-white">
             <h3 class="mb-4 text-center">Crie uma reclamação <span>anônima</span> agora mesmo</h3>
             <% if user_signed_in? %>
               <%= render 'components/btn_reclamar', text: 'Reclamar', path: new_complaint_path %>
