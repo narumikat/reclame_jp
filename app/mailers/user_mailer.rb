@@ -1,13 +1,10 @@
 class UserMailer < ApplicationMailer
-
-  def email_to_company(user_email, complaint)
+  def email_to_company(company_email, complaint)
     mail(
-      to: user_email,
+      to: company_email,
       from: ENV["USER_EMAIL"],
-      subject: 'Reclamação enviada com sucesso',
-      body: "Reclamação:\n
-#{complaint.title}\n
-#{complaint.comment}"
+      subject: "Sua empresa recebeu uma reclamação: #{complaint.title}, veja os detalhes",
+      body: 
     )
   end
 
