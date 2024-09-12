@@ -2,10 +2,10 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :home, :about, :contact, :privacy, :terms, :faq ]
 
   def home
-    @companies = Company.all.order(created_at: :desc).limit(5)
-    @complaints = Complaint.all.order(created_at: :desc).limit(5)
-    @top_ranked_companies = Company.top_company_ranking.first(3)
-    @low_ranked_companies = Company.low_company_ranking.first(3)
+    @companies = Company.select(:id, :company_name, :created_at, :company_category, :company_banner_url, :company_logo_url).order(created_at: :desc).limit(5)
+    @complaints = Complaint.select(:id, :title, :company_id, :status, :complaint_category, :created_at).order(created_at: :desc).limit(5)
+    @top_ranked_companies = Company.top_company_ranking
+    @low_ranked_companies = Company.low_company_ranking
   end
 
   # Static pages
