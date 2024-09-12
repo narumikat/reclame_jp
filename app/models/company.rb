@@ -16,38 +16,38 @@ class Company < ApplicationRecord
   has_one_attached :company_banner
 
   COMPANY_CATEGORY = [
-  "Empreiteiras",
-  "Construção",
-  "Demolição e Reforma",
-  "Educação",
-  "Entretenimento",
-  "Moda e Beleza",
-  "Saúde",
-  "Serviços",
-  "Tecnologia",
-  "Veículos e Acessórios",
-  "Viagens e Turismo",
-  "Móveis e Decoração",
-  "Seguradoras",
-  "Agencias de Emprego",
-  "Bancos e Financeiras",
-  "Telefonia, Tv e Internet",
-  "Alimentos e Bebidas",
-  "Supermercados",
-  "Transporte",
-  "Varejo",
-  "Outros"]
+    "Empreiteiras",
+    "Construção",
+    "Demolição e Reforma",
+    "Educação",
+    "Entretenimento",
+    "Moda e Beleza",
+    "Saúde",
+    "Serviços",
+    "Tecnologia",
+    "Veículos e Acessórios",
+    "Viagens e Turismo",
+    "Móveis e Decoração",
+    "Seguradoras",
+    "Agencias de Emprego",
+    "Bancos e Financeiras",
+    "Telefonia, Tv e Internet",
+    "Alimentos e Bebidas",
+    "Supermercados",
+    "Transporte",
+    "Varejo",
+    "Outros"]
 
   COMPANY_PREFECTURE = [
-  'Aichi', 'Akita', 'Aomori', 'Chiba', 'Ehime', 'Fukui', 'Fukuoka', 'Fukushima', 'Gifu', 'Gunma', 'Hiroshima', 'Hokkaido', 
-  'Hyogo', 'Ibaraki', 'Ishikawa', 'Iwate', 'Kagawa', 'Kagoshima', 'Kanagawa', 'Kochi', 'Kumamoto', 'Kyoto', 'Mie', 'Miyagi', 
-  'Miyazaki', 'Nagano', 'Nagasaki', 'Nara', 'Niigata', 'Oita', 'Okayama', 'Okinawa', 'Osaka', 'Saga', 'Saitama', 'Shiga', 'Shimane', 
-  'Shizuoka', 'Tokushima', 'Tokyo', 'Tottori', 'Toyama', 'Wakayama', 'Yamagata', 'Yamaguchi', 'Yamanashi'
+    'Aichi', 'Akita', 'Aomori', 'Chiba', 'Ehime', 'Fukui', 'Fukuoka', 'Fukushima', 'Gifu', 'Gunma', 'Hiroshima', 'Hokkaido',
+    'Hyogo', 'Ibaraki', 'Ishikawa', 'Iwate', 'Kagawa', 'Kagoshima', 'Kanagawa', 'Kochi', 'Kumamoto', 'Kyoto', 'Mie', 'Miyagi',
+    'Miyazaki', 'Nagano', 'Nagasaki', 'Nara', 'Niigata', 'Oita', 'Okayama', 'Okinawa', 'Osaka', 'Saga', 'Saitama', 'Shiga', 'Shimane',
+    'Shizuoka', 'Tokushima', 'Tokyo', 'Tottori', 'Toyama', 'Wakayama', 'Yamagata', 'Yamaguchi', 'Yamanashi'
   ]
 
   validates :company_prefecture, presence: true, inclusion: { in: COMPANY_PREFECTURE }
   validates :company_category, presence: true, inclusion: { in: COMPANY_CATEGORY }
-  
+
   def total_complaints_count
     complaints.count
   end
@@ -67,26 +67,39 @@ class Company < ApplicationRecord
 
   def company_score
     return 10 if total_complaints_count.zero?
-    
+
     score = complaints_answered_percentage
     scaled_score = (score / 10.0).round(2)
-    
+
     scaled_score
-  end  
-  
-  def self.top_company_ranking
-    companies = Company.all
-    companies_with_complaints = companies.select { |company| company.total_complaints_count > 0 && company.complaints_answered_count > 0 }
-    top_ranked_companies = companies_with_complaints.sort_by { |company| -company.company_score }
-    top_ranked_companies
   end
-  
+
+  def self.top_company_ranking
+    Company
+      .joins(:complaints)
+      .left_joins(:complaints => :responses)
+      .group('companies.id')
+      .select('companies.*, COUNT(complaints.id) AS complaints_count,
+             SUM(CASE WHEN responses.id IS NOT NULL THEN 1 ELSE 0 END) AS answered_complaints_count')
+      .having('COUNT(complaints.id) > 0 AND SUM(CASE WHEN responses.id IS NOT NULL THEN 1 ELSE 0 END) > 0')
+      .order(Arel.sql('SUM(CASE WHEN responses.id IS NOT NULL THEN 1 ELSE 0 END) / COUNT(complaints.id) DESC'))
+      .limit(3)
+  end
+
   def self.low_company_ranking
-    companies = Company.all
-    companies_with_complaints = companies.select { |company| company.total_complaints_count > 0 && company.complaints_unanswered_count > 0 }
-    low_ranked_companies = companies_with_complaints.sort_by { |company| company.company_score }
-    low_ranked_companies
-  end  
+    Company
+      .joins(:complaints)
+      .left_joins(:complaints => :responses)
+      .group('companies.id')
+      .select('companies.*,
+             COUNT(complaints.id) AS total_complaints,
+             SUM(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) AS unanswered_complaints,
+             AVG(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) AS unanswered_complaints_ratio')
+      .having('COUNT(complaints.id) > 0 AND SUM(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) > 0')
+      .order('unanswered_complaints_ratio ASC')
+      .limit(3)
+  end
+
 
   private
 
@@ -131,12 +144,12 @@ class Company < ApplicationRecord
       errors.add(:company_phone_number, 'número inválido')
     end
   end
-  
+
   def phone_number_format
     return if company_phone_number.blank?
     fixed_line_regex = /\A0\d{1,4} \d{1,4} \d{4}\z/
     mobile_regex = /\A0[789]0 \d{4} \d{4}\z/
-  
+
     unless company_phone_number.match?(fixed_line_regex) || company_phone_number.match?(mobile_regex)
       errors.add(:company_phone_number, 'deve ser um número de telefone japonês válido')
     end
