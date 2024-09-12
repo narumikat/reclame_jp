@@ -68,14 +68,25 @@ class CompaniesController < ApplicationController
 
   def update
     authorize @company
-    if @company.update(company_params)
+
+    social_media_params = {
+      facebook: params[:company][:company_social_media_facebook],
+      twitter: params[:company][:company_social_media_twitter],
+      linkedin: params[:company][:company_social_media_linkedin],
+      instagram: params[:company][:company_social_media_instagram],
+      youtube: params[:company][:company_social_media_youtube],
+      tiktok: params[:company][:company_social_media_tiktok]
+    }
+
+    if @company.update(company_params.merge(company_social_media: social_media_params))
       redirect_to company_path(@company), notice: 'Empresa atualizada com sucesso.'
     else
-      Rails.logger.debug "Erro ao atualizar a empresa: #{@company.errors.full_messages.join(", ")}"
+      Rails.logger.debug "Erro ao atualizar a empresa: #{@company.errors.full_messages.join(', ')}"
       flash[:alert] = 'Falha ao atualizar a Empresa: ' + @company.errors.full_messages.to_sentence
       render :edit
     end
-  end  
+  end
+
 
   def destroy
   end
