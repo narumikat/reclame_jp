@@ -2,7 +2,7 @@
   <%= render 'shared/back_btn' %>
   <div class="row">
     <div class="col-md-3 mt-4 border d-none d-md-flex">
-      <% if current_user.is_company? %>
+      <% if user_signed_in? && current_user.is_company? %>
         <%= render 'shared/sidebar_company' %>
       <% else %>
         <%= render 'shared/sidebar' %>
@@ -13,8 +13,8 @@
         <div class="welcome-dashboard border col-md-10 col-12">
           <div class="d-flex align-items-center">
             <div>
-              <% if current_user.avatar.attached? %>
-                <%= cl_image_tag current_user.avatar.key, class: "avatar-profile" %>
+              <% if @user.avatar.attached? %>
+                <%= cl_image_tag @user.avatar.key, class: "avatar-profile" %>
               <% else %>
                 <%= image_tag 'user-photo.png', class: "avatar-profile" %>
               <% end %>
