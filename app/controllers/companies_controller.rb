@@ -2,7 +2,7 @@ class CompaniesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_company, only: [:show, :edit, :update]
   before_action :check_company_user, only: [:new, :create, :edit, :update] 
-  skip_before_action :authenticate_user!, only: [:index, :show, :top_scored_companies]
+  skip_before_action :authenticate_user!, only: [:index, :show, :top_scored_companies, :low_scored_companies]
 
   COMPANY_CATEGORY = Company::COMPANY_CATEGORY
   
