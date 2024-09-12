@@ -37,6 +37,7 @@ class Complaint < ApplicationRecord
   validates :complaint_category, inclusion: { in: COMPLAINT_CATEGORY }, presence: true
 
   accepts_nested_attributes_for :company
+  acts_as_favoritor
 
   def self.search(search)
     if search
@@ -52,5 +53,23 @@ class Complaint < ApplicationRecord
     else
       pending!
     end
+  end
+
+  def favorite(user)
+    unless favorited_by?(user)
+    user.favorited_complaints << self
+    update_column(:likes_count, likes_count + 1)
+    end
+  end
+
+  def unfavorite(user)
+    if favorited_by(user)
+      user.unfavorite(self)
+      update_column(:likes_count, likes_count - 1)
+    end
+  end
+
+  def favorited_by?(user)
+    Favorite.exists?(favoritor: user, favoritable: self)
   end
 end
