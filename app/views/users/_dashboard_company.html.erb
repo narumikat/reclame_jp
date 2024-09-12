@@ -15,16 +15,16 @@
           <% if current_user.companies.any? %>
             <div class="border p-4">
               <% if current_user.companies.size > 1 %>
-                <h3 class="text-center">Veja as <span>reclamações</span> das suas empresas</h3>
+                <h3 class="text-center mb-4">Veja as <span>reclamações</span> das suas empresas</h3>
                 <%= company_button_for(current_user) %>
               <% else %>
-                <h3 class="text-center">Veja as <span>reclamações</span> da sua empresa</h3>
+                <h3 class="text-center mb-4">Veja as <span>reclamações</span> da sua empresa</h3>
                 <%= company_button_for(current_user) %>
               <% end %>
             </div>
           <% else %>
             <div class="border p-4">
-              <h3 class="text-center">Primeiro <span>cadastre</span> sua empresa</h3>
+              <h3 class="text-center mb-4">Primeiro <span>cadastre</span> sua empresa</h3>
               <%= render 'components/btn_companies', btn_text: 'Cadastre sua empresa', link_path: new_company_path %>
             </div>
           <% end %>

@@ -10,6 +10,9 @@
     <% if user_signed_in? %>
       <h3 class="text-center pb-2">Olá <strong><%= current_user.username %></strong></h3>
       <%= render 'components/btn_reclamar' %>
+      <% if current_user.admin? %>
+        <%= render 'components/btn_companies', btn_text: 'Adicionar empresa', link_path: new_company_path %>
+      <% end %>
     <% else %>
       <h3 class="text-center pb-2">Olá <strong>visitante</strong></h3>
       <%= render 'components/btn_reclamar', text: 'Reclamar', path: registration_type_path %>
