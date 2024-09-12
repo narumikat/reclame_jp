@@ -82,11 +82,13 @@
     </div>
   <% end %>
   <!-- btn cadastre-se para responder-->
-  <div class="d-flex row justify-content-center mt-4">
-    <div class="border p-4 complaint-company col-11 col-md-10">
-      <h5 class="text-center mb-4">Essa reclamação pertence à sua empresa? <br>
-        Cadastre-se como <strong>empresa</strong> e responda</h5>
-      <%= render 'components/btn_companies', btn_text: 'Cadastre-se e responda', link_path: registration_type_path %>
+  <% if !user_signed_in? %>
+    <div class="d-flex row justify-content-center mt-4">
+      <div class="border p-4 complaint-company col-11 col-md-10">
+        <h5 class="text-center mb-4">Essa reclamação pertence à sua empresa? <br>
+          Cadastre-se como <strong>empresa</strong> e responda</h5>
+        <%= render 'components/btn_companies', btn_text: 'Cadastre-se e responda', link_path: registration_type_path %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>
