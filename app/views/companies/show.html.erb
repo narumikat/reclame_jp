@@ -115,6 +115,12 @@
                     <% end %>
                   </div>
                 <% end %>
+                <% if @company.company_contact_email.present? %>
+                  <div class="info-box d-flex align-items-center mt-2">
+                    <i class="fa-solid fa-envelope me-2"></i>
+                    <span><%= @company.company_contact_email %></span>
+                  </div>
+                <% end %>
                 <div class="contato-company mt-4 ms-4">
                   <% social_media_fields = @company.company_social_media || {} %>
                   <% social_media_fields.each do |platform, url| %>
@@ -210,7 +216,8 @@
                 </div>
                 <% company_fields = {
                 "Telefone" => @company.company_phone_number,
-                "Website" => @company.company_website
+                "Website" => @company.company_website,
+                "Email" => @company.company_contact_email
               } %>
                 <% company_fields.each do |label, value| %>
                   <% if value.present? %>
@@ -220,11 +227,15 @@
                           <i class="fa-solid fa-phone me-2"></i>
                         <% elsif label == "Website" %>
                           <i class="fa-solid fa-globe me-2"></i>
+                        <% elsif label == "Email" %>
+                          <i class="fa-solid fa-envelope me-2"></i>
                         <% end %>
                         <%= label %>:
                       </strong>
                       <% if label == "Website" %>
-                        <%= link_to value, value, target: "_blank" %>
+                        <%= link_to (value.start_with?("http://", "https://") ? value : "http://#{value}"), target: "_blank" do %>
+                          <%= display_website(value) %>
+                        <% end %>
                       <% else %>
                         <%= value %>
                       <% end %>
