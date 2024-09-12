@@ -10,8 +10,8 @@ class PagesController < ApplicationController
 
   # Static pages
   def about
-    @complaint = Complaint.last
-    
+    # teste de template do email na page about
+    # @complaint = Complaint.last
   end
 
   def contact
