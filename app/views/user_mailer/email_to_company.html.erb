@@ -1,15 +1,17 @@
 <body>
   <div class="mail">
     <div class="mail-top">
-      <%= image_tag image_url('https://res.cloudinary.com/dckmqo1fb/image/upload/v1726150673/reclame-jp/unyb0rbit8ay42ugfc8j.png'), class: "mail-banner" %>
+      <%= image_tag image_url('https://res.cloudinary.com/dckmqo1fb/image/upload/v1726151968/pciiuj2m77gufy2cgm9o.png'), class: "mail-banner" %>
       <h1>Olá, <strong><%= @complaint.company.company_name %></strong>, <br>
         sua empresa recebeu uma nova reclamação!</h1>
     </div>
     <div class="mail-body">
       <small>Reclamação criada em: <strong><%= @complaint.created_at.strftime("%d %B %Y") %></strong>.<br>
         Confira os detalhes abaixo:</small>
-      <h3>"<%= @complaint.title %>"</h3>
-      <p><%= @complaint.comment %></p>
+      <div class="complaint-mail">
+        <h3>"<%= @complaint.title %>"</h3>
+        <p><%= @complaint.comment %></p>
+      </div>
       <h5>* Para responder a essa reclamação, <strong>registre-se como empresa</strong>, acesse o painel administrativo da sua empresa em nosso site e envie uma
         resposta para o usuário.</h5>
       <h5><strong>NÃO RESPONDA ESSE EMAIL!</strong> <br>
@@ -23,7 +25,7 @@
         <small>Atenciosamente, <br>
           Equipe <strong>ReclameJP</strong></small>
         <a href="https://www.reclamejp.com">
-          <%= image_tag 'https://res.cloudinary.com/dckmqo1fb/image/upload/v1726150712/reclame-jp/six0ktvwepdphiztyuwi.jpg', class: "logo-bottom" %>
+          <%= image_tag 'https://res.cloudinary.com/dckmqo1fb/image/upload/v1726152124/ueyfzdmxtzfw6ds6nukb.png', class: "logo-bottom" %>
         </a>
       </div>
     </div>
@@ -37,28 +39,25 @@
   }
 
   .mail-top {
-    position: relative;
+    background: #ffffff;
   }
 
   .mail-banner {
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     width: 100%;
-    height: 300px;
     object-fit: cover;
     object-position: top right;
     z-index: 0;
   }
 
   .mail-top h1 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     z-index: 1;
-    color: #ffffff;
+    color: #4b5953;
     font-weight: 400;
     text-align: center;
+    margin-bottom: 0;
+    padding-top: 40px;
   }
 
   .mail-body {
@@ -70,6 +69,10 @@
 
   .mail-body small {
     color: #4b5953;
+  }
+
+  .complaint-mail {
+    margin-bottom: 40px;
   }
 
   .mail-body h3 {
@@ -89,7 +92,7 @@
   .mail-body h5 {
     font-size: 16px;
     color: #B0060C;
-    margin-top: 40px;
+    margin-top: 20px;
   }
 
   .button {

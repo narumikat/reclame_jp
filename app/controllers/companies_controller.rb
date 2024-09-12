@@ -8,7 +8,7 @@ class CompaniesController < ApplicationController
   
   def index
     authorize Company
-    @companies = Company.all
+    @companies = Company.all.order(created_at: :desc)
     # @categories = Company::COMPANY_CATEGORY
     @categories = Company.select(:company_category).distinct.pluck(:company_category)
   end
