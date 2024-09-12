@@ -9,6 +9,7 @@ class ResponsesController < ApplicationController
     @response.company = @complaint.company
   
     if @response.save
+      UserMailer.email_company_to_user(@complaint, @response).deliver_now
       redirect_to [ @complaint.company, @complaint ], notice: 'Resposta criada com sucesso.'
     else
       Rails.logger.debug(@response.errors.full_messages.to_sentence)
