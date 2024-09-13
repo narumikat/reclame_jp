@@ -21,7 +21,14 @@
             </div>
             <div class="ms-4">
               <small>Perfil empresarial</small>
-              <h4 class="mt-2">@<strong><%= @user.username %></strong></h4>
+              <div class="my-2 d-flex align-items-center">
+                <h4 class="mb-0">@<strong><%= @user.username %></strong></h4>
+                <% if user_signed_in? && current_user == @user %>
+                  <%= link_to edit_user_path(current_user), class: "ms-3" do %>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  <% end %>
+                <% end %>
+              </div>
               <p>Se cadastrou em <%= @user.created_at.strftime("%d %b %Y") %></p>
             </div>
           </div>

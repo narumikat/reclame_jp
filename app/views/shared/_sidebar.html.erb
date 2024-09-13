@@ -64,11 +64,19 @@
       </div>
     <% end %>
     <% if user_signed_in? %>
-      <div class="d-flex m-2 pb-2">
-        <%= link_to user_path(current_user) do %>
-          <i class="fa-solid fa-user me-2"></i>
-          <span>Meu perfil</span>
-        <% end %>
+      <div class="my-2 pb-2">
+        <div class="container-fluid ps-2">
+          <div class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent2" aria-controls="navbarToggleExternalContent" aria-expanded="true" aria-label="Toggle navigation">
+            <i class="fa-solid fa-user me-2"></i>
+            <span>Perfil</span>
+          </div>
+        </div>
+        <div class="collapse" id="navbarToggleExternalContent2">
+          <div class="row ms-4 px-4 pt-4">
+            <%= link_to 'Meu Perfil',user_path(current_user), class: "mb-4" %>
+            <%= link_to 'Editar perfil', edit_user_path(current_user), class: "mb-2" %>
+          </div>
+        </div>
       </div>
       <div class="d-flex m-2">
         <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>

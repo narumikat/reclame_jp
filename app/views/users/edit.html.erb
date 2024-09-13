@@ -1,6 +1,61 @@
 <div class="container">
-  <%= simple_form_for @user do |f| %>
-    <%= f.input :avatar, as: :file %>
-    <%= f.submit "Salvar alterações" %>
-  <% end %>
-</div>
+  <%= render 'shared/back_btn' %>
+  <div class="row">
+    <div class="col-md-3 mt-4 border d-none d-md-flex">
+      <% if user_signed_in? && current_user.is_company? %>
+        <%= render 'shared/sidebar_company' %>
+      <% else %>
+        <%= render 'shared/sidebar' %>
+      <% end %>
+    </div>
+    <div class="col-md-9 col-12 mt-4">
+      <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-10 mt-4">
+          <h3>Editar seu pefil:</h3>
+          <%= simple_form_for @user do |f| %>
+            <%= f.input :username, label: "Insira seu novo username", class: "mb-0 pb-0" %>
+            <small>* Seu username deve ser unico</small>
+            <div class="d-flex row">
+              <div class="col-12 col-md-6">
+                <%= f.input :first_name, label: "Primeiro nome" %>
+              </div>
+              <div class="col-12 col-md">
+                <%= f.input :last_name, label: "Ultimo nome" %>
+              </div>
+            </div>
+            <div class="d-flex row">
+              <div class="col-12 col-md-6">
+                <%= f.input :phone_number, label: "Telefone" %>
+              </div>
+              <div class="col-12 col-md">
+                <%= f.input :zip_code, label: "Codigo postal" %>
+              </div>
+            </div>
+            <div class="d-flex row">
+              <div class="col-12 col-md-6">
+                <%= f.input :city, label: "Cidade" %>
+              </div>
+              <div class="col col-md-6">
+                <%= f.input :state, label: "Provincia" %>
+              </div>
+            </div>
+            <%= f.input :address, label: "Endereço" %>
+            <%= f.input :email %>
+            <div class="d-flex row">
+              <div class="col-12 col-md-6">
+                <%= f.input :password, label: "Nova senha" %>
+              </div>
+              <div class="col-12 col-md">
+                <%= f.input :password_confirmation, label: "Confirme sua senha" %>
+              </div>
+              <%= f.input :avatar, as: :file, label: "Foto de perfil" %>
+              <small>* upload de imagem em formato .jpg, .jpeg, .png</small>
+              <div class="my-4 d-flex justify-content-center pb-4">
+                <%= f.submit "Salvar alterações", class: "btn-red" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
