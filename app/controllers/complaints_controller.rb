@@ -5,20 +5,6 @@ class ComplaintsController < ApplicationController
 
   def index
     authorize Complaint
-    
-    # if @company.present?
-    #   @complaints = @company.complaints.order(created_at: :desc)
-    # else
-    #   @complaints = Complaint.where(user_id: current_user.id).order(created_at: :desc)
-    # end
-  
-    # if params[:respondidas].present?
-    #   if params[:respondidas] == "true"
-    #     @complaints = @complaints.joins(:responses).distinct
-    #   elsif params[:respondidas] == "false"
-    #     @complaints = @complaints.left_joins(:responses).where(responses: { id: nil })
-    #   end
-    # end
     @complaints = policy_scope(Complaint.all).order(created_at: :desc)
   end
 
