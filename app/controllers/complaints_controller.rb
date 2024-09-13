@@ -5,20 +5,7 @@ class ComplaintsController < ApplicationController
 
   def index
     authorize Complaint
-    
-    if @company.present?
-      @complaints = @company.complaints.order(created_at: :desc)
-    else
-      @complaints = Complaint.where(user_id: current_user.id).order(created_at: :desc)
-    end
-  
-    if params[:respondidas].present?
-      if params[:respondidas] == "true"
-        @complaints = @complaints.joins(:responses).distinct
-      elsif params[:respondidas] == "false"
-        @complaints = @complaints.left_joins(:responses).where(responses: { id: nil })
-      end
-    end
+    @complaints = policy_scope(Complaint.all).order(created_at: :desc)
   end
 
   def user_complaints
@@ -61,7 +48,7 @@ class ComplaintsController < ApplicationController
   
     if @complaint.save
       @company = @complaint.company
-      UserMailer.email_to_user(@company.company_contact_email, @complaint).deliver_now
+      UserMailer.email_to_company(@company.company_contact_email, @complaint).deliver_now
       redirect_to @complaint, notice: 'Reclamação criada com sucesso. Um email de confirmação foi enviado para a empresa.'
     else
       handle_existing_or_new_company
@@ -75,19 +62,17 @@ class ComplaintsController < ApplicationController
   def update
     
   end
-  # app/controllers/complaints_controller.rb
-def destroy
-  @complaint = Complaint.find(params[:id])
-  authorize @complaint
-  if @complaint.destroy
-    flash[:success] = "Reclamação excluída com sucesso."
-  else
-    flash[:error] = "Erro ao excluir a reclamação."
+  
+  def destroy
+    @complaint = Complaint.find(params[:id])
+    authorize @complaint
+    if @complaint.destroy
+      flash[:success] = "Reclamação excluída com sucesso."
+    else
+      flash[:error] = "Erro ao excluir a reclamação."
+    end
+    redirect_to company_complaints_path(@complaint.company)
   end
-  redirect_to company_complaints_path(@complaint.company)
-end
-
-
   
   private
 

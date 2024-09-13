@@ -111,14 +111,14 @@
                   <div class="info-box d-flex align-items-center">
                     <%= link_to ( @company.company_website.start_with?("http://", "https://") ? @company.company_website : "http://#{@company.company_website}" ), target: "_blank", class: "text-decoration-none d-flex align-items-center flex-wrap" do %>
                       <i class="fa-solid fa-globe me-2"></i>
-                      <span class="website-text"><%= display_website(@company.company_website) %></span>
+                      <span class="long-text"><%= display_website(@company.company_website) %></span>
                     <% end %>
                   </div>
                 <% end %>
                 <% if @company.company_contact_email.present? %>
                   <div class="info-box d-flex align-items-center mt-2">
                     <i class="fa-solid fa-envelope me-2"></i>
-                    <span><%= @company.company_contact_email %></span>
+                    <span class="long-text"><%= @company.company_contact_email %></span>
                   </div>
                 <% end %>
                 <div class="contato-company mt-4 ms-4">

@@ -1,0 +1,158 @@
+<body>
+  <div class="mail">
+    <div class="mail-top">
+      <%= image_tag image_url('https://res.cloudinary.com/dckmqo1fb/image/upload/v1726151968/pciiuj2m77gufy2cgm9o.png'), class: "mail-banner" %>
+      <h1>Olá, <strong><%= @complaint.company.company_name %></strong>, <br>
+        sua empresa recebeu uma nova reclamação!</h1>
+    </div>
+    <div class="mail-body">
+      <small>Reclamação criada em: <strong><%= @complaint.created_at.strftime("%d %B %Y") %></strong>.<br>
+        Confira os detalhes abaixo:</small>
+      <div class="complaint-mail">
+        <h3>"<%= @complaint.title %>"</h3>
+        <p><%= @complaint.comment %></p>
+      </div>
+      <h5>* Para responder a essa reclamação, <strong>registre-se como empresa</strong>, acesse o painel administrativo da sua empresa em nosso site e envie uma
+        resposta para o usuário.</h5>
+      <h5><strong>NÃO RESPONDA ESSE EMAIL!</strong> <br>
+        Esse email é enviado automaticamente, para responder a reclamação clique no botão abaixo e acesse nosso site</h5>
+      <div class="button">
+        <%= link_to complaint_url(@complaint), class: 'btn-red' do %>
+          VER RECLAMAÇÃO
+        <% end %>
+      </div>
+      <div class="bottom">
+        <small>Atenciosamente, <br>
+          Equipe <strong>ReclameJP</strong></small>
+        <a href="https://www.reclamejp.com">
+          <%= image_tag 'https://res.cloudinary.com/dckmqo1fb/image/upload/v1726152124/ueyfzdmxtzfw6ds6nukb.png', class: "logo-bottom" %>
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+<style>
+  .mail {
+    background: #f9f9f9;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+  }
+
+  .mail-top {
+    background: #ffffff;
+  }
+
+  .mail-banner {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    width: 100%;
+    object-fit: cover;
+    object-position: top right;
+    z-index: 0;
+  }
+
+  .mail-top h1 {
+    z-index: 1;
+    color: #4b5953;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 0;
+    padding-top: 40px;
+  }
+
+  .mail-body {
+    padding: 80px 20px 40px 20px;
+    background: #ffffff;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
+  .mail-body small {
+    color: #4b5953;
+  }
+
+  .complaint-mail {
+    margin-bottom: 40px;
+  }
+
+  .mail-body h3 {
+    color: #4b5953;
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .mail-body p {
+    margin: 20px 40px;
+    font-size: 14px;
+  }
+
+  .mail-body h5 {
+    font-size: 16px;
+    color: #B0060C;
+    margin-top: 20px;
+  }
+
+  .button {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  .btn-red {
+  background: #B0060C;
+  border: none;
+  padding: 0.5rem 1rem;
+  color: #ffffff;
+  border-radius: 6px;
+  transition: background 0.3s;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  }
+
+  .btn-red:hover {
+    background: darken(#B0060C, 10%);
+    color: #ffffff;
+  }
+
+  .bottom {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo-bottom {
+    width: 70px;
+    height: auto;
+    margin-right: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .mail-top h1 {
+    font-size: 24px;
+  }
+
+    .mail-body {
+      padding: 40px 20px 40px 20px;
+    }
+
+    .mail-body h3 {
+      font-size: 20px;
+      margin-top: 40px;
+    }
+
+    .mail-body p {
+      margin: 20px 20px
+    }
+
+    .mail-banner {
+    object-position: right;
+  }
+  }
+</style>
