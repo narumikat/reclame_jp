@@ -19,7 +19,7 @@ class ComplaintsController < ApplicationController
     #     @complaints = @complaints.left_joins(:responses).where(responses: { id: nil })
     #   end
     # end
-    @complaints = policy_scope(Complaint).order(created_at: :desc)
+    @complaints = policy_scope(Complaint.all).order(created_at: :desc)
   end
 
   def user_complaints
