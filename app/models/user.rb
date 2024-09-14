@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :companies, through: :companies_users
   has_many :responses
   has_many :complaints
+  acts_as_favoritor
 
   has_one_attached :avatar
 
