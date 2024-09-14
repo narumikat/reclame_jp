@@ -19,8 +19,8 @@ Rails.application.routes.draw do
   resources :companies, only: [:index, :show, :new, :create, :edit, :update] do
     resources :complaints do
       member do
-        post 'like'
-        delete 'unlike'
+        post :like
+        delete :unlike
       end
       resources :responses do
         member do

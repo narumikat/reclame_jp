@@ -11,8 +11,8 @@ export default class extends Controller {
     const form = button.closest('form');
     const url = form.getAttribute('action');
     const method = button.dataset.method.toUpperCase();
-    // console.log('URL:', url);
-    // console.log('Method:', method);
+    console.log('URL:', url);
+    console.log('Method:', method);
     this.fetchLike(url, method);
   }
 

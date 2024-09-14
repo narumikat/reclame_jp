@@ -85,7 +85,7 @@ class ComplaintsController < ApplicationController
         }
       }
     end
-    authorize @post
+    authorize @complaint
   end
 
   def unlike
@@ -100,7 +100,7 @@ class ComplaintsController < ApplicationController
         }
       }
     end
-    authorize @post
+    authorize @complaint
   end
   
   private
