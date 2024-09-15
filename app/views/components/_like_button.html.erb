@@ -1,6 +1,6 @@
-<div class="d-flex align-items-center" data-like-target="likeContainer">
+<div class="d-flex align-items-center like-container" data-like-target="likeContainer">
   <% if user_signed_in? %>
-    <% if current_user.favorited?(complaint) %>
+    <% if current_user.favorited?(item) %>
       <%= button_to path1, method: :delete, remote: true, class: 'btn-unlike', data: { action: 'like#toggleLike', 'like-target': 'likeButton', method: 'delete' } do %>
         <i class="fa-solid fa-heart me-2"></i>
       <% end %>
@@ -10,5 +10,5 @@
       <% end %>
     <% end %>
   <% end %>
-  <span data-like-target="likeCount"><%= complaint.likes_count %></span>
+  <span data-like-target="likeCount"><%= item.likes_count %></span>
 </div>

@@ -1,7 +1,7 @@
 class Complaint < ApplicationRecord
   include Pundit::Authorization
   belongs_to :user
-  belongs_to :company, optional: true 
+  belongs_to :company
   has_many :responses, dependent: :destroy
 
   COMPLAINT_CATEGORY = [
@@ -57,13 +57,13 @@ class Complaint < ApplicationRecord
 
   def favorite(user)
     unless favorited_by?(user)
-    user.favorited_complaints << self
+    user.favorite(self)
     update_column(:likes_count, likes_count + 1)
     end
   end
 
   def unfavorite(user)
-    if favorited_by(user)
+    if favorited_by?(user)
       user.unfavorite(self)
       update_column(:likes_count, likes_count - 1)
     end

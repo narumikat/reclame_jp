@@ -1,5 +1,5 @@
 class ComplaintsController < ApplicationController
-  before_action :set_company, only: [:index, :create, :show, :destroy], if: -> { params[:company_id].present? }
+  before_action :set_company, only: [:index, :create, :show, :destroy, :like, :unlike], if: -> { params[:company_id].present? }
   before_action :set_complaint, only: [:show, :destroy, :like, :unlike]
   skip_before_action :authenticate_user!, only: [:index, :show]
 
@@ -33,6 +33,7 @@ class ComplaintsController < ApplicationController
     authorize @complaint
     @response = Response.new
     @responses = @complaint.responses.where(parent_id: nil).order(created_at: :desc)
+    @response_like = @responses.first if @responses.present?
   end  
   
   def new
@@ -76,13 +77,11 @@ class ComplaintsController < ApplicationController
 
   def like
     @complaint.favorite(current_user)
+    # current_user.favorite(@complaint)
     respond_to do |format|
       format.html { redirect_to @complaint }
       format.json {
-        render json: {
-          likes_count: @complaint.likes_count,
-          like_button_html: render_to_string(partial: "components/like_button", locals: { complaint: @complaint }, formats: [:html])
-        }
+        render_like_button
       }
     end
     authorize @complaint
@@ -94,10 +93,7 @@ class ComplaintsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to @complaint }
       format.json {
-        render json: {
-          likes_count: @complaint.likes_count,
-          like_button_html: render_to_string(partial: "components/like_button", locals: { complaint: @complaint }, formats: [:html])
-        }
+        render_like_button
       }
     end
     authorize @complaint
@@ -160,6 +156,12 @@ class ComplaintsController < ApplicationController
       ]
     )
   end
+
+  def render_like_button
+    render json: { like_button_html: render_to_string(partial: 'components/like_button', locals: { item: @complaint, 
+                                                                                                    path1: unlike_company_complaint_path(@complaint.user, @complaint), 
+                                                                                                    path2: like_company_complaint_path(@complaint.user, @complaint) }) }
+  end
   
   def set_company
     @company = Company.find(params[:company_id]) if params[:company_id].present?
@@ -173,4 +175,9 @@ class ComplaintsController < ApplicationController
       @complaint = Complaint.find(params[:id])
     end
   end
+  
+  # def set_complaint
+  #   Rails.logger.debug "Looking for Complaint with ID=#{params[:id]} and Company ID=#{params[:company_id]}"
+  #   @complaint = Complaint.find_by!(id: params[:id], company_id: params[:company_id])
+  # end   
 end

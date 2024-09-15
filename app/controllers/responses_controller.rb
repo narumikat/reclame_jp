@@ -17,15 +17,45 @@ class ResponsesController < ApplicationController
       render 'complaints/show'
     end
   end
+
+  def like
+    @response.favorite(current_user)
+    # current_user.favorite(@response)
+    respond_to do |format|
+      format.html { redirect_to @response }
+      format.json {
+        render_like_button
+      }
+    end
+    authorize @response
+  end
+
+  def unlike
+    @response.unfavorite(current_user)
+
+    respond_to do |format|
+      format.html { redirect_to @response }
+      format.json {
+        render_like_button
+      }
+    end
+    authorize @response
+  end
   
   private
 
   def response_params
-    params.require(:response).permit(:content, :parent_id)
+    params.require(:response).permit(:content, :likes_count, :parent_id)
   end
 
   def set_complaint
     @complaint = Complaint.find(params[:complaint_id])
+  end
+
+  def render_like_button
+    render json: { like_button_html: render_to_string(partial: 'components/like_button', locals: { item: @response, 
+                                                                                                    path1: unlike_company_complaint_response_path(@response.complaint_id, @response), 
+                                                                                                    path2: like_company_complaint_response_path(@response.complaint_id, @response) }) }
   end
 
   def check_user_permission

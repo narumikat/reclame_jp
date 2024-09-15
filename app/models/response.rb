@@ -9,6 +9,7 @@ class Response < ApplicationRecord
   has_many :responses, class_name: 'Response', foreign_key: 'parent_id', dependent: :destroy
 
   validates :content, presence: true
+  acts_as_favoritor
 
   def self.search(search)
     if search
@@ -16,6 +17,24 @@ class Response < ApplicationRecord
     else
       all
     end
+  end
+
+  def favorite(user)
+    unless favorited_by?(user)
+    user.favorite(self)
+    update_column(:likes_count, likes_count + 1)
+    end
+  end
+
+  def unfavorite(user)
+    if favorited_by?(user)
+      user.unfavorite(self)
+      update_column(:likes_count, likes_count - 1)
+    end
+  end
+
+  def favorited_by?(user)
+    Favorite.exists?(favoritor: user, favoritable: self)
   end
 
   private
