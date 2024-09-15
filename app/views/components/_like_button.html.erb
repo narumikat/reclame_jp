@@ -9,6 +9,9 @@
         <i class="fa-regular fa-heart me-2"></i>
       <% end %>
     <% end %>
+    <span data-like-target="likeCount"><%= item.likes_count %></span>
+  <% else %>
+    <i class="fa-regular fa-heart me-2 btn-like"></i>
+    <span data-like-target="likeCount"><%= item.likes_count %></span>
   <% end %>
-  <span data-like-target="likeCount"><%= item.likes_count %></span>
 </div>

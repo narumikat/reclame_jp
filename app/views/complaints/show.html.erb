@@ -28,6 +28,7 @@
     </div>
     <span class="tag-complaint"><%= @complaint.complaint_category %></span>
   </div>
+  <!-- btn like -->
   <div class="mb-4">
     <%= render "components/like_button", item: @complaint, 
                                         path1: unlike_company_complaint_path(company_id: @complaint.company_id, id: @complaint.id), 
@@ -48,24 +49,23 @@
           <small>Respondida por: <%= link_to response.user.username, user_path(response.user) %> - <strong><%= response.user.role_in_company(@complaint.company) %></strong> da empresa</small>
           <p class="my-2"><%= response.content %></p>
           <small><%= response.created_at.strftime('%d %B %Y') %></small>
-          <% if @response_like.present? %>
+          <!-- btn like -->
+          <% @response_like = response %>
+          <div class="mt-2">
             <%= render 'components/like_button', 
-           item: @response_like, 
-           path1: unlike_company_complaint_response_path(
-                    company_id: @response_like.company_id, 
-                    complaint_id: @response_like.complaint_id, 
-                    id: @response_like.id
-                  ), 
-           path2: like_company_complaint_response_path(
-                    company_id: @response_like.company_id, 
-                    complaint_id: @response_like.complaint_id, 
-                    id: @response_like.id
-                  ) %>
-          <% else %>
-            <!-- Mensagem ou tratamento caso @response_like não esteja definido -->
-            <p>Não há respostas disponíveis para curtir.</p>
-          <% end %>
-          <!-- Renderizando as respostas aninhadas -->
+        item: @response_like, 
+        path1: unlike_company_complaint_response_path(
+                  company_id: @response_like.company_id, 
+                  complaint_id: @response_like.complaint_id, 
+                  id: @response_like.id
+                ), 
+        path2: like_company_complaint_response_path(
+                  company_id: @response_like.company_id, 
+                  complaint_id: @response_like.complaint_id, 
+                  id: @response_like.id
+                ) %>
+          </div>
+          <!-- respostas postas aninhadas -->
           <% if response.responses.any? %>
             <div class="m-4">
               <% response.responses.each do |child_response| %>
@@ -73,6 +73,21 @@
                   <small><%= link_to child_response.user.username_protected, user_path(child_response.user) %> respondeu:</small>
                   <p><%= child_response.content %></p>
                   <small><%= child_response.created_at.strftime('%d %B %Y') %></small>
+                </div>
+                <!-- btn like -->
+                <div class="mt-2">
+                  <%= render 'components/like_button', 
+                item: child_response, 
+                path1: unlike_company_complaint_response_path(
+                          company_id: child_response.company_id, 
+                          complaint_id: child_response.complaint_id, 
+                          id: child_response.id
+                        ), 
+                path2: like_company_complaint_response_path(
+                          company_id: child_response.company_id, 
+                          complaint_id: child_response.complaint_id, 
+                          id: child_response.id
+                        ) %>
                 </div>
               <% end %>
             </div>

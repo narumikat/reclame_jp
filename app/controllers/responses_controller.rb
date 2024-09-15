@@ -19,10 +19,10 @@ class ResponsesController < ApplicationController
   end
 
   def like
+    @response = Response.find_by(id: params[:id])
     @response.favorite(current_user)
-    # current_user.favorite(@response)
     respond_to do |format|
-      format.html { redirect_to @response }
+      format.html { redirect_to @response.complaint }
       format.json {
         render_like_button
       }
@@ -31,10 +31,11 @@ class ResponsesController < ApplicationController
   end
 
   def unlike
+    @response = Response.find_by(id: params[:id])
     @response.unfavorite(current_user)
 
     respond_to do |format|
-      format.html { redirect_to @response }
+      format.html { redirect_to @response.complaint }
       format.json {
         render_like_button
       }

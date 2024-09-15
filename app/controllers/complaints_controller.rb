@@ -33,7 +33,6 @@ class ComplaintsController < ApplicationController
     authorize @complaint
     @response = Response.new
     @responses = @complaint.responses.where(parent_id: nil).order(created_at: :desc)
-    @response_like = @responses.first if @responses.present?
   end  
   
   def new
@@ -77,7 +76,6 @@ class ComplaintsController < ApplicationController
 
   def like
     @complaint.favorite(current_user)
-    # current_user.favorite(@complaint)
     respond_to do |format|
       format.html { redirect_to @complaint }
       format.json {
@@ -175,9 +173,4 @@ class ComplaintsController < ApplicationController
       @complaint = Complaint.find(params[:id])
     end
   end
-  
-  # def set_complaint
-  #   Rails.logger.debug "Looking for Complaint with ID=#{params[:id]} and Company ID=#{params[:company_id]}"
-  #   @complaint = Complaint.find_by!(id: params[:id], company_id: params[:company_id])
-  # end   
 end
