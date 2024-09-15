@@ -20,7 +20,7 @@
           <h4 class="ms-2"><%= company.company_name %></h4>
         </div>
       <% end %>
-      <%= link_to search_path(company_category: company.company_category) do %>
+      <%= link_to search_results_path(company_category: company.company_category) do %>
         <span class="tag-grey-sm"><%= company.company_category %></span>
       <% end %>
     </div>

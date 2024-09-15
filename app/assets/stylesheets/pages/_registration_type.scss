@@ -76,21 +76,3 @@
     }
   }
 }
-
-#results {
-  max-height: 150px;
-  overflow-y: auto;
-  background-color: #fff;
-  position: absolute;
-  width: 100%;
-  z-index: 1000;
-}
-
-.list-group-item {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.list-group-item:hover {
-  background-color: #f8f9fa;
-}

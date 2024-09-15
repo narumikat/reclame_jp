@@ -14,7 +14,7 @@
           <div class="d-flex flex-wrap">
             <% @categories.each do |category| %>
               <div class="m-2">
-                <%= link_to search_path(company_category: category) do %>
+                <%= link_to search_results_path(company_category: category) do %>
                   <span class="tag-grey-sm"><%= category %></span>
                 <% end %>
               </div>
