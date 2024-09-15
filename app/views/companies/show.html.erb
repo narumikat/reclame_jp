@@ -207,8 +207,8 @@
                       <%= link_to user_path(employee), class: 'text-decoration-none text-dark' do %>
                         <div class="d-flex align-items-center">
                           <i class="fa-solid fa-user me-2"></i>
-                          <p class="mb-0 pe-4 border-end"><%= employee.username_protected %></p>
-                          <p class="mb-0 ms-3"><%= companies_user.role.capitalize %> da empresa</p>
+                          <p class="mb-0 pe-4 border-end"><strong>@<%= employee.username %></strong></p>
+                          <p class="mb-0 ms-3"><strong><%= companies_user.role.capitalize %></strong> da empresa</p>
                         </div>
                       <% end %>
                     </div>
