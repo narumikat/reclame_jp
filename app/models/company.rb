@@ -14,6 +14,7 @@ class Company < ApplicationRecord
 
   has_one_attached :company_logo
   has_one_attached :company_banner
+  rating
 
   COMPANY_CATEGORY = [
     "Empreiteiras",

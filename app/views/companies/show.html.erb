@@ -33,7 +33,20 @@
             <div class="col-md-8 py-4">
               <%= simple_form_for [@company, @new_complaint] do |f| %>
                 <%= f.input :title, label: 'Titulo da reclamação' %>
-                <%= f.input :review, placeholder: 'numero de 1 a 5' %>
+                <div class="form-group mb-3" data-controller="rating">
+                  <label for="review">Avaliação</label>
+                  <div id="review-rating" class="rating">
+                    <% (1..5).each do |i| %>
+                      <i class="fa-solid fa-skull-crossbones me-2" 
+                        data-value="<%= i %>" 
+                        data-target="rating.icon"
+                        data-action="click->rating#setRating"
+                        aria-label="<%= i %>">
+                      </i>
+                    <% end %>
+                  </div>
+                  <%= f.hidden_field :review, id: 'review-value', data: { target: 'rating.hiddenField' } %>
+                </div>
                 <%= f.input :comment, label: 'Reclamação' %>
                 <div class="form-group mb-4">
                   <%= f.label 'Categoria da reclamação', required: true, class: "mb-2" %>
