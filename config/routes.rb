@@ -18,16 +18,22 @@ Rails.application.routes.draw do
   # Empresas podem ter reclamações e respostas
   resources :companies, only: [:index, :show, :new, :create, :edit, :update] do
     resources :complaints do
-      resources :responses
+      member do
+        post 'like'
+        delete 'unlike'
+      end
+      resources :responses do
+        member do
+          post 'like'
+          delete 'unlike'
+        end
+      end
     end
     collection do
       get 'top_scored_companies', to: 'companies#top_scored_companies', as: 'top_scored_companies'
       get 'low_scored_companies', to: 'companies#low_scored_companies', as: 'low_scored_companies'
     end
   end
-
-  # get 'top_scored_companies', to: 'companies#top_scored_companies', as: 'top_scored_companies'
-  # get 'low_scored_companies', to: 'companies#low_scored_companies', as: 'low_scored_companies'
 
   resources :complaints do
     get 'new_complaint', on: :collection, to: 'complaints#new_complaint'

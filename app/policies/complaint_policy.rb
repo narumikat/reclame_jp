@@ -31,4 +31,12 @@ class ComplaintPolicy < ApplicationPolicy
   def destroy?
     user.admin?
   end
+
+  def like?
+    true
+  end
+
+  def unlike?
+    true
+  end
 end
