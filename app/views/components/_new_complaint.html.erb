@@ -1,8 +1,19 @@
 <div class="form-group">
   <%= f.input :title, label: "Titulo", class: 'form-control' %>
 </div>
-<div class="form-group">
-  <%= f.input :review, class: 'form-control', placeholder: "De uma nota de 1 a 5" %>
+<div class="form-group mb-3" data-controller="rating">
+  <label for="review">Avaliação</label>
+  <div id="review-rating" class="rating">
+    <% (1..5).each do |i| %>
+      <i class="fa-solid fa-skull-crossbones me-2 mt-2" 
+                        data-value="<%= i %>" 
+                        data-target="rating.icon"
+                        data-action="click->rating#setRating"
+        aria-label="<%= i %>">
+      </i>
+    <% end %>
+  </div>
+  <%= f.hidden_field :review, id: 'review-value', data: { target: 'rating.hiddenField' } %>
 </div>
 <div class="form-group mb-4">
   <%= f.label 'Categoria da reclamação', required: true, class:"mb-2" %>

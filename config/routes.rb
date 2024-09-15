@@ -28,6 +28,7 @@ Rails.application.routes.draw do
           delete 'unlike'
         end
       end
+      resources :ratings, only: [:create]
     end
     collection do
       get 'top_scored_companies', to: 'companies#top_scored_companies', as: 'top_scored_companies'

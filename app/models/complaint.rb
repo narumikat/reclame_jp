@@ -3,6 +3,7 @@ class Complaint < ApplicationRecord
   belongs_to :user
   belongs_to :company
   has_many :responses, dependent: :destroy
+  has_many :ratings, as: :resource
 
   COMPLAINT_CATEGORY = [
     'Financeira',

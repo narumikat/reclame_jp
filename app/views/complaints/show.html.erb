@@ -23,6 +23,15 @@
       </div>
       <%= render 'components/tag_status', complaint: @complaint %>
     </div>
+    <div class="rating-show mt-2">
+      <% if @complaint.review.present? && @complaint.review > 0 %>
+        <% @complaint.review.times do %>
+          <i class="fa-solid fa-skull-crossbones me-1 rating"></i>
+        <% end %>
+      <% else %>
+        <i class="fa-solid fa-skull-crossbones me-1 rating-desactive "></i>
+      <% end %>
+    </div>
     <div class="my-4">
       <p><%= @complaint.comment %></p>
     </div>

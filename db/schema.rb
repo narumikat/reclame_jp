@@ -108,6 +108,38 @@ ActiveRecord::Schema[7.1].define(version: 2024091323535020240913235028) do
     t.index ["scope"], name: "index_favorites_on_scope"
   end
 
+  create_table "rating_rates", id: :serial, force: :cascade do |t|
+    t.decimal "value", precision: 11, scale: 2, default: "0.0"
+    t.string "author_type", limit: 10, null: false
+    t.integer "author_id", null: false
+    t.string "resource_type", limit: 10, null: false
+    t.integer "resource_id", null: false
+    t.string "scopeable_type", limit: 10
+    t.integer "scopeable_id"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["author_type", "author_id", "resource_type", "resource_id", "scopeable_type", "scopeable_id"], name: "index_rating_rates_on_author_and_resource_and_scopeable", unique: true
+    t.index ["author_type", "author_id"], name: "index_rating_rates_on_author_type_and_author_id"
+    t.index ["resource_type", "resource_id"], name: "index_rating_rates_on_resource_type_and_resource_id"
+    t.index ["scopeable_type", "scopeable_id"], name: "index_rating_rates_on_scopeable_type_and_scopeable_id"
+  end
+
+  create_table "rating_ratings", id: :serial, force: :cascade do |t|
+    t.decimal "average", precision: 11, scale: 2, default: "0.0", null: false
+    t.decimal "estimate", precision: 11, scale: 2, default: "0.0", null: false
+    t.integer "sum", default: 0, null: false
+    t.integer "total", default: 0, null: false
+    t.string "resource_type", limit: 10, null: false
+    t.integer "resource_id", null: false
+    t.string "scopeable_type", limit: 10
+    t.integer "scopeable_id"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["resource_type", "resource_id", "scopeable_type", "scopeable_id"], name: "index_rating_rating_on_resource_and_scopeable", unique: true
+    t.index ["resource_type", "resource_id"], name: "index_rating_ratings_on_resource_type_and_resource_id"
+    t.index ["scopeable_type", "scopeable_id"], name: "index_rating_ratings_on_scopeable_type_and_scopeable_id"
+  end
+
   create_table "responses", force: :cascade do |t|
     t.text "content", null: false
     t.bigint "user_id", null: false
