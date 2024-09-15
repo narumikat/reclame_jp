@@ -40,7 +40,7 @@ Rails.application.routes.draw do
     get 'new_complaint', on: :collection, to: 'complaints#new_complaint'
   end
 
-  get 'search', to: 'search#index', as: 'search'
+  get 'search_results', to: 'search#index', as: 'search_results'
   match 'registration_type', to: 'registrations#registration_type', via: [:get, :post]
 
   # TWILIO
