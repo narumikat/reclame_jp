@@ -50,11 +50,11 @@ class Company < ApplicationRecord
   validates :company_category, presence: true, inclusion: { in: COMPANY_CATEGORY }
 
   def total_complaints_count
-    @total_complaints_count ||= complaints.count
+    complaints_count
   end
 
   def complaints_answered_count
-    @complaints_answered_count ||= complaints.joins(:responses).distinct.count
+    answered_complaints_count
   end
 
   def complaints_unanswered_count
