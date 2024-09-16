@@ -62,6 +62,8 @@ ActiveRecord::Schema[7.1].define(version: 2024091323535020240913235028) do
     t.string "company_employee_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "complaints_count", default: 0, null: false
+    t.integer "answered_complaints_count", default: 0, null: false
   end
 
   create_table "companies_users", force: :cascade do |t|
