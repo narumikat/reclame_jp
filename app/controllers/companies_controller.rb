@@ -2,7 +2,7 @@ class CompaniesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_company, only: [:show, :edit, :update]
   before_action :check_company_user, only: [:new, :create, :edit, :update] 
-  skip_before_action :authenticate_user!, only: [:index, :show, :top_scored_companies]
+  skip_before_action :authenticate_user!, only: [:index, :show, :top_scored_companies, :low_scored_companies]
 
   COMPANY_CATEGORY = Company::COMPANY_CATEGORY
   
@@ -11,7 +11,7 @@ class CompaniesController < ApplicationController
     @companies = Company.includes(
       company_banner_attachment: :blob,
       company_logo_attachment: :blob
-    ).all
+    ).all.order(created_at: :desc)
     # @categories = Company::COMPANY_CATEGORY
     @categories = Company.select(:company_category).distinct.pluck(:company_category)
   end
@@ -95,10 +95,12 @@ class CompaniesController < ApplicationController
   end
 
   def top_scored_companies
+    authorize :company, :top_scored_companies?
     @top_ranked_companies = Company.top_company_ranking
   end
 
   def low_scored_companies
+    authorize :company, :low_scored_companies?
     @low_ranked_companies = Company.low_company_ranking
   end
 

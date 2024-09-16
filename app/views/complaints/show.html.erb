@@ -6,17 +6,42 @@
   </h3>
   <div class="border-bottom px-4"></div>
   <div class="py-4">
-    <h2><%= @complaint.title %> - <small><%= @complaint.user.username_protected %></small></h2>
+    <div class="d-flex align-items-center">
+      <h2><%= @complaint.title %></h2>
+      <% if user_signed_in? && current_user.admin? %>
+        <%= link_to company_complaint_path(@company, @complaint), data: { turbo_method: :delete, turbo_confirm: "Tem certeza que deseja excluir essa reclamação?" }, class: 'delete-link' do %>
+          <i class="fa-solid fa-trash-alt mx-4"></i>
+        <% end %>
+      <% end %>
+    </div>
     <div class="d-flex justify-content-between">
-      <small>
-        <i class="fa-regular fa-calendar me-2"></i>
-        <%= @complaint.created_at.strftime('%d %B %Y') %></small>
+      <div>
+        <small>
+          <i class="fa-regular fa-calendar me-2"></i>
+          <%= @complaint.created_at.strftime('%d %B %Y') %><br>
+          Criado por <strong><%= link_to user_path(@complaint.user) do %><%= @complaint.user.username_protected %><% end %></strong></small>
+      </div>
       <%= render 'components/tag_status', complaint: @complaint %>
+    </div>
+    <div class="rating-show mt-2">
+      <% if @complaint.review.present? && @complaint.review > 0 %>
+        <% @complaint.review.times do %>
+          <i class="fa-solid fa-skull-crossbones me-1 rating"></i>
+        <% end %>
+      <% else %>
+        <i class="fa-solid fa-skull-crossbones me-1 rating-desactive "></i>
+      <% end %>
     </div>
     <div class="my-4">
       <p><%= @complaint.comment %></p>
     </div>
     <span class="tag-complaint"><%= @complaint.complaint_category %></span>
+  </div>
+  <!-- btn like -->
+  <div class="mb-4">
+    <%= render "components/like_button", item: @complaint, 
+                                        path1: unlike_company_complaint_path(company_id: @complaint.company_id, id: @complaint.id), 
+                                        path2: like_company_complaint_path(company_id: @complaint.company_id, id: @complaint.id) %>
   </div>
   <% if @responses.any? %>
     <div class="complaint-response border bg-white">
@@ -30,10 +55,26 @@
       <% @responses.each do |response| %>
         <div class="mx-4 border-bottom"></div>
         <div class="my-4">
-          <small>Respondida por: <%= link_to response.user.username_protected, user_path(response.user) %>, <strong><%= response.user.role_in_company(@complaint.company) %></strong> da empresa</small>
+          <small>Respondida por: <%= link_to response.user.username, user_path(response.user) %> - <strong><%= response.user.role_in_company(@complaint.company) %></strong> da empresa</small>
           <p class="my-2"><%= response.content %></p>
           <small><%= response.created_at.strftime('%d %B %Y') %></small>
-          <!-- Renderizando as respostas aninhadas -->
+          <!-- btn like -->
+          <% @response_like = response %>
+          <div class="mt-2">
+            <%= render 'components/like_button', 
+        item: @response_like, 
+        path1: unlike_company_complaint_response_path(
+                  company_id: @response_like.company_id, 
+                  complaint_id: @response_like.complaint_id, 
+                  id: @response_like.id
+                ), 
+        path2: like_company_complaint_response_path(
+                  company_id: @response_like.company_id, 
+                  complaint_id: @response_like.complaint_id, 
+                  id: @response_like.id
+                ) %>
+          </div>
+          <!-- respostas postas aninhadas -->
           <% if response.responses.any? %>
             <div class="m-4">
               <% response.responses.each do |child_response| %>
@@ -42,13 +83,28 @@
                   <p><%= child_response.content %></p>
                   <small><%= child_response.created_at.strftime('%d %B %Y') %></small>
                 </div>
+                <!-- btn like -->
+                <div class="mt-2">
+                  <%= render 'components/like_button', 
+                item: child_response, 
+                path1: unlike_company_complaint_response_path(
+                          company_id: child_response.company_id, 
+                          complaint_id: child_response.complaint_id, 
+                          id: child_response.id
+                        ), 
+                path2: like_company_complaint_response_path(
+                          company_id: child_response.company_id, 
+                          complaint_id: child_response.complaint_id, 
+                          id: child_response.id
+                        ) %>
+                </div>
               <% end %>
             </div>
           <% end %>
           <!-- Formulário para responder à reclamação -->
           <div class="ml-5 response-to-response-form">
             <% if user_signed_in? && current_user.complaints.include?(@complaint) %>
-              <p><strong>Responda ao <%= response.user.role_in_company(@complaint.company) %></strong></p>
+              <p>Responda ao <%= response.user.username %>, <strong><%= response.user.role_in_company(@complaint.company) %></strong>:</p>
               <%= simple_form_for([response.complaint.company, response.complaint, response.responses.build]) do |f| %>
                 <%= f.hidden_field :parent_id, value: response.id %>
                 <%= f.input :content, label: false, placeholder: "Escreva uma resposta..." %>
@@ -72,6 +128,16 @@
           <%= f.button :submit, "Responder", class: "btn-red" %>
         </div>
       <% end %>
+    </div>
+  <% end %>
+  <!-- btn cadastre-se para responder-->
+  <% if !user_signed_in? %>
+    <div class="d-flex row justify-content-center mt-4">
+      <div class="border p-4 complaint-company col-11 col-md-10">
+        <h5 class="text-center mb-4">Essa reclamação pertence à sua empresa? <br>
+          Cadastre-se como <strong>empresa</strong> e responda</h5>
+        <%= render 'components/btn_companies', btn_text: 'Cadastre-se e responda', link_path: registration_type_path %>
+      </div>
     </div>
   <% end %>
 </div>

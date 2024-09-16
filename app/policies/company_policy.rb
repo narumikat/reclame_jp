@@ -36,7 +36,11 @@ class CompanyPolicy < ApplicationPolicy
     user_is_owner_or_admin?
   end
 
-  def top_scored_companies
+  def top_scored_companies?
+    true
+  end
+
+  def low_scored_companies?
     true
   end
 end

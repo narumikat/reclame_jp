@@ -2,7 +2,7 @@
   <%= render 'shared/back_btn' %>
   <div class="row">
     <div class="col-md-3 mt-2 border d-none d-md-flex">
-      <% if current_user.is_company? %>
+      <% if user_signed_in? && current_user.is_company? %>
         <%= render 'shared/sidebar_company' %>
       <% else %>
         <%= render 'shared/sidebar' %>
@@ -13,21 +13,29 @@
         <div class="welcome-dashboard border col-md-10 col-12">
           <div class="d-flex align-items-center">
             <div>
-              <% if current_user.avatar.present? %>
-                <%= cl_image_tag current_user.avatar.key, class: "avatar-profile" %>
+              <% if @user.avatar.present? %>
+                <%= cl_image_tag @user.avatar.key, class: "avatar-profile" %>
               <% else %>
                 <%= image_tag 'user-photo.png', class: "avatar-profile" %>
               <% end %>
             </div>
             <div class="ms-4">
-              <h4><strong><%= @user.username_protected %></strong></h4>
+              <small>Perfil empresarial</small>
+              <div class="my-2 d-flex align-items-center">
+                <h4 class="mb-0">@<strong><%= @user.username %></strong></h4>
+                <% if user_signed_in? && current_user == @user %>
+                  <%= link_to edit_user_path(current_user), class: "ms-3" do %>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  <% end %>
+                <% end %>
+              </div>
               <p>Se cadastrou em <%= @user.created_at.strftime("%d %b %Y") %></p>
             </div>
           </div>
         </div>
         <div class="mt-4 col-md-10 col-12 d-flex">
           <div class="col-6 box-info">
-            <p><%= @user.username_protected %> trabalha em</p>
+            <p>@<%= @user.username %> trabalha em</p>
             <h2><%= @user.companies.size %></h2>
             <% if @user.companies.size > 1 %>
               <p>empresas</p>
@@ -36,7 +44,7 @@
             <% end %>
           </div>
           <div class="col box-info">
-            <p><%= @user.username_protected %> respondeu</p>
+            <p>@<%= @user.username %> respondeu</p>
             <h2><%= @user.responses.size %> </h2>
             <p>reclamações</p>
           </div>
@@ -50,7 +58,7 @@
                   <% role = @user.companies_users.find_by(company_id: company.id).role %>
                   <div class="col-md-10">
                     <div class="employee-card">
-                      <h5><%= @user.username_protected %> é <strong><%= role %></strong> da empresa 
+                      <h5>@<%= @user.username %> trabalha como <strong><%= role %></strong> da empresa 
                         <br>
                         <%= link_to company.company_name, company_path(company.id) %></h5>
                     </div>
@@ -58,7 +66,7 @@
                 <% end %>
               </div>
             <% else %>
-              <h3 class="text-center"><%= @user.username_protected %> não trabalha em nenhuma empresa</h3>
+              <h3 class="text-center">@<%= @user.username %> não trabalha em nenhuma empresa</h3>
             <% end %>
           </div>
         </div>

@@ -17,7 +17,7 @@
     <div class="tab-content" id="pills-tabContent">
       <!-- Todas reclamacoes -->
       <div class="tab-pane fade show active" id="pills-complaints" role="tabpanel" aria-labelledby="pills-complaints-tab" tabindex="0">
-        <% @complaints.last(4).each do |complaint| %>
+        <% @complaints.limit(4).each do |complaint| %>
           <%= render 'complaints/complaint_tab', complaint: complaint %>
         <% end %>
         <div class="d-flex justify-content-center mt-4">
@@ -27,7 +27,7 @@
       <!-- Reclamacoes respondidas -->
       <div class="tab-pane fade" id="pills-answered" role="tabpanel" aria-labelledby="pills-answered-tab" tabindex="0">
         <% if @answered_complaints.any? %>
-          <% @answered_complaints.last(4).each do |complaint| %>
+          <% @answered_complaints.limit(4).each do |complaint| %>
             <%= render 'complaints/complaint_tab', complaint: complaint %>
           <% end %>
         <% else %>
@@ -40,7 +40,7 @@
       <!-- Reclamacoes nao respondidas -->
       <div class="tab-pane fade" id="pills-unanswered" role="tabpanel" aria-labelledby="pills-unanswered-tab" tabindex="0">
         <% if @unanswered_complaints.any? %>
-          <% @unanswered_complaints.last(4).each do |complaint| %>
+          <% @unanswered_complaints.limit(4).each do |complaint| %>
             <%= render 'complaints/complaint_tab', complaint: complaint %>
           <% end %>
         <% else %>

@@ -57,24 +57,6 @@ user_normal = User.create!(
   is_company: false
 )
 
-user_normal2 = User.create!(
-  username: 'user_normal2',
-  email: 'user2@mail.com',
-  password: '123456',
-  password_confirmation: '123456',
-  first_name: 'User',
-  last_name: 'Two',
-  phone_number: '1234567890',
-  address: '123 Main St',
-  city: 'New York',
-  state: 'NY',
-  zip_code: '10001',
-  admin: false,
-  is_company: false
-)
-
-normal_users = [user_normal, user_normal2]
-
 puts 'Normal users created!'
 puts 'Creating company users...'
 
@@ -127,10 +109,9 @@ company1 = Company.create!(
   company_prefecture: Company::COMPANY_PREFECTURE.sample,
   company_zip_code: '10001',
   company_country: 'USA',
-  company_phone_number: '0270-21-8155',
-  company_website: 'www.empresaexemplo.com',
+  company_website: 'www.reclamejp.com',
   company_contact_email: 'suporte@reclamejp.com',
-  company_social_media: { facebook: 'www.facebook.com/empresaexemplo', twitter: 'www.twitter.com/empresaexemplo' },
+  company_social_media: { facebook: 'https://www.facebook.com/profile.php?id=61565440495945', instagram: 'https://www.instagram.com/servicos_no_japao' },
   company_description: 'Este perfil é um exemplo de empresa.',
   company_contact_name: 'John Doe',
   company_category: Company::COMPANY_CATEGORY.sample
@@ -169,20 +150,20 @@ kowa = Company.create!(
   company_contact_email: 'cadastro@kowa-corp.com',
   company_category: 'Empreiteiras'
 )
-kowa.company_logo.purge if kowa.company_logo.attached?
-kowa.company_banner.purge if kowa.company_banner.attached?
+# kowa.company_logo.purge if kowa.company_logo.attached?
+# kowa.company_banner.purge if kowa.company_banner.attached?
 
-logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725252341/reclame-jp/exlf1g56sv6oidvsvuyh.png')
-kowa.company_logo.attach(
-  io: logo, 
-  filename: 'kowa.jpg', 
-  content_type: 'image/jpg')
+# logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725252341/reclame-jp/exlf1g56sv6oidvsvuyh.png')
+# kowa.company_logo.attach(
+#   io: logo, 
+#   filename: 'kowa.jpg', 
+#   content_type: 'image/jpg')
 
-banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725252341/reclame-jp/uefum56zahy8cecdiy5k.jpg')
-kowa.company_banner.attach(
-  io: banner, 
-  filename: 'kowa.jpg', 
-  content_type: 'image/jpg')
+# banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725252341/reclame-jp/uefum56zahy8cecdiy5k.jpg')
+# kowa.company_banner.attach(
+#   io: banner, 
+#   filename: 'kowa.jpg', 
+#   content_type: 'image/jpg')
 
 fujiarte = Company.create!(
   company_name: 'Fujiarte',
@@ -198,20 +179,20 @@ fujiarte = Company.create!(
   company_contact_email: 'empregos-mail@fujiarte.co.jp',
   company_category: 'Empreiteiras'
 )
-fujiarte.company_logo.purge if fujiarte.company_logo.attached?
-fujiarte.company_banner.purge if fujiarte.company_banner.attached?
+# fujiarte.company_logo.purge if fujiarte.company_logo.attached?
+# fujiarte.company_banner.purge if fujiarte.company_banner.attached?
 
-logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251117/reclame-jp/sl4beyekvhwmojj84gjf.jpg')
-fujiarte.company_logo.attach(
-  io: logo, 
-  filename: 'fujiarte.jpg', 
-  content_type: 'image/jpg')
+# logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251117/reclame-jp/sl4beyekvhwmojj84gjf.jpg')
+# fujiarte.company_logo.attach(
+#   io: logo, 
+#   filename: 'fujiarte.jpg', 
+#   content_type: 'image/jpg')
 
-banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251118/reclame-jp/vrmyteoh1vvd214crenc.png')
-fujiarte.company_banner.attach(
-  io: banner, 
-  filename: 'fujiarte.jpg', 
-  content_type: 'image/jpg')
+# banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251118/reclame-jp/vrmyteoh1vvd214crenc.png')
+# fujiarte.company_banner.attach(
+#   io: banner, 
+#   filename: 'fujiarte.jpg', 
+#   content_type: 'image/jpg')
 
 suri_emu = Company.create!(
   company_name: 'UT Suri-emu ',
@@ -227,21 +208,21 @@ suri_emu = Company.create!(
   company_category: 'Empreiteiras',
   company_contact_email: 'yamashita@suri-emu.co.jp'
 )
-suri_emu.company_logo.purge if suri_emu.company_logo.attached?
-suri_emu.company_banner.purge if suri_emu.company_banner.attached?
+# suri_emu.company_logo.purge if suri_emu.company_logo.attached?
+# suri_emu.company_banner.purge if suri_emu.company_banner.attached?
 
-logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251126/reclame-jp/gpqa5gpcjgwhxhhsatxy.jpg')
-suri_emu.company_logo.attach(
-  io: logo,
-  filename: 'suri_emu.jpg',
-  content_type: 'image/jpg'
-)
-banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251126/reclame-jp/maecvpdznjazncfkbqlp.png')
-suri_emu.company_banner.attach(
-  io: banner,
-  filename: 'suri_emu.jpg',
-  content_type: 'image/jpg'
-)
+# logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251126/reclame-jp/gpqa5gpcjgwhxhhsatxy.jpg')
+# suri_emu.company_logo.attach(
+#   io: logo,
+#   filename: 'suri_emu.jpg',
+#   content_type: 'image/jpg'
+# )
+# banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251126/reclame-jp/maecvpdznjazncfkbqlp.png')
+# suri_emu.company_banner.attach(
+#   io: banner,
+#   filename: 'suri_emu.jpg',
+#   content_type: 'image/jpg'
+# )
 
 earnest = Company.create!(
   company_name: 'Earnest Corp.',
@@ -257,21 +238,21 @@ earnest = Company.create!(
   company_contact_email: 'm.osumi@earnest-s.co.jp',
   company_category: 'Empreiteiras'
 )
-earnest.company_logo.purge if earnest.company_logo.attached?
-earnest.company_banner.purge if earnest.company_banner.attached?
+# earnest.company_logo.purge if earnest.company_logo.attached?
+# earnest.company_banner.purge if earnest.company_banner.attached?
 
-logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251119/reclame-jp/pg6bqvoreneepu5ufxfw.jpg')
-earnest.company_logo.attach(
-  io: logo,
-  filename: 'earnest.jpg',
-  content_type: 'image/jpg'
-)
-banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251119/reclame-jp/pg6bqvoreneepu5ufxfw.jpg')
-earnest.company_banner.attach(
-  io: banner,
-  filename: 'earnest.jpg',
-  content_type: 'image/jpg'
-)
+# logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251119/reclame-jp/pg6bqvoreneepu5ufxfw.jpg')
+# earnest.company_logo.attach(
+#   io: logo,
+#   filename: 'earnest.jpg',
+#   content_type: 'image/jpg'
+# )
+# banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251119/reclame-jp/pg6bqvoreneepu5ufxfw.jpg')
+# earnest.company_banner.attach(
+#   io: banner,
+#   filename: 'earnest.jpg',
+#   content_type: 'image/jpg'
+# )
 
 ikai = Company.create!(
   company_name: 'Ikai Industry',
@@ -287,21 +268,21 @@ ikai = Company.create!(
   company_contact_email: 'tanaka_kenji@ikaigp.co.jp',
   company_category: 'Empreiteiras'
 )
-ikai.company_logo.purge if ikai.company_logo.attached?
-ikai.company_banner.purge if ikai.company_banner.attached?
+# ikai.company_logo.purge if ikai.company_logo.attached?
+# ikai.company_banner.purge if ikai.company_banner.attached?
 
-logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251120/reclame-jp/q8ihuuegvu1bkjbufteu.jpg')
-ikai.company_logo.attach(
-  io: logo,
-  filename: 'ikai.jpg',
-  content_type: 'image/jpg'
-)
-banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251120/reclame-jp/xvid9twpgiayzxlbcs4k.jpg')
-ikai.company_banner.attach(
-  io: banner,
-  filename: 'ikai.jpg',
-  content_type: 'image/jpg'
-)
+# logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251120/reclame-jp/q8ihuuegvu1bkjbufteu.jpg')
+# ikai.company_logo.attach(
+#   io: logo,
+#   filename: 'ikai.jpg',
+#   content_type: 'image/jpg'
+# )
+# banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251120/reclame-jp/xvid9twpgiayzxlbcs4k.jpg')
+# ikai.company_banner.attach(
+#   io: banner,
+#   filename: 'ikai.jpg',
+#   content_type: 'image/jpg'
+# )
 
 jto = Company.create!(
   company_name: 'JTO Corp.',
@@ -316,21 +297,21 @@ jto = Company.create!(
   company_description: 'Empresa foi fundada em 2013 com o desejo de ser uma empresa prestativa que impressiona nossos clientes, combinando sabedoria e conhecimento, sendo criativa e engenhosa para ajudar a sociedade.',
   company_category: 'Empreiteiras'
 )
-jto.company_logo.purge if jto.company_logo.attached?
-jto.company_banner.purge if jto.company_banner.attached?
+# jto.company_logo.purge if jto.company_logo.attached?
+# jto.company_banner.purge if jto.company_banner.attached?
 
-logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251121/reclame-jp/ezcobsfdgrqqol7uf31q.jpg')
-jto.company_logo.attach(
-  io: logo,
-  filename: 'jto.jpg',
-  content_type: 'image/jpg'
-)
-banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251119/reclame-jp/xkp4xlitjejizz3dmorj.jpg')
-jto.company_banner.attach(
-  io: banner,
-  filename: 'jto.jpg',
-  content_type: 'image/jpg'
-)
+# logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251121/reclame-jp/ezcobsfdgrqqol7uf31q.jpg')
+# jto.company_logo.attach(
+#   io: logo,
+#   filename: 'jto.jpg',
+#   content_type: 'image/jpg'
+# )
+# banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251119/reclame-jp/xkp4xlitjejizz3dmorj.jpg')
+# jto.company_banner.attach(
+#   io: banner,
+#   filename: 'jto.jpg',
+#   content_type: 'image/jpg'
+# )
 
 nichirin = Company.create!(
   company_name: 'Nichirin Group',
@@ -345,21 +326,21 @@ nichirin = Company.create!(
   company_description: 'Contribuiremos para a sociedade através do poder do emprego através de serviços de maior valor acrescentado, como serviços de segurança e serviços de suporte à vida, a fim de responder amplamente ao envelhecimento da sociedade e à expansão do emprego estrangeiro.',
   company_category: 'Empreiteiras'
 )
-nichirin.company_logo.purge if nichirin.company_logo.attached?
-nichirin.company_banner.purge if nichirin.company_banner.attached?
+# nichirin.company_logo.purge if nichirin.company_logo.attached?
+# nichirin.company_banner.purge if nichirin.company_banner.attached?
 
-logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251122/reclame-jp/mktmyishppm6yj27byzn.jpg')
-nichirin.company_logo.attach(
-  io: logo,
-  filename: 'nichirin.jpg',
-  content_type: 'image/jpg'
-)
-banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251122/reclame-jp/h1ceiq0ymumlgwao8uv3.png')
-nichirin.company_banner.attach(
-  io: banner,
-  filename: 'nichirin.jpg',
-  content_type: 'image/jpg'
-)
+# logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251122/reclame-jp/mktmyishppm6yj27byzn.jpg')
+# nichirin.company_logo.attach(
+#   io: logo,
+#   filename: 'nichirin.jpg',
+#   content_type: 'image/jpg'
+# )
+# banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251122/reclame-jp/h1ceiq0ymumlgwao8uv3.png')
+# nichirin.company_banner.attach(
+#   io: banner,
+#   filename: 'nichirin.jpg',
+#   content_type: 'image/jpg'
+# )
 
 konishi = Company.create!(
   company_name: 'Konishi Sangyo Co., Ltd.',
@@ -376,15 +357,15 @@ konishi = Company.create!(
   company_category: 'Empreiteiras',
   company_logo_url: 'https://i0.wp.com/jobsonline.jp/wp-content/uploads/2021/11/konishi1.jpg?fit=750%2C394&ssl=1',
 )
-konishi.company_logo.purge if konishi.company_logo.attached?
-konishi.company_banner.purge if konishi.company_banner.attached?
+# konishi.company_logo.purge if konishi.company_logo.attached?
+# konishi.company_banner.purge if konishi.company_banner.attached?
 
-banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251121/reclame-jp/krof2rgrlibafaxll5qg.jpg')
-konishi.company_banner.attach(
-  io: banner,
-  filename: 'konishi.jpg',
-  content_type: 'image/jpg'
-)
+# banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251121/reclame-jp/krof2rgrlibafaxll5qg.jpg')
+# konishi.company_banner.attach(
+#   io: banner,
+#   filename: 'konishi.jpg',
+#   content_type: 'image/jpg'
+# )
 
 Company.create!(
   company_name: 'AOC - Job Center',
@@ -415,15 +396,15 @@ human = Company.create!(
   company_category: 'Empreiteiras',
   company_banner_url: 'https://www.human-g.co.jp/files/libs/268/202302151552489542.png?1676516268',
 )
-human.company_logo.purge if human.company_logo.attached?
-human.company_banner.purge if human.company_banner.attached?
+# human.company_logo.purge if human.company_logo.attached?
+# human.company_banner.purge if human.company_banner.attached?
 
-logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251118/reclame-jp/ap0srewktk4h0dinyfg2.jpg')
-human.company_logo.attach(
-  io: logo,
-  filename: 'human.jpg',
-  content_type: 'image/jpg'
-)
+# logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251118/reclame-jp/ap0srewktk4h0dinyfg2.jpg')
+# human.company_logo.attach(
+#   io: logo,
+#   filename: 'human.jpg',
+#   content_type: 'image/jpg'
+# )
 
 marusan = Company.create!(
   company_name: 'Marusan Group',
@@ -440,15 +421,15 @@ marusan = Company.create!(
   company_category: 'Empreiteiras',
   company_logo_url: 'https://i0.wp.com/jobsonline.jp/wp-content/uploads/2021/11/marusan-kariya1.jpg?fit=750%2C394&ssl=1',
 )
-marusan.company_logo.purge if marusan.company_logo.attached?
-marusan.company_banner.purge if marusan.company_banner.attached?
+# marusan.company_logo.purge if marusan.company_logo.attached?
+# marusan.company_banner.purge if marusan.company_banner.attached?
 
-banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251121/reclame-jp/po1wiwihbiwgvj5cwscn.jpg')
-marusan.company_banner.attach(
-  io: banner,
-  filename: 'marusan.jpg',
-  content_type: 'image/jpg'
-)
+# banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251121/reclame-jp/po1wiwihbiwgvj5cwscn.jpg')
+# marusan.company_banner.attach(
+#   io: banner,
+#   filename: 'marusan.jpg',
+#   content_type: 'image/jpg'
+# )
 
 sankyo = Company.create!(
   company_name: 'Sankyo Techno',
@@ -464,21 +445,21 @@ sankyo = Company.create!(
   company_contact_email: 'cadastro@sankyo-gr.com',
   company_category: 'Empreiteiras',
 )
-sankyo.company_logo.purge if sankyo.company_logo.attached?
-sankyo.company_banner.purge if sankyo.company_banner.attached?
+# sankyo.company_logo.purge if sankyo.company_logo.attached?
+# sankyo.company_banner.purge if sankyo.company_banner.attached?
 
-logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251124/reclame-jp/sa1gw5fa3uwuk5yjufsd.jpg')
-sankyo.company_logo.attach(
-  io: logo,
-  filename: 'sankyo.jpg',
-  content_type: 'image/jpg'
-)
-banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251124/reclame-jp/kvscjerrymtohdjcsvh1.png')
-sankyo.company_banner.attach(
-  io: banner,
-  filename: 'sankyo.jpg',
-  content_type: 'image/jpg'
-)
+# logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251124/reclame-jp/sa1gw5fa3uwuk5yjufsd.jpg')
+# sankyo.company_logo.attach(
+#   io: logo,
+#   filename: 'sankyo.jpg',
+#   content_type: 'image/jpg'
+# )
+# banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251124/reclame-jp/kvscjerrymtohdjcsvh1.png')
+# sankyo.company_banner.attach(
+#   io: banner,
+#   filename: 'sankyo.jpg',
+#   content_type: 'image/jpg'
+# )
 
 fuji = Company.create!(
   company_name: 'Fuji Kogyosho',
@@ -493,21 +474,21 @@ fuji = Company.create!(
   company_contact_email: 'shishido_sss@fuji-ko.com',
   company_category: 'Empreiteiras'
 )
-fuji.company_logo.purge if fuji.company_logo.attached?
-fuji.company_banner.purge if fuji.company_banner.attached?
+# fuji.company_logo.purge if fuji.company_logo.attached?
+# fuji.company_banner.purge if fuji.company_banner.attached?
 
-logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251117/reclame-jp/lkzd6szdaya48ilwbo9m.jpg')
-fuji.company_logo.attach(
-  io: logo,
-  filename: 'fuji.jpg',
-  content_type: 'image/jpg'
-)
-banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251118/reclame-jp/rfqsxl3pxevffb98vjwb.jpg')
-fuji.company_banner.attach(
-  io: banner,
-  filename: 'fuji.jpg',
-  content_type: 'image/jpg'
-)
+# logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251117/reclame-jp/lkzd6szdaya48ilwbo9m.jpg')
+# fuji.company_logo.attach(
+#   io: logo,
+#   filename: 'fuji.jpg',
+#   content_type: 'image/jpg'
+# )
+# banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251118/reclame-jp/rfqsxl3pxevffb98vjwb.jpg')
+# fuji.company_banner.attach(
+#   io: banner,
+#   filename: 'fuji.jpg',
+#   content_type: 'image/jpg'
+# )
 
 Company.create!(
   company_name: 'Shigoto no Tobira',
@@ -538,21 +519,21 @@ sun_family = Company.create!(
   company_contact_email: 'ito@sunfamily.info',
   company_category: 'Empreiteiras',
 )
-sun_family.company_logo.purge if sun_family.company_logo.attached?
-sun_family.company_banner.purge if sun_family.company_banner.attached?
+# sun_family.company_logo.purge if sun_family.company_logo.attached?
+# sun_family.company_banner.purge if sun_family.company_banner.attached?
 
-logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251125/reclame-jp/nwiyyalitanf3ndvpugb.jpg')
-sun_family.company_logo.attach(
-  io: logo,
-  filename: 'sun_family.jpg',
-  content_type: 'image/jpg'
-)
-banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251124/reclame-jp/fs5uj7pytpwyl4bdcqoz.png')
-sun_family.company_banner.attach(
-  io: banner,
-  filename: 'sun_family.jpg',
-  content_type: 'image/jpg'
-)
+# logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251125/reclame-jp/nwiyyalitanf3ndvpugb.jpg')
+# sun_family.company_logo.attach(
+#   io: logo,
+#   filename: 'sun_family.jpg',
+#   content_type: 'image/jpg'
+# )
+# banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251124/reclame-jp/fs5uj7pytpwyl4bdcqoz.png')
+# sun_family.company_banner.attach(
+#   io: banner,
+#   filename: 'sun_family.jpg',
+#   content_type: 'image/jpg'
+# )
 
 nikko = Company.create!(
   company_name: 'NIKKO empregos ',
@@ -568,21 +549,21 @@ nikko = Company.create!(
   company_contact_email: 'global@co-nikko.co.jp',
   company_category: 'Empreiteiras'
 )
-nikko.company_logo.purge if nikko.company_logo.attached?
-nikko.company_banner.purge if nikko.company_banner.attached?
+# nikko.company_logo.purge if nikko.company_logo.attached?
+# nikko.company_banner.purge if nikko.company_banner.attached?
 
-logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251123/reclame-jp/gyjiq98zkw1gqyp3ygg4.jpg')
-nikko.company_logo.attach(
-  io: logo,
-  filename: 'nikko.jpg',
-  content_type: 'image/jpg'
-)
-banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251123/reclame-jp/vmyutarjdzxlkpt64lbf.png')
-nikko.company_banner.attach(
-  io: banner,
-  filename: 'nikko.jpg',
-  content_type: 'image/jpg'
-)
+# logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251123/reclame-jp/gyjiq98zkw1gqyp3ygg4.jpg')
+# nikko.company_logo.attach(
+#   io: logo,
+#   filename: 'nikko.jpg',
+#   content_type: 'image/jpg'
+# )
+# banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251123/reclame-jp/vmyutarjdzxlkpt64lbf.png')
+# nikko.company_banner.attach(
+#   io: banner,
+#   filename: 'nikko.jpg',
+#   content_type: 'image/jpg'
+# )
 
 lp_staff = Company.create!(
   company_name: 'LP STAFF',
@@ -594,37 +575,20 @@ lp_staff = Company.create!(
   company_social_media: { facebook: 'https://www.facebook.com/profile.php?id=100069316765489' },
   company_category: 'Empreiteiras',
 )
-lp_staff.company_logo.purge if lp_staff.company_logo.attached?
-lp_staff.company_banner.purge if lp_staff.company_banner.attached?
+# lp_staff.company_logo.purge if lp_staff.company_logo.attached?
+# lp_staff.company_banner.purge if lp_staff.company_banner.attached?
 
-logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251119/reclame-jp/necujnxgtvxjemwawgpo.png')
-lp_staff.company_logo.attach(
-  io: logo,
-  filename: 'lp_staff.jpg',
-  content_type: 'image/jpg'
-)
-banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251118/reclame-jp/rupgmrxtisjbg5mnlihi.png')
-lp_staff.company_banner.attach(
-  io: banner,
-  filename: 'lp_staff.jpg',
-  content_type: 'image/jpg'
-)
-
-# Company.create!(
-#   company_name: '',
-#   company_address: '',
-#   company_city: '',
-#   company_prefecture: '',
-#   company_zip_code: '',
-#   company_country: '',
-#   company_phone_number: '',
-#   company_website: '',
-#   company_social_media: { facebook: '', instagram: '' },
-#   company_description: '',
-#   company_contact_email: '',
-#   company_category: 'Empreiteiras',
-#   company_banner_url: '',
-#   company_logo_url: '',
+# logo = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251119/reclame-jp/necujnxgtvxjemwawgpo.png')
+# lp_staff.company_logo.attach(
+#   io: logo,
+#   filename: 'lp_staff.jpg',
+#   content_type: 'image/jpg'
+# )
+# banner = URI.open('https://res.cloudinary.com/dckmqo1fb/image/upload/v1725251118/reclame-jp/rupgmrxtisjbg5mnlihi.png')
+# lp_staff.company_banner.attach(
+#   io: banner,
+#   filename: 'lp_staff.jpg',
+#   content_type: 'image/jpg'
 # )
 
 puts 'EMPREITEIRAS created!'
@@ -660,7 +624,7 @@ complaints = [
     comment: 'Comprei um eletrônico dessa empresa e, após apenas duas semanas de uso, o dispositivo começou a apresentar problemas constantes de funcionamento. Entrei em contato com o suporte, mas a assistência foi insatisfatória e o problema não foi resolvido.',
     review: rand(1..5),
     company: company1,
-    user: normal_users.sample,
+    user: user_normal,
     complaint_category: Complaint::COMPLAINT_CATEGORY.sample
   ),
   Complaint.create!(
@@ -668,7 +632,7 @@ complaints = [
     comment: 'A empresa prometeu entregar meu pedido em 7 dias úteis, mas o produto só chegou após 3 semanas. Não houve comunicação clara sobre o atraso e, quando tentei buscar informações, a resposta foi demorada e pouco útil.',
     review: rand(1..5),
     company: company1,
-    user: normal_users.sample,
+    user: user_normal,
     complaint_category: Complaint::COMPLAINT_CATEGORY.sample
   ),
   Complaint.create!(
@@ -676,7 +640,7 @@ complaints = [
     comment: 'Experiência extremamente negativa com o atendimento ao cliente. Ao tentar resolver um problema com minha conta, fui tratado com desdém e a solução oferecida foi inadequada. A empresa não demonstrou preocupação com a minha situação.',
     review: rand(1..5),
     company: company1,
-    user: normal_users.sample,
+    user: user_normal,
     complaint_category: Complaint::COMPLAINT_CATEGORY.sample
   ),
   Complaint.create!(
@@ -684,7 +648,7 @@ complaints = [
     comment: 'Fui cobrado por um serviço que não contratei. Após revisar meu extrato, percebi que houve uma cobrança adicional que não foi autorizada. O processo de contestação foi burocrático e demorado, e o problema ainda não foi resolvido.',
     review: rand(1..5),
     company: company1,
-    user: normal_users.sample,
+    user: user_normal,
     complaint_category: Complaint::COMPLAINT_CATEGORY.sample
   ),
   Complaint.create!(
@@ -692,7 +656,7 @@ complaints = [
     comment: 'O produto recebido não corresponde às especificações apresentadas no site. A qualidade é inferior ao que foi descrito e a empresa não oferece um retorno eficiente para resolver o problema. Senti-me enganado com a discrepância entre a descrição e o item recebido.',
     review: rand(1..5),
     company: company1,
-    user: normal_users.sample,
+    user: user_normal,
     complaint_category: Complaint::COMPLAINT_CATEGORY.sample
   )
 ]

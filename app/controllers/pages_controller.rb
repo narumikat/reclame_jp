@@ -4,13 +4,14 @@ class PagesController < ApplicationController
   def home
     @companies = Company.select(:id, :company_name, :created_at, :company_category, :company_banner_url, :company_logo_url).order(created_at: :desc).limit(5)
     @complaints = Complaint.select(:id, :title, :company_id, :status, :complaint_category, :created_at).order(created_at: :desc).limit(5)
-    @top_ranked_companies = Company.top_company_ranking
-    @low_ranked_companies = Company.low_company_ranking
+    @top_ranked_companies = Company.top_company_ranking.limit(3)
+    @low_ranked_companies = Company.low_company_ranking.limit(3)
   end
 
   # Static pages
   def about
-
+    # teste de template do email na page about
+    # @complaint = Complaint.last
   end
 
   def contact

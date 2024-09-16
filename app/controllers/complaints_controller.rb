@@ -1,24 +1,11 @@
 class ComplaintsController < ApplicationController
-  before_action :set_company, only: [:index, :create, :show], if: -> { params[:company_id].present? }
-  before_action :set_complaint, only: [:show]
+  before_action :set_company, only: [:index, :create, :show, :destroy, :like, :unlike], if: -> { params[:company_id].present? }
+  before_action :set_complaint, only: [:show, :destroy, :like, :unlike]
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
     authorize Complaint
-    
-    if @company.present?
-      @complaints = @company.complaints.order(created_at: :desc)
-    else
-      @complaints = Complaint.where(user_id: current_user.id).order(created_at: :desc)
-    end
-  
-    if params[:respondidas].present?
-      if params[:respondidas] == "true"
-        @complaints = @complaints.joins(:responses).distinct
-      elsif params[:respondidas] == "false"
-        @complaints = @complaints.left_joins(:responses).where(responses: { id: nil })
-      end
-    end
+    @complaints = policy_scope(Complaint.all).order(created_at: :desc)
   end
 
   def user_complaints
@@ -46,7 +33,7 @@ class ComplaintsController < ApplicationController
     authorize @complaint
     @response = Response.new
     @responses = @complaint.responses.where(parent_id: nil).order(created_at: :desc)
-  end
+  end  
   
   def new
     authorize Complaint
@@ -61,13 +48,54 @@ class ComplaintsController < ApplicationController
   
     if @complaint.save
       @company = @complaint.company
-      UserMailer.email_to_user(@company.company_contact_email, @complaint).deliver_now
+      UserMailer.email_to_company(@company.company_contact_email, @complaint).deliver_now
       redirect_to @complaint, notice: 'Reclamação criada com sucesso. Um email de confirmação foi enviado para a empresa.'
     else
       handle_existing_or_new_company
     end
   end
   
+  def edit
+    
+  end
+
+  def update
+    
+  end
+  
+  def destroy
+    @complaint = Complaint.find(params[:id])
+    authorize @complaint
+    if @complaint.destroy
+      flash[:success] = "Reclamação excluída com sucesso."
+    else
+      flash[:error] = "Erro ao excluir a reclamação."
+    end
+    redirect_to company_complaints_path(@complaint.company)
+  end
+
+  def like
+    @complaint.favorite(current_user)
+    respond_to do |format|
+      format.html { redirect_to @complaint }
+      format.json {
+        render_like_button
+      }
+    end
+    authorize @complaint
+  end
+
+  def unlike
+    @complaint.unfavorite(current_user)
+
+    respond_to do |format|
+      format.html { redirect_to @complaint }
+      format.json {
+        render_like_button
+      }
+    end
+    authorize @complaint
+  end
   
   private
 
@@ -119,12 +147,18 @@ class ComplaintsController < ApplicationController
 
   def complaint_params
     params.require(:complaint).permit(
-      :company_id, :title, :review, :comment, :complaint_category,
+      :company_id, :title, :review, :comment, :complaint_category, :likes_count,
       company_attributes: [
         :company_name, :company_category, :company_city, :company_prefecture,
         company_social_media: [:facebook, :twitter, :linkedin, :instagram, :youtube, :tiktok]
       ]
     )
+  end
+
+  def render_like_button
+    render json: { like_button_html: render_to_string(partial: 'components/like_button', locals: { item: @complaint, 
+                                                                                                    path1: unlike_company_complaint_path(@complaint.user, @complaint), 
+                                                                                                    path2: like_company_complaint_path(@complaint.user, @complaint) }) }
   end
   
   def set_company

@@ -55,6 +55,8 @@ gem "sassc-rails"
 gem "pundit"
 gem "cloudinary"
 gem 'countries'
+gem 'acts_as_favoritor'
+gem 'rating'
 
 # Twilio
 gem "twilio-ruby"

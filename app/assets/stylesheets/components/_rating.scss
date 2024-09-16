@@ -1,0 +1,46 @@
+.rating {
+  display: flex;
+  cursor: pointer;
+
+  i {
+    font-size: 24px;
+    color: gray;
+    margin-right: 5px;
+    transition: color 0.2s;
+  }
+
+  i.selected {
+    color: gold;
+  }
+
+  /* Hover para desktops */
+  i:hover,
+  i:hover ~ i {
+    color: gold;
+  }
+
+  @media (max-width: 768px) {
+    i {
+      font-size: 32px;
+    }
+
+    /* Desativar o hover em dispositivos móveis */
+    i:hover,
+    i:hover ~ i {
+      color: gray;
+    }
+  }
+}
+
+.rating-show {
+  display: flex;
+  .rating {
+    color: gold;
+    font-size: 24px;
+  }
+
+  .rating-desactive {
+    color: gray;
+    font-size: 24px;
+  }
+}

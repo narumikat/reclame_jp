@@ -14,6 +14,7 @@ class Company < ApplicationRecord
 
   has_one_attached :company_logo
   has_one_attached :company_banner
+  rating
 
   COMPANY_CATEGORY = [
     "Empreiteiras",
@@ -69,7 +70,7 @@ class Company < ApplicationRecord
     return 10 if total_complaints_count.zero?
 
     score = complaints_answered_percentage
-    scaled_score = (score / 10.0).round(2)
+    scaled_score = (score / 10.0).round(1)
 
     scaled_score
   end
@@ -83,7 +84,6 @@ class Company < ApplicationRecord
              SUM(CASE WHEN responses.id IS NOT NULL THEN 1 ELSE 0 END) AS answered_complaints_count')
       .having('COUNT(complaints.id) > 0 AND SUM(CASE WHEN responses.id IS NOT NULL THEN 1 ELSE 0 END) > 0')
       .order(Arel.sql('SUM(CASE WHEN responses.id IS NOT NULL THEN 1 ELSE 0 END) / COUNT(complaints.id) DESC'))
-      .limit(3)
   end
 
   def self.low_company_ranking
@@ -96,8 +96,7 @@ class Company < ApplicationRecord
              SUM(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) AS unanswered_complaints,
              AVG(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) AS unanswered_complaints_ratio')
       .having('COUNT(complaints.id) > 0 AND SUM(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) > 0')
-      .order('unanswered_complaints_ratio ASC')
-      .limit(3)
+      .order('unanswered_complaints_ratio DESC')
   end
 
 

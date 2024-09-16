@@ -4,15 +4,15 @@
   <div class="container py-4">
     <div class="row">
       <div class="d-flex justify-content-center align-items-center mb-2">
-        <h1 class="mb-0"><%= @company.company_name %></h1>
+        <h1 class="mb-2"><%= @company.company_name %></h1>
         <% if can_edit_company?(@company) %>
           <%= link_to edit_company_path(@company) do %>
             <i class="ms-2 fa-solid fa-pen-to-square"></i>
           <% end %>
         <% end %>
       </div>
-      <div class="d-flex justify-content-center">
-        <%= link_to search_path(company_category: @company.company_category) do %>
+      <div class="d-flex justify-content-center mb-2">
+        <%= link_to search_results_path(company_category: @company.company_category) do %>
           <span class="tag-grey"><%= @company.company_category %></span>
         <% end %>
       </div>
@@ -33,7 +33,20 @@
             <div class="col-md-8 py-4">
               <%= simple_form_for [@company, @new_complaint] do |f| %>
                 <%= f.input :title, label: 'Titulo da reclamação' %>
-                <%= f.input :review, placeholder: 'numero de 1 a 5' %>
+                <div class="form-group mb-3" data-controller="rating">
+                  <label for="review">Avaliação</label>
+                  <div id="review-rating" class="rating">
+                    <% (1..5).each do |i| %>
+                      <i class="fa-solid fa-skull-crossbones me-2" 
+                        data-value="<%= i %>" 
+                        data-target="rating.icon"
+                        data-action="click->rating#setRating"
+                        aria-label="<%= i %>">
+                      </i>
+                    <% end %>
+                  </div>
+                  <%= f.hidden_field :review, id: 'review-value', data: { target: 'rating.hiddenField' } %>
+                </div>
                 <%= f.input :comment, label: 'Reclamação' %>
                 <div class="form-group mb-4">
                   <%= f.label 'Categoria da reclamação', required: true, class: "mb-2" %>
@@ -111,14 +124,14 @@
                   <div class="info-box d-flex align-items-center">
                     <%= link_to ( @company.company_website.start_with?("http://", "https://") ? @company.company_website : "http://#{@company.company_website}" ), target: "_blank", class: "text-decoration-none d-flex align-items-center flex-wrap" do %>
                       <i class="fa-solid fa-globe me-2"></i>
-                      <span class="website-text"><%= display_website(@company.company_website) %></span>
+                      <span class="long-text"><%= display_website(@company.company_website) %></span>
                     <% end %>
                   </div>
                 <% end %>
                 <% if @company.company_contact_email.present? %>
                   <div class="info-box d-flex align-items-center mt-2">
                     <i class="fa-solid fa-envelope me-2"></i>
-                    <span><%= @company.company_contact_email %></span>
+                    <span class="long-text"><%= @company.company_contact_email %></span>
                   </div>
                 <% end %>
                 <div class="contato-company mt-4 ms-4">
@@ -194,8 +207,8 @@
                       <%= link_to user_path(employee), class: 'text-decoration-none text-dark' do %>
                         <div class="d-flex align-items-center">
                           <i class="fa-solid fa-user me-2"></i>
-                          <p class="mb-0 pe-4 border-end"><%= employee.username_protected %></p>
-                          <p class="mb-0 ms-3"><%= companies_user.role.capitalize %> da empresa</p>
+                          <p class="mb-0 pe-4 border-end"><strong>@<%= employee.username %></strong></p>
+                          <p class="mb-0 ms-3"><strong><%= companies_user.role.capitalize %></strong> da empresa</p>
                         </div>
                       <% end %>
                     </div>

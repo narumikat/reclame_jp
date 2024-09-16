@@ -15,4 +15,12 @@ class ResponsePolicy < ApplicationPolicy
   def create?
     true
   end
+
+  def like?
+    true
+  end
+
+  def unlike?
+    true
+  end
 end

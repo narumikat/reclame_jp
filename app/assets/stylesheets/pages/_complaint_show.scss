@@ -44,7 +44,29 @@
     .response-to-response-form {
       p {
         font-size: 0.8rem;
+        color: $main-red;
       }
+    }
+  }
+
+  .fa-trash-alt {
+    color: $gray-icon;
+    transition: color 0.3s;
+    font-size: 1.2rem;
+
+    &:hover {
+      color: $gray-hover;
+    }
+  }
+
+  .complaint-company {
+    background: #fff;
+    h5 {
+      font-weight: 600;
+    }
+
+    strong {
+      color: $main-red;
     }
   }
 }
