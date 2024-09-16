@@ -8,7 +8,10 @@ class CompaniesController < ApplicationController
   
   def index
     authorize Company
-    @companies = Company.all
+    @companies = Company.includes(
+      company_banner_attachment: :blob,
+      company_logo_attachment: :blob
+    ).all
     # @categories = Company::COMPANY_CATEGORY
     @categories = Company.select(:company_category).distinct.pluck(:company_category)
   end
