@@ -20,7 +20,9 @@
           <!-- CARROUSEL -->
           <div>
             <h5 class="text-center mb-2 text-bold">Últimas empresas cadastradas</h5>
-            <%= render 'companies/carrousel', companies: @companies %>
+            <% cache @companies do %>
+              <%= render 'companies/carrousel', companies: @companies %>
+            <% end %>
             <div class="d-flex justify-content-center mt-2 mb-4">
               <%= link_to "Todas as empresas", companies_path, class: "btn-blue" %>
             </div>
