@@ -8,7 +8,7 @@ class CompaniesController < ApplicationController
 
   def index
     authorize Company
-    @companies = Company.order(created_at: :desc).limit(5)
+    @companies = Company.includes(company_logo_attachment: :blob).order(created_at: :desc).limit(5)
     @categories = Company.select(:company_category).distinct.pluck(:company_category)
   end
   def new
