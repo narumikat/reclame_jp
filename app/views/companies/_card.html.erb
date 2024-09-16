@@ -21,7 +21,8 @@
     </div>
     <div class="company-score">
       <i class="fa-solid fa-medal me-2"></i>
-      <h5><%= company.company_score %><small>/10</small></h5>
+      <% company_score = company.company_score %>
+      <h5><%= company_score %><small>/10</small></h5>
     </div>
     <%= link_to company_path(company) do %>
       <% if company.company_logo.present? %>
