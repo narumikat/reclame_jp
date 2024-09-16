@@ -5,11 +5,10 @@ class CompaniesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show, :top_scored_companies, :low_scored_companies]
 
   COMPANY_CATEGORY = Company::COMPANY_CATEGORY
-
+  
   def index
     authorize Company
-    # @companies = Company.includes(company_logo_attachment: :blob).order(created_at: :desc).limit(5)
-    @companies = Company.includes(:company_logo_attachment, :company_banner_attachment).order(created_at: :desc).limit(5)
+    @companies = Company.all.order(created_at: :desc)
     @categories = Company.select(:company_category).distinct.pluck(:company_category)
   end
   def new
