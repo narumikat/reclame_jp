@@ -1,12 +1,14 @@
 <div class="company-card border">
+  <% banner_image = if company.company_banner.attached?
+                      cl_image_tag company.company_banner.key, class: "card-cover"
+                    elsif company.company_banner_url.present?
+                      image_tag company.company_banner_url, class: "card-cover"
+                    else
+                      image_tag 'card-img.png', class: "card-cover"
+                    end %>
+
   <%= link_to company_path(company) do %>
-    <% if company.company_banner.attached? %>
-      <%= cl_image_tag company.company_banner.key, class: "card-cover" %>
-    <% elsif company.company_banner_url.present? %>
-      <%= image_tag company.company_banner_url, class: "card-cover" %>
-    <% else %>
-      <%= image_tag 'card-img.png', class: "card-cover" %>
-    <% end %>
+    <%= banner_image %>
   <% end %>
   <div class="company-card-info mb-2 d-flex justify-content-between">
     <div>
@@ -19,18 +21,21 @@
         <span class="tag-grey-sm"><%= company.company_category %></span>
       <% end %>
     </div>
+    <% company_score = company.company_score %>
     <div class="company-score">
       <i class="fa-solid fa-medal me-2"></i>
-      <h5><%= company.company_score %><small>/10</small></h5>
+      <h5><%= company_score %><small>/10</small></h5>
     </div>
+    <% logo_image = if company.company_logo.attached?
+                      cl_image_tag company.company_logo.key, class: "card-avatar"
+                    elsif company.company_logo_url.present?
+                      image_tag company.company_logo_url, class: "card-avatar"
+                    else
+                      image_tag 'company-avatar.png', class: "card-avatar"
+                    end %>
+
     <%= link_to company_path(company) do %>
-      <% if company.company_logo.present? %>
-        <%= cl_image_tag company.company_logo.key, class: "card-avatar" %>
-      <% elsif company.company_logo_url.present? %>
-        <%= image_tag company.company_logo_url, class: "card-avatar" %>
-      <% else %>
-        <%= image_tag 'company-avatar.png', class: "card-avatar" %>
-      <% end %>
+      <%= logo_image %>
     <% end %>
   </div>
   <% if can_edit_company?(company) %>

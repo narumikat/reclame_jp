@@ -50,30 +50,33 @@ class Company < ApplicationRecord
   validates :company_category, presence: true, inclusion: { in: COMPANY_CATEGORY }
 
   def total_complaints_count
-    complaints.count
+    complaints_count
   end
 
   def complaints_answered_count
-    complaints.joins(:responses).distinct.count
+    answered_complaints_count
   end
 
   def complaints_unanswered_count
-    complaints.where.not(id: Response.select(:complaint_id)).count
+    @complaints_unanswered_count ||= complaints.where.not(id: Response.select(:complaint_id)).count
   end
 
   def complaints_answered_percentage
-    return 0 if total_complaints_count.zero?
-    complaints_answered_count.to_f / total_complaints_count.to_f * 100
+    @complaints_answered_percentage ||= begin
+                                          return 0 if total_complaints_count.zero?
+                                          complaints_answered_count.to_f / total_complaints_count.to_f * 100
+                                        end
   end
+
 
   def company_score
-    return 10 if total_complaints_count.zero?
-
-    score = complaints_answered_percentage
-    scaled_score = (score / 10.0).round(1)
-
-    scaled_score
+    @company_score ||= begin
+                         return 10 if total_complaints_count.zero?
+                         score = complaints_answered_percentage
+                         (score / 10.0).round(1)
+                       end
   end
+
 
   def self.top_company_ranking
     Company

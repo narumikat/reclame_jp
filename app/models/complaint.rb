@@ -1,9 +1,12 @@
 class Complaint < ApplicationRecord
   include Pundit::Authorization
   belongs_to :user
-  belongs_to :company
+  belongs_to :company, counter_cache: true
   has_many :responses, dependent: :destroy
   has_many :ratings, as: :resource
+
+  after_create :increment_answered_complaints_count, if: :answered?
+  after_destroy :decrement_answered_complaints_count, if: :answered?
 
   COMPLAINT_CATEGORY = [
     'Financeira',
@@ -73,4 +76,19 @@ class Complaint < ApplicationRecord
   def favorited_by?(user)
     Favorite.exists?(favoritor: user, favoritable: self)
   end
+
+  private
+
+  def answered?
+    responses.exists?
+  end
+
+  def increment_answered_complaints_count
+    Company.increment_counter(:answered_complaints_count, company_id)
+  end
+
+  def decrement_answered_complaints_count
+    Company.decrement_counter(:answered_complaints_count, company_id)
+  end
+
 end

@@ -2,7 +2,8 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :home, :about, :contact, :privacy, :terms, :faq ]
 
   def home
-    @companies = Company.select(:id, :company_name, :created_at, :company_category, :company_banner_url, :company_logo_url).order(created_at: :desc).limit(5)
+    # @companies = Company.includes(company_logo_attachment: :blob).order(created_at: :desc).limit(5)
+    @companies = Company.includes(:company_logo_attachment, :company_banner_attachment).order(created_at: :desc).limit(5)
     @complaints = Complaint.select(:id, :title, :company_id, :status, :complaint_category, :created_at).order(created_at: :desc).limit(5)
     @top_ranked_companies = Company.top_company_ranking.limit(3)
     @low_ranked_companies = Company.low_company_ranking.limit(3)
