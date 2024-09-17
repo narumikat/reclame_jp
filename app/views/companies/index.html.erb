@@ -1,44 +1,53 @@
 <div class="container mt-4">
   <%= render 'shared/back_btn' %>
-  <div class="d-flex justify-content-between align-items-center">
-    <h2 class="py-2 mb-2">Todas as empresas</h2>
-    <div>
-      <button class="btn-blue" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Categorias</button>
-      <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
-        <div class="offcanvas-header">
-          <%= image_tag 'reclame-logo.png', class: "logo-sm" %>
-          <h5 class="ms-2 offcanvas-title" id="offcanvasTopLabel">Pesquise por categorias:</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-          <div class="d-flex flex-wrap">
-            <% @categories.each do |category| %>
-              <div class="m-2">
-                <%= link_to search_results_path(company_category: category) do %>
-                  <span class="tag-grey-sm"><%= category %></span>
+  <div class="row mt-4">
+    <!-- Sidebar -->
+    <div class="col-md-3 d-none d-md-block border">
+      <%= render 'shared/sidebar' %>
+    </div>
+    <!-- Main content -->
+    <div class="col-md-9 col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="py-2 mb-2">Todas as empresas</h2>
+        <div>
+          <button class="btn-blue" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Categorias</button>
+          <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+            <div class="offcanvas-header">
+              <%= image_tag 'reclame-logo.png', class: "logo-sm" %>
+              <h5 class="ms-2 offcanvas-title" id="offcanvasTopLabel">Pesquise por categorias:</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <div class="d-flex flex-wrap">
+                <% @categories.each do |category| %>
+                  <div class="m-2">
+                    <%= link_to search_results_path(company_category: category) do %>
+                      <span class="tag-grey-sm"><%= category %></span>
+                    <% end %>
+                  </div>
                 <% end %>
               </div>
-            <% end %>
+            </div>
           </div>
         </div>
+      </div>
+      <!-- Company cards -->
+      <div class="row">
+        <% post_counter = 0 %>
+        <% @companies.each do |company| %>
+          <% post_counter += 1 %>
+          <div class="col-12 col-md-4 my-2">
+            <%= render 'companies/card', company: company %>
+          </div>
+          <% if post_counter == 9 || (post_counter > 9 && (post_counter - 8) % 10 == 0) %>
+            <div class="col-12">
+              <div class="d-flex justify-content-center my-4">
+                <%= render 'components/company_not_find' %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>
-  <div class="row d-flex justify-content-center">
-    <% post_counter = 0 %>
-    <% @companies.each do |company| %>
-      <% post_counter += 1 %>
-      <div class="col-10 col-md-4 my-2">
-        <%= render 'companies/card', company: company %>
-      </div>
-      <% if post_counter == 9 || (post_counter > 9 && (post_counter - 8) % 10 == 0) %>
-        <div class="d-flex justify-content-center">
-          <div class="my-4 col-11 col-md-8">
-            <%= render 'components/company_not_find' %>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-</div>
 </div>
