@@ -58,8 +58,7 @@ gem 'countries'
 gem 'acts_as_favoritor'
 gem 'rating'
 gem 'rails_performance'
-
-
+gem 'rails_admin', '3.0'
 # Twilio
 gem "twilio-ruby"
 
@@ -87,3 +86,4 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+gem "sassc-rails"
