@@ -57,6 +57,8 @@ gem "cloudinary"
 gem 'countries'
 gem 'acts_as_favoritor'
 gem 'rating'
+gem 'rails_performance'
+
 
 # Twilio
 gem "twilio-ruby"

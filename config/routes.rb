@@ -54,4 +54,9 @@ Rails.application.routes.draw do
   get 'terms', to: 'pages#terms'
   get 'faq', to: 'pages#faq'
 
+  # Performance
+  authenticate :user, -> (user) { user.admin? } do
+    mount RailsPerformance::Engine, at: 'rails/performance'
+  end
+
 end
