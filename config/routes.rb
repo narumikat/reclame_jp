@@ -60,4 +60,7 @@ Rails.application.routes.draw do
     mount RailsPerformance::Engine, at: 'rails/performance'
   end
 
+  # ADS
+  get '/ads.txt', to: redirect('/ads.txt')
+
 end
