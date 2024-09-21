@@ -106,16 +106,20 @@ class CompaniesController < ApplicationController
   def low_scored_companies
     authorize :company, :low_scored_companies?
     @low_ranked_companies = Rails.cache.fetch('low_ranked_companies', expires_in: 6.hours) do
+      # Company
+      #   .joins(:complaints)
+      #   .left_joins(:complaints => :responses)
+      #   .group('companies.id')
+      #   .select('companies.*,
+      #        COUNT(complaints.id) AS total_complaints,
+      #        SUM(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) AS unanswered_complaints,
+      #        AVG(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) AS unanswered_complaints_ratio')
+      #   .having('COUNT(complaints.id) > 0 AND SUM(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) > 0')
+      #   .order('unanswered_complaints_ratio DESC')
       Company
         .joins(:complaints)
         .left_joins(:complaints => :responses)
         .group('companies.id')
-        .select('companies.*,
-             COUNT(complaints.id) AS total_complaints,
-             SUM(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) AS unanswered_complaints,
-             AVG(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) AS unanswered_complaints_ratio')
-        .having('COUNT(complaints.id) > 0 AND SUM(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) > 0')
-        .order('unanswered_complaints_ratio DESC')
     end
   end
 
