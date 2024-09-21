@@ -78,29 +78,29 @@ class Company < ApplicationRecord
   end
 
 
-  def self.top_company_ranking
-    Company
-      .joins(:complaints)
-      .left_joins(:complaints => :responses)
-      .group('companies.id')
-      .select('companies.*, COUNT(complaints.id) AS complaints_count,
-             SUM(CASE WHEN responses.id IS NOT NULL THEN 1 ELSE 0 END) AS answered_complaints_count')
-      .having('COUNT(complaints.id) > 0 AND SUM(CASE WHEN responses.id IS NOT NULL THEN 1 ELSE 0 END) > 0')
-      .order(Arel.sql('SUM(CASE WHEN responses.id IS NOT NULL THEN 1 ELSE 0 END) / COUNT(complaints.id) DESC'))
-  end
-
-  def self.low_company_ranking
-    Company
-      .joins(:complaints)
-      .left_joins(:complaints => :responses)
-      .group('companies.id')
-      .select('companies.*,
-             COUNT(complaints.id) AS total_complaints,
-             SUM(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) AS unanswered_complaints,
-             AVG(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) AS unanswered_complaints_ratio')
-      .having('COUNT(complaints.id) > 0 AND SUM(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) > 0')
-      .order('unanswered_complaints_ratio DESC')
-  end
+  # def self.top_company_ranking
+  #   Company
+  #     .joins(:complaints)
+  #     .left_joins(:complaints => :responses)
+  #     .group('companies.id')
+  #     .select('companies.*, COUNT(complaints.id) AS complaints_count,
+  #            SUM(CASE WHEN responses.id IS NOT NULL THEN 1 ELSE 0 END) AS answered_complaints_count')
+  #     .having('COUNT(complaints.id) > 0 AND SUM(CASE WHEN responses.id IS NOT NULL THEN 1 ELSE 0 END) > 0')
+  #     .order(Arel.sql('SUM(CASE WHEN responses.id IS NOT NULL THEN 1 ELSE 0 END) / COUNT(complaints.id) DESC'))
+  # end
+  #
+  # def self.low_company_ranking
+  #   Company
+  #     .joins(:complaints)
+  #     .left_joins(:complaints => :responses)
+  #     .group('companies.id')
+  #     .select('companies.*,
+  #            COUNT(complaints.id) AS total_complaints,
+  #            SUM(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) AS unanswered_complaints,
+  #            AVG(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) AS unanswered_complaints_ratio')
+  #     .having('COUNT(complaints.id) > 0 AND SUM(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) > 0')
+  #     .order('unanswered_complaints_ratio DESC')
+  # end
 
 
   private
