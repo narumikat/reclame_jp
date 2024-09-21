@@ -120,6 +120,12 @@ class CompaniesController < ApplicationController
         .joins(:complaints)
         .left_joins(:complaints => :responses)
         .group('companies.id')
+        .select('companies.*,
+              COUNT(complaints.id) AS total_complaints,
+              SUM(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) AS unanswered_complaints,
+              AVG(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) AS unanswered_complaints_ratio')
+        .having('COUNT(complaints.id) > 0 AND SUM(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) > 0')
+        .order('unanswered_complaints_ratio DESC')
     end
   end
 
