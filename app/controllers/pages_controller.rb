@@ -1,22 +1,28 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :home, :about, :contact, :privacy, :terms, :faq ]
+  skip_before_action :authenticate_user!, only: [:home, :about, :contact, :privacy, :terms, :faq]
 
   def home
     # @companies = Company.includes(company_logo_attachment: :blob).order(created_at: :desc).limit(5)
     @companies = Company.includes(:company_logo_attachment, :company_banner_attachment).order(created_at: :desc).limit(5)
     @complaints = Complaint.select(:id, :title, :company_id, :status, :complaint_category, :created_at).order(created_at: :desc).limit(5)
-    @top_ranked_companies = Company.top_company_ranking.limit(3)
-    @low_ranked_companies = Company.low_company_ranking.limit(3)
-    RailsPerformance.measure('Ranked Companies') do
-      @top_ranked_companies = Company.top_company_ranking.limit(3)
-      @low_ranked_companies = Company.low_company_ranking.limit(3)
-    end
-    RailsPerformance.measure('Complaints') do
-      @complaints = Complaint.select(:id, :title, :company_id, :status, :complaint_category, :created_at).order(created_at: :desc).limit(5)
-    end
-    RailsPerformance.measure('Companies') do
-      @companies = Company.includes(:company_logo_attachment, :company_banner_attachment).order(created_at: :desc).limit(5)
-    end
+    @top_ranked_companies = Company
+                              .joins(:complaints)
+                              .left_joins(:complaints => :responses)
+                              .group('companies.id')
+                              .select('companies.*, COUNT(complaints.id) AS complaints_count,
+             SUM(CASE WHEN responses.id IS NOT NULL THEN 1 ELSE 0 END) AS answered_complaints_count')
+                              .having('COUNT(complaints.id) > 0 AND SUM(CASE WHEN responses.id IS NOT NULL THEN 1 ELSE 0 END) > 0')
+                              .order(Arel.sql('SUM(CASE WHEN responses.id IS NOT NULL THEN 1 ELSE 0 END) / COUNT(complaints.id) DESC')).limit(3)
+    @low_ranked_companies = Company
+                              .joins(:complaints)
+                              .left_joins(:complaints => :responses)
+                              .group('companies.id')
+                              .select('companies.*,
+             COUNT(complaints.id) AS total_complaints,
+             SUM(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) AS unanswered_complaints,
+             AVG(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) AS unanswered_complaints_ratio')
+                              .having('COUNT(complaints.id) > 0 AND SUM(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) > 0')
+                              .order('unanswered_complaints_ratio DESC').limit(3)
   end
 
   # Static pages
