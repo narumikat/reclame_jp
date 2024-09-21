@@ -60,8 +60,8 @@
                 <i class="fa-solid fa-circle-arrow-right"></i>
               <% end %>
             </div>
-            <% cache @top_ranked_companies do %>
-              <% @top_ranked_companies.each do |company| %>
+            <% cache @top_ranked_companies_home do %>
+              <% @top_ranked_companies_home.each do |company| %>
                 <div class="mb-2">
                   <%= render 'companies/ranked_companies', company: company %>
                 </div>
@@ -75,8 +75,8 @@
                 <i class="fa-solid fa-circle-arrow-right"></i>
               <% end %>
             </div>
-            <% cache @low_ranked_companies do %>
-              <% @low_ranked_companies.each do |company| %>
+            <% cache @low_ranked_companies_home do %>
+              <% @low_ranked_companies_home.each do |company| %>
                 <div class="mb-2">
                   <%= render 'companies/ranked_companies', company: company %>
                 </div>
