@@ -14,7 +14,7 @@ class PagesController < ApplicationController
              SUM(CASE WHEN responses.id IS NOT NULL THEN 1 ELSE 0 END) AS answered_complaints_count')
         .having('COUNT(complaints.id) > 0 AND SUM(CASE WHEN responses.id IS NOT NULL THEN 1 ELSE 0 END) > 0')
         .order(Arel.sql('SUM(CASE WHEN responses.id IS NOT NULL THEN 1 ELSE 0 END) / COUNT(complaints.id) DESC'))
-        .limit(5)
+        .limit(3)
     end
     @low_ranked_companies_home = Rails.cache.fetch('low_ranked_companies', expires_in: 6.hours) do
       Company
@@ -26,7 +26,7 @@ class PagesController < ApplicationController
              SUM(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) AS unanswered_complaints,
              AVG(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) AS unanswered_complaints_ratio')
         .having('COUNT(complaints.id) > 0 AND SUM(CASE WHEN responses.id IS NULL THEN 1 ELSE 0 END) > 0')
-        .order('unanswered_complaints_ratio DESC').limit(5)
+        .order('unanswered_complaints_ratio DESC').limit(3)
     end
   end
 
