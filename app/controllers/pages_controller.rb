@@ -7,6 +7,16 @@ class PagesController < ApplicationController
     @complaints = Complaint.select(:id, :title, :company_id, :status, :complaint_category, :created_at).order(created_at: :desc).limit(5)
     @top_ranked_companies = Company.top_company_ranking.limit(3)
     @low_ranked_companies = Company.low_company_ranking.limit(3)
+    RailsPerformance.measure('Ranked Companies') do
+      @top_ranked_companies = Company.top_company_ranking.limit(3)
+      @low_ranked_companies = Company.low_company_ranking.limit(3)
+    end
+    RailsPerformance.measure('Complaints') do
+      @complaints = Complaint.select(:id, :title, :company_id, :status, :complaint_category, :created_at).order(created_at: :desc).limit(5)
+    end
+    RailsPerformance.measure('Companies') do
+      @companies = Company.includes(:company_logo_attachment, :company_banner_attachment).order(created_at: :desc).limit(5)
+    end
   end
 
   # Static pages
