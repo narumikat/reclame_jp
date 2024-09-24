@@ -17,13 +17,9 @@ class ApplicationController < ActionController::Base
   end
 
   def load_ads
-    # @banner_ads = Ad.where(ad_type: 'Banner').order(created_at: :desc).to_a
-    # @random_banner = @banner_ads.sample
     @banner_ads = Ad.where(ad_type: 'Banner').shuffle.sample
     @banner_sm_ads = Ad.where(ad_type: 'Banner-sm').shuffle.sample
-    # @random_banner_sm = @banner_sm_ads.sample
-    @card_ads = Ad.where(ad_type: 'Card').order(created_at: :desc).to_a
-    # @random_card = @card_ads.sample
+    @card_ads = Ad.where(ad_type: 'Card').shuffle.sample
     @sidecard_ads = Ad.where(ad_type: 'Sidecard').shuffle.sample
   end
   
