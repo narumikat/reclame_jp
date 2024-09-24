@@ -1,0 +1,9 @@
+<%= link_to ad.url, target: '_blank' do %>
+  <% if ad.image.attached? %>
+    <div class="card-ads">
+      <%= cl_image_tag ad.image.key, class: "card-img" %>
+    <% else %>
+      <%= image_tag 'card-ads.png', class: "card-img" %>
+    <% end %>
+  <% end %>
+</div>

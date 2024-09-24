@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include Pundit::Authorization
-  before_action :authenticate_user!, :load_users
+  before_action :authenticate_user!, :load_users, :load_ads
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
@@ -16,4 +16,11 @@ class ApplicationController < ActionController::Base
     @users = User.all.order(:user_name)
   end
 
+  def load_ads
+    @banner_ads = Ad.where(ad_type: 'Banner').shuffle.sample
+    @banner_sm_ads = Ad.where(ad_type: 'Banner-sm').shuffle.sample
+    @card_ads = Ad.where(ad_type: 'Card').shuffle.sample
+    @sidecard_ads = Ad.where(ad_type: 'Sidecard').shuffle.sample
+  end
+  
 end

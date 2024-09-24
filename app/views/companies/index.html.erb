@@ -32,7 +32,7 @@
         </div>
       </div>
       <!-- Company cards -->
-      <div class="row">
+      <div class="row d-flex justify-content-center align-items-center">
         <% post_counter = 0 %>
         <% @companies.each do |company| %>
           <% post_counter += 1 %>
@@ -45,6 +45,12 @@
                 <%= render 'components/company_not_find' %>
               </div>
             </div>
+          <% elsif post_counter == 4 || (post_counter > 4 && (post_counter - 3) % 10 == 0) %>
+            <% if @card_ads %>
+              <div class="col-12 col-md-4 my-2 d-flex justify-content-center">
+                <%= render 'ads/card', ad: @card_ads %>
+              </div>
+            <% end %>
           <% end %>
         <% end %>
       </div>

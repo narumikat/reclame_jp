@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 mt-4 border d-none d-md-flex">
+      <%= render 'shared/sidebar' %>
+    </div>
+    <div class="col-md-9 col-12 pt-4">
+      <%= render 'shared/back_btn' %>
+      <div class="mt-4 mx-4">
+        <div class="d-flex justify-content-between mb-4">
+          <h2 class="mb-0 pb-0"><strong>Anúncios</strong></h2>
+          <%= link_to "Novo Anuncio", new_ad_path, class: "btn-red" %>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Título</th>
+              <th scope="col">Tipo de Anúncio</th>
+              <th scope="col">Ativo</th>
+              <th scope="col">Atualizado em</th>
+              <th scope="col">Ações</th>
+              <!-- Nova coluna para ações -->
+            </tr>
+          </thead>
+          <tbody>
+            <% @ads.each_with_index do |ad, index| %>
+              <tr>
+                <th scope="row"><%= index + 1 %></th>
+                <td><%= ad.title %></td>
+                <td><%= ad.ad_type %></td>
+                <td><%= ad.active ? 'Sim' : 'Não' %></td>
+                <td><%= ad.updated_at.strftime("%d %b") %></td>
+                <td>
+                  <%= link_to 'Editar', edit_ad_path(ad), class: 'btn btn-primary btn-sm' %>
+                  <%= link_to 'Deletar', ad, method: :delete, data: { confirm: 'Tem certeza que deseja deletar este anúncio?' }, class: 'btn btn-danger btn-sm' %> <!-- Link para deletar -->
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

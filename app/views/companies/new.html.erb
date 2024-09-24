@@ -1,9 +1,16 @@
 <div class="container new-company">
-  <%= render 'shared/back_btn' %>
-  <h2 class="text-center my-4">Cadastre uma empresa</h2>
-  <p class="text-center">Para cadastrar uma empresa, preencha os campos abaixo:</p>
-  <small>Campos com * são obrigatórios</small>
-  <div class="mt-4">
-    <%= render 'components/new_company', text_btn: 'Cadastrar empresa' %>
+  <div class="row">
+    <div class="col-md-3 mt-4 border d-none d-md-flex">
+      <%= render 'shared/sidebar' %>
+    </div>
+    <div class="col-md-9 col-12 p-4">
+      <%= render 'shared/back_btn' %>
+      <h2 class="text-center my-4">Cadastre uma empresa</h2>
+      <p class="text-center">Para cadastrar uma empresa, preencha os campos abaixo:</p>
+      <small>Campos com * são obrigatórios</small>
+      <div class="mt-4">
+        <%= render 'components/new_company', text_btn: 'Cadastrar empresa' %>
+      </div>
+    </div>
   </div>
 </div>
