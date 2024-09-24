@@ -9,8 +9,8 @@
       <div class="col-md-9 col-12">
         <div class="mt-4 mx-2">
           <!-- ADS -->
-          <% if @banner_sm_ads.any? %>
-            <%= render 'ads/banner', ad: @random_banner_sm %>
+          <% if @banner_sm_ads %>
+            <%= render 'ads/banner', ad: @banner_sm_ads %>
           <% end %>
           <div class="border p-4 welcome-dashboard my-4">
             <h3 class="text-center">Bem vindo ao <strong>Reclame JP</strong> <br>
@@ -61,8 +61,8 @@
           <%= render 'components/company_not_find' %>
           <!-- ADS -->
           <div class="mt-4">
-            <% if @banner_ads.any? %>
-              <%= render 'ads/banner', ad: @random_banner %>
+            <% if @banner_ads %>
+              <%= render 'ads/banner', ad: @banner_ads %>
             <% end %>
           </div>
           <div class="my-4 pt-4 ranked_companies">
@@ -120,8 +120,8 @@
           </div>
           <!-- ADS -->
           <div class="mt-4">
-            <% if @banner_ads.any? %>
-              <%= render 'ads/banner', ad: @random_banner %>
+            <% if @banner_ads %>
+              <%= render 'ads/banner', ad: @banner_ads %>
             <% end %>
           </div>
         </div>

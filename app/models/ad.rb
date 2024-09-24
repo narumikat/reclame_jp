@@ -1,7 +1,7 @@
 class Ad < ApplicationRecord
   has_one_attached :image
 
-  ADS_TYPE = ['banner', 'banner-sm', 'card', 'sidecard'].freeze
+  ADS_TYPE = ['Banner', 'Banner-sm', 'Card', 'Sidecard'].freeze
   LOCATION = ['home', 'index company', 'index complaints', 'about', 'contact', 'privacy', 'terms'].freeze
 
   validates :title, presence: true

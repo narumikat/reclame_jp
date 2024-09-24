@@ -1,8 +1,13 @@
-<% if user_signed_in? && current_user.is_company? %>
-  <%= render 'users/dashboard_company' %>
-<% else %>
-  <%= render 'users/dashboard' %>
-<% end %>
+<div class="ads-bg">
+  <!-- Conteúdo principal -->
+  <div class="main-content">
+    <% if user_signed_in? && current_user.is_company? %>
+      <%= render 'users/dashboard_company' %>
+    <% else %>
+      <%= render 'users/dashboard' %>
+    <% end %>
+  </div>
+</div>
 <!--    Descomente o código abaixo para habilitar o envio de SMS e Whatsapp-->
 <!--    <h1 class="mb-4">Sending Messages</h1>-->
 <!--    <div class="card mb-4">-->

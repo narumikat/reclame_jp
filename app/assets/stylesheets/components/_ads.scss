@@ -1,3 +1,5 @@
+// BANNERS 
+
 .banner-ads {
   display: flex;
   justify-content: center;
@@ -5,7 +7,6 @@
   width: 100%;
   height: auto;
   overflow: hidden;
-  // max-height: 200px;
 
   .banner-img {
     width: 100%;
@@ -20,3 +21,61 @@
     flex-direction: column;
   }
 }
+
+// CARD 
+
+.card-ads {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  overflow: hidden;
+  max-height: 336px;
+  max-width: 280px;
+
+  .card-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
+// SIDEBANNER
+
+.left-side-ad, .right-side-ad {
+  position: fixed;
+  top: 30%;
+  transform: translate(0, -30%);
+  max-width: 160px;
+  height: 100%;
+  max-height: 600px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.left-side-ad {
+  left: 15px;
+}
+
+.right-side-ad {
+  right: 15px;
+}
+
+
+@media (max-width: 1024px) {
+  .left-side-ad, .right-side-ad {
+    display: none;
+  }
+}
+
+
