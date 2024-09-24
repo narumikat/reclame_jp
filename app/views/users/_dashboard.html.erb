@@ -55,12 +55,8 @@
             </div>
           </div>
           <%= render 'components/company_not_find' %>
-          <div class="row d-flex">
-            <% @banner_ads.each do |ad| %>
-              <div class="col-12 col-md-10">
-                <%= render 'ads/banner', locals: { ad: ad, link_path: ad.url}%>
-              </div>
-            <% end %>
+          <div class="mt-4">
+            <%= render 'ads/banner', ad: @random_banner%>
           </div>
           <div class="my-4 pt-4 ranked_companies">
             <div class="d-flex justify-content-between align-items-center my-4">

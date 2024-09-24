@@ -52,6 +52,12 @@
             <span>Adicionar empresa</span>
           </div>
         <% end %>
+        <%= link_to new_ad_path do %>
+          <div class="d-flex ms-2 align-items-center mb-3 mt-2">
+            <i class="fa-solid fa-rectangle-ad me-2"></i>
+            <span>Novo anuncio</span>
+          </div>
+        <% end %>
       <% end %>
     <% else %>
       <div class="d-flex ms-2 align-items-center">
