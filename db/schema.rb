@@ -42,6 +42,20 @@ ActiveRecord::Schema[7.1].define(version: 2024091323535020240913235028) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "ads", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "image"
+    t.string "url"
+    t.string "ad_type"
+    t.string "location"
+    t.integer "views"
+    t.integer "clicks"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "companies", force: :cascade do |t|
     t.string "company_name"
     t.string "company_register_number"

@@ -1,0 +1,9 @@
+<% link_to link_path do  %>
+  <div class="banner-ads">
+    <% if ad.image.attached? %>
+      <%= cl_image_tag ad.image.key, class: "banner-img" %>
+    <% else %>
+      <% image_tag 'banner-ads.png', class: "banner-img" %>
+    <% end %>
+  </div>
+<% end %>
