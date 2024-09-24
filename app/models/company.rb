@@ -49,25 +49,18 @@ class Company < ApplicationRecord
   validates :company_prefecture, presence: true, inclusion: { in: COMPANY_PREFECTURE }
   validates :company_category, presence: true, inclusion: { in: COMPANY_CATEGORY }
 
-  def total_complaints_count
-    complaints_count
-  end
-
-  def complaints_answered_count
-    answered_complaints_count
-  end
 
   def complaints_unanswered_count
     complaints.where.not(id: Response.select(:complaint_id)).count
   end
 
   def complaints_answered_percentage
-    return 0 if total_complaints_count.zero?
-    complaints_answered_count.to_f / total_complaints_count.to_f * 100
+    return 0 if complaints_count.zero?
+    answered_complaints_count.to_f / complaints_count.to_f * 100
   end
 
   def company_score
-    return 10 if total_complaints_count.zero?
+    return 10 if complaints_count.zero?
     score = complaints_answered_percentage
     (score / 10.0).round(1)
   end
