@@ -45,6 +45,12 @@
                 <%= render 'components/company_not_find' %>
               </div>
             </div>
+          <% elsif post_counter == 4 || (post_counter > 4 && (post_counter - 3) % 10 == 0) %>
+            <% if @card_ads.any? %>
+              <div class="col-12 col-md-4 my-2 d-flex flex-column">
+                <%= render 'ads/banner', ad: @random_card %>
+              </div>
+            <% end %>
           <% end %>
         <% end %>
       </div>

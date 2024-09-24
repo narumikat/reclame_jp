@@ -21,6 +21,8 @@ class ApplicationController < ActionController::Base
     @random_banner = @banner_ads.sample
     @banner_sm_ads = Ad.where(ad_type: 'banner-sm').order(created_at: :desc).to_a
     @random_banner_sm = @banner_sm_ads.sample
+    @card_ads = Ad.where(ad_type: 'card').order(created_at: :desc).to_a
+    @random_card = @card_ads.sample
   end
   
 end
