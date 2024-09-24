@@ -28,7 +28,15 @@
                 <td><%= ad.title %></td>
                 <td><%= ad.ad_type %></td>
                 <td>
-                  <span class="<%= ad.active ? 'green-tag' : 'red-tag' %>"><%= ad.active ? 'Sim' : 'Não' %></span>
+                  <span data-controller="ad-toggle" 
+                      data-ad-toggle-ad-id-value="<%= ad.id %>" 
+                      data-ad-toggle-active-value="<%= ad.active %>" 
+                      data-action="click->ad-toggle#toggle" 
+                    class="ad-toggle">
+                    <button class="toggle-button <%= ad.active ? 'green-tag' : 'red-tag' %>">
+                      <%= ad.active ? 'Ativo' : 'Inativo' %>
+                    </button>
+                  </span>
                 </td>
                 <td><%= ad.created_at.strftime("%d %b") %></td>
                 <td>

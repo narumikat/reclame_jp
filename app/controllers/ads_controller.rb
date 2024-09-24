@@ -56,6 +56,16 @@ class AdsController < ApplicationController
     redirect_to ads_path, notice: 'Anúncio excluído com sucesso.'
   end
 
+  def toggle_active
+    ad = Ad.find(params[:id])
+    ad.update(active: params[:active])
+
+    respond_to do |format|
+      format.json { render json: { success: true } }
+      format.html { redirect_to ads_path }
+    end
+  end
+
   private
 
   def ad_params

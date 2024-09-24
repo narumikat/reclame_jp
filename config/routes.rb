@@ -42,6 +42,9 @@ Rails.application.routes.draw do
       get :load_banner_ads
       get :load_card_ads
     end
+    member do
+      patch :toggle_active
+    end
   end
   
 
