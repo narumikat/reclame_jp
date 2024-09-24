@@ -19,6 +19,8 @@ class ApplicationController < ActionController::Base
   def load_ads
     @banner_ads = Ad.where(ad_type: 'banner').order(created_at: :desc).to_a
     @random_banner = @banner_ads.sample
+    @banner_sm_ads = Ad.where(ad_type: 'banner-sm').order(created_at: :desc).to_a
+    @random_banner_sm = @banner_sm_ads.sample
   end
   
 end
