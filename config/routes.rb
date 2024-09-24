@@ -37,7 +37,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :ads
+  resources :ads do
+    collection do
+      get :load_banner_ads
+      get :load_card_ads
+    end
+  end
+  
 
   resources :complaints do
     get 'new_complaint', on: :collection, to: 'complaints#new_complaint'

@@ -11,7 +11,23 @@ class AdPolicy < ApplicationPolicy
     true
   end
 
+  def edit?
+    user.admin? || user == record.user
+  end
+
+  def update?
+    user.admin? || user == record.user
+  end
+
   def show?
+    true
+  end
+
+  def load_banner_ads?
+    true
+  end
+
+  def load_card_ads?
     true
   end
 end

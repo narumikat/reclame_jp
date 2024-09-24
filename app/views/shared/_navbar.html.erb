@@ -34,7 +34,7 @@
               <% end %>
             </div>
             <ul class="navbar-nav me-auto d-none d-md-flex">
-              <li class="nav-item dropdown">
+              <li class="nav-item dropdown me-4">
                 <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <% if user_signed_in? && current_user.avatar.present? %>
                     <%= cl_image_tag current_user.avatar.key, class: "avatar", alt: "dropdown menu" %>
@@ -54,7 +54,7 @@
                 </div>
               </li>
             <% else %>
-              <div class="nav-item d-flex">
+              <div class="nav-item d-flex me-4">
                 <%= link_to "Login", new_user_session_path, class: "nav-link mb-2 mx-2" %>
                 <%= link_to "Registre-se", registration_type_path, class: "nav-link mb-2 mx-2" %>
               </div>

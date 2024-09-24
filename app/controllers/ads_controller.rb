@@ -1,5 +1,7 @@
 class AdsController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_ad, only: [:show, :edit, :update]
+  skip_before_action :authenticate_user!, only: [:load_banner_ads, :load_card_ads]
   
   def new
     @ad = Ad.new
@@ -21,11 +23,11 @@ class AdsController < ApplicationController
   end
 
   def show
-    @ad = Ad.find(params[:id])
+    authorize @ad
   end
 
   def edit
-    @ad = Ad.find(params[:id])
+    authorize @ad
   end
 
   def update
@@ -38,10 +40,28 @@ class AdsController < ApplicationController
     end
   end
     
+  def load_banner_ads
+    @banner_ads = Ad.where(ad_type: 'Banner').order("RANDOM()").first
+    render partial: 'ads/banner', locals: { ad: @banner_ads }
+  end
+
+  def load_card_ads
+    @card_ads = Ad.where(ad_type: 'Card').order("RANDOM()").first
+    render partial: 'ads/card', locals: { ad: @card_ads }
+  end
 
   private
 
   def ad_params
     params.require(:ad).permit(:title, :ad_type, :location, :description, :url, :active, :image)
   end
+
+  def find_ad
+    @ad = Ad.find_by(id: params[:id])
+    unless @ad
+      flash[:alert] = "Anúncio não encontrado."
+      redirect_to ads_path
+    end
+  end
+  
 end
