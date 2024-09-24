@@ -52,12 +52,20 @@
             <span>Adicionar empresa</span>
           </div>
         <% end %>
-        <%= link_to new_ad_path do %>
-          <div class="d-flex ms-2 align-items-center mb-3 mt-2">
-            <i class="fa-solid fa-rectangle-ad me-2"></i>
-            <span>Novo anuncio</span>
+        <div class="my-2 pb-2">
+          <div class="container-fluid ps-2">
+            <div class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent3" aria-controls="navbarToggleExternalContent" aria-expanded="true" aria-label="Toggle navigation">
+              <i class="fa-solid fa-rectangle-ad me-2"></i>
+              <span>Anuncios</span>
+            </div>
           </div>
-        <% end %>
+          <div class="collapse" id="navbarToggleExternalContent3">
+            <div class="row ms-4 px-4 pt-4">
+              <%= link_to 'Todos',ads_path, class: "mb-4" %>
+              <%= link_to 'Novo Ads', new_ad_path, class: "mb-2" %>
+            </div>
+          </div>
+        </div>
       <% end %>
     <% else %>
       <div class="d-flex ms-2 align-items-center">
