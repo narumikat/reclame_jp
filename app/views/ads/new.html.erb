@@ -1,4 +1,64 @@
-<div class="container pt-4">
+<div class="container new-ads">
+  <!-- -->
+  <div class="ads-sizes row d-flex justify-content-center">
+    <div class="col-10 accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Ads size
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+          <div class="accordion-body row">
+            <p><strong>Tamanho ideal para cada tipo do anuncio</strong></p>
+            <%= image_tag 'size-ads.png', class: "size-ads mt-4" %>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Banner
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+          <div class="accordion-body row">
+            <p><strong> Banner maior (970px por 250px)</strong></p>
+            <p>Este é o banner que será posicionado no meio das páginas, e seu tamanho ideal é de 970px de largura por 250px de altura. Este tipo de banner é conhecido como Leaderboard, que é bastante comum em layouts de páginas web. Sua dimensão larga, mas relativamente baixa, permite capturar a atenção do usuário sem ocupar muito espaço vertical.</p>
+            <p><strong>Banner mais fino (728px por 90px)</strong></p>
+            <p>Esse banner será colocado no topo da página e terá uma altura menor para ocupar menos espaço, seu tamanho ideal é de 728px de largura por 90px de altura. O propósito deste banner é garantir visibilidade imediata sem ser invasivo. Seu tamanho é mais fino em comparação com o banner no meio da página, o que o torna perfeito para ocupar o topo da página, acima ou ao lado da navegação.</p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Card
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <p><strong>Card Banner (336px x 280px)</strong></p>
+            <p>Este tipo de banner é conhecido como Large Rectangle, com dimensões de 336px de largura por 280px de altura. Este formato é ideal para integrar dentro de conteúdo ou ao lado de artigos, pois ocupa um espaço moderado sem ser muito invasivo.</p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+            Sidecard
+          </button>
+        </h2>
+        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <p><strong>Sidecard Banner (160px x 600px) </strong></p>
+            <p>Este é um Vertical Banner com dimensões de 160px de largura por 600px de altura, ideal para ocupar áreas laterais da página, como uma barra lateral fixa (sticky banner). Ele é alto e fino, o que permite maximizar o espaço lateral sem prejudicar o layout principal da página.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3>Novo anúncio:</h3>
   <%= simple_form_for @ad do |f| %>
     <div class="row">
       <div class="col-md-6">
@@ -26,12 +86,12 @@
         <%= f.input :image, as: :file, label: 'Imagem do Anúncio' %>
       </div>
       <div class="col-md-6">
-        <%= f.input :active, as: :boolean, label: 'Anúncio Ativo' %>
+        <%= f.input :status, as: :select, label: 'Estado do Anúncio', collection: [['Ativo', true], ['Inativo', false]], selected: true %>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12 text-center">
-        <%= f.button :submit, 'Salvar Anúncio', class: 'btn btn-primary' %>
+      <div class="col-md-12 text-center my-4">
+        <%= f.button :submit, 'Salvar Anúncio', class: 'btn-red' %>
       </div>
     </div>
   <% end %>
