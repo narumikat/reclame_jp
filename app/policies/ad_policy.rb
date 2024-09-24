@@ -30,4 +30,8 @@ class AdPolicy < ApplicationPolicy
   def load_card_ads?
     true
   end
+
+  def destroy?
+    user.admin? || user == record.user
+  end
 end

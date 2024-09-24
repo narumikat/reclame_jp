@@ -1,6 +1,6 @@
 class AdsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_ad, only: [:show, :edit, :update]
+  before_action :find_ad, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:load_banner_ads, :load_card_ads]
   
   def new
@@ -48,6 +48,12 @@ class AdsController < ApplicationController
   def load_card_ads
     @card_ads = Ad.where(ad_type: 'Card').order("RANDOM()").first
     render partial: 'ads/card', locals: { ad: @card_ads }
+  end
+
+  def destroy
+    authorize @ad
+    @ad.destroy
+    redirect_to ads_path, notice: 'Anúncio excluído com sucesso.'
   end
 
   private
