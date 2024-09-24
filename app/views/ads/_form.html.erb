@@ -25,7 +25,7 @@
       <%= f.input :image, as: :file, label: 'Imagem do Anúncio' %>
     </div>
     <div class="col-md-6">
-      <%= f.input :status, as: :select, label: 'Estado do Anúncio', collection: [['Ativo', true], ['Inativo', false]], selected: true %>
+      <%= f.input :active, as: :select, label: 'Estado do Anúncio', collection: [['Ativo', true], ['Inativo', false]], selected: f.object.active %>
     </div>
   </div>
   <div class="row">

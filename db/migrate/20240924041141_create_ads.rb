@@ -9,7 +9,7 @@ class CreateAds < ActiveRecord::Migration[7.1]
       t.string :location
       t.integer :views
       t.integer :clicks
-      t.boolean :active
+      t.boolean :active, default: true
 
       t.timestamps
     end

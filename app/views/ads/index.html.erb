@@ -13,13 +13,12 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">No.</th>
               <th scope="col">Título</th>
               <th scope="col">Tipo de Anúncio</th>
               <th scope="col">Ativo</th>
-              <th scope="col">Atualizado em</th>
+              <th scope="col">Criado em</th>
               <th scope="col">Ações</th>
-              <!-- Nova coluna para ações -->
             </tr>
           </thead>
           <tbody>
@@ -28,11 +27,13 @@
                 <th scope="row"><%= index + 1 %></th>
                 <td><%= ad.title %></td>
                 <td><%= ad.ad_type %></td>
-                <td><%= ad.active ? 'Sim' : 'Não' %></td>
-                <td><%= ad.updated_at.strftime("%d %b") %></td>
+                <td>
+                  <span class="<%= ad.active ? 'green-tag' : 'red-tag' %>"><%= ad.active ? 'Sim' : 'Não' %></span>
+                </td>
+                <td><%= ad.created_at.strftime("%d %b") %></td>
                 <td>
                   <%= link_to 'Editar', edit_ad_path(ad), class: 'btn btn-primary btn-sm' %>
-                  <%= link_to 'Deletar', ad, method: :delete, data: { confirm: 'Tem certeza que deseja deletar este anúncio?' }, class: 'btn btn-danger btn-sm' %> <!-- Link para deletar -->
+                  <%= link_to 'Deletar', ad, data: { turbo_method: :delete, turbo_confirm: "Tem certeza que deseja excluir essa reclamação?" }, class: 'btn btn-danger btn-sm' %> <!-- Link para deletar -->
                 </td>
               </tr>
             <% end %>

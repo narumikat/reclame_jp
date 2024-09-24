@@ -47,7 +47,12 @@
             </div>
           <% elsif post_counter == 4 || (post_counter > 4 && (post_counter - 3) % 10 == 0) %>
             <% if @card_ads %>
-              <div class="col-12 col-md-4 my-2 d-flex justify-content-center">
+              <div
+                class="col-12 col-md-4 mb-3 d-flex justify-content-center"
+                data-controller="ads"
+                data-ads-url-value="<%= load_card_ads_ads_path %>" 
+                data-ads-interval-value="15000" 
+                >
                 <%= render 'ads/card', ad: @card_ads %>
               </div>
             <% end %>
