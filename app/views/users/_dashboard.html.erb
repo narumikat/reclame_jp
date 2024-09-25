@@ -14,9 +14,9 @@
               id="banner-ads"
               class="mt-4"
               data-controller="ads"
-              data-ads-url-value="<%= load_banner_ads_ads_path %>"
+              data-ads-url-value="<%= load_sm_banner_ads_path %>"
             >
-              <%= render 'ads/banner', ad: @banner_sm_ads %>
+              <%= render 'ads/banner_sm', ad: @banner_sm_ads %>
             </div>
           <% end %>
           <div class="border p-4 welcome-dashboard my-4">
@@ -72,7 +72,7 @@
               id="banner-ads"
               class="mt-4"
               data-controller="ads"
-              data-ads-url-value="<%= load_banner_ads_ads_path %>"
+              data-ads-url-value="<%= load_banner_ads_path %>"
             >
               <%= render 'ads/banner', ad: @banner_ads %>
             </div>
@@ -136,7 +136,7 @@
             id="banner-ads"
             class="mt-4"
             data-controller="ads"
-            data-ads-url-value="<%= load_banner_ads_ads_path %>"
+            data-ads-url-value="<%= load_banner_ads_path %>"
             data-ads-interval-value="10000" 
             >
               <%= render 'ads/banner', ad: @banner_ads %>

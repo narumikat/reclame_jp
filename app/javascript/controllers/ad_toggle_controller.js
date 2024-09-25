@@ -1,6 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="ad-toggle"
 export default class extends Controller {
   static values = {
     adId: Number,
@@ -10,7 +9,6 @@ export default class extends Controller {
   toggle() {
     const newActiveStatus = !this.activeValue
 
-    // Faz a requisição para atualizar o estado no servidor
     fetch(`/ads/${this.adIdValue}/toggle_active`, {
       method: 'PATCH',
       headers: {

@@ -11,6 +11,31 @@
   .banner-img {
     width: 100%;
     height: auto;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
+.banner-sm-ads {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  max-height: 90px;
+  overflow: hidden;
+
+  .banner-img {
+    width: 100%;
+    height: auto;
+    max-height: 90px;
     object-fit: cover;
     border-radius: 8px;
   }

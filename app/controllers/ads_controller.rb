@@ -1,7 +1,7 @@
 class AdsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_ad, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_user!, only: [:load_banner_ads, :load_card_ads]
+  skip_before_action :authenticate_user!, only: [:load_banner, :load_sm_banner, :load_card]
   
   def new
     @ad = Ad.new
@@ -40,12 +40,17 @@ class AdsController < ApplicationController
     end
   end
     
-  def load_banner_ads
-    @banner_ads = Ad.where(ad_type: 'Banner').order("RANDOM()").first
-    render partial: 'ads/banner', locals: { ad: @banner_ads }
+  def load_banner
+    @banner_ads = Ad.where(ad_type: 'Banner', active: true).order("RANDOM()").first
+      render partial: 'ads/banner', locals: { ad: @banner_ads }
   end
 
-  def load_card_ads
+  def load_sm_banner
+    @banner_sm_ads = Ad.where(ad_type: 'Banner-sm', active: true).order("RANDOM()").first
+      render partial: 'ads/banner_sm', locals: { ad: @banner_sm_ads }
+  end
+  
+  def load_card
     @card_ads = Ad.where(ad_type: 'Card').order("RANDOM()").first
     render partial: 'ads/card', locals: { ad: @card_ads }
   end

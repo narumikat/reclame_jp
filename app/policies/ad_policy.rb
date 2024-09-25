@@ -23,11 +23,15 @@ class AdPolicy < ApplicationPolicy
     true
   end
 
-  def load_banner_ads?
+  def load_banner?
     true
   end
 
-  def load_card_ads?
+  def load_sm_banner?
+    true
+  end
+
+  def load_card?
     true
   end
 
