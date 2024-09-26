@@ -17,14 +17,28 @@
       <!-- Anúncio do lado esquerdo -->
       <div class="left-side-ad">
         <% if @sidecard_ads %>
-          <%= render 'ads/sidecard', ad: @sidecard_ads %>
+          <div
+              id="banner-ads"
+              class="mt-4"
+              data-controller="ads"
+              data-ads-url-value="<%= load_sidecard_ads_path %>"
+            >
+            <%= render 'ads/sidecard', ad: @sidecard_ads %>
+          </div>
         <% end %>
       </div>
       <%= yield %>
       <!-- Anúncio do lado direito -->
       <div class="right-side-ad">
         <% if @sidecard_ads %>
-          <%= render 'ads/sidecard', ad: @sidecard_ads %>
+          <div
+              id="banner-ads"
+              class="mt-4"
+              data-controller="ads"
+              data-ads-url-value="<%= load_sidecard_ads_path %>"
+            >
+            <%= render 'ads/sidecard', ad: @sidecard_ads %>
+          </div>
         <% end %>
       </div>
     </div>

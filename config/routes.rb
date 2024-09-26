@@ -42,6 +42,7 @@ Rails.application.routes.draw do
       get :load_banner
       get :load_sm_banner
       get :load_card
+      get :load_sidecard
     end
     member do
       patch :toggle_active

@@ -9,7 +9,7 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <%= f.input :description, label: 'Descrição', as: :text %>
+      <%= f.input :description, label: 'Descrição / Observacão', as: :text %>
     </div>
   </div>
   <div class="row">
@@ -17,15 +17,12 @@
       <%= f.input :ad_type, collection: Ad::ADS_TYPE, label: 'Tipo de Anúncio', prompt: 'Selecione o tipo de anúncio' %>
     </div>
     <div class="col-md-6">
-      <%= f.input :location, collection: Ad::LOCATION, label: 'Localização do Anúncio', prompt: 'Selecione a localização' %>
+      <%= f.input :active, as: :select, label: 'Estado do Anúncio', collection: [['Ativo', true], ['Inativo', false]], selected: f.object.active %>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 col-12">
       <%= f.input :image, as: :file, label: 'Imagem do Anúncio' %>
-    </div>
-    <div class="col-md-6">
-      <%= f.input :active, as: :select, label: 'Estado do Anúncio', collection: [['Ativo', true], ['Inativo', false]], selected: f.object.active %>
     </div>
   </div>
   <div class="row">

@@ -51,9 +51,16 @@ class AdsController < ApplicationController
   end
   
   def load_card
-    @card_ads = Ad.where(ad_type: 'Card').order("RANDOM()").first
+    @card_ads = Ad.where(ad_type: 'Card', active: true).order("RANDOM()").first
     render partial: 'ads/card', locals: { ad: @card_ads }
   end
+
+  def load_sidecard
+    @sidecard_ads = Ad.where(ad_type: 'Sidecard', active: true)
+    @sidecard_ad = @sidecard_ads.sample # Escolhe aleatoriamente um anúncio ativo e de tipo 'Sidecard'
+    render partial: 'ads/sidecard', locals: { ad: @sidecard_ad }
+  end
+  
 
   def destroy
     authorize @ad

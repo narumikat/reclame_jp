@@ -14,8 +14,8 @@
               </button>
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-              <div class="accordion-body row">
-                <p><strong>Tamanho ideal para cada tipo do anuncio</strong></p>
+              <div class="accordion-body row d-flex justify-content-center text-center">
+                <p><strong>Tamanho ideal para cada tipo do anúncio</strong></p>
                 <%= image_tag 'size-ads.png', class: "size-ads mt-4" %>
               </div>
             </div>
@@ -63,8 +63,11 @@
           </div>
         </div>
       </div>
-      <h3>Novo anúncio:</h3>
-      <%= render 'ads/form', ad: @ad %>
+      <!-- ADS FORM -->
+      <div class="border-top pt-4 mt-4">
+        <h3>Novo anúncio:</h3>
+        <%= render 'ads/form', ad: @ad %>
+      </div>
     </div>
   </div>
 </div>
