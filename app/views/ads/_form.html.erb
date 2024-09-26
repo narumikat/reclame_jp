@@ -20,9 +20,12 @@
       <%= f.input :active, as: :select, label: 'Estado do Anúncio', collection: [['Ativo', true], ['Inativo', false]], selected: f.object.active %>
     </div>
   </div>
-  <div class="row">
+  <div class="row" data-controller="photo-preview">
     <div class="col-md-6 col-12">
-      <%= f.input :image, as: :file, label: 'Imagem do Anúncio' %>
+      <%= f.label 'Imagem do Anúncio', class: "mb-2" %>
+      <%= f.file_field :image, class: "form-control", data: { action: "change->photo-preview#preview" } %>
+    </div>
+    <div class="col-md-6 col-12" id="preview-container">
     </div>
   </div>
   <div class="row">
