@@ -5,21 +5,27 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: auto;
+  height: 230px;
   overflow: hidden;
+  border-radius: 8px;
 
   .banner-img {
-    width: 100%;
-    height: auto;
-    max-height: 250px;
+    width: 800px;
+    height: 100%;
+    max-height: 230px;
     object-fit: cover;
     border-radius: 8px;
   }
 
   @media (max-width: 768px) {
-    max-width: 100%;
-    width: 100%;
     flex-direction: column;
+    height: 150px;
+
+    .banner-img {
+      width: 100%;
+      height: auto;
+    }
+
   }
 }
 
