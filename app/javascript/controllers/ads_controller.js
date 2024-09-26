@@ -15,7 +15,7 @@ export default class extends Controller {
   startRefreshing() {
     this.interval = setInterval(() => {
       this.loadAds()
-    }, this.intervalValue || 4000)
+    }, this.intervalValue || 5000)
   }
 
   stopRefreshing() {

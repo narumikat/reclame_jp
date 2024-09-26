@@ -23,17 +23,21 @@ class AdPolicy < ApplicationPolicy
     true
   end
 
-  def load_banner?
-    true
-  end
+  # def load_banner?
+  #   true
+  # end
 
-  def load_sm_banner?
-    true
-  end
+  # def load_sm_banner?
+  #   true
+  # end
 
-  def load_card?
-    true
-  end
+  # def load_card?
+  #   true
+  # end
+
+  # def load_sidecard
+  #   true
+  # end
 
   def destroy?
     user.admin? || user == record.user

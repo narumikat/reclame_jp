@@ -1,7 +1,7 @@
 class AdsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_ad, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_user!, only: [:load_banner, :load_sm_banner, :load_card]
+  skip_before_action :authenticate_user!, only: [:load_banner, :load_sm_banner, :load_card, :load_sidecard]
   
   def new
     @ad = Ad.new
@@ -57,7 +57,7 @@ class AdsController < ApplicationController
 
   def load_sidecard
     @sidecard_ads = Ad.where(ad_type: 'Sidecard', active: true)
-    @sidecard_ad = @sidecard_ads.sample # Escolhe aleatoriamente um anúncio ativo e de tipo 'Sidecard'
+    @sidecard_ad = @sidecard_ads.sample
     render partial: 'ads/sidecard', locals: { ad: @sidecard_ad }
   end
   
