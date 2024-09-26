@@ -9,21 +9,21 @@
       <% end %>
     </div>
     <div class="col-md-9 col-12 mt-4">
-      <div class="d-flex row justify-content-center">
+      <div class="d-flex row justify-content-center align-items-center">
         <h3 class="mb-4">Todas as reclamações</h3>
         <% post_counter = 0 %>
         <% @complaints.each do |complaint| %>
           <% post_counter += 1 %>
-          <div class="col-10 col-md-4 mb-3">
+          <div class="col-10 col-md-4 pb-3">
             <%= render 'complaints/card', complaint: complaint %>
           </div>
           <% if post_counter == 4 || (post_counter > 4 && (post_counter - 3) % 10 == 0) %>
             <% if @card_ads %>
               <div
-                class="col-12 col-md-4 mb-3 d-flex justify-content-center"
+                class="col-12 col-md-4 d-flex pb-3"
+                id="banner-ads"
                 data-controller="ads"
                 data-ads-url-value="<%= load_card_ads_path %>" 
-                data-ads-interval-value="15000" 
                 >
                 <%= render 'ads/card', ad: @card_ads %>
               </div>
