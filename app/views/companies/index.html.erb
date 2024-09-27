@@ -45,19 +45,17 @@
                 <%= render 'components/company_not_find' %>
               </div>
             </div>
-            <!-- 
-            <% elsif post_counter == 4 || (post_counter > 4 && (post_counter - 3) % 10 == 0) %>
+          <% elsif post_counter == 4 || (post_counter > 4 && (post_counter - 3) % 10 == 0) %>
             <% if @card_ads %>
-            <div
+              <div
                 class="col-12 col-md-4 d-flex justify-content-center"
                 id="banner-ads"
                 data-controller="ads"
                 data-ads-url-value="<%= load_card_ads_path %>" 
               >
-              <%= render 'ads/card', ad: @card_ads %>
-            </div>
+                <%= render 'ads/card', ad: @card_ads %>
+              </div>
             <% end %>
-            -->
           <% end %>
         <% end %>
       </div>
