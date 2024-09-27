@@ -29,6 +29,15 @@
               <% end %>
             </h3>
           </div>
+          <div class="border p-4 bg-white welcome-dashboard my-4">
+            <h3 class="text-center">O que é o <span>Reclame JP</span> ?</h3>
+            <p>
+              O Reclame JP é uma plataforma onde os usuários podem compartilhar suas experiências com 
+              <strong>empresas do Japão</strong> de forma <span>anônima</span>. <br>
+              As empresas têm a oportunidade de <strong>responder e solucionar</strong> os problemas
+              para melhorar o relacionamento com seus clientes.
+            </p>
+          </div>
           <!-- CARROUSEL -->
           <div>
             <h5 class="text-center mb-2 text-bold">Últimas empresas cadastradas</h5>
@@ -41,12 +50,12 @@
           </div>
           <div class="border bg-white p-4">
             <div class="ms-4">
-              <h3 class="mb-4">Está com algum <span>problema?</span></h3>
+              <h3 class="mb-4 text-center">Está com algum <span>problema?</span></h3>
               <% if user_signed_in? %>
-                <p><strong>Crie uma reclamação</strong></p>
+                <p class="text-center"><strong>Crie uma reclamação</strong></p>
                 <%= render 'components/btn_reclamar', path: new_complaint_path %>
               <% else %>
-                <p><strong>Registre-se e crie uma reclamação</strong>, reclamações podem ser feitas de forma <strong>anônima</strong></p>
+                <p class="text-center"><strong>Registre-se e crie uma reclamação</strong>, reclamações podem ser feitas de forma <strong>anônima</strong></p>
                 <%= render 'components/btn_reclamar', text: 'Nova reclamacão', path: registration_type_path %>
               <% end %>
             </div>
@@ -125,7 +134,7 @@
             </div>
           </div>
           <div class="border p-4 mt-4 bg-white">
-            <h3 class="mb-4 text-center">Crie uma reclamação <span>anônima</span> agora mesmo</h3>
+            <h3 class="mb-4 text-center">Crie uma reclamação <strong>anônima</strong> agora mesmo</h3>
             <% if user_signed_in? %>
               <%= render 'components/btn_reclamar', text: 'Reclamar', path: new_complaint_path %>
             <% else %>
