@@ -39,13 +39,7 @@
           <div class="col-12 col-md-4 my-2">
             <%= render 'companies/card', company: company %>
           </div>
-          <% if post_counter == 9 || (post_counter > 9 && (post_counter - 8) % 10 == 0) %>
-            <div class="col-12">
-              <div class="d-flex justify-content-center my-4">
-                <%= render 'components/company_not_find' %>
-              </div>
-            </div>
-          <% elsif post_counter == 4 || (post_counter > 4 && (post_counter - 3) % 10 == 0) %>
+          <% if post_counter == 4 || (post_counter > 4 && (post_counter - 3) % 10 == 0) %>
             <% if @card_ads %>
               <div
                 class="col-12 col-md-4 d-flex justify-content-center"
@@ -56,6 +50,12 @@
                 <%= render 'ads/card', ad: @card_ads %>
               </div>
             <% end %>
+          <% elsif post_counter == 8 || (post_counter > 7 && (post_counter - 6) % 10 == 0) %>
+            <div class="col-12">
+              <div class="d-flex justify-content-center my-4">
+                <%= render 'components/company_not_find' %>
+              </div>
+            </div>
           <% end %>
         <% end %>
       </div>
