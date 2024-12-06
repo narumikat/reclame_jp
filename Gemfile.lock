@@ -408,7 +408,7 @@ DEPENDENCIES
   rails_admin (= 3.0)
   rails_performance
   rating
-  redis (>= 4.0.1)
+  redis (>= 4.0.3)
   sassc-rails
   selenium-webdriver
   simple_form!
